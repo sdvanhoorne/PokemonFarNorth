@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://w8it21f8eyqh"]
+
+[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/npc.gd" id="1_sspvn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpyoa"]
+
+[node name="Npc" type="CharacterBody2D"]
+script = ExtResource("1_sspvn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pcwmf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dpyoa")

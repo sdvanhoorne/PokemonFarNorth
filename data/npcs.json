@@ -1,0 +1,10 @@
+{
+  "default_npc": [
+	"Welcome to Route 1!",
+	"Be careful — wild Pokémon are nearby."
+  ],
+  "grumpy_grandpa": [
+	"Kids these days...",
+	"Always running through my lawn!"
+  ]
+}
