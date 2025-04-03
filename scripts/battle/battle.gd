@@ -19,3 +19,6 @@ func _ready():
 	
 func _on_run_pressed() -> void:
 	BattleManager.return_to_world()
+
+func update_health(healthBar: TextureProgressBar, healthCurrent: int, healthMax: int):
+	healthBar.value = healthCurrent / healthMax
