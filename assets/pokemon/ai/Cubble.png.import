@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qapnl4a7edr0"
-path="res://.godot/imported/player_down_idle.png-ab959c1f98e310581e554ac20042b898.ctex"
+uid="uid://c5jlr3wso5qo8"
+path="res://.godot/imported/Cubble.png-39d4a780a106c331af5854232cde4853.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/player_down_idle.png"
-dest_files=["res://.godot/imported/player_down_idle.png-ab959c1f98e310581e554ac20042b898.ctex"]
+source_file="res://assets/pokemon/ai/Cubble.png"
+dest_files=["res://.godot/imported/Cubble.png-39d4a780a106c331af5854232cde4853.ctex"]
 
 [params]
 

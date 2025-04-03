@@ -1,6 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://w8it21f8eyqh"]
 
-[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/npc.gd" id="1_sspvn"]
+[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_sspvn"]
+
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
 

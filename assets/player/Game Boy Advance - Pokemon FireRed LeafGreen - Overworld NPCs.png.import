@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dtnpw774a6y38"
-path="res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png-70ef722af7a4dc49193c546434c9b7cb.ctex"
+path="res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png-d8b2e7179e63d733982f8e34fb9b2f87.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/player/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png"
-dest_files=["res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png-70ef722af7a4dc49193c546434c9b7cb.ctex"]
+source_file="res://assets/player/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png"
+dest_files=["res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png-d8b2e7179e63d733982f8e34fb9b2f87.ctex"]
 
 [params]
 

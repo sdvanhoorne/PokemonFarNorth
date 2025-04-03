@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://6b7jmwqt02xb"]
 
-[ext_resource type="Texture2D" uid="uid://d3ourd836bt80" path="res://assets/sprites/tiles/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png" id="1_xw0p5"]
+[ext_resource type="Texture2D" uid="uid://d3ourd836bt80" path="res://assets/tiles/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png" id="1_xw0p5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i44br"]
 texture = ExtResource("1_xw0p5")

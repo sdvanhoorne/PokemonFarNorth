@@ -24,7 +24,7 @@ func _physics_process(delta):
 			global_position = target_position.snapped(Vector2(TILE_SIZE, TILE_SIZE))
 			is_moving = false
 			velocity = Vector2.ZERO
-			check_for_grass_encounter()
+			check_for_encounter()
 		return
 
 	var input = Vector2.ZERO
@@ -58,23 +58,11 @@ func _physics_process(delta):
 		facing_input = Vector2.ZERO
 		hold_timer = 0.0
 
-func check_for_grass_encounter():
-	var tilemap = get_tree().current_scene.get_node("RandomEncounterLayer")
-	
-	if tilemap == null:
+func check_for_encounter():
+	var current_map = get_parent().current_map
+	if(current_map == null): # no map
 		return
-
-	var local_pos = tilemap.to_local(global_position)
-	var cell_coords = tilemap.local_to_map(local_pos)
-	var tile_data = tilemap.get_cell_tile_data(cell_coords)
-
-	if tile_data == null:
-		return # No tile here, early exit
-
-	if tile_data.get_custom_data("encounter_grass") != true:
-		return # Not a grass tile
-
-	# Only gets here if tile is grass
-	if randf() < 0.1:
-		print("A wild battle begins!")
-		#get_tree().change_scene_to_file("res://scenes/battles/battle.tscn")
+	var encounter_layer = current_map.get_node("EncounterLayer")
+	if(encounter_layer == null):
+		return
+	EncounterManager.check_for_encounter_at_position(global_position, facing_input, encounter_layer)

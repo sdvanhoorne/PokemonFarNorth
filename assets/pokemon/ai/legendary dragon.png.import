@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://tvvcctfkowmp"
-path="res://.godot/imported/legendary dragon.png-cb38c8a8e1352fcccf4297f2f2b3317c.ctex"
+path="res://.godot/imported/legendary dragon.png-12c88cb2099a1715407f2838867a07d7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/pokemon/ai/legendary dragon.png"
-dest_files=["res://.godot/imported/legendary dragon.png-cb38c8a8e1352fcccf4297f2f2b3317c.ctex"]
+source_file="res://assets/pokemon/ai/legendary dragon.png"
+dest_files=["res://.godot/imported/legendary dragon.png-12c88cb2099a1715407f2838867a07d7.ctex"]
 
 [params]
 

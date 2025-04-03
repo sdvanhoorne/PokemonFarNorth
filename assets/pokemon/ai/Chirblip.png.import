@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qapnl4a7edr0"
-path="res://.godot/imported/player_down_idle.png-ab959c1f98e310581e554ac20042b898.ctex"
+uid="uid://csqbrik8oeahj"
+path="res://.godot/imported/Chirblip.png-a964efeef3fb606440360c9baa775f0e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/player_down_idle.png"
-dest_files=["res://.godot/imported/player_down_idle.png-ab959c1f98e310581e554ac20042b898.ctex"]
+source_file="res://assets/pokemon/ai/Chirblip.png"
+dest_files=["res://.godot/imported/Chirblip.png-a964efeef3fb606440360c9baa775f0e.ctex"]
 
 [params]
 

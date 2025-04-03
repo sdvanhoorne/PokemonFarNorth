@@ -15,6 +15,12 @@ run/main_scene="uid://cuvh67l5gtpaq"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+EncounterManager="*res://scripts/world/EncounterManager.gd"
+BattleManager="*res://scripts/battle/BattleManager.gd"
+PlayerInventory="*res://scripts/player/PlayerInventory.gd"
+
 [display]
 
 window/size/viewport_width=1920

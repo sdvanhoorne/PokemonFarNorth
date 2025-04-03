@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d1mmbtcqcicjk"
-path="res://.godot/imported/Route 224.png-563f6d83f4c1653e76dc7d2166288a9c.ctex"
+path="res://.godot/imported/Route 224.png-af0eecdb0de10cdadbf372e61d93ecda.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/Route 224.png"
-dest_files=["res://.godot/imported/Route 224.png-563f6d83f4c1653e76dc7d2166288a9c.ctex"]
+source_file="res://assets/tiles/Route 224.png"
+dest_files=["res://.godot/imported/Route 224.png-af0eecdb0de10cdadbf372e61d93ecda.ctex"]
 
 [params]
 

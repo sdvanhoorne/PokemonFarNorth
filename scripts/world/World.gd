@@ -4,11 +4,6 @@ extends Node2D
 var current_map: Node = null
 
 func load_map(scene: PackedScene, spawn_name: String = ""):
-	player.velocity = Vector2.ZERO
-	player.is_moving = false
-	player.hold_timer = 0.0
-	player.facing_input = Vector2.ZERO
-	
 	if current_map:
 		current_map.queue_free()
 
@@ -23,7 +18,9 @@ func load_map(scene: PackedScene, spawn_name: String = ""):
 			player.global_position = spawn.global_position
 			player.target_position = spawn.global_position.snapped(Vector2(16, 16))
 
-
+	player.velocity = Vector2.ZERO
+	player.is_moving = false
+	player.hold_timer = 0.0
 
 func _on_button_pressed() -> void:
 	load_map(load("res://scenes/world/starting_house.tscn"), "PlayerSpawn")

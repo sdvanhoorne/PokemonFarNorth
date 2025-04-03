@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d3ourd836bt80"
-path="res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png-6055f41f3a6665d723f635a77723f932.ctex"
+path="res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png-1e7ad2490f930fe88522a21c81ceafe7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/tiles/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png"
-dest_files=["res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png-6055f41f3a6665d723f635a77723f932.ctex"]
+source_file="res://assets/tiles/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png"
+dest_files=["res://.godot/imported/Game Boy Advance - Pokemon FireRed LeafGreen - Tileset 2.png-1e7ad2490f930fe88522a21c81ceafe7.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://qapnl4a7edr0"
-path="res://.godot/imported/player_down_idle.png-ab959c1f98e310581e554ac20042b898.ctex"
+uid="uid://wjesx1246fmq"
+path="res://.godot/imported/Masklit.png-8b2321368dd6b64028ecd89a3827b27b.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/player_down_idle.png"
-dest_files=["res://.godot/imported/player_down_idle.png-ab959c1f98e310581e554ac20042b898.ctex"]
+source_file="res://assets/pokemon/ai/Masklit.png"
+dest_files=["res://.godot/imported/Masklit.png-8b2321368dd6b64028ecd89a3827b27b.ctex"]
 
 [params]
 

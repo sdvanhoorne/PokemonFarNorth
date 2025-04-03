@@ -1,0 +1,16 @@
+{
+  "encounters": [
+	{
+	  "pokemon": "Cubble",
+	  "rate": 50
+	},
+	{
+	  "pokemon": "Masklit",
+	  "rate": 30
+	},
+	{
+	  "pokemon": "Chirblip",
+	  "rate": 20
+	}
+  ]
+}

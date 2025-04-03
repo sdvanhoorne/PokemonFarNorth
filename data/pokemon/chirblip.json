@@ -1,0 +1,11 @@
+{
+  "name": "Chirblip",
+  "type": ["Flying"],
+  "base_stats": {
+	"hp": 45,
+	"attack": 50,
+	"defense": 40,
+	"speed": 60
+  },
+  "moves": ["Peck", "Tail Whip"]
+}
