@@ -1,5 +1,5 @@
 extends Node
-var wild_pokemon = null
+var wild_pokemon: Dictionary
 var player_position: Vector2
 var player_direction: Vector2
 var current_map_path: String
