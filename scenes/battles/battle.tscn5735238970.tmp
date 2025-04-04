@@ -1,10 +1,44 @@
 [gd_scene load_steps=3 format=3 uid="uid://bihya4k8vuet"]
 
 [ext_resource type="Texture2D" uid="uid://bu5vtalxdd5de" path="res://assets/player/player_up_idle.png" id="1_2fwn1"]
-[ext_resource type="Script" uid="uid://fonk8iskxg6s" path="res://scripts/battle/Battle.gd" id="1_5od06"]
+
+[sub_resource type="GDScript" id="GDScript_2fwn1"]
+script/source = "extends Node2D
+@onready var messageBox = $MessageBox/Message
+@onready var EnemyPokemonContainer = $EnemyPokemonContainer
+@onready var PlayerPokemonContainer = $PlayerPokemonContainer
+
+func _ready():
+	var wild = BattleManager.wild_pokemon
+	print(\"A wild %s appeared!\" % wild[\"name\"])
+	
+	load_player_pokemon()
+	load_enemy_pokemon(wild)
+
+	messageBox.clear()
+	messageBox.add_text(\"A wild %s appeared!\" % wild[\"name\"])
+	
+func load_player_pokemon():
+	var player_pokemon = PlayerInventory.get_lead()
+	PlayerPokemonContainer.get_node(\"PlayerPokemonSprite\").texture = load(\"res://assets/pokemon/ai/\" + player_pokemon[\"name\"] + \".png\")	
+	PlayerPokemonContainer.get_node(\"PlayerPokemonInfo/Name\").text = player_pokemon[\"name\"]
+	
+func load_enemy_pokemon(wild: Dictionary):	
+	EnemyPokemonContainer.get_node(\"EnemyPokemonSprite\").texture = load(\"res://assets/pokemon/ai/\" + wild[\"name\"] + \".png\")
+	EnemyPokemonContainer.get_node(\"EnemyPokemonInfo/Name\").text = wild[\"name\"]
+	
+func _on_run_pressed() -> void:
+	BattleManager.return_to_world()
+
+func update_health(healthBar: TextureProgressBar, healthCurrent: int, healthMax: int):
+	healthBar.value = healthCurrent / healthMax
+
+func _on_fight_pressed() -> void:
+	pass # Replace with function body.
+"
 
 [node name="Battle" type="Node2D"]
-script = ExtResource("1_5od06")
+script = SubResource("GDScript_2fwn1")
 
 [node name="Background" type="Sprite2D" parent="."]
 
