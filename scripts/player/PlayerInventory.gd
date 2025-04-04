@@ -9,4 +9,4 @@ func _ready():
 		pokemon = JSON.parse_string(party.get_as_text())["party"]
 
 func get_lead():
-	return pokemon[1]
+	return pokemon[0]

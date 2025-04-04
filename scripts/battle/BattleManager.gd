@@ -39,6 +39,6 @@ func _load_previous_map():
 	# Position the player after world has loaded
 	var player = world_scene.get_node("Player")  
 	player.global_position = player_position
-	player.visuals.update_direction(player_direction)
 	await get_tree().process_frame
-	
+	player.facing_input = player_direction
+	player.update_facing_direction()

@@ -9,16 +9,33 @@ var hold_timer = 0.0
 const HOLD_THRESHOLD = 0.03
 var is_moving = false
 var target_position = Vector2.ZERO
+var sprinting = false
 
 func _ready():
-	global_position = global_position.snapped(Vector2(TILE_SIZE, TILE_SIZE)) # ✅ Ensure alignment
+	# align player to grid
+	global_position = global_position.snapped(Vector2(TILE_SIZE, TILE_SIZE)) 
 	target_position = global_position
+	
+func update_facing_direction():
+	match facing_input:
+		Vector2.ZERO:
+			return
+		Vector2(-1, 0):			
+			_animation_player.play("move_left")
+		Vector2(1, 0):			
+			_animation_player.play("move_right")
+		Vector2(0, -1):			
+			_animation_player.play("move_up")
+		Vector2(0, 1):			
+			_animation_player.play("move_down")
 
 func _physics_process(delta):
 	if is_moving:
 		# Continue moving toward target
 		var direction = (target_position - global_position).normalized()
 		velocity = direction * (TILE_SIZE / MOVE_TIME)
+		if(sprinting):
+			velocity = velocity * 2
 		move_and_slide()
 
 		if global_position.distance_to(target_position) < 1:
@@ -46,11 +63,16 @@ func _physics_process(delta):
 	if input != Vector2.ZERO:
 		input = input.normalized()
 		
+		if(Input.is_action_pressed("sprint")):
+			sprinting = true
+		else:
+			sprinting = false
+		
 		# If new direction is different, update facing direction instantly
 		if input != facing_input:
 			facing_input = input
 			hold_timer = 0.0
-			visuals.update_direction(facing_input)
+			#visuals.update_direction(facing_input)
 		else:
 			hold_timer += delta
 			if hold_timer >= HOLD_THRESHOLD:

@@ -10,7 +10,7 @@
 			"defense": 40,
 			"speed": 60
 		  },
-		  "moves": ["Tackle", "Tail Whip"]
+		  "moves": ["Tackle", "Tail Whip", "", ""]
 		},
 		{
 		  "name": "Minket",
@@ -21,7 +21,7 @@
 			"defense": 40,
 			"speed": 60
 		  },
-		  "moves": ["Tackle", "Tail Whip"]
+		  "moves": ["Tackle", "Tail Whip", "", ""]
 		}
 	]
 }

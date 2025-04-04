@@ -2,27 +2,29 @@ extends Node2D
 @onready var messageBox = $MessageBox
 @onready var EnemyPokemonContainer = $EnemyPokemonContainer
 @onready var PlayerPokemonContainer = $PlayerPokemonContainer
+var rng = RandomNumberGenerator.new()
 
 func _ready():
-	var wild = BattleManager.wild_pokemon
 	load_player_pokemon()
-	load_enemy_pokemon(wild)
-	
+	load_enemy_pokemon()
 	
 	messageBox.get_node("PokemonMoves").visible = false
-	messageBox.get_node("Message").text = ("A wild %s appeared!" % wild["name"])
+	messageBox.get_node("Message").text = ("A wild %s appeared!" % BattleManager.wild_pokemon["name"])
 	Helpers.wait(2)
-	messageBox.get_node("Message").text = ("What will you do?")
+	show_prompt()
 	
+func show_prompt():
+	messageBox.get_node("Message").text = ("What will you do?")
+
 func load_player_pokemon():
 	var player_pokemon = PlayerInventory.get_lead()
 	PlayerPokemonContainer.get_node("PlayerPokemonSprite").texture = load("res://assets/pokemon/ai/" + player_pokemon["name"] + ".png")	
 	PlayerPokemonContainer.get_node("PlayerPokemonInfo/Name").text = player_pokemon["name"]
 	
-func load_enemy_pokemon(wild: Dictionary):	
-	print("A wild %s appeared!" % wild["name"])
-	EnemyPokemonContainer.get_node("EnemyPokemonSprite").texture = load("res://assets/pokemon/ai/" + wild["name"] + ".png")
-	EnemyPokemonContainer.get_node("EnemyPokemonInfo/Name").text = wild["name"]
+func load_enemy_pokemon():	
+	print("A wild %s appeared!" % BattleManager.wild_pokemon["name"])
+	EnemyPokemonContainer.get_node("EnemyPokemonSprite").texture = load("res://assets/pokemon/ai/" + BattleManager.wild_pokemon["name"] + ".png")
+	EnemyPokemonContainer.get_node("EnemyPokemonInfo/Name").text = BattleManager.wild_pokemon["name"]
 	
 func _on_run_pressed() -> void:
 	BattleManager.return_to_world()
@@ -35,14 +37,53 @@ func _on_fight_pressed() -> void:
 	
 func show_moves():
 	messageBox.get_node("Message").visible = false
+	messageBox.get_node
 	messageBox.get_node("PokemonMoves").visible = true
-	var pokemonMoves = messageBox.get_node("PokemonMoves")
-	var moveOneButton = pokemonMoves.get_node("Move1")
-	messageBox.get_node("PokemonMoves").get_node("Move1").text = PlayerInventory.get_lead()["moves"][1] or ""
-	messageBox.get_node("PokemonMoves").get_node("Move2").text = PlayerInventory.get_lead()["moves"][2] or ""
-	messageBox.get_node("PokemonMoves").get_node("Move3").text = PlayerInventory.get_lead()["moves"][3] or ""
-	messageBox.get_node("PokemonMoves").get_node("Move4").text = PlayerInventory.get_lead()["moves"][4] or ""
+	set_move(0)
+	set_move(1)
+	set_move(2)
+	set_move(3)
+	
+func set_move(i: int):
+	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))
+	var pokemon_move = PlayerInventory.get_lead().get("moves")[i]
+	if(pokemon_move == null):
+		move_button.text = ""
+	move_button.text = pokemon_move
 
 func show_dialogue():
 	messageBox.get_node("PokemonMoves").visible = false
 	messageBox.get_node("Message").visible = true
+
+func _on_move_0_pressed() -> void:
+	var moveName = messageBox.get_node("PokemonMoves").get_node("Move0").text
+	process_turn(moveName)
+
+func _on_move_1_pressed() -> void:
+	var moveName = messageBox.get_node("PokemonMoves").get_node("Move1").text
+	process_turn(moveName)
+	
+func _on_move_2_pressed() -> void:
+	var moveName = messageBox.get_node("PokemonMoves").get_node("Move2").text
+	process_turn(moveName)
+
+func _on_move_3_pressed() -> void:
+	var moveName = messageBox.get_node("PokemonMoves").get_node("Move3").text
+	process_turn(moveName)
+
+func process_turn(moveName: String):
+	if moveName == "" or null:
+		return
+	show_dialogue()
+	var name = PlayerInventory.get_lead().get("name")
+	messageBox.get_node("Message").text = name + " used " + moveName
+	await get_tree().create_timer(1).timeout
+	messageBox.get_node("Message").text = BattleManager.wild_pokemon.get("name") + " used " + enemy_move()
+	await get_tree().create_timer(1).timeout
+	show_prompt()
+	
+func enemy_move() -> String:
+	var enemy_moves = BattleManager.wild_pokemon.get("moves")
+	var roll = rng.randi_range(0, enemy_moves.size()-1)
+	var enemy_move = enemy_moves[roll]
+	return enemy_move

@@ -6,6 +6,8 @@ extends Sprite2D
 @onready var sprite_right = preload("res://assets/player/player_right_idle.png")
 
 func update_direction(input: Vector2):
+	if input == Vector2.ZERO:
+		return
 	if input.y == -1:
 		texture = sprite_up
 	elif input.y == 1:

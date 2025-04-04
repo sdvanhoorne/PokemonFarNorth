@@ -78,26 +78,33 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Move0" type="Button" parent="MessageBox/PokemonMoves"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 14.0
+offset_right = 24.0
+offset_bottom = 22.0
+
 [node name="Move1" type="Button" parent="MessageBox/PokemonMoves"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-text = "zip"
+offset_left = 261.0
+offset_top = 18.0
+offset_right = 269.0
+offset_bottom = 26.0
 
 [node name="Move2" type="Button" parent="MessageBox/PokemonMoves"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 18.0
+offset_top = 79.0
+offset_right = 26.0
+offset_bottom = 87.0
 
 [node name="Move3" type="Button" parent="MessageBox/PokemonMoves"]
 layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
-
-[node name="Move4" type="Button" parent="MessageBox/PokemonMoves"]
-layout_mode = 0
-offset_right = 8.0
-offset_bottom = 8.0
+offset_left = 260.0
+offset_top = 79.0
+offset_right = 268.0
+offset_bottom = 87.0
 
 [node name="BattleMenu" type="Control" parent="."]
 layout_mode = 3
@@ -139,5 +146,9 @@ offset_right = 151.0
 offset_bottom = 97.0
 text = "Run"
 
+[connection signal="pressed" from="MessageBox/PokemonMoves/Move0" to="." method="_on_move_0_pressed"]
+[connection signal="pressed" from="MessageBox/PokemonMoves/Move1" to="." method="_on_move_1_pressed"]
+[connection signal="pressed" from="MessageBox/PokemonMoves/Move2" to="." method="_on_move_2_pressed"]
+[connection signal="pressed" from="MessageBox/PokemonMoves/Move3" to="." method="_on_move_3_pressed"]
 [connection signal="pressed" from="BattleMenu/Fight" to="." method="_on_fight_pressed"]
 [connection signal="pressed" from="BattleMenu/Run" to="." method="_on_run_pressed"]

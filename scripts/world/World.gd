@@ -20,6 +20,7 @@ func load_map(scene: PackedScene, spawn_name: String = ""):
 
 	player.velocity = Vector2.ZERO
 	player.hold_timer = 0.0
+	player.is_moving = false
 
 func _on_button_pressed() -> void:
-	load_map(load("res://scenes/world/starting_house.tscn"), "PlayerSpawn")
+	load_map(load("res://scenes/world/starting_town.tscn"), "StartingHouseSpawn")

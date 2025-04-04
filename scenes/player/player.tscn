@@ -1,8 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2236iavdsvwx"]
+[gd_scene load_steps=16 format=3 uid="uid://d2236iavdsvwx"]
 
 [ext_resource type="Texture2D" uid="uid://qapnl4a7edr0" path="res://assets/player/player_down_idle.png" id="1_8afob"]
 [ext_resource type="Script" uid="uid://bg6jvoetwhsri" path="res://scripts/player/Player.gd" id="1_dovo2"]
-[ext_resource type="Script" uid="uid://br4bmg6uh233d" path="res://scripts/player/UpdateTexture.gd" id="3_gmlin"]
 [ext_resource type="Texture2D" uid="uid://c4fxgprgfeewq" path="res://assets/player/player down move.png" id="4_ugbui"]
 [ext_resource type="Texture2D" uid="uid://bk2ov8reqenaj" path="res://assets/player/moving down 2.png" id="5_fcs02"]
 [ext_resource type="Texture2D" uid="uid://c8ieknn6gf2yu" path="res://assets/player/moving left 1.png" id="6_myrg7"]
@@ -34,7 +33,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_down",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -51,7 +50,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_left",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -68,7 +67,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_right",
-"speed": 5.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -85,28 +84,24 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_up",
-"speed": 6.0
+"speed": 8.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 script = ExtResource("1_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-visible = false
-z_index = 1
-position = Vector2(8, 8)
-texture = ExtResource("1_8afob")
-script = ExtResource("3_gmlin")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
 position = Vector2(8, 8)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_x7p2l")
 
 [node name="SpriteAnimation" type="AnimatedSprite2D" parent="."]
+z_index = 1
 sprite_frames = SubResource("SpriteFrames_007i1")
-animation = &"move_down"
-frame_progress = 0.0747719
+animation = &"move_up"
+offset = Vector2(8, 6)
