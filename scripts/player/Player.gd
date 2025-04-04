@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @onready var visuals = $Sprite2D
+@onready var _animation_player = $SpriteAnimation
 
 const TILE_SIZE = 16
 const MOVE_TIME = 0.1  # Time it takes to move one tile
@@ -31,12 +32,16 @@ func _physics_process(delta):
 
 	if Input.is_action_pressed("ui_up"):
 		input.y -= 1
+		_animation_player.play("move_up")
 	elif Input.is_action_pressed("ui_down"):
 		input.y += 1
+		_animation_player.play("move_down")
 	elif Input.is_action_pressed("ui_left"):
 		input.x -= 1
+		_animation_player.play("move_left")
 	elif Input.is_action_pressed("ui_right"):
 		input.x += 1
+		_animation_player.play("move_right")
 
 	if input != Vector2.ZERO:
 		input = input.normalized()
@@ -57,6 +62,7 @@ func _physics_process(delta):
 		# Reset if no direction held
 		facing_input = Vector2.ZERO
 		hold_timer = 0.0
+		_animation_player.stop()
 
 func check_for_encounter():
 	var current_map = get_parent().current_map

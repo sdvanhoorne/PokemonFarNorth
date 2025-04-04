@@ -19,7 +19,6 @@ func load_map(scene: PackedScene, spawn_name: String = ""):
 			player.target_position = spawn.global_position.snapped(Vector2(16, 16))
 
 	player.velocity = Vector2.ZERO
-	player.is_moving = false
 	player.hold_timer = 0.0
 
 func _on_button_pressed() -> void:

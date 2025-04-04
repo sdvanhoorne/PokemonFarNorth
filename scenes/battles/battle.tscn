@@ -82,6 +82,7 @@ offset_bottom = 40.0
 layout_mode = 0
 offset_right = 8.0
 offset_bottom = 8.0
+text = "zip"
 
 [node name="Move2" type="Button" parent="MessageBox/PokemonMoves"]
 layout_mode = 0
