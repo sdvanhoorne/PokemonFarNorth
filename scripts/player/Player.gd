@@ -1,5 +1,4 @@
 extends CharacterBody2D
-@onready var visuals = $Sprite2D
 @onready var _animation_player = $SpriteAnimation
 
 const TILE_SIZE = 16
@@ -72,7 +71,6 @@ func _physics_process(delta):
 		if input != facing_input:
 			facing_input = input
 			hold_timer = 0.0
-			#visuals.update_direction(facing_input)
 		else:
 			hold_timer += delta
 			if hold_timer >= HOLD_THRESHOLD:

@@ -1,0 +1,20 @@
+{
+	"moves": [
+		{
+			"name": "Tackle",
+			"damage": 40,
+	 		"type": "Normal",
+			"category": "Physical",
+			"accuracy": 100,
+			"description": "A physical attack in which the user charges, full body, into the foe."
+		},
+		{
+			"name": "Tail Whip",
+			"damage": null,
+	 		"type": "Normal",
+			"category": "Status",
+			"accuracy": 100,
+			"description": "The user wags its tail cutely, making the foe lower its Defense stat."
+		}
+	]
+}
