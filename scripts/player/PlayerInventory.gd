@@ -1,7 +1,6 @@
 extends Node
 
 const party_path = "res://data/player/party.json"
-const Pokemon = preload("res://scripts/pokemon/Pokemon.gd")
 var PartyPokemon = [] # array of pokemon
 
 func _ready():

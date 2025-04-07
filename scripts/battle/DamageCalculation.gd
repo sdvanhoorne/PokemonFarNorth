@@ -1,5 +1,4 @@
 extends Node
-const Move = preload("res://scripts/moves/Move.gd")
 const TypeEffectivenessChartPath = "res://data/typeEffectiveness.json"
 
 func get_damage(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon) -> int:	
@@ -19,8 +18,10 @@ func get_damage(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon
 	else:
 		typeEffectiveness2 = get_type_effectiveness(move.type, defendingPokemon.type2)
 	
+	# might need to manage int vs float here
+	# should damage round to nearest int?
 	var damage = baseDamage * (attackerStat / defenderStat) 
-	return damage * stabMultiplier * typeEffectiveness1 * typeEffectiveness2 / 8
+	return damage * stabMultiplier * typeEffectiveness1 * typeEffectiveness2 / 4
 	
 func get_type_effectiveness(moveType: String, type: String) -> float:
 	print("Getting type effectiveness")

@@ -3,39 +3,36 @@ extends Node2D
 @onready var PartyUI = $Party
 @onready var EnemyPokemonContainer = $EnemyPokemonContainer
 @onready var PlayerPokemonContainer = $PlayerPokemonContainer
-const Move = preload("res://scripts/moves/Move.gd")
 var rng = RandomNumberGenerator.new()
-var EnemyPokemons = []
+var EnemyPokemon = []
 
 func _ready():
-	EnemyPokemons.append(BattleManager.wild_pokemon)
-	load_player_pokemon(PlayerInventory.PartyPokemon[0].name)
-	load_enemy_pokemon()
+	EnemyPokemon.append(BattleManager.wild_pokemon)
+	load_pokemon(PlayerPokemonContainer, PlayerInventory.PartyPokemon[0])
+	load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 	
 	messageBox.get_node("PokemonMoves").visible = false
-	messageBox.get_node("Message").text = ("A wild %s appeared!" % EnemyPokemons[0].get("name"))
+	messageBox.get_node("Message").text = ("A wild %s appeared!" % EnemyPokemon[0].get("name"))
 	Helpers.wait(2)
 	show_prompt()
 	
 func show_prompt():
 	messageBox.get_node("Message").text = ("What will you do?")
 
-func load_player_pokemon(name: String):
-	PlayerPokemonContainer.get_node("PlayerPokemonSprite").texture = load("res://assets/pokemon/ai/" + name + ".png")	
-	PlayerPokemonContainer.get_node("PlayerPokemonInfo/Name").text = name
-	
-func load_enemy_pokemon():	
-	var name = EnemyPokemons[0].get("name")
-	print("A wild %s appeared!" % name)
-	EnemyPokemonContainer.get_node("EnemyPokemonSprite").texture = load("res://assets/pokemon/ai/" + name + ".png")
-	EnemyPokemonContainer.get_node("EnemyPokemonInfo/Name").text = name
+func load_pokemon(node: Node2D, pokemon: Pokemon):
+	var sprite = node.get_node("Sprite")
+	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.name + ".png")	
+	var nameLabel = node.get_node("Info/Name")
+	nameLabel.text = pokemon.name
+	var levelLabel = node.get_node("Info/Level")
+	levelLabel.text = str(pokemon.level)
+	var healthBar = node.get_node("Info/HealthBar")
+	healthBar.max_value = pokemon.hp
+	healthBar.value = pokemon.current_hp
 	
 func _on_run_pressed() -> void:
 	print("You ran away...")
 	BattleManager.return_to_world()
-
-# func update_health(healthBar: TextureProgressBar, healthCurrent: int, healthMax: int):
-	# healthBar.value = healthCurrent / healthMax
 
 func _on_fight_pressed() -> void:	
 	show_moves()
@@ -84,12 +81,12 @@ func process_turn(moveName: String):
 	show_dialogue()
 	# player always wins speed tie
 	var playerLead = PlayerInventory.PartyPokemon[0]
-	if(playerLead.speed >= EnemyPokemons[0].speed):
-		process_move(moveName, playerLead, EnemyPokemons[0])
-		process_move(moveName, EnemyPokemons[0], playerLead)
+	if(playerLead.speed >= EnemyPokemon[0].speed):
+		process_move(moveName, playerLead, EnemyPokemon[0], true)
+		process_move(moveName, EnemyPokemon[0], playerLead, false)
 	else:
-		process_move(moveName, EnemyPokemons[0], playerLead)
-		process_move(moveName, playerLead, EnemyPokemons[0])
+		process_move(moveName, EnemyPokemon[0], playerLead, false)
+		process_move(moveName, playerLead, EnemyPokemon[0], true)
 	show_prompt()
 	
 func get_enemy_move() -> String:
@@ -98,7 +95,7 @@ func get_enemy_move() -> String:
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
 	
-func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
+func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
 	print(attackingPokemon.name + " used " + moveName)
 	print_move(attackingPokemon.name, moveName)
 	await get_tree().create_timer(1).timeout
@@ -106,10 +103,19 @@ func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon:
 	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
 	if(move.category == "Physical" or "Special"):
 		var damage = DamageCalculation.get_damage(move, attackingPokemon, defendingPokemon)
-	
-func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
+		process_damage(damage, attackingPokemon, defendingPokemon, isPlayerAttacking)
+		
+func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
 	defendingPokemon.current_hp -= damage
-	print(defendingPokemon.name + " took " + damage + " damage from " + attackingPokemon.name)
+	var damagedPokemonContainer
+	if(isPlayerAttacking):
+		damagedPokemonContainer = EnemyPokemonContainer
+	else:
+		damagedPokemonContainer = PlayerPokemonContainer
+	var healthBar = damagedPokemonContainer.get_node("Info/HealthBar")
+	healthBar.value = defendingPokemon.current_hp
+	print(defendingPokemon.name + " took " + str(damage) + " damage from " + attackingPokemon.name)
+	print(defendingPokemon.name + " now has " + str(healthBar.value) + " health")
 	if(defendingPokemon.current_hp <= 0):
 		print(defendingPokemon.name + " fainted")
 		# un load 

@@ -24,7 +24,7 @@ func roll_encounter() -> Pokemon:
 	return Pokemon.new()
 	
 func load_pokemon(pokemonName: String, pokemonLevel: int) -> Pokemon:
-	var path = "res://data/pokemon/%s.json" % pokemonName.to_lower()
+	var path = "res://data/pokemon/%s.json" % pokemonName
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
 		var response = JSON.parse_string(file.get_as_text())
