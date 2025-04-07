@@ -1,43 +1,46 @@
 extends Node2D
 @onready var messageBox = $MessageBox
+@onready var PartyUI = $Party
 @onready var EnemyPokemonContainer = $EnemyPokemonContainer
 @onready var PlayerPokemonContainer = $PlayerPokemonContainer
 var rng = RandomNumberGenerator.new()
+var EnemyPokemons = []
 
 func _ready():
-	load_player_pokemon()
+	EnemyPokemons.append(BattleManager.wild_pokemon)
+	load_player_pokemon(PlayerInventory.PartyPokemon[0].name)
 	load_enemy_pokemon()
 	
 	messageBox.get_node("PokemonMoves").visible = false
-	messageBox.get_node("Message").text = ("A wild %s appeared!" % BattleManager.wild_pokemon["name"])
+	messageBox.get_node("Message").text = ("A wild %s appeared!" % EnemyPokemons[0].get("name"))
 	Helpers.wait(2)
 	show_prompt()
 	
 func show_prompt():
 	messageBox.get_node("Message").text = ("What will you do?")
 
-func load_player_pokemon():
-	var player_pokemon = PlayerInventory.get_lead()
-	PlayerPokemonContainer.get_node("PlayerPokemonSprite").texture = load("res://assets/pokemon/ai/" + player_pokemon["name"] + ".png")	
-	PlayerPokemonContainer.get_node("PlayerPokemonInfo/Name").text = player_pokemon["name"]
+func load_player_pokemon(name: String):
+	PlayerPokemonContainer.get_node("PlayerPokemonSprite").texture = load("res://assets/pokemon/ai/" + name + ".png")	
+	PlayerPokemonContainer.get_node("PlayerPokemonInfo/Name").text = name
 	
 func load_enemy_pokemon():	
-	print("A wild %s appeared!" % BattleManager.wild_pokemon["name"])
-	EnemyPokemonContainer.get_node("EnemyPokemonSprite").texture = load("res://assets/pokemon/ai/" + BattleManager.wild_pokemon["name"] + ".png")
-	EnemyPokemonContainer.get_node("EnemyPokemonInfo/Name").text = BattleManager.wild_pokemon["name"]
+	var name = EnemyPokemons[0].get("name")
+	print("A wild %s appeared!" % name)
+	EnemyPokemonContainer.get_node("EnemyPokemonSprite").texture = load("res://assets/pokemon/ai/" + name + ".png")
+	EnemyPokemonContainer.get_node("EnemyPokemonInfo/Name").text = name
 	
 func _on_run_pressed() -> void:
+	print("You ran away...")
 	BattleManager.return_to_world()
 
-func update_health(healthBar: TextureProgressBar, healthCurrent: int, healthMax: int):
-	healthBar.value = healthCurrent / healthMax
+# func update_health(healthBar: TextureProgressBar, healthCurrent: int, healthMax: int):
+	# healthBar.value = healthCurrent / healthMax
 
 func _on_fight_pressed() -> void:	
 	show_moves()
 	
 func show_moves():
 	messageBox.get_node("Message").visible = false
-	messageBox.get_node
 	messageBox.get_node("PokemonMoves").visible = true
 	set_move(0)
 	set_move(1)
@@ -46,7 +49,7 @@ func show_moves():
 	
 func set_move(i: int):
 	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))
-	var pokemon_move = PlayerInventory.get_lead().get("moves")[i]
+	var pokemon_move = PlayerInventory.PartyPokemon[0].moves[i]
 	if(pokemon_move == null):
 		move_button.text = ""
 	move_button.text = pokemon_move
@@ -75,15 +78,57 @@ func process_turn(moveName: String):
 	if moveName == "" or null:
 		return
 	show_dialogue()
-	var name = PlayerInventory.get_lead().get("name")
-	messageBox.get_node("Message").text = name + " used " + moveName
-	await get_tree().create_timer(1).timeout
-	messageBox.get_node("Message").text = BattleManager.wild_pokemon.get("name") + " used " + enemy_move()
-	await get_tree().create_timer(1).timeout
+	# player always wins speed tie
+	if(PlayerInventory.PartyPokemon[0].speed >= EnemyPokemons[0].get("speed")):		
+		process_player_move(moveName)
+		process_enemy_move()
+	else:
+		process_enemy_move()
+		process_player_move(moveName)
 	show_prompt()
 	
-func enemy_move() -> String:
+func get_enemy_move() -> String:
 	var enemy_moves = BattleManager.wild_pokemon.get("moves")
 	var roll = rng.randi_range(0, enemy_moves.size()-1)
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
+	
+# process move could be a single function =================
+func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
+	print(attackingPokemon.name + " used " + moveName)
+	print_move(attackingPokemon.name, moveName)
+	await get_tree().create_timer(1).timeout
+	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
+	var move = JSON.parse_string(moveData.get_as_text())[moveName]
+	
+
+func process_player_move(moveName: String):
+	print("Begin player move")
+	print_move(PlayerInventory.PartyPokemon[0].name, moveName)
+	await get_tree().create_timer(1).timeout
+	# get move from data
+	
+	# if physical or special move process damage
+	# apply damage to 
+	# check for ko
+	
+func process_enemy_move():
+	print("Begin enemy move")
+	print_move(EnemyPokemons[0].get("name"), get_enemy_move())
+	await get_tree().create_timer(1).timeout
+	# process enemy move
+	
+# ===========================================================
+	
+func print_move(pokemonName: String, move: String):
+	messageBox.get_node("Message").text = pokemonName + " used " + move
+	
+
+func _on_switch_pressed() -> void:
+	show_party()
+	
+func show_party():
+	PartyUI.visible = true
+	
+func hide_party():
+	PartyUI.visible = false

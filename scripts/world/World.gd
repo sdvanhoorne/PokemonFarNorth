@@ -7,6 +7,7 @@ func load_map(scene: PackedScene, spawn_name: String = ""):
 	if current_map:
 		current_map.queue_free()
 
+	await get_tree().process_frame
 	current_map = scene.instantiate()
 	add_child(current_map)
 

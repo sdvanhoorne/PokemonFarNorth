@@ -17,6 +17,7 @@ tile_map_data = PackedByteArray("AADz/xMABAAQABIAAADz/xQABAAQABMAAAD0/xMABAARABI
 tile_set = ExtResource("1_nv1ov")
 
 [node name="EncounterLayer" type="TileMapLayer" parent="."]
+tile_set = ExtResource("1_nv1ov")
 
 [node name="StartingTownSpawn" type="Marker2D" parent="."]
 position = Vector2(0, 352)

@@ -2,10 +2,12 @@
   "name": "Cubble",
   "type": ["Normal"],
   "base_stats": {
-	"hp": 45,
-	"attack": 50,
-	"defense": 40,
-	"speed": 60
+	"hp": 65,
+	"attack": 60,
+	"special_attack": 25,
+	"defense": 50,
+	"special_defense": 45,
+	"speed": 55
   },
   "moves": ["Tackle", "Growl"]
 }

@@ -2,26 +2,46 @@
 	"party": 
 	[
 		{
-		  "name": "Minket",
-		  "type": "Grass",
-		  "base_stats": {
-			"hp": 45,
-			"attack": 50,
-			"defense": 40,
-			"speed": 60
-		  },
-		  "moves": ["Tackle", "Tail Whip", "", ""]
+			"id": 1,
+			"name": "Minket",
+			"type1": "Grass",
+			"type2": null,
+			"level": 5,
+			"status": null,
+			"current_hp": 40,
+			"current_xp": 0,
+			"base_stats":{
+				"hp": 40,
+				"attack": 45,
+				"defense": 35,
+				"special_attack": 65,
+				"special_defense": 55,
+				"speed": 70
+			},			
+			"moves": [
+				"Tackle, Tail Whip"
+			]
 		},
 		{
-		  "name": "Minket",
-		  "type": "Grass",
-		  "base_stats": {
-			"hp": 45,
-			"attack": 50,
-			"defense": 40,
-			"speed": 60
-		  },
-		  "moves": ["Tackle", "Tail Whip", "", ""]
+			"id": 7,
+			"name": "Ignewt",
+			"type1": "Fire",
+			"type2": null,
+			"level": 5,
+			"status": null,
+			"current_hp": 45,
+			"current_xp": 0,
+			"base_stats": {
+				"hp": 45,
+				"attack": 60,
+				"defense": 40,
+				"special_attack": 70,
+				"special_defense": 50,
+				"speed": 45
+			},			
+			"moves": [
+				"Tackle, Tail Whip"
+			]
 		}
 	]
 }
