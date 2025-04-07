@@ -95,10 +95,11 @@ func get_enemy_move() -> String:
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
 	
-func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
+func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
 	print(attackingPokemon.name + " used " + moveName)
 	print_move(attackingPokemon.name, moveName)
 	await get_tree().create_timer(1).timeout
+	Helpers.wait(1)
 	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
 	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
 	if(move.category == "Physical" or "Special"):
@@ -121,7 +122,10 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 		# un load 
 
 func print_move(pokemonName: String, move: String):
-	messageBox.get_node("Message").text = pokemonName + " used " + move	
+	messageBox.get_node("Message").text = (pokemonName + " used " + move)	
+	var message = messageBox.get_node("Message").text
+	var temp = 0
+	
 
 func _on_switch_pressed() -> void:
 	show_party()

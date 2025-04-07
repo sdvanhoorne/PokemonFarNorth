@@ -14,14 +14,15 @@ func get_damage(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon
 	var typeEffectiveness1 = get_type_effectiveness(move.type, defendingPokemon.type1)
 	var typeEffectiveness2
 	if(defendingPokemon.type2 == null):
-		typeEffectiveness2 = 1
+		typeEffectiveness2 = 1.0
 	else:
 		typeEffectiveness2 = get_type_effectiveness(move.type, defendingPokemon.type2)
 	
 	# might need to manage int vs float here
 	# should damage round to nearest int?
 	var damage = baseDamage * (attackerStat / defenderStat) 
-	return damage * stabMultiplier * typeEffectiveness1 * typeEffectiveness2 / 4
+	damage =  damage * stabMultiplier * typeEffectiveness1 * typeEffectiveness2 / 6
+	return damage
 	
 func get_type_effectiveness(moveType: String, type: String) -> float:
 	print("Getting type effectiveness")
