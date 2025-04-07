@@ -1,16 +1,22 @@
 {
-  "encounters": [
-	{
-	  "pokemon": "Cubble",
-	  "rate": 50
-	},
-	{
-	  "pokemon": "Masklit",
-	  "rate": 30
-	},
-	{
-	  "pokemon": "Chirblip",
-	  "rate": 20
-	}
-  ]
+	"encounters": [
+		{
+			"pokemon": "Cubble",
+			"rate": 50,
+			"level_min": 2,
+			"level_max": 3
+		},
+		{
+			"pokemon": "Masklit",
+			"rate": 30,
+			"level_min": 2,
+			"level_max": 3
+		},
+		{
+			"pokemon": "Chirblip",
+			"rate": 20,
+			"level_min": 2,
+			"level_max": 3
+		}
+	]
 }

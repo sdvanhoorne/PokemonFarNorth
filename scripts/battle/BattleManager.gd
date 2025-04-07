@@ -1,10 +1,10 @@
 extends Node
-var wild_pokemon: Dictionary
+var wild_pokemon: Pokemon
 var player_position: Vector2
 var player_direction: Vector2
 var current_map_path: String
 
-func start_battle(wild_data: Dictionary, player_pos: Vector2, player_dir: Vector2, map_path: String):
+func start_battle(wild_data: Pokemon, player_pos: Vector2, player_dir: Vector2, map_path: String):
 	wild_pokemon = wild_data
 	player_position = player_pos
 	player_direction = player_dir

@@ -1,11 +1,18 @@
 {
-  "name": "Masklit",
-  "type": ["Normal"],
-  "base_stats": {
-	"hp": 45,
-	"attack": 50,
-	"defense": 40,
-	"speed": 60
-  },
-  "moves": ["Scratch", "Growl"]
+	"id": 1,
+	"name": "Masklit",
+	"type1": "Normal",
+	"type2": null,
+	"base_stats": {
+		"hp": 65,
+		"attack": 60,
+		"special_attack": 25,
+		"defense": 50,
+		"special_defense": 45,
+		"speed": 55
+	  },
+	  "moves": [
+		{ "level": 0, "name": "Tackle" },
+		{ "level": 0, "name": "Growl" }
+  ]
 }

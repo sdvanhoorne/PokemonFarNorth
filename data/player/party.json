@@ -19,7 +19,7 @@
 				"speed": 70
 			},			
 			"moves": [
-				"Tackle, Tail Whip"
+				"Tackle", "Tail Whip"
 			]
 		},
 		{
@@ -40,7 +40,7 @@
 				"speed": 45
 			},			
 			"moves": [
-				"Tackle, Tail Whip"
+				"Tackle", "Tail Whip"
 			]
 		}
 	]

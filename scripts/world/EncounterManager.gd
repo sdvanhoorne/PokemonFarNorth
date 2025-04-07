@@ -9,26 +9,31 @@ func load_encounters(file_path: String):
 		var result = JSON.parse_string(json_file.get_as_text())
 		encounter_data = result["encounters"]
 		
-func roll_encounter() -> Dictionary:
+func roll_encounter() -> Pokemon:
 	var roll = rng.randi_range(1, 100)
 	var current = 0
 
 	for entry in encounter_data:
 		current += entry["rate"]
 		if roll <= current:
-			return load_pokemon_data(entry["pokemon"])
+			var minLevel = entry.get("level_min")
+			var maxLevel = entry.get("level_max")
+			var pokemonLevel = rng.randi_range(minLevel, maxLevel)
+			return load_pokemon(entry["pokemon"], pokemonLevel)
 	
-	return {}
+	return Pokemon.new()
 	
-func load_pokemon_data(pokemon_name: String) -> Dictionary:
-	var path = "res://data/pokemon/%s.json" % pokemon_name.to_lower()
+func load_pokemon(pokemonName: String, pokemonLevel: int) -> Pokemon:
+	var path = "res://data/pokemon/%s.json" % pokemonName.to_lower()
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
 		var response = JSON.parse_string(file.get_as_text())
-		return response
+		var wildPokemon = Pokemon.new(response)
+		wildPokemon.level = pokemonLevel
+		return wildPokemon
 	else:
 		push_error("Failed to load Pokémon data at %s" % path)
-		return {}
+		return Pokemon.new()
 
 func check_for_encounter_at_position(pos: Vector2, dir: Vector2, encounterLayer: TileMapLayer):
 	var local_pos = encounterLayer.to_local(pos)

@@ -3,6 +3,7 @@ extends Node2D
 @onready var PartyUI = $Party
 @onready var EnemyPokemonContainer = $EnemyPokemonContainer
 @onready var PlayerPokemonContainer = $PlayerPokemonContainer
+const Move = preload("res://scripts/moves/Move.gd")
 var rng = RandomNumberGenerator.new()
 var EnemyPokemons = []
 
@@ -48,8 +49,11 @@ func show_moves():
 	set_move(3)
 	
 func set_move(i: int):
-	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))
-	var pokemon_move = PlayerInventory.PartyPokemon[0].moves[i]
+	var moves = PlayerInventory.PartyPokemon[0].moves
+	if i >= moves.size():
+		return
+	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))	
+	var pokemon_move = moves[i]
 	if(pokemon_move == null):
 		move_button.text = ""
 	move_button.text = pokemon_move
@@ -79,12 +83,13 @@ func process_turn(moveName: String):
 		return
 	show_dialogue()
 	# player always wins speed tie
-	if(PlayerInventory.PartyPokemon[0].speed >= EnemyPokemons[0].get("speed")):		
-		process_player_move(moveName)
-		process_enemy_move()
+	var playerLead = PlayerInventory.PartyPokemon[0]
+	if(playerLead.speed >= EnemyPokemons[0].speed):
+		process_move(moveName, playerLead, EnemyPokemons[0])
+		process_move(moveName, EnemyPokemons[0], playerLead)
 	else:
-		process_enemy_move()
-		process_player_move(moveName)
+		process_move(moveName, EnemyPokemons[0], playerLead)
+		process_move(moveName, playerLead, EnemyPokemons[0])
 	show_prompt()
 	
 func get_enemy_move() -> String:
@@ -93,36 +98,24 @@ func get_enemy_move() -> String:
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
 	
-# process move could be a single function =================
 func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
 	print(attackingPokemon.name + " used " + moveName)
 	print_move(attackingPokemon.name, moveName)
 	await get_tree().create_timer(1).timeout
 	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
-	var move = JSON.parse_string(moveData.get_as_text())[moveName]
+	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
+	if(move.category == "Physical" or "Special"):
+		var damage = DamageCalculation.get_damage(move, attackingPokemon, defendingPokemon)
 	
+func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
+	defendingPokemon.current_hp -= damage
+	print(defendingPokemon.name + " took " + damage + " damage from " + attackingPokemon.name)
+	if(defendingPokemon.current_hp <= 0):
+		print(defendingPokemon.name + " fainted")
+		# un load 
 
-func process_player_move(moveName: String):
-	print("Begin player move")
-	print_move(PlayerInventory.PartyPokemon[0].name, moveName)
-	await get_tree().create_timer(1).timeout
-	# get move from data
-	
-	# if physical or special move process damage
-	# apply damage to 
-	# check for ko
-	
-func process_enemy_move():
-	print("Begin enemy move")
-	print_move(EnemyPokemons[0].get("name"), get_enemy_move())
-	await get_tree().create_timer(1).timeout
-	# process enemy move
-	
-# ===========================================================
-	
 func print_move(pokemonName: String, move: String):
-	messageBox.get_node("Message").text = pokemonName + " used " + move
-	
+	messageBox.get_node("Message").text = pokemonName + " used " + move	
 
 func _on_switch_pressed() -> void:
 	show_party()
