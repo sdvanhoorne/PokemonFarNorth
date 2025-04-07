@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bihya4k8vuet"]
 
 [ext_resource type="Texture2D" uid="uid://bu5vtalxdd5de" path="res://assets/player/player_up_idle.png" id="1_2fwn1"]
-[ext_resource type="Script" uid="uid://fonk8iskxg6s" path="res://scripts/battle/Battle.gd" id="1_5od06"]
+[ext_resource type="Script" uid="uid://fonk8iskxg6s" path="res://scripts/battle/battle.gd" id="1_5od06"]
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_5od06")

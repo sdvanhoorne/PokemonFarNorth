@@ -36,7 +36,7 @@ func check_for_encounter_at_position(pos: Vector2, dir: Vector2, encounterLayer:
 	var tile_data = encounterLayer.get_cell_tile_data(cell_coords)
 
 	if tile_data and tile_data.get_custom_data("encounter_grass") == true:
-		if randf() < 0.1: # wild encounter rate
+		if randf() < 0.05: # wild encounter rate
 			print("A wild encounter begins!")
 			load_encounters("res://data/encounters/" + encounterLayer.get_parent().name + ".json")
 			var encountered_pokemon = EncounterManager.roll_encounter()
