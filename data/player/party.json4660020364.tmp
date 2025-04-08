@@ -10,14 +10,14 @@
 			"status": null,
 			"current_hp": 18,
 			"current_xp": 0,
-			"base_stats": {
+			"base_stats":{
 				"hp": 18,
 				"attack": 9,
 				"defense": 9,
 				"special_attack": 13,
 				"special_defense": 9,
 				"speed": 14
-			},
+			},			
 			"moves": [
 				"Tackle", "Tail Whip"
 			]

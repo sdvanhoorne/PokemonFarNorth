@@ -81,12 +81,16 @@ func process_turn(moveName: String):
 	show_dialogue()
 	# player always wins speed tie
 	var playerLead = PlayerInventory.PartyPokemon[0]
+	show_dialogue()
 	if(playerLead.speed >= EnemyPokemon[0].speed):
 		process_move(moveName, playerLead, EnemyPokemon[0], true)
+		await get_tree().create_timer(1).timeout
 		process_move(moveName, EnemyPokemon[0], playerLead, false)
 	else:
 		process_move(moveName, EnemyPokemon[0], playerLead, false)
+		await get_tree().create_timer(1).timeout
 		process_move(moveName, playerLead, EnemyPokemon[0], true)
+	await get_tree().create_timer(1).timeout
 	show_prompt()
 	
 func get_enemy_move() -> String:
@@ -98,8 +102,6 @@ func get_enemy_move() -> String:
 func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
 	print(attackingPokemon.name + " used " + moveName)
 	print_move(attackingPokemon.name, moveName)
-	await get_tree().create_timer(1).timeout
-	Helpers.wait(1)
 	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
 	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
 	if(move.category == "Physical" or "Special"):
@@ -123,9 +125,7 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 
 func print_move(pokemonName: String, move: String):
 	messageBox.get_node("Message").text = (pokemonName + " used " + move)	
-	var message = messageBox.get_node("Message").text
-	var temp = 0
-	
+	await get_tree().process_frame
 
 func _on_switch_pressed() -> void:
 	show_party()
