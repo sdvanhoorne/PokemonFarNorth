@@ -20,7 +20,7 @@ func show_prompt():
 	messageBox.get_node("Message").text = ("What will you do?")
 
 func load_pokemon(node: Node2D, pokemon: Pokemon):
-	var sprite = node.get_node("Sprite")
+	var sprite = node.get_node("InfoArea").get_node("Sprite")
 	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.name + ".png")	
 	var nameLabel = node.get_node("Info/Name")
 	nameLabel.text = pokemon.name

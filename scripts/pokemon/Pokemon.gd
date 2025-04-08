@@ -1,6 +1,6 @@
 class_name Pokemon
 
-const stat_scaler = 25
+const stat_scaler = 25.0
 const starting_hp = 10
 
 var id = 0
@@ -52,5 +52,6 @@ func _init(data = {}, generatedLevel = 1):
 	
 	moves = data["moves"]
 
-func scale_stat(stat: int):
-	return stat * (int(level) / stat_scaler)
+func scale_stat(stat: int) -> int:
+	var scaled_stat = stat * (level / stat_scaler)
+	return scaled_stat
