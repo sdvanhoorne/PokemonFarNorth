@@ -1,8 +1,8 @@
 extends Node2D
 @onready var messageBox = $MessageBox
 @onready var PartyUI = $Party
-@onready var EnemyPokemonContainer = $EnemyPokemonContainer
-@onready var PlayerPokemonContainer = $PlayerPokemonContainer
+@onready var EnemyPokemonContainer = $EnemyPokemon
+@onready var PlayerPokemonContainer = $PlayerPokemon
 var rng = RandomNumberGenerator.new()
 var EnemyPokemon = []
 
@@ -20,7 +20,7 @@ func show_prompt():
 	messageBox.get_node("Message").text = ("What will you do?")
 
 func load_pokemon(node: Node2D, pokemon: Pokemon):
-	var sprite = node.get_node("InfoArea").get_node("Sprite")
+	var sprite = node.get_node("SpriteArea").get_node("Sprite")
 	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.name + ".png")	
 	var nameLabel = node.get_node("Info/Name")
 	nameLabel.text = pokemon.name
@@ -30,8 +30,19 @@ func load_pokemon(node: Node2D, pokemon: Pokemon):
 	healthBar.max_value = pokemon.hp
 	healthBar.value = pokemon.current_hp
 	
+func unload_pokemon(node: Node2D):
+	var infoArea = node.get_node("SpriteArea")
+	var sprite = infoArea.get_node("Sprite")
+	sprite.texture = null
+	# show fainting animation?
+	var info = node.get_node("Info")
+	info.visible = false
+	
 func _on_run_pressed() -> void:
 	print("You ran away...")
+	end_battle()
+	
+func end_battle() -> void:
 	BattleManager.return_to_world()
 
 func _on_fight_pressed() -> void:	
@@ -121,7 +132,15 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 	print(defendingPokemon.name + " now has " + str(healthBar.value) + " health")
 	if(defendingPokemon.current_hp <= 0):
 		print(defendingPokemon.name + " fainted")
-		# un load 
+		if(isPlayerAttacking):
+			unload_pokemon(EnemyPokemonContainer)
+			# faint enemy pokemon
+			# get xp / check for level up
+			end_battle()
+		else:
+			unload_pokemon(PlayerPokemonContainer)
+			# faint player pokemon / maybe the pokemon class should
+			# be attached to the battle and then saved back to party
 
 func print_move(pokemonName: String, move: String):
 	messageBox.get_node("Message").text = (pokemonName + " used " + move)	

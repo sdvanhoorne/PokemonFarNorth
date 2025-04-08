@@ -20,9 +20,9 @@ func get_damage(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon
 	
 	# might need to manage int vs float here
 	# should damage round to nearest int?
-	var damage = baseDamage * (attackerStat / defenderStat) 
+	var damage = baseDamage * (float(attackerStat) / float(defenderStat)) 
 	damage =  damage * stabMultiplier * typeEffectiveness1 * typeEffectiveness2 / 6
-	return damage
+	return int(damage)
 	
 func get_type_effectiveness(moveType: String, type: String) -> float:
 	print("Getting type effectiveness")

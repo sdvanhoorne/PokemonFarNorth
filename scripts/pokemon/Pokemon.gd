@@ -1,7 +1,7 @@
 class_name Pokemon
 
 const stat_scaler = 25.0
-const starting_hp = 10
+const starting_hp = 15
 
 var id = 0
 var name = ""

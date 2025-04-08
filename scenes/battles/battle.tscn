@@ -13,23 +13,23 @@ script = ExtResource("1_7611a")
 
 [node name="Background" type="Sprite2D" parent="."]
 
-[node name="PlayerPokemonContainer" type="Node2D" parent="."]
+[node name="PlayerPokemon" type="Node2D" parent="."]
 position = Vector2(14, 137)
 
-[node name="InfoArea" type="Area2D" parent="PlayerPokemonContainer"]
+[node name="SpriteArea" type="Area2D" parent="PlayerPokemon"]
 position = Vector2(513, -26)
 
-[node name="Sprite" type="Sprite2D" parent="PlayerPokemonContainer/InfoArea"]
+[node name="Sprite" type="Sprite2D" parent="PlayerPokemon/SpriteArea"]
 position = Vector2(-358, 195)
 scale = Vector2(5, 5)
 texture = ExtResource("2_836qq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPokemonContainer/InfoArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPokemon/SpriteArea"]
 position = Vector2(-365, 213)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" type="Control" parent="PlayerPokemonContainer"]
+[node name="Info" type="Control" parent="PlayerPokemon"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 312.0
@@ -37,7 +37,7 @@ offset_top = 191.0
 offset_right = 352.0
 offset_bottom = 231.0
 
-[node name="HealthBar" type="TextureProgressBar" parent="PlayerPokemonContainer/Info"]
+[node name="HealthBar" type="TextureProgressBar" parent="PlayerPokemon/Info"]
 layout_mode = 0
 offset_left = 9.0
 offset_top = 4.0
@@ -47,7 +47,7 @@ scale = Vector2(5.128, 1)
 texture_under = ExtResource("3_7611a")
 texture_progress = ExtResource("4_836qq")
 
-[node name="Name" type="Label" parent="PlayerPokemonContainer/Info"]
+[node name="Name" type="Label" parent="PlayerPokemon/Info"]
 layout_mode = 0
 offset_left = 13.0
 offset_top = 33.0
@@ -55,7 +55,7 @@ offset_right = 68.0
 offset_bottom = 56.0
 text = "Minket"
 
-[node name="Level" type="Label" parent="PlayerPokemonContainer/Info"]
+[node name="Level" type="Label" parent="PlayerPokemon/Info"]
 layout_mode = 0
 offset_left = 235.0
 offset_top = 34.0
@@ -63,22 +63,22 @@ offset_right = 275.0
 offset_bottom = 57.0
 text = "5"
 
-[node name="EnemyPokemonContainer" type="Node2D" parent="."]
+[node name="EnemyPokemon" type="Node2D" parent="."]
 position = Vector2(527, 111)
 
-[node name="InfoArea" type="Area2D" parent="EnemyPokemonContainer"]
+[node name="SpriteArea" type="Area2D" parent="EnemyPokemon"]
 
-[node name="Sprite" type="Sprite2D" parent="EnemyPokemonContainer/InfoArea"]
+[node name="Sprite" type="Sprite2D" parent="EnemyPokemon/SpriteArea"]
 position = Vector2(108, -11)
 scale = Vector2(5, 5)
 texture = ExtResource("5_836qq")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyPokemonContainer/InfoArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyPokemon/SpriteArea"]
 position = Vector2(100, 13)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" type="Control" parent="EnemyPokemonContainer"]
+[node name="Info" type="Control" parent="EnemyPokemon"]
 layout_mode = 3
 anchors_preset = 0
 offset_left = -309.0
@@ -86,7 +86,7 @@ offset_top = -78.0
 offset_right = -269.0
 offset_bottom = -38.0
 
-[node name="HealthBar" type="TextureProgressBar" parent="EnemyPokemonContainer/Info"]
+[node name="HealthBar" type="TextureProgressBar" parent="EnemyPokemon/Info"]
 layout_mode = 0
 offset_left = -2.0
 offset_top = 3.0
@@ -96,7 +96,7 @@ scale = Vector2(5.128, 1)
 texture_under = ExtResource("3_7611a")
 texture_progress = ExtResource("4_836qq")
 
-[node name="Name" type="Label" parent="EnemyPokemonContainer/Info"]
+[node name="Name" type="Label" parent="EnemyPokemon/Info"]
 layout_mode = 0
 offset_left = 2.0
 offset_top = 27.0
@@ -104,7 +104,7 @@ offset_right = 56.0
 offset_bottom = 50.0
 text = "Cubble"
 
-[node name="Level" type="Label" parent="EnemyPokemonContainer/Info"]
+[node name="Level" type="Label" parent="EnemyPokemon/Info"]
 layout_mode = 0
 offset_left = 226.0
 offset_top = 31.0
