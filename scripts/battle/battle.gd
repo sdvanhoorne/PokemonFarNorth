@@ -29,6 +29,7 @@ func load_pokemon(node: Node2D, pokemon: Pokemon):
 	var healthBar = node.get_node("Info/HealthBar")
 	healthBar.max_value = pokemon.hp
 	healthBar.value = pokemon.current_hp
+	node.set_meta("pokemon", pokemon)
 	
 func unload_pokemon(node: Node2D):
 	var infoArea = node.get_node("SpriteArea")

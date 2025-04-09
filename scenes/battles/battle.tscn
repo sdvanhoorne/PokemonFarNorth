@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://bihya4k8vuet"]
+[gd_scene load_steps=8 format=3 uid="uid://bihya4k8vuet"]
 
-[ext_resource type="Script" uid="uid://bgh6i7rh0cou1" path="res://scripts/battle/battle.gd" id="1_7611a"]
+[ext_resource type="Script" uid="uid://bgh6i7rh0cou1" path="res://scripts/battle/Battle.gd" id="1_7611a"]
+[ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scenes/battles/PokemonTooltip.gd" id="2_1kxda"]
 [ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="2_836qq"]
 [ext_resource type="Texture2D" uid="uid://dtahf7dn7d1wo" path="res://assets/battle/HealthBarRed.png" id="3_7611a"]
 [ext_resource type="Texture2D" uid="uid://dlrqrpa43srk3" path="res://assets/battle/HealthBarGreen.png" id="4_836qq"]
@@ -15,17 +16,18 @@ script = ExtResource("1_7611a")
 
 [node name="PlayerPokemon" type="Node2D" parent="."]
 position = Vector2(14, 137)
+script = ExtResource("2_1kxda")
 
 [node name="SpriteArea" type="Area2D" parent="PlayerPokemon"]
-position = Vector2(513, -26)
+position = Vector2(31, 94)
 
 [node name="Sprite" type="Sprite2D" parent="PlayerPokemon/SpriteArea"]
-position = Vector2(-358, 195)
+position = Vector2(134, 83)
 scale = Vector2(5, 5)
 texture = ExtResource("2_836qq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPokemon/SpriteArea"]
-position = Vector2(-365, 213)
+position = Vector2(116, 117)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
@@ -61,6 +63,40 @@ offset_left = 235.0
 offset_top = 34.0
 offset_right = 275.0
 offset_bottom = 57.0
+text = "5"
+
+[node name="PopUpStats" type="Control" parent="PlayerPokemon"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 101.0
+offset_top = 140.0
+offset_right = 141.0
+offset_bottom = 180.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PlayerPokemon/PopUpStats"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 131.0
+scale = Vector2(0.8, 0.8)
+
+[node name="Attack" type="Label" parent="PlayerPokemon/PopUpStats/VBoxContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="Defense" type="Label" parent="PlayerPokemon/PopUpStats/VBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="SpecialAttack" type="Label" parent="PlayerPokemon/PopUpStats/VBoxContainer"]
+layout_mode = 2
+text = "3"
+
+[node name="SpecialDefense" type="Label" parent="PlayerPokemon/PopUpStats/VBoxContainer"]
+layout_mode = 2
+text = "4"
+
+[node name="Speed" type="Label" parent="PlayerPokemon/PopUpStats/VBoxContainer"]
+layout_mode = 2
 text = "5"
 
 [node name="EnemyPokemon" type="Node2D" parent="."]
@@ -231,6 +267,8 @@ offset_bottom = 27.0
 
 [node name="Popup" type="Popup" parent="Party/Party1"]
 
+[connection signal="mouse_entered" from="PlayerPokemon/SpriteArea" to="PlayerPokemon" method="_on_sprite_area_mouse_entered"]
+[connection signal="mouse_exited" from="PlayerPokemon/SpriteArea" to="PlayerPokemon" method="_on_sprite_area_mouse_exited"]
 [connection signal="pressed" from="MessageBox/PokemonMoves/Move0" to="." method="_on_move_0_pressed"]
 [connection signal="pressed" from="MessageBox/PokemonMoves/Move1" to="." method="_on_move_1_pressed"]
 [connection signal="pressed" from="MessageBox/PokemonMoves/Move2" to="." method="_on_move_2_pressed"]
