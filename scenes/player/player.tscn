@@ -103,5 +103,5 @@ shape = SubResource("RectangleShape2D_x7p2l")
 [node name="SpriteAnimation" type="AnimatedSprite2D" parent="."]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_007i1")
-animation = &"move_up"
+animation = &"move_down"
 offset = Vector2(8, 6)

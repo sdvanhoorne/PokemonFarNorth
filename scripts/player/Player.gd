@@ -2,13 +2,14 @@ extends CharacterBody2D
 @onready var _animation_player = $SpriteAnimation
 
 const TILE_SIZE = 16
-const MOVE_TIME = 0.1  # Time it takes to move one tile
+const MOVE_TIME = 0.12  # Time it takes to move one tile
 var facing_input = Vector2.ZERO
 var hold_timer = 0.0
 const HOLD_THRESHOLD = 0.03
 var is_moving = false
 var target_position = Vector2.ZERO
 var sprinting = false
+var sprint_multipier = 1.75
 
 func _ready():
 	# align player to grid
@@ -34,7 +35,7 @@ func _physics_process(delta):
 		var direction = (target_position - global_position).normalized()
 		velocity = direction * (TILE_SIZE / MOVE_TIME)
 		if(sprinting):
-			velocity = velocity * 2
+			velocity = velocity * sprint_multipier
 		move_and_slide()
 
 		if global_position.distance_to(target_position) < 1:
@@ -75,7 +76,8 @@ func _physics_process(delta):
 			hold_timer += delta
 			if hold_timer >= HOLD_THRESHOLD:
 				var offset = input * TILE_SIZE
-				if !test_move(global_transform, offset):
+				var sprintedOffset = offset * sprint_multipier
+				if !test_move(global_transform, sprintedOffset if sprinting else offset):
 					target_position = global_position + offset
 					is_moving = true
 	else:

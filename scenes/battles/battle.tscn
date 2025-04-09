@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bihya4k8vuet"]
 
-[ext_resource type="Script" uid="uid://bgh6i7rh0cou1" path="res://scripts/battle/Battle.gd" id="1_7611a"]
+[ext_resource type="Script" uid="uid://bgh6i7rh0cou1" path="res://scripts/battle/battle.gd" id="1_7611a"]
 [ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="2_836qq"]
 [ext_resource type="Texture2D" uid="uid://dtahf7dn7d1wo" path="res://assets/battle/HealthBarRed.png" id="3_7611a"]
 [ext_resource type="Texture2D" uid="uid://dlrqrpa43srk3" path="res://assets/battle/HealthBarGreen.png" id="4_836qq"]
