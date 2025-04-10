@@ -113,12 +113,13 @@ func get_enemy_move() -> String:
 	
 func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
 	print(attackingPokemon.name + " used " + moveName)
-	print_move(attackingPokemon.name, moveName)
+	print_dialogue(attackingPokemon.name + " used " + moveName)
 	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
 	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
 	if(move.category == "Physical" or "Special"):
 		var damage = DamageCalculation.get_damage(move, attackingPokemon, defendingPokemon)
 		process_damage(damage, attackingPokemon, defendingPokemon, isPlayerAttacking)
+	await get_tree().create_timer(1).timeout
 		
 func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
 	defendingPokemon.current_hp -= damage
@@ -132,19 +133,24 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 	print(defendingPokemon.name + " took " + str(damage) + " damage from " + attackingPokemon.name)
 	print(defendingPokemon.name + " now has " + str(healthBar.value) + " health")
 	if(defendingPokemon.current_hp <= 0):
+		print_dialogue(defendingPokemon.name + " fainted")
 		print(defendingPokemon.name + " fainted")
+		await get_tree().create_timer(1).timeout
 		if(isPlayerAttacking):
 			unload_pokemon(EnemyPokemonContainer)
+			await get_tree().create_timer(1).timeout
 			# faint enemy pokemon
-			# get xp / check for level up
+			# dget xp / check for level up
 			end_battle()
 		else:
 			unload_pokemon(PlayerPokemonContainer)
+			await get_tree().create_timer(1).timeout
 			# faint player pokemon / maybe the pokemon class should
 			# be attached to the battle and then saved back to party
 
-func print_move(pokemonName: String, move: String):
-	messageBox.get_node("Message").text = (pokemonName + " used " + move)	
+func print_dialogue(message: String):
+	show_dialogue()
+	messageBox.get_node("Message").text = message	
 	await get_tree().process_frame
 
 func _on_switch_pressed() -> void:

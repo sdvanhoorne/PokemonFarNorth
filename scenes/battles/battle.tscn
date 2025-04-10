@@ -1,25 +1,26 @@
-[gd_scene load_steps=8 format=3 uid="uid://bihya4k8vuet"]
+[gd_scene load_steps=9 format=3 uid="uid://bihya4k8vuet"]
 
-[ext_resource type="Script" uid="uid://bgh6i7rh0cou1" path="res://scripts/battle/Battle.gd" id="1_7611a"]
+[ext_resource type="Script" uid="uid://2tjjxccvbkga" path="res://scripts/battle/Battle.gd" id="1_m7hvh"]
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scenes/battles/PokemonTooltip.gd" id="2_1kxda"]
 [ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="2_836qq"]
 [ext_resource type="Texture2D" uid="uid://dtahf7dn7d1wo" path="res://assets/battle/HealthBarRed.png" id="3_7611a"]
 [ext_resource type="Texture2D" uid="uid://dlrqrpa43srk3" path="res://assets/battle/HealthBarGreen.png" id="4_836qq"]
+[ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="5_1kxda"]
 [ext_resource type="Texture2D" uid="uid://c5jlr3wso5qo8" path="res://assets/pokemon/ai/Cubble.png" id="5_836qq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
 
 [node name="Battle" type="Node2D"]
-script = ExtResource("1_7611a")
+script = ExtResource("1_m7hvh")
 
 [node name="Background" type="Sprite2D" parent="."]
 
 [node name="PlayerPokemon" type="Node2D" parent="."]
-position = Vector2(14, 137)
+position = Vector2(56, 248)
 script = ExtResource("2_1kxda")
 
 [node name="SpriteArea" type="Area2D" parent="PlayerPokemon"]
-position = Vector2(31, 94)
+position = Vector2(-25, -14)
 
 [node name="Sprite" type="Sprite2D" parent="PlayerPokemon/SpriteArea"]
 position = Vector2(134, 83)
@@ -34,10 +35,10 @@ shape = SubResource("RectangleShape2D_1kxda")
 [node name="Info" type="Control" parent="PlayerPokemon"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 312.0
-offset_top = 191.0
-offset_right = 352.0
-offset_bottom = 231.0
+offset_left = 264.0
+offset_top = 115.0
+offset_right = 304.0
+offset_bottom = 155.0
 
 [node name="HealthBar" type="TextureProgressBar" parent="PlayerPokemon/Info"]
 layout_mode = 0
@@ -65,19 +66,17 @@ offset_right = 275.0
 offset_bottom = 57.0
 text = "5"
 
-[node name="PopUpStats" type="Control" parent="PlayerPokemon"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 101.0
-offset_top = 140.0
-offset_right = 141.0
-offset_bottom = 180.0
+[node name="PopUpStats" type="PanelContainer" parent="PlayerPokemon"]
+visible = false
+z_index = 1
+offset_left = 66.0
+offset_top = 41.0
+offset_right = 106.0
+offset_bottom = 172.0
+theme = ExtResource("5_1kxda")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PlayerPokemon/PopUpStats"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 131.0
-scale = Vector2(0.8, 0.8)
+layout_mode = 2
 
 [node name="Attack" type="Label" parent="PlayerPokemon/PopUpStats/VBoxContainer"]
 layout_mode = 2
