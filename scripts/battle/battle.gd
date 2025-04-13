@@ -89,36 +89,54 @@ func _on_move_3_pressed() -> void:
 
 func process_turn(moveName: String):
 	if moveName == "" or null:
+		print("Issue using player move")
 		return
-	show_dialogue()
 	# player always wins speed tie
-	var playerLead = PlayerInventory.PartyPokemon[0]
 	show_dialogue()
+	
+	# get both pokemons moves
+	var playerMove = get_move(moveName)
+	var enemyMove = get_move(get_enemy_move())
+	
+	# juicy move processing code
+	var playerLead = PlayerInventory.PartyPokemon[0]
 	if(playerLead.speed >= EnemyPokemon[0].speed):
-		process_move(moveName, playerLead, EnemyPokemon[0], true)
+		process_move(playerMove, playerLead, EnemyPokemon[0], true)
 		await get_tree().create_timer(1).timeout
-		process_move(moveName, EnemyPokemon[0], playerLead, false)
+		process_move(enemyMove, EnemyPokemon[0], playerLead, false)
 	else:
-		process_move(moveName, EnemyPokemon[0], playerLead, false)
+		process_move(enemyMove, EnemyPokemon[0], playerLead, false)
 		await get_tree().create_timer(1).timeout
-		process_move(moveName, playerLead, EnemyPokemon[0], true)
+		process_move(playerMove, playerLead, EnemyPokemon[0], true)
 	await get_tree().create_timer(1).timeout
+	
 	show_prompt()
 	
+func get_move(moveName: String) -> Move:
+	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
+	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
+	return move
+	
 func get_enemy_move() -> String:
-	var enemy_moves = BattleManager.wild_pokemon.get("moves")
+	var enemy_moves = EnemyPokemon[0].get("moves")
 	var roll = rng.randi_range(0, enemy_moves.size()-1)
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
 	
-func process_move(moveName: String, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
-	print(attackingPokemon.name + " used " + moveName)
-	print_dialogue(attackingPokemon.name + " used " + moveName)
-	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
-	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
-	if(move.category == "Physical" or "Special"):
+func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
+	print(attackingPokemon.name + " used " + move.name)
+	print_dialogue(attackingPokemon.name + " used " + move.name)
+	
+	# process each move type differently 
+	var moveCategory = move.category
+	if(moveCategory == "Physical" or moveCategory == "Special"):
 		var damage = DamageCalculation.get_damage(move, attackingPokemon, defendingPokemon)
 		process_damage(damage, attackingPokemon, defendingPokemon, isPlayerAttacking)
+	elif(moveCategory == "Status"):
+		process_status(move, attackingPokemon, defendingPokemon)	
+	elif(moveCategory == "StatChange"):
+		process_stat_change(move, attackingPokemon, defendingPokemon)	
+		
 	await get_tree().create_timer(1).timeout
 		
 func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
@@ -132,21 +150,22 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 	healthBar.value = defendingPokemon.current_hp
 	print(defendingPokemon.name + " took " + str(damage) + " damage from " + attackingPokemon.name)
 	print(defendingPokemon.name + " now has " + str(healthBar.value) + " health")
-	if(defendingPokemon.current_hp <= 0):
-		print_dialogue(defendingPokemon.name + " fainted")
-		print(defendingPokemon.name + " fainted")
-		await get_tree().create_timer(1).timeout
-		if(isPlayerAttacking):
-			unload_pokemon(EnemyPokemonContainer)
-			await get_tree().create_timer(1).timeout
-			# faint enemy pokemon
-			# dget xp / check for level up
-			end_battle()
-		else:
-			unload_pokemon(PlayerPokemonContainer)
-			await get_tree().create_timer(1).timeout
-			# faint player pokemon / maybe the pokemon class should
-			# be attached to the battle and then saved back to party
+	
+
+func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
+	print("apply status")
+	var statusType = move.status
+	var target = move.target
+	if(target == "Self"):
+		attackingPokemon.status = statusType
+	elif (target == "Enemy"):
+		defendingPokemon.status = statusType
+	
+func process_stat_change(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
+	print("apply stat change")
+	var target = move.target
+		
+	# need to find a way to save original stats before buff/debuff
 
 func print_dialogue(message: String):
 	show_dialogue()

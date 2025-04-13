@@ -3,6 +3,7 @@
 	{
 		"damage": 40,
  		"type": "Normal",
+ 		"target": "Enemy",
 		"category": "Physical",
 		"accuracy": 100,
 		"description": "A physical attack in which the user charges, full body, into the foe."
@@ -11,8 +12,34 @@
 	{
 		"damage": null,
  		"type": "Normal",
+ 		"target": "Enemy",
+		"targetStat": "Defense",
+		"statMultipier": 0.85,
 		"category": "Status",
 		"accuracy": 100,
 		"description": "The user wags its tail cutely, making the foe lower its Defense stat."
-	}	
+	},	
+	"Howl": 
+	{
+		"damage": null,
+ 		"type": "Normal",
+ 		"target": "Self",
+		"targetStat": "Attack",
+		"statMultipier": 1.15,
+		"category": "Status",
+		"accuracy": 100,
+		"description": "User howls",
+	},
+	"Thunder Wave": 
+	{
+		"damage": null,
+ 		"type": "Electric",
+ 		"target": "Enemy",
+		"targetStat": null,
+		"statMultipier": null,
+		"category": "Status",
+		"status": "Paralyze",
+		"accuracy": 100,
+		"description": "User howls",
+	}
 }

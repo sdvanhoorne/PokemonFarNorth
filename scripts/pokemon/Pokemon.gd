@@ -16,6 +16,7 @@ var defense = 0
 var special_defense = 0
 var speed = 0
 var moves = []
+var status = ""
 
 func _init(data = {}, generatedLevel = 1):
 	id = data["id"]
