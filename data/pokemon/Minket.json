@@ -1,18 +1,18 @@
 {
-	"id": 1,
-	"name": "Minket",
-	"type1": "Grass",
-	"type2": null,
-	"base_stats": {
-		"hp": 40,
-		"attack": 45,
-		"defense": 45,
-		"special_attack": 65,
-		"special_defense": 45,
-		"speed": 70
-	  },
-	  "moves": [
-		{ "level": 0, "name": "Tackle" },
-		{ "level": 0, "name": "Tail Whip" }
+	"Id": 1,
+	"Name": "Minket",
+	"Type1": "Grass",
+	"Type2": null,
+	"Base_Stats": {
+		"Hp": 40,
+		"Attack": 45,
+		"Defense": 45,
+		"Special_Attack": 65,
+		"Special_Defense": 45,
+		"Speed": 70
+	},
+	"Moves": [
+		{ "Level": 0, "Name": "Tackle" },
+		{ "Level": 0, "Name": "Tail Whip" }
   ]
 }

@@ -12,7 +12,7 @@ func _ready():
 	load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 	
 	messageBox.get_node("PokemonMoves").visible = false
-	messageBox.get_node("Message").text = ("A wild %s appeared!" % EnemyPokemon[0].get("name"))
+	messageBox.get_node("Message").text = ("A wild %s appeared!" % EnemyPokemon[0].Name)
 	Helpers.wait(2)
 	show_prompt()
 	
@@ -21,14 +21,14 @@ func show_prompt():
 
 func load_pokemon(node: Node2D, pokemon: Pokemon):
 	var sprite = node.get_node("SpriteArea").get_node("Sprite")
-	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.name + ".png")	
+	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.Name + ".png")	
 	var nameLabel = node.get_node("Info/Name")
-	nameLabel.text = pokemon.name
+	nameLabel.text = pokemon.Name
 	var levelLabel = node.get_node("Info/Level")
-	levelLabel.text = str(pokemon.level)
+	levelLabel.text = str(pokemon.Level)
 	var healthBar = node.get_node("Info/HealthBar")
-	healthBar.max_value = pokemon.hp
-	healthBar.value = pokemon.current_hp
+	healthBar.max_value = pokemon.BattleStats.Hp
+	healthBar.value = pokemon.Current_Hp
 	node.set_meta("pokemon", pokemon)
 	
 func unload_pokemon(node: Node2D):
@@ -40,7 +40,6 @@ func unload_pokemon(node: Node2D):
 	info.visible = false
 	
 func _on_run_pressed() -> void:
-	print("You ran away...")
 	end_battle()
 	
 func end_battle() -> void:
@@ -58,7 +57,7 @@ func show_moves():
 	set_move(3)
 	
 func set_move(i: int):
-	var moves = PlayerInventory.PartyPokemon[0].moves
+	var moves = PlayerInventory.PartyPokemon[0].Moves
 	if i >= moves.size():
 		return
 	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))	
@@ -89,26 +88,22 @@ func _on_move_3_pressed() -> void:
 
 func process_turn(moveName: String):
 	if moveName == "" or null:
-		print("Issue using player move")
 		return
-	# player always wins speed tie
 	show_dialogue()
-	
-	# get both pokemons moves
 	var playerMove = get_move(moveName)
 	var enemyMove = get_move(get_enemy_move())
 	
-	# juicy move processing code
+	# Check speed for priority and process moves
 	var playerLead = PlayerInventory.PartyPokemon[0]
-	if(playerLead.speed >= EnemyPokemon[0].speed):
+	if(playerLead.BattleStats.Speed >= EnemyPokemon[0].BattleStats.Speed):
 		process_move(playerMove, playerLead, EnemyPokemon[0], true)
-		await get_tree().create_timer(1).timeout
+		Helpers.wait(1)
 		process_move(enemyMove, EnemyPokemon[0], playerLead, false)
 	else:
 		process_move(enemyMove, EnemyPokemon[0], playerLead, false)
-		await get_tree().create_timer(1).timeout
+		Helpers.wait(1)
 		process_move(playerMove, playerLead, EnemyPokemon[0], true)
-	await get_tree().create_timer(1).timeout
+	Helpers.wait(1)
 	
 	show_prompt()
 	
@@ -118,58 +113,52 @@ func get_move(moveName: String) -> Move:
 	return move
 	
 func get_enemy_move() -> String:
-	var enemy_moves = EnemyPokemon[0].get("moves")
+	var enemy_moves = EnemyPokemon[0].get("Moves")
 	var roll = rng.randi_range(0, enemy_moves.size()-1)
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
 	
 func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
-	print(attackingPokemon.name + " used " + move.name)
-	print_dialogue(attackingPokemon.name + " used " + move.name)
+	print_dialogue(attackingPokemon.Name + " used " + move.Name)
 	
 	# process each move type differently 
-	var moveCategory = move.category
+	var moveCategory = move.Category
 	if(moveCategory == "Physical" or moveCategory == "Special"):
 		var damage = DamageCalculation.get_damage(move, attackingPokemon, defendingPokemon)
 		process_damage(damage, attackingPokemon, defendingPokemon, isPlayerAttacking)
 	elif(moveCategory == "Status"):
 		process_status(move, attackingPokemon, defendingPokemon)	
 	elif(moveCategory == "StatChange"):
-		process_stat_change(move, attackingPokemon, defendingPokemon)	
-		
-	await get_tree().create_timer(1).timeout
+		process_stat_change(move, attackingPokemon, defendingPokemon)		
+	Helpers.wait(1)
 		
 func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
-	defendingPokemon.current_hp -= damage
+	defendingPokemon.Current_Hp -= damage
 	var damagedPokemonContainer
 	if(isPlayerAttacking):
 		damagedPokemonContainer = EnemyPokemonContainer
 	else:
 		damagedPokemonContainer = PlayerPokemonContainer
 	var healthBar = damagedPokemonContainer.get_node("Info/HealthBar")
-	healthBar.value = defendingPokemon.current_hp
-	print(defendingPokemon.name + " took " + str(damage) + " damage from " + attackingPokemon.name)
-	print(defendingPokemon.name + " now has " + str(healthBar.value) + " health")
-	
+	healthBar.value = defendingPokemon.Current_Hp
 
 func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
-	print("apply status")
-	var statusType = move.status
-	var target = move.target
+	var statusType = move.Status
+	var target = move.Target
 	if(target == "Self"):
-		attackingPokemon.status = statusType
+		attackingPokemon.Status = statusType
 	elif (target == "Enemy"):
-		defendingPokemon.status = statusType
+		defendingPokemon.Status = statusType
 	
-func process_stat_change(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
-	print("apply stat change")
-	var target = move.target
+func process_stat_change(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> void:
+	var affected_pokemon = attacking_pokemon if move.Target == "Self" else defending_pokemon
+	if affected_pokemon.BattleStats.has_property(move.Target_Stat):
+		var current_value = affected_pokemon.BattleStats.get(move.Target_Stat)
+		affected_pokemon.BattleStats.set(move.Target_Stat, current_value * move.Stat_Multiplier)
 		
-	# need to find a way to save original stats before buff/debuff
-
 func print_dialogue(message: String):
 	show_dialogue()
-	messageBox.get_node("Message").text = message	
+	messageBox.get_node("Message").text = message
 	await get_tree().process_frame
 
 func _on_switch_pressed() -> void:

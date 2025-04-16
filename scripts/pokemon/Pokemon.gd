@@ -1,58 +1,56 @@
 class_name Pokemon
 
-const stat_scaler = 25.0
-const starting_hp = 15
+var Id = 0
+var Name = ""
+var Level = 0
+var Type1 = ""
+var Type2 = ""
+var Current_Hp
+var Moves = []
+var Status = ""
 
-var id = 0
-var name = ""
-var level = 0
-var type1 = ""
-var type2 = ""
-var hp = 0
-var current_hp
-var attack = 0
-var special_attack = 0
-var defense = 0
-var special_defense = 0
-var speed = 0
-var moves = []
-var status = ""
+var CurrentStats = null
+var BattleStats = null
 
-func _init(data = {}, generatedLevel = 1):
-	id = data["id"]
-	name = data["name"]
-	
-	# this section is wack
-	# need a better way to generate a pokemon at a certain level
-	# also need constructor for party pokemon that may have existing 
-	# status effects or hp loss
-	var lvl = data.get("level")
-	level = lvl if lvl else generatedLevel
-	type1 = data["type1"]
-	type2 = data["type2"]
-	
-	# this section is also wack
-	# need a better way to track base stats vs current stats
-	var currentHp = data.get("current_hp")
-	if(currentHp == null):
-		hp = scale_stat(data["base_stats"]["hp"]) + starting_hp
-		current_hp = hp
-		attack = scale_stat(data["base_stats"]["attack"])
-		special_attack = scale_stat(data["base_stats"]["special_attack"])
-		defense = scale_stat(data["base_stats"]["defense"])
-		special_defense = scale_stat(data["base_stats"]["special_defense"])
-		speed = scale_stat(data["base_stats"]["speed"])
-	else:
-		hp = data["base_stats"]["hp"]
-		current_hp = currentHp
-		attack = data["base_stats"]["attack"]
-		special_attack = data["base_stats"]["special_attack"]
-		defense = data["base_stats"]["defense"]
-		special_defense = data["base_stats"]["special_defense"]
-		speed = data["base_stats"]["speed"]
-	
-	moves = data["moves"]
+func _init(data := {}):
+	Id = data["Id"]
+	Name = data["Name"]
+	Type1 = data["Type1"]
+	Type2 = data["Type2"]
+	Level = data.get("Level")
+	Status = data.get("Status")
+	Current_Hp = data.get("Current_Hp")
+	CurrentStats = PokemonStats.new(data.get("Stats"))
+	BattleStats = CurrentStats
+	Moves = data["Moves"]
 
-func scale_stat(stat: int) -> int:
-	var scaled_stat = stat * (level / stat_scaler)
-	return scaled_stat
+static func new_wild(level: int, data = {}) -> Pokemon:
+	var pokemon = Pokemon.new({
+		"Id": data.get("Id"),
+		"Name": data.get("Name"),
+		"Type1": data.get("Type1"),
+		"Type2": data.get("Type2"),
+		"Level": level,
+		"Stats": PokemonStats.scaled_stats(level, data.get("Base_Stats")),
+		"Moves": []
+	})
+	
+	pokemon.BattleStats = pokemon.CurrentStats
+	pokemon.Current_Hp = pokemon.BattleStats.Hp
+		
+	var all_moves = data.get("Moves", [])
+	var learned_moves := []
+
+	# Keep only moves the Pokémon can learn at or before its level
+	for move_entry in all_moves:
+		if move_entry["Level"] <= level:
+			learned_moves.append(move_entry)
+
+	# Sort moves by level descending
+	learned_moves.sort_custom(func(a, b): return b["Level"] - a["Level"])
+
+	# Take the top 4 (latest learned)
+	for move in learned_moves.slice(0, 4):
+		pokemon.Moves.append(move["Name"])
+		
+	return pokemon

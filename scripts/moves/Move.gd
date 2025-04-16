@@ -1,16 +1,20 @@
 class_name Move
 
-var damage = 0
-var type = ""
-var category = ""
-var target = ""
-var accuracy = 1
-var description = ""
+var Damage = 0
+var Type = ""
+var Category = ""
+var Target = ""
+var Target_Stat = ""
+var Stat_Multiplier = 1.0
+var Accuracy = 1.0
+var Description = ""
 
 func _init(moveData = {}):
-	damage = moveData.get("damage")
-	type = moveData.get("type")
-	target = moveData.get("target")
-	category = moveData.get("category")
-	accuracy = moveData.get("accuracy")
-	# description = moveData.get("description")
+	Damage = moveData.get("Damage")
+	Type = moveData.get("Type")
+	Target = moveData.get("Target")
+	Target_Stat = moveData.get("Target_Stat")
+	Stat_Multiplier = moveData.get("Stat_Multiplier")
+	Category = moveData.get("Category")
+	Accuracy = moveData.get("Accuracy")
+	Description = moveData.get("Description")

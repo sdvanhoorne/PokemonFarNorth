@@ -28,7 +28,7 @@ func load_pokemon(pokemonName: String, pokemonLevel: int) -> Pokemon:
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file:
 		var response = JSON.parse_string(file.get_as_text())
-		var wildPokemon = Pokemon.new(response, pokemonLevel)
+		var wildPokemon = Pokemon.new_wild(pokemonLevel, response)
 		return wildPokemon
 	else:
 		push_error("Failed to load Pokémon data at %s" % path)

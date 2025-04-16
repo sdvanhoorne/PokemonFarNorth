@@ -1,18 +1,18 @@
 {
-	"id": 1,
-	"name": "Chirblip",
-	"type1": "Flying",
-	"type2": null,
-	"base_stats": {
-		"hp": 40,
-		"attack": 45,
-		"defense": 35,
-		"special_attack": 65,
-		"special_defense": 55,
-		"speed": 70
+	"Id": 1,
+	"Name": "Chirblip",
+	"Type1": "Flying",
+	"Type2": null,
+	"Base_Stats": {
+		"Hp": 40,
+		"Attack": 45,
+		"Defense": 35,
+		"Special_Attack": 65,
+		"Special_Defense": 55,
+		"Speed": 70
 	  },
-	  "moves": [
-		{ "level": 0, "name": "Tackle" },
-		{ "level": 0, "name": "Tail Whip" }
+	  "Moves": [
+		{ "Level": 0, "Name": "Tackle" },
+		{ "Level": 0, "Name": "Tail Whip" }
   ]
 }

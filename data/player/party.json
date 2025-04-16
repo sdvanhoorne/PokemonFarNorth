@@ -1,24 +1,23 @@
 {
-	"party": 
+	"Party": 
 	[
 		{
-			"id": 1,
-			"name": "Minket",
-			"type1": "Grass",
-			"type2": null,
-			"level": 5,
-			"status": null,
-			"current_hp": 18,
-			"current_xp": 0,
-			"base_stats": {
-				"hp": 18,
-				"attack": 9,
-				"defense": 9,
-				"special_attack": 13,
-				"special_defense": 9,
-				"speed": 14
+			"Id": 1,
+			"Name": "Minket",
+			"Type1": "Grass",
+			"Type2": null,
+			"Level": 5,
+			"Status": null,
+			"Current_Hp": 18,
+			"Stats": {
+				"Hp": 18,
+				"Attack": 9,
+				"Defense": 9,
+				"Special_Attack": 13,
+				"Special_Defense": 9,
+				"Speed": 14
 			},
-			"moves": [
+			"Moves": [
 				"Tackle", "Tail Whip"
 			]
 		}

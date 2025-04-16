@@ -1,45 +1,56 @@
 {
 	"Tackle": 
 	{
-		"damage": 40,
- 		"type": "Normal",
- 		"target": "Enemy",
-		"category": "Physical",
-		"accuracy": 100,
-		"description": "A physical attack in which the user charges, full body, into the foe."
+		"Damage": 40,
+ 		"Type": "Normal",
+ 		"Target": "Enemy",
+		"Category": "Physical",
+		"Accuracy": 100,
+		"Description": "A physical attack in which the user charges, full body, into the foe."
 	},	
 	"Tail Whip": 
 	{
-		"damage": null,
- 		"type": "Normal",
- 		"target": "Enemy",
-		"targetStat": "Defense",
-		"statMultipier": 0.85,
-		"category": "Status",
-		"accuracy": 100,
-		"description": "The user wags its tail cutely, making the foe lower its Defense stat."
-	},	
+		"Damage": null,
+ 		"Type": "Normal",
+ 		"Target": "Enemy",
+		"Target_Stat": "Defense",
+		"Stat_Multipier": 0.85,
+		"Category": "Status",
+		"Accuracy": 100,
+		"Description": "The user wags its tail cutely, making the foe lower its Defense stat."
+	},
+	"Growl": 
+	{
+		"Damage": null,
+ 		"Type": "Normal",
+ 		"Target": "Enemy",
+		"Target_Stat": "Attack",
+		"Stat_Multipier": 0.85,
+		"Category": "Status",
+		"Accuracy": 100,
+		"Description": "The user growls and lowers the targets attack stat."
+	},
 	"Howl": 
 	{
-		"damage": null,
- 		"type": "Normal",
- 		"target": "Self",
-		"targetStat": "Attack",
-		"statMultipier": 1.15,
-		"category": "Status",
-		"accuracy": 100,
-		"description": "User howls",
+		"Damage": null,
+ 		"Type": "Normal",
+ 		"Target": "Self",
+		"Target_Stat": "Attack",
+		"Stat_Multipier": 1.15,
+		"Category": "Status",
+		"Accuracy": 100,
+		"Description": "User howls",
 	},
 	"Thunder Wave": 
 	{
-		"damage": null,
- 		"type": "Electric",
- 		"target": "Enemy",
-		"targetStat": null,
-		"statMultipier": null,
-		"category": "Status",
-		"status": "Paralyze",
-		"accuracy": 100,
-		"description": "User howls",
+		"Damage": null,
+ 		"Type": "Electric",
+ 		"Target": "Enemy",
+		"Target_Stat": null,
+		"Stat_Multipier": null,
+		"Category": "Status",
+		"Status": "Paralyze",
+		"Accuracy": 100,
+		"Description": "User howls",
 	}
 }
