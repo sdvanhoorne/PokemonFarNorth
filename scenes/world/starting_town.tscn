@@ -58,7 +58,7 @@ scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_8dtor")
 
 [node name="Npc" parent="." instance=ExtResource("4_5rp11")]
-position = Vector2(-72, 40)
+position = Vector2(-72, 72)
 
 [connection signal="body_entered" from="HouseWarp" to="HouseWarp" method="_on_body_entered"]
 [connection signal="body_entered" from="Route1Warp" to="Route1Warp" method="_on_body_entered"]

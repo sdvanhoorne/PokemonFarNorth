@@ -6,11 +6,13 @@ extends CharacterBody2D
 @onready var interaction_area = $Area2D
 
 var player_in_range = false
-var dialogue_lines: Array[String] = []
+var dialogue_lines = []
+var Movement = null
 
 func _ready():
-	interaction_area.body_entered.connect(_on_body_entered)
-	interaction_area.body_exited.connect(_on_body_exited)
+	Movement = MovementController.new(self)
+	#interaction_area.body_entered.connect(_on_body_entered)
+	#interaction_area.body_exited.connect(_on_body_exited)
 	load_dialogue_from_file()
 
 func _on_body_entered(body):

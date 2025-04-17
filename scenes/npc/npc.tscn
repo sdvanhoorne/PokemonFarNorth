@@ -1,11 +1,9 @@
-[gd_scene load_steps=18 format=3 uid="uid://w8it21f8eyqh"]
+[gd_scene load_steps=17 format=3 uid="uid://w8it21f8eyqh"]
 
 [ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_sspvn"]
 [ext_resource type="Texture2D" uid="uid://ckey6urbbibmu" path="res://assets/player/3698.png" id="2_pcwmf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpyoa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4bp4"]
 atlas = ExtResource("2_pcwmf")
@@ -118,13 +116,11 @@ animations = [{
 script = ExtResource("1_sspvn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 8)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_pcwmf")
 
-[node name="Area2D" type="Area2D" parent="."]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("RectangleShape2D_dpyoa")
-
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 4)
 sprite_frames = SubResource("SpriteFrames_atglx")
 animation = &"Move_Up"
