@@ -4,7 +4,6 @@ extends CharacterBody2D
 @export var dialogue_file: String = "res://data/npcs.json"
 
 @onready var interaction_area = $Area2D
-@onready var sprite = $Sprite2D
 
 var player_in_range = false
 var dialogue_lines: Array[String] = []

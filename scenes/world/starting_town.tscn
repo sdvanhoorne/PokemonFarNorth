@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=4 uid="uid://18fqavfy4vve"]
+[gd_scene load_steps=7 format=4 uid="uid://18fqavfy4vve"]
 
 [ext_resource type="TileSet" uid="uid://6b7jmwqt02xb" path="res://assets/tiles/routes.tres" id="1_5rp11"]
+[ext_resource type="PackedScene" uid="uid://w8it21f8eyqh" path="res://scenes/npc/npc.tscn" id="4_5rp11"]
 [ext_resource type="TileSet" uid="uid://6712cs13i3l5" path="res://assets/tiles/buildings.tres" id="7_p1syj"]
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="9_xyl7g"]
 
@@ -55,6 +56,9 @@ metadata/target_scene = "res://scenes/world/route_1.tscn"
 position = Vector2(0, 32)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_8dtor")
+
+[node name="Npc" parent="." instance=ExtResource("4_5rp11")]
+position = Vector2(-72, 40)
 
 [connection signal="body_entered" from="HouseWarp" to="HouseWarp" method="_on_body_entered"]
 [connection signal="body_entered" from="Route1Warp" to="Route1Warp" method="_on_body_entered"]
