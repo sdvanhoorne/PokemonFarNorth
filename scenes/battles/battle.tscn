@@ -16,7 +16,8 @@ script = ExtResource("1_m7hvh")
 [node name="Background" type="Sprite2D" parent="."]
 
 [node name="PlayerPokemon" type="Node2D" parent="."]
-position = Vector2(85, 497)
+position = Vector2(90, 450)
+scale = Vector2(1.5, 1.5)
 script = ExtResource("2_1kxda")
 
 [node name="SpriteArea" type="Area2D" parent="PlayerPokemon"]
@@ -27,6 +28,7 @@ texture_filter = 1
 position = Vector2(134, 83)
 scale = Vector2(5, 5)
 texture = ExtResource("2_836qq")
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerPokemon/SpriteArea"]
 position = Vector2(116, 117)
@@ -100,7 +102,8 @@ layout_mode = 2
 text = "5"
 
 [node name="EnemyPokemon" type="Node2D" parent="."]
-position = Vector2(1590, 163)
+position = Vector2(1561, 186)
+scale = Vector2(1.5, 1.5)
 
 [node name="SpriteArea" type="Area2D" parent="EnemyPokemon"]
 
