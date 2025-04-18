@@ -15,7 +15,7 @@
  		"Target": "Enemy",
 		"Target_Stat": "Defense",
 		"Stat_Multipier": 0.85,
-		"Category": "Status",
+		"Category": "StatChange",
 		"Accuracy": 100,
 		"Description": "The user wags its tail cutely, making the foe lower its Defense stat."
 	},
@@ -26,7 +26,7 @@
  		"Target": "Enemy",
 		"Target_Stat": "Attack",
 		"Stat_Multipier": 0.85,
-		"Category": "Status",
+		"Category": "StatChange",
 		"Accuracy": 100,
 		"Description": "The user growls and lowers the targets attack stat."
 	},
@@ -37,7 +37,7 @@
  		"Target": "Self",
 		"Target_Stat": "Attack",
 		"Stat_Multipier": 1.15,
-		"Category": "Status",
+		"Category": "StatChange",
 		"Accuracy": 100,
 		"Description": "User howls",
 	},

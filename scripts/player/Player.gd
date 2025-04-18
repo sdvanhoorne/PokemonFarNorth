@@ -87,7 +87,7 @@ func _physics_process(delta):
 		_animation_player.stop()
 
 func check_for_encounter():
-	var current_map = get_parent()
+	var current_map = get_parent().get_parent()
 	if(current_map == null): # no map
 		return
 	var encounter_layer = current_map.get_node("EncounterLayer")

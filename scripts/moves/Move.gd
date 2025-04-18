@@ -1,5 +1,6 @@
 class_name Move
 
+var Name = ""
 var Damage = 0
 var Type = ""
 var Category = ""
@@ -9,7 +10,8 @@ var Stat_Multiplier = 1.0
 var Accuracy = 1.0
 var Description = ""
 
-func _init(moveData = {}):
+func _init(name: String, moveData = {}):
+	Name = name
 	Damage = moveData.get("Damage")
 	Type = moveData.get("Type")
 	Target = moveData.get("Target")

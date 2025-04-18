@@ -109,7 +109,7 @@ func process_turn(moveName: String):
 	
 func get_move(moveName: String) -> Move:
 	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
-	var move = Move.new(JSON.parse_string(moveData.get_as_text())[moveName])
+	var move = Move.new(moveName, JSON.parse_string(moveData.get_as_text())[moveName])
 	return move
 	
 func get_enemy_move() -> String:
@@ -119,6 +119,7 @@ func get_enemy_move() -> String:
 	return enemy_move
 	
 func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
+	var name = move.Name
 	print_dialogue(attackingPokemon.Name + " used " + move.Name)
 	
 	# process each move type differently 
@@ -151,10 +152,9 @@ func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pok
 		defendingPokemon.Status = statusType
 	
 func process_stat_change(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> void:
-	var affected_pokemon = attacking_pokemon if move.Target == "Self" else defending_pokemon
-	if affected_pokemon.BattleStats.has_property(move.Target_Stat):
-		var current_value = affected_pokemon.BattleStats.get(move.Target_Stat)
-		affected_pokemon.BattleStats.set(move.Target_Stat, current_value * move.Stat_Multiplier)
+	var affected_pokemon = attacking_pokemon if move.Target == "Self" else defending_pokemon	
+	var current_value = affected_pokemon.BattleStats.get(move.Target_Stat)
+	affected_pokemon.BattleStats.set(move.Target_Stat, current_value * move.Stat_Multiplier)
 		
 func print_dialogue(message: String):
 	show_dialogue()
