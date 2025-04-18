@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://w8it21f8eyqh"]
+[gd_scene load_steps=18 format=3 uid="uid://w8it21f8eyqh"]
 
 [ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_sspvn"]
 [ext_resource type="Texture2D" uid="uid://ckey6urbbibmu" path="res://assets/player/3698.png" id="2_pcwmf"]
@@ -112,17 +112,34 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dpyoa"]
+
 [node name="Npc" type="CharacterBody2D"]
 z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_sspvn")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(8, 8)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_pcwmf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 texture_filter = 1
 position = Vector2(8, 4)
 sprite_frames = SubResource("SpriteFrames_atglx")
 animation = &"Move_Up"
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(8, 8)
+scale = Vector2(1.5, 1.5)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_dpyoa")

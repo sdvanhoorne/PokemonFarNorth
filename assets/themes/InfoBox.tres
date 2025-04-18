@@ -1,12 +1,15 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://b4d8mhipe34it"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m03bw"]
-content_margin_left = 10.0
+content_margin_left = 45.0
 content_margin_top = 10.0
-content_margin_right = 10.0
+content_margin_right = 45.0
 content_margin_bottom = 10.0
 bg_color = Color(1, 1, 1, 1)
 
 [resource]
 Label/colors/font_color = Color(0, 0, 0, 1)
 PanelContainer/styles/panel = SubResource("StyleBoxFlat_m03bw")
+RichTextLabel/colors/default_color = Color(0, 0, 0, 1)
+RichTextLabel/font_sizes/bold_font_size = 24
+RichTextLabel/font_sizes/normal_font_size = 48

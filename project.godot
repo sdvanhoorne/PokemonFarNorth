@@ -22,6 +22,7 @@ BattleManager="*res://scripts/battle/BattleManager.gd"
 PlayerInventory="*res://scripts/player/PlayerInventory.gd"
 Helpers="*res://scripts/Helpers.gd"
 DamageCalculation="*res://scripts/battle/DamageCalculation.gd"
+DialogueManager="*res://scripts/DialogueManager.gd"
 
 [display]
 

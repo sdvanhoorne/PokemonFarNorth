@@ -89,19 +89,28 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 zoom = Vector2(3, 3)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(8, 8)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_x7p2l")
 
 [node name="SpriteAnimation" type="AnimatedSprite2D" parent="."]
 z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_007i1")
 animation = &"move_down"
