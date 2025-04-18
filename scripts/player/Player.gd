@@ -77,7 +77,7 @@ func _physics_process(delta):
 			if hold_timer >= HOLD_THRESHOLD:
 				var offset = input * TILE_SIZE
 				var sprintedOffset = offset * sprint_multipier
-				if !test_move(global_transform, sprintedOffset if sprinting else offset):
+				if !test_move(global_transform, offset):
 					target_position = global_position + offset
 					is_moving = true
 	else:
@@ -87,7 +87,7 @@ func _physics_process(delta):
 		_animation_player.stop()
 
 func check_for_encounter():
-	var current_map = get_parent().current_map
+	var current_map = get_parent()
 	if(current_map == null): # no map
 		return
 	var encounter_layer = current_map.get_node("EncounterLayer")

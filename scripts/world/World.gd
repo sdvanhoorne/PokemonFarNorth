@@ -1,6 +1,7 @@
 extends Node2D
 
-@onready var player = $Player
+# @onready var player = $Player
+const PlayerScene = preload("res://scenes/player/player.tscn")
 var current_map: Node = null
 
 func load_map(scene: PackedScene, spawn_name: String = ""):
@@ -9,6 +10,8 @@ func load_map(scene: PackedScene, spawn_name: String = ""):
 
 	await get_tree().process_frame
 	current_map = scene.instantiate()
+	var player = PlayerScene.instantiate()
+	current_map.get_node("SortY").add_child(player)
 	add_child(current_map)
 
 	await get_tree().process_frame

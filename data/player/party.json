@@ -20,6 +20,26 @@
 			"Moves": [
 				"Tackle", "Tail Whip"
 			]
+		},
+		{
+			"Id": 7,
+			"Name": "Ignewt",
+			"Type1": "Fire",
+			"Type2": null,
+			"Level": 5,
+			"Status": null,
+			"Current_Hp": 19,
+			"Stats": {
+				"Hp": 19,
+				"Attack": 12,
+				"Defense": 8,
+				"Special_Attack": 14,
+				"Special_Defense": 10,
+				"Speed": 9
+			},
+			"Moves": [
+				"Tackle", "Tail Whip"
+			]
 		}
 	]
 }

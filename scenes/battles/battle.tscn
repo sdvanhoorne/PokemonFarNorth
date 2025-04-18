@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://bihya4k8vuet"]
 
-[ext_resource type="Script" uid="uid://2tjjxccvbkga" path="res://scripts/battle/battle.gd" id="1_m7hvh"]
+[ext_resource type="Script" uid="uid://2tjjxccvbkga" path="res://scripts/battle/Battle.gd" id="1_m7hvh"]
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scenes/battles/PokemonTooltip.gd" id="2_1kxda"]
 [ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="2_836qq"]
 [ext_resource type="Texture2D" uid="uid://dtahf7dn7d1wo" path="res://assets/battle/HealthBarRed.png" id="3_7611a"]
@@ -23,6 +23,7 @@ script = ExtResource("2_1kxda")
 position = Vector2(-25, -14)
 
 [node name="Sprite" type="Sprite2D" parent="PlayerPokemon/SpriteArea"]
+texture_filter = 1
 position = Vector2(134, 83)
 scale = Vector2(5, 5)
 texture = ExtResource("2_836qq")
@@ -104,6 +105,7 @@ position = Vector2(527, 111)
 [node name="SpriteArea" type="Area2D" parent="EnemyPokemon"]
 
 [node name="Sprite" type="Sprite2D" parent="EnemyPokemon/SpriteArea"]
+texture_filter = 1
 position = Vector2(108, -11)
 scale = Vector2(5, 5)
 texture = ExtResource("5_836qq")
