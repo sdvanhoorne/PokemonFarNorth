@@ -1,5 +1,6 @@
 extends Node
 var dialogue_box: Node = null
+const text_speed = 0.01
 
 func _ready():
 	dialogue_box = get_node_or_null("/root/World/CanvasLayer/DialogueBox")
@@ -11,7 +12,8 @@ func print_lines(lines: PackedStringArray):
 	for line in lines:
 		for character in line:
 			text_box.append_text(character)
-			await get_tree().process_frame
+			await get_tree().create_timer(text_speed).timeout
+		text_box.append_text(" ")
 
 func show_dialogue_box():
 	dialogue_box.visible = true
