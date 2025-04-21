@@ -1,8 +1,8 @@
 extends Node2D
-@onready var messageBox = $MessageBox
-@onready var PartyUI = $Party
-@onready var EnemyPokemonContainer = $EnemyPokemon
-@onready var PlayerPokemonContainer = $PlayerPokemon
+@onready var messageBox = $BattleUI/MessageBox
+@onready var PartyUI = $PartyUI/Party
+@onready var EnemyPokemonContainer = $BattleUI/EnemyPokemonUI/EnemyPokemon
+@onready var PlayerPokemonContainer = $BattleUI/PlayerPokemonUI/PlayerPokemon
 var rng = RandomNumberGenerator.new()
 var EnemyPokemon = []
 
