@@ -4,7 +4,7 @@ extends Node2D
 const PlayerScene = preload("res://scenes/player/player.tscn")
 var current_map: Node = null
 
-func load_map(scene: PackedScene, spawn_name: String = ""):
+func load_map(scene: PackedScene, spawn_name: String = "") -> Node2D:
 	if current_map:
 		current_map.queue_free()
 
@@ -25,6 +25,8 @@ func load_map(scene: PackedScene, spawn_name: String = ""):
 	player.velocity = Vector2.ZERO
 	player.hold_timer = 0.0
 	player.is_moving = false
+	
+	return current_map
 
 func _on_button_pressed() -> void:
 	load_map(load("res://scenes/world/starting_town.tscn"), "StartingHouseSpawn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bihya4k8vuet"]
+[gd_scene load_steps=10 format=3 uid="uid://bihya4k8vuet"]
 
 [ext_resource type="Script" uid="uid://2tjjxccvbkga" path="res://scripts/battle/Battle.gd" id="1_m7hvh"]
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scenes/battles/PokemonTooltip.gd" id="2_1kxda"]
@@ -9,6 +9,22 @@
 [ext_resource type="Texture2D" uid="uid://c5jlr3wso5qo8" path="res://assets/pokemon/ai/Cubble.png" id="5_836qq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7hvh"]
+content_margin_left = 64.0
+content_margin_top = 64.0
+content_margin_right = 64.0
+content_margin_bottom = 64.0
+bg_color = Color(0.74978, 0.74978, 0.74978, 1)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
 
 [node name="Battle" type="Node2D"]
 script = ExtResource("1_m7hvh")
@@ -55,7 +71,7 @@ offset_bottom = -110.0
 layout_mode = 0
 offset_right = 48.0
 offset_bottom = 6.0
-scale = Vector2(5.128, 1)
+scale = Vector2(5.128, 2)
 texture_under = ExtResource("3_7611a")
 texture_progress = ExtResource("4_836qq")
 
@@ -64,6 +80,7 @@ layout_mode = 0
 offset_top = 10.0
 offset_right = 55.0
 offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Minket"
 
 [node name="Level" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/Info"]
@@ -72,6 +89,7 @@ offset_left = 200.0
 offset_top = 10.0
 offset_right = 240.0
 offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "5"
 
 [node name="PopUpStats" type="PanelContainer" parent="BattleUI/PlayerPokemonUI/PlayerPokemon"]
@@ -140,7 +158,7 @@ offset_bottom = -132.0
 layout_mode = 0
 offset_right = 48.0
 offset_bottom = 6.0
-scale = Vector2(5.128, 1)
+scale = Vector2(5.128, 2)
 texture_under = ExtResource("3_7611a")
 texture_progress = ExtResource("4_836qq")
 
@@ -149,6 +167,7 @@ layout_mode = 0
 offset_top = 10.0
 offset_right = 54.0
 offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Cubble"
 
 [node name="Level" type="Label" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/Info"]
@@ -157,6 +176,7 @@ offset_left = 200.0
 offset_top = 10.0
 offset_right = 240.0
 offset_bottom = 33.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "5"
 
 [node name="MessageBox" type="Panel" parent="BattleUI"]
@@ -170,7 +190,7 @@ offset_top = -301.0
 offset_right = 1418.0
 offset_bottom = -1.0
 grow_vertical = 0
-theme = ExtResource("5_1kxda")
+theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
 
 [node name="Message" type="RichTextLabel" parent="BattleUI/MessageBox"]
 layout_mode = 1
@@ -179,9 +199,12 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("5_1kxda")
+theme_override_colors/table_border = Color(0, 0, 0, 1)
 text = "What would you like to do?"
 
 [node name="PokemonMoves" type="GridContainer" parent="BattleUI/MessageBox"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -229,6 +252,8 @@ custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
 text = "Fight"
 vertical_icon_alignment = 2
 
@@ -237,6 +262,8 @@ custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
 text = "Switch"
 
 [node name="Item" type="Button" parent="BattleUI/GridContainer"]
@@ -244,6 +271,8 @@ custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
 text = "Item"
 
 [node name="Run" type="Button" parent="BattleUI/GridContainer"]
@@ -251,9 +280,22 @@ custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
 text = "Run"
 
+[node name="ColorRect" type="ColorRect" parent="BattleUI"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
 [node name="PartyUI" type="Control" parent="."]
+visible = false
 z_index = 1
 layout_mode = 3
 anchors_preset = 15

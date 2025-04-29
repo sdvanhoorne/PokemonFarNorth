@@ -34,10 +34,10 @@ func _load_previous_map():
 	var current_map_scene = load(current_map_path)
 	
 	# Re-load the correct map
-	world_scene.load_map(current_map_scene, "") 
+	var current_map = await world_scene.load_map(current_map_scene, "") 
 	
 	# Position the player after world has loaded
-	var player = world_scene.get_node("Player")  
+	var player = current_map.get_node("SortY").get_node("Player")  
 	player.global_position = player_position
 	await get_tree().process_frame
 	player.facing_input = player_direction

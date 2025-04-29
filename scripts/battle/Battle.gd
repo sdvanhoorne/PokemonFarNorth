@@ -142,6 +142,12 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 		damagedPokemonContainer = PlayerPokemonContainer
 	var healthBar = damagedPokemonContainer.get_node("Info/HealthBar")
 	healthBar.value = defendingPokemon.Current_Hp
+	if(defendingPokemon.Current_Hp <= 0):
+		Helpers.wait(1)
+		print_dialogue(defendingPokemon.Name + " was defeated")
+		# give xp if player
+		Helpers.wait(2)
+		end_battle()
 
 func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
 	var statusType = move.Status
