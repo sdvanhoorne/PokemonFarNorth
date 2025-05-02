@@ -7,7 +7,6 @@ var rng = RandomNumberGenerator.new()
 var EnemyPokemon = []
 
 func _ready():
-	EnemyPokemon.append(BattleManager.wild_pokemon)
 	load_pokemon(PlayerPokemonContainer, PlayerInventory.PartyPokemon[0])
 	load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 	
@@ -144,9 +143,12 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 	healthBar.value = defendingPokemon.Current_Hp
 	if(defendingPokemon.Current_Hp <= 0):
 		Helpers.wait(1)
-		print_dialogue(defendingPokemon.Name + " was defeated")
-		# give xp if player
+		print_dialogue(defendingPokemon.Name + " fainted")
 		Helpers.wait(2)
+		
+		# Give xp if player
+		if(isPlayerAttacking):
+			attackingPokemon.Xp
 		end_battle()
 
 func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):

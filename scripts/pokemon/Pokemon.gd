@@ -6,11 +6,14 @@ var Level = 0
 var Type1 = ""
 var Type2 = ""
 var Current_Hp
+var Current_Xp = 0
+var Xp_To_Next_Level = 10
 var Moves = []
 var Status = ""
 
 var CurrentStats = null
 var BattleStats = null
+var BaseStats = null
 
 func _init(data := {}):
 	Id = data["Id"]
@@ -21,7 +24,9 @@ func _init(data := {}):
 	Status = data.get("Status")
 	Current_Hp = data.get("Current_Hp")
 	CurrentStats = PokemonStats.new(data.get("Stats"))
+	Current_Xp = data.get("Current_Xp")
 	BattleStats = CurrentStats
+	BaseStats = PokemonStats.new(data.get("BaseStats"))
 	Moves = data["Moves"]
 
 static func new_wild(level: int, data = {}) -> Pokemon:
@@ -54,3 +59,18 @@ static func new_wild(level: int, data = {}) -> Pokemon:
 		pokemon.Moves.append(move["Name"])
 		
 	return pokemon
+	
+func add_xp(amount: int) -> void:
+	Current_Xp += amount
+	while Current_Xp >= Xp_To_Next_Level:
+		Level += 1
+		Xp_To_Next_Level = calculate_xp_to_next(Level)
+		print(Name + " leveled up to " + str(Level))
+		# Apply stat increases
+		
+func calculate_xp_to_next(level: int) -> int:
+	return level * level * level
+	
+func recalculate_stats_on_level_up() -> void:
+	BattleStats = PokemonStats.scaled_stats(Level, BaseStats)
+	Current_Hp = BattleStats.Hp	
