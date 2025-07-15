@@ -19,7 +19,7 @@ func start_battle(enemy_pokemon: Array[Pokemon], player_pos: Vector2, player_dir
 	
 	# Create battle scene
 	var battle_scene = load("res://scenes/battles/battle.tscn").instantiate()
-	battle_scene.EnemyPokemon.append(enemy_pokemon)
+	battle_scene.EnemyPokemon = enemy_pokemon
 	get_parent().add_child(battle_scene)
 
 func return_to_world():

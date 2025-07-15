@@ -11,8 +11,7 @@ func _ready():
 	load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 	
 	messageBox.get_node("PokemonMoves").visible = false
-	messageBox.get_node("Message").text = ("A wild %s appeared!" % EnemyPokemon[0].Name)
-	Helpers.wait(2)
+	await print_dialogue(("A wild %s appeared!" % EnemyPokemon[0].Name))
 	show_prompt()
 	
 func show_prompt():
@@ -88,21 +87,17 @@ func _on_move_3_pressed() -> void:
 func process_turn(moveName: String):
 	if moveName == "" or null:
 		return
-	show_dialogue()
 	var playerMove = get_move(moveName)
 	var enemyMove = get_move(get_enemy_move())
 	
 	# Check speed for priority and process moves
 	var playerLead = PlayerInventory.PartyPokemon[0]
 	if(playerLead.BattleStats.Speed >= EnemyPokemon[0].BattleStats.Speed):
-		process_move(playerMove, playerLead, EnemyPokemon[0], true)
-		Helpers.wait(1)
-		process_move(enemyMove, EnemyPokemon[0], playerLead, false)
+		await process_move(playerMove, playerLead, EnemyPokemon[0], true)
+		await process_move(enemyMove, EnemyPokemon[0], playerLead, false)
 	else:
-		process_move(enemyMove, EnemyPokemon[0], playerLead, false)
-		Helpers.wait(1)
-		process_move(playerMove, playerLead, EnemyPokemon[0], true)
-	Helpers.wait(1)
+		await process_move(enemyMove, EnemyPokemon[0], playerLead, false)
+		await process_move(playerMove, playerLead, EnemyPokemon[0], true)
 	
 	show_prompt()
 	
@@ -119,7 +114,7 @@ func get_enemy_move() -> String:
 	
 func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
 	var name = move.Name
-	print_dialogue(attackingPokemon.Name + " used " + move.Name)
+	await print_dialogue(attackingPokemon.Name + " used " + move.Name)
 	
 	# process each move type differently 
 	var moveCategory = move.Category
@@ -130,7 +125,6 @@ func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokem
 		process_status(move, attackingPokemon, defendingPokemon)	
 	elif(moveCategory == "StatChange"):
 		process_stat_change(move, attackingPokemon, defendingPokemon)		
-	Helpers.wait(1)
 		
 func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
 	defendingPokemon.Current_Hp -= damage
@@ -142,13 +136,11 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 	var healthBar = damagedPokemonContainer.get_node("Info/HealthBar")
 	healthBar.value = defendingPokemon.Current_Hp
 	if(defendingPokemon.Current_Hp <= 0):
-		Helpers.wait(1)
-		print_dialogue(defendingPokemon.Name + " fainted")
-		Helpers.wait(2)
+		await print_dialogue(defendingPokemon.Name + " fainted")
 		
 		# Give xp if player
 		if(isPlayerAttacking):
-			attackingPokemon.Xp
+			attackingPokemon.add_xp(1)
 		end_battle()
 
 func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
@@ -168,6 +160,7 @@ func print_dialogue(message: String):
 	show_dialogue()
 	messageBox.get_node("Message").text = message
 	await get_tree().process_frame
+	await Helpers.wait(2)
 
 func _on_switch_pressed() -> void:
 	show_party()

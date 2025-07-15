@@ -33,4 +33,4 @@ func _on_button_pressed() -> void:
 
 func _on_battle_pressed() -> void:
 	var encounteredPokemon = EncounterManager.load_pokemon("Masklit", 1)
-	BattleManager.start_battle(encounteredPokemon, Vector2(0,0), Vector2(0,0), "")
+	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), "")

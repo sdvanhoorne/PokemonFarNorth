@@ -9,6 +9,7 @@
 			"Level": 5,
 			"Status": null,
 			"Current_Hp": 18,
+			"Current_Xp": 0,
 			"Stats": {
 				"Hp": 18,
 				"Attack": 9,

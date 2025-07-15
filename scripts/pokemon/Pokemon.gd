@@ -26,7 +26,9 @@ func _init(data := {}):
 	CurrentStats = PokemonStats.new(data.get("Stats"))
 	Current_Xp = data.get("Current_Xp")
 	BattleStats = CurrentStats
-	BaseStats = PokemonStats.new(data.get("BaseStats"))
+	BaseStats = null 
+	# need to get base stats from base pokemon json
+	# BaseStats = PokemonStats.new(data.get("BaseStats"))
 	Moves = data["Moves"]
 
 static func new_wild(level: int, data = {}) -> Pokemon:
