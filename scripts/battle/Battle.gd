@@ -88,17 +88,21 @@ func process_turn(moveName: String):
 	if moveName == "" or null:
 		return
 	var playerMove = get_move(moveName)
-	var enemyMove = get_move(get_enemy_move())
+	var enemyMove = get_move(determine_enemy_move())
 	
 	# Check speed for priority and process moves
 	var playerLead = PlayerInventory.PartyPokemon[0]
 	if(playerLead.BattleStats.Speed >= EnemyPokemon[0].BattleStats.Speed):
 		await process_move(playerMove, playerLead, EnemyPokemon[0], true)
+		# TODO check if enemy pokemon fainted
 		await process_move(enemyMove, EnemyPokemon[0], playerLead, false)
 	else:
 		await process_move(enemyMove, EnemyPokemon[0], playerLead, false)
+		# TODO check if player pokemon fainted
 		await process_move(playerMove, playerLead, EnemyPokemon[0], true)
 	
+	# TODO process poison, burn, any other damage over time
+	# TODO and check again if a pokemon has fainted
 	show_prompt()
 	
 func get_move(moveName: String) -> Move:
@@ -106,14 +110,13 @@ func get_move(moveName: String) -> Move:
 	var move = Move.new(moveName, JSON.parse_string(moveData.get_as_text())[moveName])
 	return move
 	
-func get_enemy_move() -> String:
+func determine_enemy_move() -> String:
 	var enemy_moves = EnemyPokemon[0].get("Moves")
 	var roll = rng.randi_range(0, enemy_moves.size()-1)
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
 	
 func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
-	var name = move.Name
 	await print_dialogue(attackingPokemon.Name + " used " + move.Name)
 	
 	# process each move type differently 

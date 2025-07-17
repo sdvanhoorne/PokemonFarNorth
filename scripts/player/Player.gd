@@ -76,7 +76,6 @@ func _physics_process(delta):
 			hold_timer += delta
 			if hold_timer >= HOLD_THRESHOLD:
 				var offset = input * TILE_SIZE
-				var sprintedOffset = offset * sprint_multipier
 				if !test_move(global_transform, offset):
 					target_position = global_position + offset
 					is_moving = true
