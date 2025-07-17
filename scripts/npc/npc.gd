@@ -11,12 +11,14 @@ var player_ref: Node2D = null
 var dialogue_lines = []
 var showing_dialogue = false
 var Movement = null
+var message_box: Node
 
 func _ready():
 	Movement = MovementController.new(self)
 	interaction_area.body_entered.connect(_on_body_entered)
 	interaction_area.body_exited.connect(_on_body_exited)
 	load_dialogue_from_file()
+	message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
 
 func _on_body_entered(body):
 	if body.name == "Player":
@@ -37,7 +39,7 @@ func _unhandled_input(event):
 		else:
 			face_toward(player_ref.global_position)
 			showing_dialogue = true
-			DialogueManager.print_lines(dialogue_lines)
+			DialogueManager.print_lines(message_box, dialogue_lines)
 
 func start_dialogue():
 	for line in dialogue_lines:

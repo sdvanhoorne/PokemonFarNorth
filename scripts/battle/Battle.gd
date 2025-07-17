@@ -11,11 +11,11 @@ func _ready():
 	load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 	
 	messageBox.get_node("PokemonMoves").visible = false
-	await print_dialogue(("A wild %s appeared!" % EnemyPokemon[0].Name))
+	await print_dialogue([("A wild %s appeared!" % EnemyPokemon[0].Name)])
 	show_prompt()
 	
 func show_prompt():
-	messageBox.get_node("Message").text = ("What will you do?")
+	await print_dialogue(["What will you do?"])
 
 func load_pokemon(node: Node2D, pokemon: Pokemon):
 	var sprite = node.get_node("SpriteArea").get_node("Sprite")
@@ -38,6 +38,7 @@ func unload_pokemon(node: Node2D):
 	info.visible = false
 	
 func _on_run_pressed() -> void:
+	await print_dialogue(["You ran away..."])
 	end_battle()
 	
 func end_battle() -> void:
@@ -85,21 +86,26 @@ func _on_move_3_pressed() -> void:
 	process_turn(moveName)
 
 func process_turn(moveName: String):
-	if moveName == "" or null:
-		return
 	var playerMove = get_move(moveName)
 	var enemyMove = get_move(determine_enemy_move())
 	
 	# Check speed for priority and process moves
-	var playerLead = PlayerInventory.PartyPokemon[0]
-	if(playerLead.BattleStats.Speed >= EnemyPokemon[0].BattleStats.Speed):
-		await process_move(playerMove, playerLead, EnemyPokemon[0], true)
-		# TODO check if enemy pokemon fainted
-		await process_move(enemyMove, EnemyPokemon[0], playerLead, false)
+	var playerPokemon = PlayerInventory.PartyPokemon[0]
+	var enemyPokemon = EnemyPokemon[0]
+	if(playerPokemon.BattleStats.Speed >= enemyPokemon.BattleStats.Speed):
+		await process_move(playerMove, playerPokemon, enemyPokemon, true)
+		if await check_faint(enemyPokemon, true): 
+			return
+		await process_move(enemyMove, enemyPokemon, playerPokemon, false)
+		if await check_faint(playerPokemon, false):
+			return
 	else:
-		await process_move(enemyMove, EnemyPokemon[0], playerLead, false)
-		# TODO check if player pokemon fainted
-		await process_move(playerMove, playerLead, EnemyPokemon[0], true)
+		await process_move(enemyMove, enemyPokemon, playerPokemon, false)
+		if await check_faint(playerPokemon, false):
+			return
+		await process_move(playerMove, playerPokemon, enemyPokemon, true)
+		if await check_faint(enemyPokemon, true):
+			return
 	
 	# TODO process poison, burn, any other damage over time
 	# TODO and check again if a pokemon has fainted
@@ -117,7 +123,7 @@ func determine_enemy_move() -> String:
 	return enemy_move
 	
 func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
-	await print_dialogue(attackingPokemon.Name + " used " + move.Name)
+	await print_dialogue([attackingPokemon.Name + " used " + move.Name])
 	
 	# process each move type differently 
 	var moveCategory = move.Category
@@ -130,6 +136,7 @@ func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokem
 		process_stat_change(move, attackingPokemon, defendingPokemon)		
 		
 func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
+	# might be a better way than "isPlayerAttacking"
 	defendingPokemon.Current_Hp -= damage
 	var damagedPokemonContainer
 	if(isPlayerAttacking):
@@ -138,13 +145,16 @@ func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Po
 		damagedPokemonContainer = PlayerPokemonContainer
 	var healthBar = damagedPokemonContainer.get_node("Info/HealthBar")
 	healthBar.value = defendingPokemon.Current_Hp
-	if(defendingPokemon.Current_Hp <= 0):
-		await print_dialogue(defendingPokemon.Name + " fainted")
 		
-		# Give xp if player
-		if(isPlayerAttacking):
-			attackingPokemon.add_xp(1)
+func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
+	if(pokemon.Current_Hp <= 0):
+		await print_dialogue([pokemon.Name + " fainted"])
+			
+		# end battle for now, 
+		# TODO need to check if player or enemy has more pokemon
 		end_battle()
+		return true
+	return false
 
 func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
 	var statusType = move.Status
@@ -159,9 +169,9 @@ func process_stat_change(move: Move, attacking_pokemon: Pokemon, defending_pokem
 	var current_value = affected_pokemon.BattleStats.get(move.Target_Stat)
 	affected_pokemon.BattleStats.set(move.Target_Stat, current_value * move.Stat_Multiplier)
 		
-func print_dialogue(message: String):
+func print_dialogue(message: PackedStringArray):
 	show_dialogue()
-	messageBox.get_node("Message").text = message
+	DialogueManager.print_lines(messageBox, message)
 	await get_tree().process_frame
 	await Helpers.wait(2)
 

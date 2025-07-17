@@ -33,7 +33,7 @@ text = "Battle"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="DialogueBox" type="PanelContainer" parent="CanvasLayer"]
+[node name="MessageBox" type="PanelContainer" parent="CanvasLayer"]
 visible = false
 custom_minimum_size = Vector2(0, 300)
 anchors_preset = 12
@@ -46,7 +46,7 @@ grow_vertical = 0
 size_flags_horizontal = 3
 theme = ExtResource("2_sl2e5")
 
-[node name="DialogueText" type="RichTextLabel" parent="CanvasLayer/DialogueBox"]
+[node name="Message" type="RichTextLabel" parent="CanvasLayer/MessageBox"]
 layout_mode = 2
 text = "Sample Message"
 
