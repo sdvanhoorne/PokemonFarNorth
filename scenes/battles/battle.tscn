@@ -233,7 +233,7 @@ layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
-[node name="GridContainer" type="GridContainer" parent="BattleUI"]
+[node name="BattleOptions" type="GridContainer" parent="BattleUI"]
 custom_minimum_size = Vector2(500, 300)
 layout_mode = 1
 anchors_preset = 3
@@ -247,7 +247,7 @@ grow_horizontal = 0
 grow_vertical = 0
 columns = 2
 
-[node name="Fight" type="Button" parent="BattleUI/GridContainer"]
+[node name="Fight" type="Button" parent="BattleUI/BattleOptions"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -257,7 +257,7 @@ theme_override_font_sizes/font_size = 32
 text = "Fight"
 vertical_icon_alignment = 2
 
-[node name="Switch" type="Button" parent="BattleUI/GridContainer"]
+[node name="Switch" type="Button" parent="BattleUI/BattleOptions"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -266,7 +266,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Switch"
 
-[node name="Item" type="Button" parent="BattleUI/GridContainer"]
+[node name="Item" type="Button" parent="BattleUI/BattleOptions"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -275,7 +275,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Item"
 
-[node name="Run" type="Button" parent="BattleUI/GridContainer"]
+[node name="Run" type="Button" parent="BattleUI/BattleOptions"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -346,6 +346,6 @@ offset_bottom = 27.0
 [connection signal="pressed" from="BattleUI/MessageBox/PokemonMoves/Move1" to="." method="_on_move_1_pressed"]
 [connection signal="pressed" from="BattleUI/MessageBox/PokemonMoves/Move2" to="." method="_on_move_2_pressed"]
 [connection signal="pressed" from="BattleUI/MessageBox/PokemonMoves/Move3" to="." method="_on_move_3_pressed"]
-[connection signal="pressed" from="BattleUI/GridContainer/Fight" to="." method="_on_fight_pressed"]
-[connection signal="pressed" from="BattleUI/GridContainer/Switch" to="." method="_on_switch_pressed"]
-[connection signal="pressed" from="BattleUI/GridContainer/Run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="BattleUI/BattleOptions/Fight" to="." method="_on_fight_pressed"]
+[connection signal="pressed" from="BattleUI/BattleOptions/Switch" to="." method="_on_switch_pressed"]
+[connection signal="pressed" from="BattleUI/BattleOptions/Run" to="." method="_on_run_pressed"]

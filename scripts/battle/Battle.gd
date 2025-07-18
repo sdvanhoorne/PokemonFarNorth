@@ -1,6 +1,7 @@
 extends Node2D
 @onready var messageBox = $BattleUI/MessageBox
 @onready var PartyUI = $PartyUI/Party
+@onready var BattleOptions = $BattleUI/BattleOptions
 @onready var EnemyPokemonContainer = $BattleUI/EnemyPokemonUI/EnemyPokemon
 @onready var PlayerPokemonContainer = $BattleUI/PlayerPokemonUI/PlayerPokemon
 var rng = RandomNumberGenerator.new()
@@ -11,11 +12,13 @@ func _ready():
 	load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 	
 	messageBox.get_node("PokemonMoves").visible = false
+	BattleOptions.visible = false
 	await print_dialogue([("A wild %s appeared!" % EnemyPokemon[0].Name)])
 	show_prompt()
 	
 func show_prompt():
 	await print_dialogue(["What will you do?"])
+	BattleOptions.visible = true
 
 func load_pokemon(node: Node2D, pokemon: Pokemon):
 	var sprite = node.get_node("SpriteArea").get_node("Sprite")
@@ -38,6 +41,7 @@ func unload_pokemon(node: Node2D):
 	info.visible = false
 	
 func _on_run_pressed() -> void:
+	BattleOptions.visible = false
 	await print_dialogue(["You ran away..."])
 	end_battle()
 	
@@ -86,6 +90,7 @@ func _on_move_3_pressed() -> void:
 	process_turn(moveName)
 
 func process_turn(moveName: String):
+	BattleOptions.visible = false
 	var playerMove = get_move(moveName)
 	var enemyMove = get_move(determine_enemy_move())
 	
