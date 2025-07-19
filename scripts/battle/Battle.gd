@@ -13,7 +13,7 @@ func _ready():
 	
 	messageBox.get_node("PokemonMoves").visible = false
 	BattleOptions.visible = false
-	await print_dialogue([("A wild %s appeared!" % EnemyPokemon[0].Name)])
+	await print_dialogue([("A wild %s appeared!" % EnemyPokemon[0].base_data.name)])
 	show_prompt()
 	
 func show_prompt():
@@ -22,14 +22,17 @@ func show_prompt():
 
 func load_pokemon(node: Node2D, pokemon: Pokemon):
 	var sprite = node.get_node("SpriteArea").get_node("Sprite")
-	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.Name + ".png")	
+	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.base_data.name + ".png")	
 	var nameLabel = node.get_node("Info/Name")
-	nameLabel.text = pokemon.Name
+	nameLabel.text = pokemon.base_data.name
 	var levelLabel = node.get_node("Info/Level")
-	levelLabel.text = str(pokemon.Level)
+	levelLabel.text = str(pokemon.level)
 	var healthBar = node.get_node("Info/HealthBar")
-	healthBar.max_value = pokemon.BattleStats.Hp
-	healthBar.value = pokemon.Current_Hp
+	healthBar.max_value = pokemon.battle_stats.hp
+	healthBar.value = pokemon.battle_stats.hp
+	
+	foreach(var move_id in pokemon.move_ids):
+		pokemon.moves.append(Move.new(move_id))
 	node.set_meta("pokemon", pokemon)
 	
 func unload_pokemon(node: Node2D):
@@ -60,7 +63,7 @@ func show_moves():
 	set_move(3)
 	
 func set_move(i: int):
-	var moves = PlayerInventory.PartyPokemon[0].Moves
+	var moves = PlayerInventory.PartyPokemon[0].moves
 	if i >= moves.size():
 		return
 	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))	
@@ -115,11 +118,6 @@ func process_turn(moveName: String):
 	# TODO process poison, burn, any other damage over time
 	# TODO and check again if a pokemon has fainted
 	show_prompt()
-	
-func get_move(moveName: String) -> Move:
-	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
-	var move = Move.new(moveName, JSON.parse_string(moveData.get_as_text())[moveName])
-	return move
 	
 func determine_enemy_move() -> String:
 	var enemy_moves = EnemyPokemon[0].get("Moves")

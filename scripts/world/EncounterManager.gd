@@ -20,20 +20,8 @@ func roll_encounter() -> Pokemon:
 			var minLevel = entry.get("level_min")
 			var maxLevel = entry.get("level_max")
 			var pokemonLevel = rng.randi_range(minLevel, maxLevel)
-			return load_pokemon(entry["pokemon"], pokemonLevel)
-	
-	return Pokemon.new()
-	
-func load_pokemon(pokemonName: String, pokemonLevel: int) -> Pokemon:
-	var path = "res://data/pokemon/%s.json" % pokemonName
-	var file = FileAccess.open(path, FileAccess.READ)
-	if file:
-		var response = JSON.parse_string(file.get_as_text())
-		var wildPokemon = Pokemon.new_wild(pokemonLevel, response)
-		return wildPokemon
-	else:
-		push_error("Failed to load Pokémon data at %s" % path)
-		return Pokemon.new()
+			return Pokemon.new_wild(entry["id"], pokemonLevel)
+	return Pokemon.new(0)
 
 func check_for_encounter_at_position(pos: Vector2, dir: Vector2, encounterLayer: TileMapLayer):
 	var local_pos = encounterLayer.to_local(pos)

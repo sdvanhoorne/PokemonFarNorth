@@ -17,7 +17,7 @@
 				"special_defense": 9,
 				"speed": 14
 			},
-			"move_ids": [
+			"moves": [
 				0, 1
 			]
 		}

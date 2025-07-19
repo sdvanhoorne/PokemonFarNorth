@@ -11,5 +11,5 @@ func get_party():
 	var party = FileAccess.open(party_path, FileAccess.READ)
 	if party:
 		for pokemonData in JSON.parse_string(party.get_as_text()).get("Party"):
-			var pokemon = Pokemon.new(pokemonData)
+			var pokemon = Pokemon.new_existing(pokemonData)
 			PartyPokemon.append(pokemon)

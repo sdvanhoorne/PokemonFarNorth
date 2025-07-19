@@ -1,6 +1,7 @@
 {
-	"Tackle": 
+	"0",  
 	{
+		"name": "Tackle",
 		"Damage": 40,
  		"Type": "Normal",
  		"Target": "Enemy",

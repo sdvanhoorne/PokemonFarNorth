@@ -1,22 +1,25 @@
 class_name Move
 
-var Name = ""
-var Damage = 0
-var Type = ""
-var Category = ""
-var Target = ""
-var Target_Stat = ""
-var Stat_Multiplier = 1.0
-var Accuracy = 1.0
-var Description = ""
+var id: int
+var name = ""
+var damage = 0
+var type = ""
+var category = ""
+var target = ""
+var target_stat = ""
+var stat_multiplier = 1.0
+var accuracy = 1.0
+var description = ""
 
-func _init(name: String, moveData = {}):
-	Name = name
-	Damage = moveData.get("Damage")
-	Type = moveData.get("Type")
-	Target = moveData.get("Target")
-	Target_Stat = moveData.get("Target_Stat")
-	Stat_Multiplier = moveData.get("Stat_Multiplier")
-	Category = moveData.get("Category")
-	Accuracy = moveData.get("Accuracy")
-	Description = moveData.get("Description")
+func _init(id: int):
+	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
+	id = 
+	name = name
+	damage = moveData.get("damage")
+	type = moveData.get("type")
+	target = moveData.get("target")
+	target_stat = moveData.get("target_stat")
+	stat_multiplier = moveData.get("stat_multiplier")
+	category = moveData.get("category")
+	accuracy = moveData.get("accuracy")
+	description = moveData.get("description")

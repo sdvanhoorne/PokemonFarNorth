@@ -17,13 +17,13 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+Pokedex="*res://scripts/pokemon/Pokedex.gd"
 EncounterManager="*res://scripts/world/EncounterManager.gd"
 BattleManager="*res://scripts/battle/BattleManager.gd"
 PlayerInventory="*res://scripts/player/PlayerInventory.gd"
 Helpers="*res://scripts/Helpers.gd"
 DamageCalculation="*res://scripts/battle/DamageCalculation.gd"
 DialogueManager="*res://scripts/DialogueManager.gd"
-Pokedex="*res://scripts/pokemon/Pokedex.gd"
 
 [display]
 
