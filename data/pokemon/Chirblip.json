@@ -1,0 +1,18 @@
+{
+	"Id": 1,
+	"Name": "Chirblip",
+	"Type1": "Flying",
+	"Type2": null,
+	"Base_Stats": {
+		"Hp": 40,
+		"Attack": 45,
+		"Defense": 35,
+		"Special_Attack": 65,
+		"Special_Defense": 55,
+		"Speed": 70
+	  },
+	  "Moves": [
+		{ "Level": 0, "Name": "Tackle" },
+		{ "Level": 0, "Name": "Tail Whip" }
+  ]
+}

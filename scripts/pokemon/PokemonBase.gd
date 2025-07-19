@@ -8,9 +8,17 @@ var base_stats = null
 var learnable_moves: Array[Dictionary] 
 var evolutions: Array[Dictionary]
 
-func _init(data := {}):
-	id = data["id"]
-	name = data["name"]
+func _init(id: int):
+	id = id
+	name = Pokedex.pokedex[id]
+	if name == null:
+		push_error("Pokémon ID %d not found in Pokedex." % id)
+		return 
+	
+	var path = "res://data/pokemon_base/%s.json" % name
+	var file = FileAccess.open(path, FileAccess.READ)
+	var data = JSON.parse_string(file.get_as_text())
+	
 	base_stats = PokemonStats.new(data["base_stats"])
 	learnable_moves = data["learnable_moves"]
 	evolutions = data["evolutions"]

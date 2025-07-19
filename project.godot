@@ -23,6 +23,7 @@ PlayerInventory="*res://scripts/player/PlayerInventory.gd"
 Helpers="*res://scripts/Helpers.gd"
 DamageCalculation="*res://scripts/battle/DamageCalculation.gd"
 DialogueManager="*res://scripts/DialogueManager.gd"
+Pokedex="*res://scripts/pokemon/Pokedex.gd"
 
 [display]
 
