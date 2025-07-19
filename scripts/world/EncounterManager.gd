@@ -1,6 +1,7 @@
 extends Node
 
 var encounter_data = []
+var encounter_rate = 0.05 # 0.05 = every 20 steps
 var rng = RandomNumberGenerator.new()
 
 func load_encounters(file_path: String):
@@ -40,7 +41,7 @@ func check_for_encounter_at_position(pos: Vector2, dir: Vector2, encounterLayer:
 	var tile_data = encounterLayer.get_cell_tile_data(cell_coords)
 
 	if tile_data and tile_data.get_custom_data("encounter_grass") == true:
-		if randf() < 0.05: # wild encounter rate
+		if randf() < encounter_rate:
 			print("A wild encounter begins!")
 			load_encounters("res://data/encounters/" + encounterLayer.get_parent().name + ".json")
 			var encountered_pokemon = EncounterManager.roll_encounter()
