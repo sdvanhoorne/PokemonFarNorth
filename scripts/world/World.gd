@@ -26,6 +26,8 @@ func load_map(scene: PackedScene, spawn_name: String = "") -> Node2D:
 	player.hold_timer = 0.0
 	player.is_moving = false
 	
+	# DialogueManager.set_message_box() ?
+	
 	return current_map
 
 func _on_button_pressed() -> void:
