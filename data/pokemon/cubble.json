@@ -2,7 +2,7 @@
 	"id": 10,
 	"name": "Cubble",
 	"type1": "Normal",
-	"type2": null,
+	"type2": "",
 	"base_stats": {
 		"hp": 65,
 		"attack": 60,

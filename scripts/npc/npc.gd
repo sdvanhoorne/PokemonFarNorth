@@ -34,7 +34,7 @@ func _on_body_exited(body):
 func _unhandled_input(event):
 	if event.is_action_pressed("interact") and player_in_range and player_ref:
 		if showing_dialogue:
-			DialogueManager.hide_dialogue_box()
+			DialogueManager.hide_message_box()
 			showing_dialogue = false
 		else:
 			face_toward(player_ref.global_position)

@@ -2,7 +2,7 @@
 	"id": 1,
 	"name": "Minket",
 	"type1": "Grass",
-	"type2": null,
+	"type2": "",
 	"base_stats": {
 		"hp": 40,
 		"attack": 45,

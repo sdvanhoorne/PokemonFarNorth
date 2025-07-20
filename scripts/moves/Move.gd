@@ -12,14 +12,16 @@ var accuracy = 1.0
 var description = ""
 
 func _init(id: int):
-	var moveData = FileAccess.open("res://data/moves.json", FileAccess.READ)
-	id = 
-	name = name
-	damage = moveData.get("damage")
-	type = moveData.get("type")
-	target = moveData.get("target")
-	target_stat = moveData.get("target_stat")
-	stat_multiplier = moveData.get("stat_multiplier")
-	category = moveData.get("category")
-	accuracy = moveData.get("accuracy")
-	description = moveData.get("description")
+	var file = FileAccess.open("res://data/moves.json", FileAccess.READ)
+	var all_data = JSON.parse_string(file.get_as_text())
+	var move_data = all_data[str(id)]
+	id = id
+	name = move_data.get("name")
+	damage = move_data.get("damage")
+	type = move_data.get("type")
+	target = move_data.get("target")
+	target_stat = move_data.get("target_stat")
+	stat_multiplier = move_data.get("stat_multiplier")
+	category = move_data.get("category")
+	accuracy = move_data.get("accuracy")
+	description = move_data.get("description")

@@ -1,57 +1,23 @@
 {
-	"0",  
+	"0":   
 	{
 		"name": "Tackle",
-		"Damage": 40,
- 		"Type": "Normal",
- 		"Target": "Enemy",
-		"Category": "Physical",
-		"Accuracy": 100,
-		"Description": "A physical attack in which the user charges, full body, into the foe."
+		"damage": 40,
+ 		"type": "Normal",
+ 		"target": "Enemy",
+		"category": "Physical",
+		"accuracy": 100,
+		"description": "A physical attack in which the user charges, full body, into the foe."
 	},	
-	"Tail Whip": 
+	"1":  
 	{
-		"Damage": null,
- 		"Type": "Normal",
- 		"Target": "Enemy",
-		"Target_Stat": "Defense",
-		"Stat_Multiplier": 0.85,
-		"Category": "StatChange",
-		"Accuracy": 100,
-		"Description": "The user wags its tail cutely, making the foe lower its Defense stat."
-	},
-	"Growl": 
-	{
-		"Damage": null,
- 		"Type": "Normal",
- 		"Target": "Enemy",
-		"Target_Stat": "Attack",
-		"Stat_Multiplier": 0.85,
-		"Category": "StatChange",
-		"Accuracy": 100,
-		"Description": "The user growls and lowers the targets attack stat."
-	},
-	"Howl": 
-	{
-		"Damage": null,
- 		"Type": "Normal",
- 		"Target": "Self",
-		"Target_Stat": "Attack",
-		"Stat_Multiplier": 1.15,
-		"Category": "StatChange",
-		"Accuracy": 100,
-		"Description": "User howls",
-	},
-	"Thunder Wave": 
-	{
-		"Damage": null,
- 		"Type": "Electric",
- 		"Target": "Enemy",
-		"Target_Stat": null,
-		"Stat_Multiplier": null,
-		"Category": "Status",
-		"Status": "Paralyze",
-		"Accuracy": 100,
-		"Description": "User howls",
+		"name": "Tail Whip",
+ 		"type": "Normal",
+ 		"target": "Enemy",
+		"target_stat": "Defense",
+		"stat_multiplier": 0.85,
+		"category": "StatChange",
+		"accuracy": 100,
+		"description": "The user wags its tail cutely, making the foe lower its Defense stat."
 	}
 }

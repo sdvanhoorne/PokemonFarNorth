@@ -31,8 +31,9 @@ func load_pokemon(node: Node2D, pokemon: Pokemon):
 	healthBar.max_value = pokemon.battle_stats.hp
 	healthBar.value = pokemon.battle_stats.hp
 	
-	foreach(var move_id in pokemon.move_ids):
+	for move_id in pokemon.move_ids:
 		pokemon.moves.append(Move.new(move_id))
+		
 	node.set_meta("pokemon", pokemon)
 	
 func unload_pokemon(node: Node2D):
@@ -63,11 +64,12 @@ func show_moves():
 	set_move(3)
 	
 func set_move(i: int):
+	# might want to set an active pokemon 
 	var moves = PlayerInventory.PartyPokemon[0].moves
 	if i >= moves.size():
 		return
 	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))	
-	var pokemon_move = moves[i]
+	var pokemon_move = moves[i]["name"]
 	if(pokemon_move == null):
 		move_button.text = ""
 	move_button.text = pokemon_move
@@ -77,81 +79,78 @@ func show_dialogue():
 	messageBox.get_node("Message").visible = true
 
 func _on_move_0_pressed() -> void:
-	var moveName = messageBox.get_node("PokemonMoves").get_node("Move0").text
-	process_turn(moveName)
+	process_turn(0)
 
 func _on_move_1_pressed() -> void:
-	var moveName = messageBox.get_node("PokemonMoves").get_node("Move1").text
-	process_turn(moveName)
+	process_turn(1)
 	
 func _on_move_2_pressed() -> void:
-	var moveName = messageBox.get_node("PokemonMoves").get_node("Move2").text
-	process_turn(moveName)
+	process_turn(2)
 
 func _on_move_3_pressed() -> void:
-	var moveName = messageBox.get_node("PokemonMoves").get_node("Move3").text
-	process_turn(moveName)
+	process_turn(3)
 
-func process_turn(moveName: String):
+func process_turn(move_index: int):
+	var player_pokemon = PlayerInventory.PartyPokemon[0]
+	var enemy_pokemon = EnemyPokemon[0]
+	
 	BattleOptions.visible = false
-	var playerMove = get_move(moveName)
-	var enemyMove = get_move(determine_enemy_move())
+	var player_move = player_pokemon.moves[move_index]
+	var enemy_move = Move.new(determine_enemy_move())
 	
 	# Check speed for priority and process moves
-	var playerPokemon = PlayerInventory.PartyPokemon[0]
-	var enemyPokemon = EnemyPokemon[0]
-	if(playerPokemon.BattleStats.Speed >= enemyPokemon.BattleStats.Speed):
-		await process_move(playerMove, playerPokemon, enemyPokemon, true)
-		if await check_faint(enemyPokemon, true): 
+	if(player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed):
+		await process_move(player_move, player_pokemon, enemy_pokemon, true)
+		if await check_faint(enemy_pokemon, true): 
 			return
-		await process_move(enemyMove, enemyPokemon, playerPokemon, false)
-		if await check_faint(playerPokemon, false):
+		await process_move(enemy_move, enemy_pokemon, player_pokemon, false)
+		if await check_faint(player_pokemon, false):
 			return
 	else:
-		await process_move(enemyMove, enemyPokemon, playerPokemon, false)
-		if await check_faint(playerPokemon, false):
+		await process_move(enemy_move, enemy_pokemon, player_pokemon, false)
+		if await check_faint(player_pokemon, false):
 			return
-		await process_move(playerMove, playerPokemon, enemyPokemon, true)
-		if await check_faint(enemyPokemon, true):
+		await process_move(player_move, player_pokemon, enemy_pokemon, true)
+		if await check_faint(enemy_pokemon, true):
 			return
 	
 	# TODO process poison, burn, any other damage over time
 	# TODO and check again if a pokemon has fainted
 	show_prompt()
 	
-func determine_enemy_move() -> String:
-	var enemy_moves = EnemyPokemon[0].get("Moves")
+func determine_enemy_move() -> int:
+	var enemy_moves = EnemyPokemon[0].get("move_ids")
 	var roll = rng.randi_range(0, enemy_moves.size()-1)
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
 	
-func process_move(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):	
-	await print_dialogue([attackingPokemon.Name + " used " + move.Name])
+func process_move(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon, isPlayerAttacking: bool):	
+	await print_dialogue([attacking_pokemon.base_data.name + " used " + move.name])
 	
 	# process each move type differently 
-	var moveCategory = move.Category
+	var moveCategory = move.category
 	if(moveCategory == "Physical" or moveCategory == "Special"):
-		var damage = DamageCalculation.get_damage(move, attackingPokemon, defendingPokemon)
-		process_damage(damage, attackingPokemon, defendingPokemon, isPlayerAttacking)
+		var damage = DamageCalculation.get_damage(move, attacking_pokemon, defending_pokemon)
+		process_damage(damage, defending_pokemon, isPlayerAttacking)
 	elif(moveCategory == "Status"):
-		process_status(move, attackingPokemon, defendingPokemon)	
+		process_status(move, attacking_pokemon, defending_pokemon)	
 	elif(moveCategory == "StatChange"):
-		process_stat_change(move, attackingPokemon, defendingPokemon)		
+		process_stat_change(move, attacking_pokemon, defending_pokemon)		
 		
-func process_damage(damage: int, attackingPokemon: Pokemon, defendingPokemon: Pokemon, isPlayerAttacking: bool):
+func process_damage(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: bool):
 	# might be a better way than "isPlayerAttacking"
-	defendingPokemon.Current_Hp -= damage
+	defending_pokemon.current_hp -= damage
 	var damagedPokemonContainer
 	if(isPlayerAttacking):
 		damagedPokemonContainer = EnemyPokemonContainer
 	else:
 		damagedPokemonContainer = PlayerPokemonContainer
 	var healthBar = damagedPokemonContainer.get_node("Info/HealthBar")
-	healthBar.value = defendingPokemon.Current_Hp
+	healthBar.value = defending_pokemon.current_hp
 		
 func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
-	if(pokemon.Current_Hp <= 0):
-		await print_dialogue([pokemon.Name + " fainted"])
+	if(pokemon.current_hp <= 0):
+		await print_dialogue([pokemon.base_data.name + " fainted"])
 			
 		# end battle for now, 
 		# TODO need to check if player or enemy has more pokemon
@@ -159,18 +158,18 @@ func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 		return true
 	return false
 
-func process_status(move: Move, attackingPokemon: Pokemon, defendingPokemon: Pokemon):
-	var statusType = move.Status
-	var target = move.Target
+func process_status(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon):
+	var status_type = move.status
+	var target = move.target
 	if(target == "Self"):
-		attackingPokemon.Status = statusType
+		attacking_pokemon.status = status_type
 	elif (target == "Enemy"):
-		defendingPokemon.Status = statusType
+		defending_pokemon.status = status_type
 	
 func process_stat_change(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> void:
-	var affected_pokemon = attacking_pokemon if move.Target == "Self" else defending_pokemon	
-	var current_value = affected_pokemon.BattleStats.get(move.Target_Stat)
-	affected_pokemon.BattleStats.set(move.Target_Stat, current_value * move.Stat_Multiplier)
+	var affected_pokemon = attacking_pokemon if move.target == "Self" else defending_pokemon	
+	var current_value = affected_pokemon.BattleStats.get(move.target_stat)
+	affected_pokemon.BattleStats.set(move.target_stat, current_value * move.stat_multiplier)
 		
 func print_dialogue(message: PackedStringArray):
 	show_dialogue()

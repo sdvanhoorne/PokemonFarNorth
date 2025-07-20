@@ -7,7 +7,7 @@ var current_hp
 var current_xp = 0
 var xp_to_next_level = 10
 var move_ids = []
-var moves: Array[Move]
+var moves = []
 var status = ""
 
 var stats = null
@@ -24,7 +24,7 @@ static func new_existing(data: Dictionary) -> Pokemon:
 	pokemon.level = data.get("level")
 	pokemon.status = data.get("status")
 	pokemon.current_xp = data.get("current_xp")
-	pokemon.moves = data["move_ids"]
+	pokemon.move_ids = data["move_ids"]
 	pokemon.stats = data.get("stats")
 	# might want to set battle_stats right before battle
 	pokemon.battle_stats = pokemon.stats
