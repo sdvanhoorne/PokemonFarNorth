@@ -14,7 +14,7 @@
 		"name": "Tail Whip",
  		"type": "Normal",
  		"target": "Enemy",
-		"target_stat": "Defense",
+		"target_stat": "defense",
 		"stat_multiplier": 0.85,
 		"category": "StatChange",
 		"accuracy": 100,

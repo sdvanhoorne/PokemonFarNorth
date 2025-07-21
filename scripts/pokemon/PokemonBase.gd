@@ -10,8 +10,8 @@ var base_stats = null
 var learnable_moves = []
 var evolutions = []
 
-func _init(id: int):
-	id = id
+func _init(_id: int):
+	id = _id
 	name = Pokedex.pokedex[id]
 	if name == null:
 		push_error("Pokémon ID %d not found in Pokedex." % id)

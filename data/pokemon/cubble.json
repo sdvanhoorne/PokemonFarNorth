@@ -12,7 +12,6 @@
 		"speed": 55
 	},
 	"learnable_moves": [
-		{ "level": 0, "id": 0 },
 		{ "level": 0, "id": 1 }
 	],
 	"evolutions": [
