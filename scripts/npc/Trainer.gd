@@ -16,5 +16,5 @@ func initiate_battle():
 	# Call your BattleManager to start a battle
 	face_toward(player_ref.global_position)
 	var orientation = player_ref.global_position - global_position
-	BattleManager.start_battle(team, global_position, orientation,                                                                                                                                                                                                                                                                                                                                                     )
+	BattleManager.start_battle(team, global_position, orientation,                                                                                                                                                                                                                                                                                                                   )
 	defeated = true  # Prevent rematching immediately
