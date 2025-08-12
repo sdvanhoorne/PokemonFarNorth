@@ -35,7 +35,7 @@ func load_pokemon(node: Node2D, pokemon: Pokemon):
 		pokemon.moves.append(Move.new(move_id))
 		
 	node.set_meta("pokemon", pokemon)
-	
+
 func unload_pokemon(node: Node2D):
 	var infoArea = node.get_node("SpriteArea")
 	var sprite = infoArea.get_node("Sprite")
@@ -151,9 +151,15 @@ func process_damage(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: 
 func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 	if(pokemon.current_hp <= 0):
 		await print_dialogue([pokemon.base_data.name + " fainted"])
-			
+		EnemyPokemon.pop_front()
 		# end battle for now, 
 		# TODO need to check if player or enemy has more pokemon
+		if(!isPlayer && EnemyPokemon.size() > 0):
+			# TODO enemy uses next pokemon
+			load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
+		elif (!isPlayer && EnemyPokemon.size() == 0):
+			# TODO enemy out of pokemon
+			end_battle()
 		end_battle()
 		return true
 	return false
