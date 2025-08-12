@@ -1,4 +1,5 @@
 extends Node2D
+@onready var BattleUI: BattleUI = $BattleUI
 @onready var messageBox = $BattleUI/MessageBox
 @onready var PartyUI = $PartyUI/Party
 @onready var BattleOptions = $BattleUI/BattleOptions
@@ -8,8 +9,8 @@ var rng = RandomNumberGenerator.new()
 var EnemyPokemon = []
 
 func _ready():
-	load_pokemon(PlayerPokemonContainer, PlayerInventory.PartyPokemon[0])
-	load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
+	BattleUI.load_pokemon(PlayerPokemonContainer, PlayerInventory.PartyPokemon[0])
+	BattleUI.load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 	
 	messageBox.get_node("PokemonMoves").visible = false
 	BattleOptions.visible = false
@@ -19,30 +20,6 @@ func _ready():
 func show_prompt():
 	await print_dialogue(["What will you do?"])
 	BattleOptions.visible = true
-
-func load_pokemon(node: Node2D, pokemon: Pokemon):
-	var sprite = node.get_node("SpriteArea").get_node("Sprite")
-	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.base_data.name + ".png")	
-	var nameLabel = node.get_node("Info/Name")
-	nameLabel.text = pokemon.base_data.name
-	var levelLabel = node.get_node("Info/Level")
-	levelLabel.text = str(pokemon.level)
-	var healthBar = node.get_node("Info/HealthBar")
-	healthBar.max_value = pokemon.battle_stats.hp
-	healthBar.value = pokemon.battle_stats.hp
-	
-	for move_id in pokemon.move_ids:
-		pokemon.moves.append(Move.new(move_id))
-		
-	node.set_meta("pokemon", pokemon)
-
-func unload_pokemon(node: Node2D):
-	var infoArea = node.get_node("SpriteArea")
-	var sprite = infoArea.get_node("Sprite")
-	sprite.texture = null
-	# show fainting animation?
-	var info = node.get_node("Info")
-	info.visible = false
 	
 func _on_run_pressed() -> void:
 	BattleOptions.visible = false
@@ -150,13 +127,14 @@ func process_damage(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: 
 		
 func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 	if(pokemon.current_hp <= 0):
-		await print_dialogue([pokemon.base_data.name + " fainted"])
+		BattleUI.unload_pokemon(EnemyPokemonContainer)
 		EnemyPokemon.pop_front()
+		await print_dialogue([pokemon.base_data.name + " fainted"])
 		# end battle for now, 
 		# TODO need to check if player or enemy has more pokemon
 		if(!isPlayer && EnemyPokemon.size() > 0):
 			# TODO enemy uses next pokemon
-			load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
+			BattleUI.load_pokemon(EnemyPokemonContainer, EnemyPokemon[0])
 		elif (!isPlayer && EnemyPokemon.size() == 0):
 			# TODO enemy out of pokemon
 			end_battle()

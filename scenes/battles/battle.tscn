@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://bihya4k8vuet"]
+[gd_scene load_steps=11 format=3 uid="uid://bihya4k8vuet"]
 
-[ext_resource type="Script" path="res://scripts/battle/Battle.gd" id="1_m7hvh"]
+[ext_resource type="Script" uid="uid://2tjjxccvbkga" path="res://scripts/battle/Battle.gd" id="1_m7hvh"]
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scenes/battles/PokemonTooltip.gd" id="2_1kxda"]
 [ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="2_836qq"]
+[ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scenes/battles/BattleUI.gd" id="2_p1d8k"]
 [ext_resource type="Texture2D" uid="uid://dtahf7dn7d1wo" path="res://assets/battle/HealthBarRed.png" id="3_7611a"]
 [ext_resource type="Texture2D" uid="uid://dlrqrpa43srk3" path="res://assets/battle/HealthBarGreen.png" id="4_836qq"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="5_1kxda"]
@@ -34,6 +35,7 @@ layout_mode = 3
 anchor_right = 0.875
 offset_right = 1920.0
 offset_bottom = 1080.0
+script = ExtResource("2_p1d8k")
 
 [node name="PlayerPokemonUI" type="Control" parent="BattleUI"]
 layout_mode = 1
