@@ -1,0 +1,33 @@
+[gd_scene load_steps=2 format=3 uid="uid://tvog5b4ed61v"]
+
+[ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="1_8qhdc"]
+
+[node name="PopUpStats" type="PanelContainer"]
+visible = false
+z_index = 1
+offset_right = 100.0
+offset_bottom = 151.0
+theme = ExtResource("1_8qhdc")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="Attack" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "1"
+
+[node name="Defense" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "2"
+
+[node name="SpecialAttack" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "3"
+
+[node name="SpecialDefense" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "4"
+
+[node name="Speed" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "5"

@@ -21,7 +21,7 @@ func _init(id: int):
 	
 static func new_existing(data: Dictionary) -> Pokemon:
 	var pokemon = Pokemon.new(data.get("id"))
-	pokemon.level = data.get("level")
+	pokemon.level = int(data.get("level"))
 	pokemon.status = data.get("status")
 	pokemon.current_xp = data.get("current_xp")
 	pokemon.move_ids = data["move_ids"]

@@ -29,7 +29,7 @@ func _on_body_exited(body):
 	if body.name == "Player":
 		player_in_range = false
 		player_ref = null
-		DialogueManager.hide_dialogue_box()
+		#wDialogueManager.hide_dialogue_box()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("interact") and player_in_range and player_ref:

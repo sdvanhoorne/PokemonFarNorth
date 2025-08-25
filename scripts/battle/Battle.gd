@@ -152,7 +152,7 @@ func process_status(move: Move, attacking_pokemon: Pokemon, defending_pokemon: P
 	
 func process_stat_change(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> void:
 	var affected_pokemon = attacking_pokemon if move.target == "Self" else defending_pokemon	
-	var current_value = affected_pokemon.BattleStats.get(move.target_stat)
+	var current_value = affected_pokemon.battle_stats.get(move.target_stat)
 	affected_pokemon.BattleStats.set(move.target_stat, current_value * move.stat_multiplier)
 		
 func print_dialogue(message: PackedStringArray):

@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://w8it21f8eyqh"]
 
-[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_sspvn"]
+[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/npc.gd" id="1_sspvn"]
 [ext_resource type="Texture2D" uid="uid://ckey6urbbibmu" path="res://assets/player/3698.png" id="2_pcwmf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
@@ -133,7 +133,7 @@ z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(8, 4)
+position = Vector2(8, 2)
 sprite_frames = SubResource("SpriteFrames_atglx")
 animation = &"Move_Up"
 

@@ -2,7 +2,7 @@ extends CharacterBody2D
 @onready var _animation_player = $SpriteAnimation
 
 const TILE_SIZE = 16
-const MOVE_TIME = 0.12  # Time it takes to move one tile
+const MOVE_TIME = 0.16  # Time it takes to move one tile
 var facing_input = Vector2.ZERO
 var hold_timer = 0.0
 const HOLD_THRESHOLD = 0.03
@@ -47,18 +47,19 @@ func _physics_process(delta):
 
 	var input = Vector2.ZERO
 
+	var move_state = "sprint" if sprinting else "move"
 	if Input.is_action_pressed("ui_up"):
 		input.y -= 1
-		_animation_player.play("move_up")
+		_animation_player.play(move_state + "_up")
 	elif Input.is_action_pressed("ui_down"):
 		input.y += 1
-		_animation_player.play("move_down")
+		_animation_player.play(move_state + "_down")
 	elif Input.is_action_pressed("ui_left"):
 		input.x -= 1
-		_animation_player.play("move_left")
+		_animation_player.play(move_state + "_left")
 	elif Input.is_action_pressed("ui_right"):
 		input.x += 1
-		_animation_player.play("move_right")
+		_animation_player.play(move_state + "_right")
 
 	if input != Vector2.ZERO:
 		input = input.normalized()

@@ -4,10 +4,10 @@
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scenes/battles/PokemonTooltip.gd" id="2_1kxda"]
 [ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="2_836qq"]
 [ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scenes/battles/BattleUI.gd" id="2_p1d8k"]
-[ext_resource type="Texture2D" uid="uid://dtahf7dn7d1wo" path="res://assets/battle/HealthBarRed.png" id="3_7611a"]
-[ext_resource type="Texture2D" uid="uid://dlrqrpa43srk3" path="res://assets/battle/HealthBarGreen.png" id="4_836qq"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="5_1kxda"]
 [ext_resource type="Texture2D" uid="uid://c5jlr3wso5qo8" path="res://assets/pokemon/ai/Cubble.png" id="5_836qq"]
+[ext_resource type="PackedScene" uid="uid://tvog5b4ed61v" path="res://scenes/battles/BattleStatsPopUp.tscn" id="5_p1d8k"]
+[ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/BattleInfo.tscn" id="6_mxf8o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
 
@@ -61,68 +61,9 @@ flip_h = true
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" type="Control" parent="BattleUI/PlayerPokemonUI/PlayerPokemon"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -100.0
-offset_top = -150.0
-offset_right = -60.0
-offset_bottom = -110.0
+[node name="PopUpStats" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("5_p1d8k")]
 
-[node name="HealthBar" type="TextureProgressBar" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/Info"]
-layout_mode = 0
-offset_right = 48.0
-offset_bottom = 6.0
-scale = Vector2(5.128, 2)
-texture_under = ExtResource("3_7611a")
-texture_progress = ExtResource("4_836qq")
-
-[node name="Name" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/Info"]
-layout_mode = 0
-offset_top = 10.0
-offset_right = 55.0
-offset_bottom = 33.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Minket"
-
-[node name="Level" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/Info"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 10.0
-offset_right = 240.0
-offset_bottom = 33.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "5"
-
-[node name="PopUpStats" type="PanelContainer" parent="BattleUI/PlayerPokemonUI/PlayerPokemon"]
-visible = false
-z_index = 1
-offset_right = 100.0
-offset_bottom = 151.0
-theme = ExtResource("5_1kxda")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/PopUpStats"]
-layout_mode = 2
-
-[node name="Attack" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/PopUpStats/VBoxContainer"]
-layout_mode = 2
-text = "1"
-
-[node name="Defense" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/PopUpStats/VBoxContainer"]
-layout_mode = 2
-text = "2"
-
-[node name="SpecialAttack" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/PopUpStats/VBoxContainer"]
-layout_mode = 2
-text = "3"
-
-[node name="SpecialDefense" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/PopUpStats/VBoxContainer"]
-layout_mode = 2
-text = "4"
-
-[node name="Speed" type="Label" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/PopUpStats/VBoxContainer"]
-layout_mode = 2
-text = "5"
+[node name="Info" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("6_mxf8o")]
 
 [node name="EnemyPokemonUI" type="Control" parent="BattleUI"]
 layout_mode = 1
@@ -148,38 +89,13 @@ texture = ExtResource("5_836qq")
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" type="Control" parent="BattleUI/EnemyPokemonUI/EnemyPokemon"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -128.667
-offset_top = -172.0
-offset_right = -88.6667
-offset_bottom = -132.0
+[node name="Info" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("6_mxf8o")]
+offset_left = -125.333
+offset_top = -180.0
+offset_right = -85.3333
+offset_bottom = -140.0
 
-[node name="HealthBar" type="TextureProgressBar" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/Info"]
-layout_mode = 0
-offset_right = 48.0
-offset_bottom = 6.0
-scale = Vector2(5.128, 2)
-texture_under = ExtResource("3_7611a")
-texture_progress = ExtResource("4_836qq")
-
-[node name="Name" type="Label" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/Info"]
-layout_mode = 0
-offset_top = 10.0
-offset_right = 54.0
-offset_bottom = 33.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "Cubble"
-
-[node name="Level" type="Label" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/Info"]
-layout_mode = 0
-offset_left = 200.0
-offset_top = 10.0
-offset_right = 240.0
-offset_bottom = 33.0
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-text = "5"
+[node name="PopUpStats" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("5_p1d8k")]
 
 [node name="MessageBox" type="Panel" parent="BattleUI"]
 custom_minimum_size = Vector2(0, 300)

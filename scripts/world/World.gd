@@ -4,13 +4,15 @@ extends Node2D
 const PlayerScene = preload("res://scenes/player/player.tscn")
 var current_map: Node = null
 
-func load_map(scene: PackedScene, spawn_name: String = "") -> Node2D:
+func load_map(scene: PackedScene, player: Node2D, spawn_name: String = "") -> Node2D:
 	if current_map:
 		current_map.queue_free()
 
-	await get_tree().process_frame
+	# await get_tree().process_frame
 	current_map = scene.instantiate()
-	var player = PlayerScene.instantiate()
+	
+	if(player == null):
+		player = PlayerScene.instantiate()
 	current_map.get_node("SortY").add_child(player)
 	add_child(current_map)
 
@@ -31,7 +33,7 @@ func load_map(scene: PackedScene, spawn_name: String = "") -> Node2D:
 	return current_map
 
 func _on_button_pressed() -> void:
-	load_map(load("res://scenes/world/starting_town.tscn"), "StartingHouseSpawn")
+	load_map(load("res://scenes/world/starting_town.tscn"), null, "StartingHouseSpawn")
 
 func _on_battle_pressed() -> void:
 	var encounteredPokemon = Pokemon.new_wild(10, 1)

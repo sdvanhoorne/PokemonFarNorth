@@ -11,6 +11,6 @@ func _on_body_entered(body: Node2D) -> void:
 			if packed_scene is PackedScene:
 				var spawn_point = get_meta("spawn_point")
 				var world = get_tree().root.get_node("World")
-				world.load_map(packed_scene, spawn_point)
+				world.load_map(packed_scene, body, spawn_point)
 			else:
 				push_error("Failed to load scene at: %s" % scene_path)
