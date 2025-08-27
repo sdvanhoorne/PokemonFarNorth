@@ -51,13 +51,12 @@ scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_icgh1")
 
 [node name="Route1Warp" type="Area2D" parent="."]
-position = Vector2(-16, -232)
+position = Vector2(-16, -248)
 script = ExtResource("9_xyl7g")
 metadata/spawn_point = "StartingTownSpawn"
 metadata/target_scene = "res://scenes/world/route_1.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Route1Warp"]
-position = Vector2(0, 32)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_8dtor")
 

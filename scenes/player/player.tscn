@@ -70,7 +70,36 @@ animations = [{
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("1_8afob")
+}],
+"loop": true,
+"name": &"idle_down",
+"speed": 5.0
 }, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_kvlxm")
+}],
+"loop": true,
+"name": &"idle_left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_8ydkj")
+}],
+"loop": true,
+"name": &"idle_right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ioxgp")
+}],
+"loop": true,
+"name": &"idle_up",
+"speed": 5.0
+}, {
+"frames": [{
 "duration": 1.0,
 "texture": ExtResource("4_ugbui")
 }, {
@@ -79,15 +108,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("5_fcs02")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_8afob")
 }],
 "loop": true,
 "name": &"move_down",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("7_kvlxm")
-}, {
 "duration": 1.0,
 "texture": ExtResource("6_myrg7")
 }, {
@@ -96,15 +125,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("8_uf5tr")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_kvlxm")
 }],
 "loop": true,
 "name": &"move_left",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("10_8ydkj")
-}, {
 "duration": 1.0,
 "texture": ExtResource("11_3j4b4")
 }, {
@@ -113,15 +142,15 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("9_lgqa7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_8ydkj")
 }],
 "loop": true,
 "name": &"move_right",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
-"duration": 1.0,
-"texture": ExtResource("13_ioxgp")
-}, {
 "duration": 1.0,
 "texture": ExtResource("12_yj68g")
 }, {
@@ -130,10 +159,13 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": ExtResource("14_cnsyf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ioxgp")
 }],
 "loop": true,
 "name": &"move_up",
-"speed": 7.0
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -144,6 +176,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_kvlxm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_myrg7")
 }],
 "loop": true,
 "name": &"sprint_down",
@@ -158,6 +193,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_8ydkj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgqa7")
 }],
 "loop": true,
 "name": &"sprint_left",
@@ -172,6 +210,9 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_007i1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cnsyf")
 }],
 "loop": true,
 "name": &"sprint_right",
@@ -186,17 +227,19 @@ animations = [{
 }, {
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_ioxgp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yj68g")
 }],
 "loop": true,
 "name": &"sprint_up",
-"speed": 8.0
+"speed": 9.0
 }]
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(0, -1)
 script = ExtResource("1_dovo2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -220,5 +263,5 @@ y_sort_enabled = true
 texture_filter = 1
 position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_007i1")
-animation = &"sprint_down"
+animation = &"idle_down"
 offset = Vector2(8, 6)
