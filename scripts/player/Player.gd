@@ -2,43 +2,32 @@ extends CharacterBody2D
 @onready var _animation_player = $SpriteAnimation
 
 const TILE_SIZE = 16
-const MOVE_TIME = 0.12  # Time it takes to move one tile
+const MOVE_TIME = .17 # Time it takes to move one tile
 var facing_input = Vector2.ZERO
 var hold_timer = 0.0
 const HOLD_THRESHOLD = 0.03
 var is_moving = false
 var target_position = Vector2.ZERO
 var sprinting = false
-var sprint_multipier = 1.75
+var sprint_multipier = 2
+var facing_direction = "down"
 
 func _ready():
 	# align player to grid
 	global_position = global_position.snapped(Vector2(TILE_SIZE, TILE_SIZE)) 
 	target_position = global_position
-	
-func update_facing_direction():
-	match facing_input:
-		Vector2.ZERO:
-			return
-		Vector2(-1, 0):			
-			_animation_player.play("move_left")
-		Vector2(1, 0):			
-			_animation_player.play("move_right")
-		Vector2(0, -1):			
-			_animation_player.play("move_up")
-		Vector2(0, 1):			
-			_animation_player.play("move_down")
 
 func _physics_process(delta):
 	if is_moving:
 		# Continue moving toward target
 		var direction = (target_position - global_position).normalized()
+		velocity = Vector2.ZERO
 		velocity = direction * (TILE_SIZE / MOVE_TIME)
 		if(sprinting):
 			velocity = velocity * sprint_multipier
 		move_and_slide()
-
-		if global_position.distance_to(target_position) < 1:
+		
+		if abs(global_position.distance_to(target_position)) < (velocity.length() / (TILE_SIZE / MOVE_TIME)):
 			global_position = target_position.snapped(Vector2(TILE_SIZE, TILE_SIZE))
 			is_moving = false
 			velocity = Vector2.ZERO
@@ -47,19 +36,22 @@ func _physics_process(delta):
 
 	var input = Vector2.ZERO
 
+	var move_state = get_move_state()
 	if Input.is_action_pressed("ui_up"):
 		input.y -= 1
-		_animation_player.play("move_up")
+		facing_direction = "up"
 	elif Input.is_action_pressed("ui_down"):
 		input.y += 1
-		_animation_player.play("move_down")
+		facing_direction = "down"
 	elif Input.is_action_pressed("ui_left"):
 		input.x -= 1
-		_animation_player.play("move_left")
+		facing_direction = "left"
 	elif Input.is_action_pressed("ui_right"):
 		input.x += 1
-		_animation_player.play("move_right")
-
+		facing_direction = "right"
+	_animation_player.play(move_state + "_" + facing_direction)
+		
+	# if there is movement input
 	if input != Vector2.ZERO:
 		input = input.normalized()
 		
@@ -79,11 +71,21 @@ func _physics_process(delta):
 				if !test_move(global_transform, offset):
 					target_position = global_position + offset
 					is_moving = true
+	
+	# no movement input
 	else:
 		# Reset if no direction held
 		facing_input = Vector2.ZERO
 		hold_timer = 0.0
-		_animation_player.stop()
+		_animation_player.play("idle_" + facing_direction)
+
+func get_move_state() -> String:
+	if(facing_input == Vector2.ZERO):
+		return "idle"
+	elif(sprinting):
+		return "sprint" 
+	else:
+		return "move"
 
 func check_for_encounter():
 	var current_map = get_parent().get_parent()
