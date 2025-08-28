@@ -31,6 +31,12 @@ func load_map(map: PackedScene, player: Node2D, spawn_name := "") -> Node2D:
 			player.global_position = spawn.global_position
 			player.target_position = spawn.global_position.snapped(Vector2(16, 16))
 
+	player.is_moving = false
+	player.facing_input = Vector2.ZERO
+	player.sprinting = false
+	player.hold_timer = 0.0
+	player.velocity = Vector2.ZERO
+	
 	if old_map:
 		old_map.queue_free()
 
