@@ -17,6 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
+GlobalConstants="*res://scripts/GlobalConstants.gd"
 Pokedex="*res://scripts/pokemon/Pokedex.gd"
 EncounterManager="*res://scripts/world/EncounterManager.gd"
 BattleManager="*res://scripts/battle/BattleManager.gd"

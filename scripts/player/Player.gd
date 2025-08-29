@@ -1,7 +1,6 @@
 extends CharacterBody2D
 @onready var _animation_player = $SpriteAnimation
 
-const TILE_SIZE = 16
 const MOVE_TIME = .17 # Time it takes to move one tile
 var facing_input = Vector2.ZERO
 var hold_timer = 0.0
@@ -14,7 +13,7 @@ var facing_direction = "down"
 
 func _ready():
 	# align player to grid
-	global_position = global_position.snapped(Vector2(TILE_SIZE, TILE_SIZE)) 
+	global_position = global_position.snapped(Vector2(GlobalConstants.TileSize, GlobalConstants.TileSize)) 
 	target_position = global_position
 
 func _physics_process(delta):
@@ -22,13 +21,13 @@ func _physics_process(delta):
 		# Continue moving toward target
 		var direction = (target_position - global_position).normalized()
 		velocity = Vector2.ZERO
-		velocity = direction * (TILE_SIZE / MOVE_TIME)
+		velocity = direction * (GlobalConstants.TileSize / MOVE_TIME)
 		if(sprinting):
 			velocity = velocity * sprint_multipier
 		move_and_slide()
 		
-		if abs(global_position.distance_to(target_position)) < (velocity.length() / (TILE_SIZE / MOVE_TIME)):
-			global_position = target_position.snapped(Vector2(TILE_SIZE, TILE_SIZE))
+		if abs(global_position.distance_to(target_position)) < (velocity.length() / (GlobalConstants.TileSize / MOVE_TIME)):
+			global_position = target_position.snapped(Vector2(GlobalConstants.TileSize, GlobalConstants.TileSize))
 			is_moving = false
 			velocity = Vector2.ZERO
 			check_for_encounter()
@@ -67,7 +66,7 @@ func _physics_process(delta):
 		else:
 			hold_timer += delta
 			if hold_timer >= HOLD_THRESHOLD:
-				var offset = input * TILE_SIZE
+				var offset = input * GlobalConstants.TileSize
 				if !test_move(global_transform, offset):
 					target_position = global_position + offset
 					is_moving = true
