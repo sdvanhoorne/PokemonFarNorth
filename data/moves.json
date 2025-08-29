@@ -19,5 +19,45 @@
 		"category": "StatChange",
 		"accuracy": 100,
 		"description": "The user wags its tail cutely, making the foe lower its Defense stat."
+	},
+	"2":
+	{
+		"name": "Ember",
+		"damage": 40,
+		"type": "Fire",
+		"target": "Enemy",
+		"category": "Special",
+		"accuracy": 100,
+		"description": ""
+	},
+	"3": 
+	{
+		"name": "Fire Fang",
+		"damage": 50,
+		"type": "Fire",
+		"target": "Enemy",
+		"category": "Physical",
+		"accuracy": 95,
+		"description": ""
+	},
+	"4": 
+	{
+		"name": "Water Gun",
+		"damage": 40,
+		"type": "Water",
+		"target": "Enemy",
+		"category": "Special",
+		"accuracy": 100,
+		"description": ""
+	},
+	"5":
+	{
+		"name": "Gush",
+		"damage": 50,
+		"type": "Water",
+		"target": "Enemy",
+		"category": "Physical",
+		"accuracy": 95,
+		"description": ""
 	}
 }

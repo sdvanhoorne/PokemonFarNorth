@@ -1,0 +1,111 @@
+normal
+-------------------
+trample
+primal roar
+
+
+fire
+-------------------
+flame guard
+liquid fire
+supernova
+
+
+water
+-------------------
+torrent
+gush
+rip tide
+deluge
+
+
+grass
+-------------------
+living armor
+tree throw
+
+
+electric
+-------------------
+static storm
+static link
+plasma field
+electric vortex
+
+
+ice
+-------------------
+frostbite
+ice vortex
+arctic burn
+
+
+fighting
+-------------------
+warcry
+unleash
+
+
+poison
+-------------------
+venomous gale
+
+
+ground
+-------------------
+burrowstrike
+
+
+flying
+-------------------
+gale force
+
+
+psychic
+-------------------
+
+
+
+bug
+-------------------
+spin web
+spiked carapace
+
+
+rock
+-------------------
+avalance
+
+
+ghost
+-------------------
+spirit siphon
+haunt
+
+
+dragon
+-------------------
+breathe fire
+
+
+dark
+-------------------
+malefice
+midnight pulse
+crippling fear
+disruption
+
+
+steel
+-------------------
+hookshot
+flak cannon
+rearm
+
+
+fairy
+-------------------
+purification
+guardian angel
+enchant
+purifying flames
