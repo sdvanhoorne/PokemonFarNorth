@@ -9,10 +9,10 @@ func _ready():
 	var height = CollisionShape.shape.get_rect().size.y
 	if(width < height):
 		horizontal = false
-		length = height / GlobalConstants.TileSize
+		length = height / 20
 	else:
 		horizontal = true
-		length = width / GlobalConstants.TileSize
+		length = width / 20
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.name != "Player":
@@ -23,15 +23,16 @@ func _on_body_entered(body: Node2D) -> void:
 			var scene_path = get_meta("target_scene")
 			var packed_scene = load(scene_path)
 			if packed_scene is PackedScene:
-				var local_offset : Vector2 = (body.global_position - global_position) / GlobalConstants.TileSize
+				var body_position = body.global_position
+				var local_offset : Vector2 = (body_position - global_position) / GlobalConstants.TileSize
 				var spawn_point = get_meta("spawn_point")
 				var world = get_tree().root.get_node("World")
 				
 				var index : int
 				if(horizontal):
-					index = clamp(int(floor(local_offset.x)), 0, length - 1)
+					index = local_offset.x
 				else:
-					index = clamp(int(floor(local_offset.y)), 0, length - 1)
+					index = local_offset.y
 				world.load_map(packed_scene, body, spawn_point, horizontal, index)
 			else:
 				push_error("Failed to load scene at: %s" % scene_path)
