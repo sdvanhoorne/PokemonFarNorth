@@ -4,6 +4,7 @@
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="3_37p6g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p1t16"]
+size = Vector2(20, 10)
 
 [node name="StartingHouse" type="Node2D"]
 
@@ -16,17 +17,16 @@ tile_map_data = PackedByteArray("AAD7//j/AABJAAEAAAD7//n/AABJAAIAAAD7//r/AABJAAM
 tile_set = ExtResource("1_37p6g")
 
 [node name="WorldWarp" type="Area2D" parent="."]
+position = Vector2(-8, 8)
 script = ExtResource("3_37p6g")
 metadata/spawn_point = "StartingHouseSpawn"
 metadata/target_scene = "res://scenes/world/starting_town.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WorldWarp"]
 z_index = 1
-position = Vector2(-8, 8)
+position = Vector2(-4.76837e-07, 4)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_p1t16")
-
-[node name="Node2D" type="Node2D" parent="WorldWarp"]
 
 [node name="SortY" type="Node2D" parent="."]
 z_index = 1
