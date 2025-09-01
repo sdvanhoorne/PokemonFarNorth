@@ -77,7 +77,7 @@ func _physics_process(delta):
 		facing_input = Vector2.ZERO
 		hold_timer = 0.0
 		_animation_player.play("idle_" + facing_direction)
-
+	
 func get_move_state() -> String:
 	if(facing_input == Vector2.ZERO):
 		return "idle"
@@ -85,6 +85,16 @@ func get_move_state() -> String:
 		return "sprint" 
 	else:
 		return "move"
+		
+func update_facing_direction():
+	if(facing_input.x == 1):
+		facing_direction = "right"
+	elif(facing_input.x == -1):
+		facing_direction = "left"
+	elif(facing_input.y == -1):
+		facing_direction = "down"
+	else:
+		facing_direction = "up"
 
 func check_for_encounter():
 	var current_map = get_parent().get_parent()

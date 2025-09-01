@@ -28,6 +28,7 @@ func return_to_world():
 	
 func _load_previous_map():
 	# Remove battle scene
+	get_node("/root").print_tree_pretty()
 	var battle = get_parent().get_node("Battle")
 	if(battle == null):
 		print("Battle not found")
@@ -38,9 +39,9 @@ func _load_previous_map():
 	var world_scene = load("res://scenes/world/world.tscn").instantiate()
 	get_parent().add_child(world_scene)
 	var current_map_scene = load(current_map_path)
-	var current_map = await world_scene.load_map(current_map_scene, "") 
+	var current_map = await world_scene.load_map(current_map_scene, null, "") 
 	
-	# Position the player after world has loaded
+	# Re-position the player after world has loaded
 	var player = current_map.get_node("SortY").get_node("Player")  
 	player.global_position = player_position
 	await get_tree().process_frame

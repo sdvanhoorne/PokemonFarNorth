@@ -66,8 +66,9 @@ static func calculate_xp_to_next(_level: int) -> int:
 	return level * level * level
 	
 func recalculate_stats_on_level_up() -> void:
-	battle_stats = PokemonStats.scaled_stats(level, base_data.base_stats)
-	current_hp = battle_stats.hp	
+	stats = PokemonStats.scaled_stats(level, base_data.base_stats)
+	current_hp = battle_stats.hp
+	battle_stats = stats
 
 static func get_xp_given(level: int) -> int:
 	return level * level * level / 4
