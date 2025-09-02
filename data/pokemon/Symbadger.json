@@ -1,0 +1,18 @@
+{
+	"id": 3,
+	"name": "Symbadger",
+	"type1": "Grass",
+	"type2": "Electric",
+	"base_stats": {
+		"hp": 70,
+		"attack": 105,
+		"defense": 65,
+		"special_attack": 85,
+		"special_defense": 85,
+		"speed": 120
+	},
+	"learnable_moves": [
+		{ "level": 0, "id": 0 },
+		{ "level": 0, "id": 1 }
+  	]
+}

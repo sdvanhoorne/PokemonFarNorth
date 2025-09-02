@@ -4,6 +4,7 @@ var rng = RandomNumberGenerator.new()
 var EnemyPokemon = []
 
 func _ready():
+	PlayerInventory.get_party()
 	BattleUI.load_player_pokemon(PlayerInventory.PartyPokemon[0])
 	BattleUI.load_enemy_pokemon(EnemyPokemon[0])
 	BattleUI.hide_moves()
@@ -12,6 +13,7 @@ func _ready():
 	BattleUI.show_battle_options()
 	
 func end_battle() -> void:
+	PlayerInventory.write_party()
 	BattleManager.return_to_world()
 
 func _on_fight_pressed() -> void:	
@@ -85,15 +87,9 @@ func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 	if(pokemon.current_hp <= 0):
 		await BattleUI.print_dialogue([pokemon.base_data.name + " fainted"])
 		if(isPlayer):
-			# use next pokemon?
-			BattleUI.unload_player_pokemon()
-			PlayerInventory.PartyPokemon.pop_front()
-			if(PlayerInventory.PartyPokemon.size() > 0):
-				BattleUI.load_player_pokemon(PlayerInventory.PartyPokemon[0])
-		elif(!isPlayer):
 			BattleUI.unload_enemy_pokemon()
 			EnemyPokemon.pop_front()
-			
+			# give xp
 			PlayerInventory.PartyPokemon[0].add_xp(20)
 			if(EnemyPokemon.size() > 0):
 				# TODO enemy uses next pokemon
@@ -101,7 +97,15 @@ func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 			else:
 				# TODO enemy out of pokemon
 				end_battle()
-		end_battle()
+		elif(!isPlayer):
+			# use next pokemon?
+			BattleUI.unload_player_pokemon()
+			PlayerInventory.PartyPokemon.pop_front()
+			if(PlayerInventory.PartyPokemon.size() > 0):
+				# want to use your next pokemon?
+				BattleUI.load_player_pokemon(PlayerInventory.PartyPokemon[0])
+			else:
+				end_battle()
 		return true
 	return false
 

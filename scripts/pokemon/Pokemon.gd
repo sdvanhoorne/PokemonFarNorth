@@ -23,12 +23,12 @@ static func new_existing(data: Dictionary) -> Pokemon:
 	var pokemon = Pokemon.new(data.get("id"))
 	pokemon.level = int(data.get("level"))
 	pokemon.status = data.get("status")
-	pokemon.current_xp = data.get("current_xp")
+	pokemon.current_xp = int(data.get("current_xp"))
 	pokemon.move_ids = data["move_ids"]
 	pokemon.stats = data.get("stats")
 	# might want to set battle_stats right before battle
 	pokemon.battle_stats = pokemon.stats
-	pokemon.current_hp = data.get("current_hp")
+	pokemon.current_hp = int(data.get("current_hp"))
 	pokemon.xp_to_next_level = calculate_xp_to_next(pokemon.level)
 	return pokemon
 
