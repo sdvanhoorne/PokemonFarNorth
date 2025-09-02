@@ -2,8 +2,6 @@ extends Node
 const TypeEffectivenessChartPath = "res://data/typeEffectiveness.json"
 
 func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> int:	
-	var baseDamage = move.damage
-	
 	var has_stab = move.type == attacking_pokemon.base_data.type1 or attacking_pokemon.base_data.type2
 	var stab_multiplier = 1.5 if has_stab else 1.0
 	
@@ -26,7 +24,7 @@ func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokem
 	
 	# might need to manage int vs float here
 	# should damage round to nearest int?
-	var damage = baseDamage * (float(attacker_stat) / float(defender_stat)) 
+	var damage = move.power * (float(attacker_stat) / float(defender_stat)) 
 	damage =  damage * stab_multiplier * type_effectiveness_1 * type_effectiveness_2 / 6
 	return int(damage)
 	

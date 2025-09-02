@@ -6,7 +6,7 @@ var level = 0
 var current_hp
 var current_xp = 0
 var xp_to_next_level = 0
-var move_ids = []
+var move_names = []
 var moves = []
 var status = ""
 
@@ -24,7 +24,7 @@ static func new_existing(data: Dictionary) -> Pokemon:
 	pokemon.level = int(data.get("level"))
 	pokemon.status = data.get("status")
 	pokemon.current_xp = int(data.get("current_xp"))
-	pokemon.move_ids = data["move_ids"]
+	pokemon.move_names = data["move_names"]
 	pokemon.stats = data.get("stats")
 	# might want to set battle_stats right before battle
 	pokemon.battle_stats = pokemon.stats
@@ -36,7 +36,7 @@ static func new_wild(id: int, level: int) -> Pokemon:
 	var pokemon = Pokemon.new(id)
 	pokemon.level = level
 	pokemon.status = "None"
-	pokemon.move_ids = get_learned_moves(level, pokemon.base_data.learnable_moves)
+	pokemon.move_names = get_learned_moves(level, pokemon.base_data.learnable_moves)
 	pokemon.stats = PokemonStats.scaled_stats(level, pokemon.base_data.base_stats)
 	pokemon.battle_stats = pokemon.stats
 	pokemon.current_hp = pokemon.battle_stats.hp		
@@ -50,7 +50,7 @@ static func get_learned_moves(level: int, learnable_moves: Array) -> Array:
 			learned_moves.append(learnable_move)
 
 	learned_moves.sort_custom(func(a, b): return b["level"] - a["level"])
-	return learned_moves.slice(0, 4).map(func(move): return move["id"])
+	return learned_moves.slice(0, 4).map(func(move): return move["name"])
 
 func add_xp(amount: int) -> void:
 	current_xp += amount

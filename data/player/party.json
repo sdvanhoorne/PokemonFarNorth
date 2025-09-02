@@ -5,9 +5,9 @@
 			"current_xp": 20,
 			"id": 1,
 			"level": 5,
-			"move_ids": [
-				0.0,
-				1.0
+			"move_names": [
+				"Tackle",
+				"Tail Whip"
 			],
 			"stats": {
 				"attack": 9.0,

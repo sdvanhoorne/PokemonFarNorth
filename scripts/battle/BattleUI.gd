@@ -25,8 +25,8 @@ func load_pokemon(node: Node2D, pokemon: Pokemon):
 	healthBar.max_value = pokemon.battle_stats.hp
 	healthBar.value = pokemon.battle_stats.hp
 	
-	for move_id in pokemon.move_ids:
-		pokemon.moves.append(Move.new(move_id))
+	for move_name in pokemon.move_names:
+		pokemon.moves.append(MoveDatabase.get_move_by_name(move_name))
 		
 	node.set_meta("pokemon", pokemon)
 

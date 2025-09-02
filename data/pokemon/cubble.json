@@ -12,7 +12,8 @@
 		"speed": 55
 	},
 	"learnable_moves": [
-		{ "level": 0, "id": 1 }
+		{ "level": 0, "name": "Tackle" },
+		{ "level": 0, "name": "Tail Whip" }
 	],
 	"evolutions": [
 		{ "level": 16, "id": 11 }

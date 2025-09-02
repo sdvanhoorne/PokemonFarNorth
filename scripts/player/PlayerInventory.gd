@@ -32,7 +32,7 @@ func write_party():
 				"special_defense": pokemon.stats.special_defense,
 				"speed": pokemon.stats.speed
 			},
-			"move_ids": pokemon.move_ids
+			"move_names": pokemon.move_names
 		}
 		party_data.append(pokemon_data)
 

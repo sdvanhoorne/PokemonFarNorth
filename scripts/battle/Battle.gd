@@ -36,7 +36,7 @@ func process_turn(move_index: int):
 	var enemy_pokemon = EnemyPokemon[0]
 	BattleUI.hide_battle_options()
 	var player_move = player_pokemon.moves[move_index]
-	var enemy_move = Move.new(determine_enemy_move())
+	var enemy_move = MoveDatabase.get_move_by_name(determine_enemy_move())
 	
 	# Check speed for priority and process moves
 	if(player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed):
@@ -59,8 +59,8 @@ func process_turn(move_index: int):
 	
 	BattleUI.show_battle_options()
 	
-func determine_enemy_move() -> int:
-	var enemy_moves = EnemyPokemon[0].get("move_ids")
+func determine_enemy_move() -> String:
+	var enemy_moves = EnemyPokemon[0].get("move_names")
 	var roll = rng.randi_range(0, enemy_moves.size()-1)
 	var enemy_move = enemy_moves[roll]
 	return enemy_move
