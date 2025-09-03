@@ -3,7 +3,6 @@
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="1_8qhdc"]
 
 [node name="PopUpStats" type="PanelContainer"]
-visible = false
 z_index = 1
 offset_right = 100.0
 offset_bottom = 151.0

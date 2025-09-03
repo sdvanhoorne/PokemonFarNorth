@@ -19,16 +19,19 @@ script = SubResource("GDScript_sl2e5")
 
 [node name="Home" type="Button" parent="Control"]
 layout_mode = 0
-offset_right = 16.0
-offset_bottom = 16.0
+offset_left = 4.0
+offset_right = 287.0
+offset_bottom = 112.0
+theme_override_font_sizes/font_size = 48
 text = "Home"
 
 [node name="Battle" type="Button" parent="Control"]
 layout_mode = 0
-offset_left = 1.0
-offset_top = 38.0
-offset_right = 56.0
-offset_bottom = 69.0
+offset_left = 4.0
+offset_top = 134.0
+offset_right = 287.0
+offset_bottom = 249.0
+theme_override_font_sizes/font_size = 48
 text = "Battle"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
