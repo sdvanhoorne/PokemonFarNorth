@@ -52,12 +52,15 @@ static func get_learned_moves(level: int, learnable_moves: Array) -> Array:
 	learned_moves.sort_custom(func(a, b): return b["level"] - a["level"])
 	return learned_moves.slice(0, 4).map(func(move): return move["name"])
 
+func calculate_xp_given() -> int:
+	return 20
+
 func add_xp(amount: int) -> void:
 	current_xp += amount
 	while current_xp >= xp_to_next_level:
 		level += 1
 		xp_to_next_level = calculate_xp_to_next(level)
-		print(base_data.name + " leveled up to " + str(level))
+		DialogueManager.print_lines([base_data.name + " leveled up to " + str(level)])
 		# Apply stat increases
 		
 static func calculate_xp_to_next(_level: int) -> int:
@@ -71,4 +74,4 @@ func recalculate_stats_on_level_up() -> void:
 	battle_stats = stats
 
 static func get_xp_given(level: int) -> int:
-	return level * level * level / 4
+	return int(level * level * level / 4)

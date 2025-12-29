@@ -2,9 +2,9 @@
 	"Party": [
 		{
 			"current_hp": 14,
-			"current_xp": 40,
+			"current_xp": 120,
 			"id": 1,
-			"level": 5,
+			"level": 6,
 			"move_names": [
 				"Tackle",
 				"Tail Whip"

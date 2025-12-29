@@ -19,6 +19,9 @@ func start_battle(enemy_pokemon: Array[Pokemon], player_pos: Vector2, player_dir
 	
 	# Create battle scene
 	var battle_scene = load("res://scenes/battles/battle.tscn").instantiate()
+	battle_scene.print_tree_pretty()
+	var message_box = battle_scene.get_node_or_null("BattleUI/MessageBox")
+	DialogueManager.message_box = message_box
 	battle_scene.EnemyPokemon = enemy_pokemon
 	get_parent().add_child(battle_scene)
 
@@ -34,6 +37,9 @@ func _load_previous_map():
 		print("Battle not found")
 	battle.queue_free()
 	await get_tree().process_frame
+	
+	#i suspect we will need to store the world node somewhere
+	# between sessions and events like battles
 	
 	# Load current map scene
 	var world_scene = load("res://scenes/world/world.tscn").instantiate()

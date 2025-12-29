@@ -43,6 +43,9 @@ func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bo
 		old_map.queue_free()
 
 	is_loading_map = false
+	
+	#not sure where this should go, just set the dialogue manager box every load map
+	DialogueManager.message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
 	return current_map
 
 func _on_button_pressed() -> void:

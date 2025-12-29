@@ -88,9 +88,13 @@ func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 		await BattleUI.print_dialogue([pokemon.base_data.name + " fainted"])
 		if(isPlayer):
 			BattleUI.unload_enemy_pokemon()
-			EnemyPokemon.pop_front()
 			# give xp
-			PlayerInventory.PartyPokemon[0].add_xp(20)
+			var xp_gain = pokemon.calculate_xp_given()
+			PlayerInventory.PartyPokemon[0].add_xp(xp_gain)
+			DialogueManager.print_lines([PlayerInventory.PartyPokemon[0].base_data.name + " gained " + str(xp_gain) + " xp"])
+			# show xp bar increase, wait 2 sec for now
+			await Helpers.wait(2)
+			EnemyPokemon.pop_front()
 			if(EnemyPokemon.size() > 0):
 				# TODO enemy uses next pokemon
 				BattleUI.load_enemy_pokemon(EnemyPokemon[0])

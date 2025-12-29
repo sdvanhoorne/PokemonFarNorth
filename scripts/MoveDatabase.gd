@@ -10,8 +10,8 @@ func _ready():
 	if typeof(parsed) == TYPE_ARRAY:
 		moves = parsed
 
-func get_move_by_name(name: String) -> Move:
+func get_move_by_name(move_name: String) -> Move:
 	for move in moves:
-		if move.has("name") and move["name"] == name:
+		if move.has("name") and move["name"] == move_name:
 			return Move.new(move)
 	return Move.new({})

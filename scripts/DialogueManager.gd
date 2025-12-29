@@ -2,13 +2,10 @@ extends Node
 var message_box: Node = null
 const text_speed = 0.01
 	
-func set_message_box(box: Node):
-	message_box = box
-	
-func print_lines(messageBox: Node, lines: PackedStringArray):
-	var message = messageBox.get_node("Message")
+func print_lines(lines: PackedStringArray):
+	var message = message_box.get_node("Message")
 	message.text = ""
-	messageBox.visible = true
+	message_box.visible = true
 	for line in lines:
 		for character in line:
 			message.append_text(character)

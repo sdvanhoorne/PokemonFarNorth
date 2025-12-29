@@ -18,7 +18,6 @@ func _ready():
 	interaction_area.body_entered.connect(_on_body_entered)
 	interaction_area.body_exited.connect(_on_body_exited)
 	load_dialogue_from_file()
-	message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
 
 func _on_body_entered(body):
 	if body.name == "Player":
@@ -29,7 +28,9 @@ func _on_body_exited(body):
 	if body.name == "Player":
 		player_in_range = false
 		player_ref = null
-		#wDialogueManager.hide_dialogue_box()
+		if(showing_dialogue):
+			DialogueManager.hide_message_box()
+		showing_dialogue = false
 
 func _unhandled_input(event):
 	if event.is_action_pressed("interact") and player_in_range and player_ref:
@@ -39,7 +40,7 @@ func _unhandled_input(event):
 		else:
 			face_toward(player_ref.global_position)
 			showing_dialogue = true
-			DialogueManager.print_lines(message_box, dialogue_lines)
+			DialogueManager.print_lines(dialogue_lines)
 
 func start_dialogue():
 	for line in dialogue_lines:
