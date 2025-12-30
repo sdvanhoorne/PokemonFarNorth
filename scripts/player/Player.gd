@@ -1,5 +1,6 @@
 extends CharacterBody2D
 @onready var _animation_player = $SpriteAnimation
+@onready var interact_ray: RayCast2D = $InteractRay
 
 const MOVE_TIME = .17 # Time it takes to move one tile
 var facing_input = Vector2.ZERO
@@ -10,6 +11,7 @@ var target_position = Vector2.ZERO
 var sprinting = false
 var sprint_multipier = 2
 var facing_direction = "down"
+var facing = Vector2.ZERO
 
 func _ready():
 	# align player to grid
@@ -53,7 +55,7 @@ func _physics_process(delta):
 	# if there is movement input
 	if input != Vector2.ZERO:
 		input = input.normalized()
-		
+		facing = input
 		if(Input.is_action_pressed("sprint")):
 			sprinting = true
 		else:
@@ -77,7 +79,30 @@ func _physics_process(delta):
 		facing_input = Vector2.ZERO
 		hold_timer = 0.0
 		_animation_player.play("idle_" + facing_direction)
-	
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("interact"):
+		_try_interact()
+
+func _try_interact() -> void:
+	_update_interact_ray()
+	interact_ray.force_raycast_update()
+
+	if not interact_ray.is_colliding():
+		return
+
+	var hit := interact_ray.get_collider()
+	var node := hit as Node
+
+	while node and not node.has_method("interact"):
+		node = node.get_parent()
+
+	if node:
+		node.interact(self)
+
+func _update_interact_ray() -> void:
+	interact_ray.target_position = facing * GlobalConstants.TileSize
+
 func get_move_state() -> String:
 	if(facing_input == Vector2.ZERO):
 		return "idle"

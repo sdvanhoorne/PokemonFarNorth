@@ -91,7 +91,6 @@ func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 			# give xp
 			var xp_gain = pokemon.calculate_xp_given()
 			PlayerInventory.PartyPokemon[0].add_xp(xp_gain)
-			DialogueManager.print_lines([PlayerInventory.PartyPokemon[0].base_data.name + " gained " + str(xp_gain) + " xp"])
 			# show xp bar increase, wait 2 sec for now
 			await Helpers.wait(2)
 			EnemyPokemon.pop_front()

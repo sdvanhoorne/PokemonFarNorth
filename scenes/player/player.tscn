@@ -265,3 +265,8 @@ position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_007i1")
 animation = &"idle_down"
 offset = Vector2(8, 6)
+
+[node name="InteractRay" type="RayCast2D" parent="."]
+position = Vector2(8, 8)
+target_position = Vector2(0, 0)
+collide_with_areas = true

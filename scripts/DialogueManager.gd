@@ -11,6 +11,7 @@ func print_lines(lines: PackedStringArray):
 			message.append_text(character)
 			await get_tree().create_timer(text_speed).timeout
 		message.append_text(" ")
+	await Helpers.wait(1)
 
 func show_message_box():
 	message_box.visible = true

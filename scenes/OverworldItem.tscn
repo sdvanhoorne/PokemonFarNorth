@@ -1,0 +1,29 @@
+[gd_scene load_steps=5 format=3 uid="uid://c1deemrnljwky"]
+
+[ext_resource type="Script" uid="uid://bjrhdulmg2w5p" path="res://scripts/world/OverworldItem.gd" id="1_64835"]
+[ext_resource type="Texture2D" uid="uid://buf7hkcxuxaea" path="res://assets/items/poke-ball.png" id="2_u01qc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_64835"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u01qc"]
+
+[node name="OverworldItem" type="Node2D"]
+script = ExtResource("1_64835")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(8, 8)
+shape = SubResource("RectangleShape2D_64835")
+
+[node name="Area2D" type="Area2D" parent="."]
+z_index = 1
+position = Vector2(8, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_u01qc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_u01qc")
+offset = Vector2(8, 8)
+region_rect = Rect2(0, 0, 16, 16)
