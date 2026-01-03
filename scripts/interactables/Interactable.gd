@@ -9,7 +9,7 @@ var _busy := false
 var _cooling_down := false
 
 func can_interact(_player: Node) -> bool:
-	return enabled and (not _busy) and (not _cooling_down)
+	return enabled and (not _busy) and (not _cooling_down) and GameState.gameplay_input_enabled
 
 func interact(player: Node) -> void:
 	# Player calls this. Subclasses implement _do_interact().
@@ -26,5 +26,4 @@ func interact(player: Node) -> void:
 		_cooling_down = false
 
 func _do_interact(_player: Node) -> void:
-	# Override in subclasses.
-	pass
+	push_error("_do_interact not implemented")

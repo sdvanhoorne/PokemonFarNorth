@@ -19,6 +19,10 @@ func _ready():
 	target_position = global_position
 
 func _physics_process(delta):
+	if not GameState.gameplay_input_enabled:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
 	if is_moving:
 		# Continue moving toward target
 		var direction = (target_position - global_position).normalized()
@@ -93,6 +97,11 @@ func _try_interact() -> void:
 
 	var hit := interact_ray.get_collider()
 	var node := hit as Node
+	
+	# fix later? better interact function finding?
+	# for now just check first if the node has the interactable as a child
+	if(node.has_node("Interactable")):
+		node = node.get_node("Interactable")
 
 	while node and not node.has_method("interact"):
 		node = node.get_parent()

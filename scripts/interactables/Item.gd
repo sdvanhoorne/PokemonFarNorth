@@ -1,4 +1,4 @@
-extends Node2D
+extends Interactable
 class_name OverworldItem
 
 @export var item_id: String = "potion"
@@ -10,20 +10,11 @@ class_name OverworldItem
 
 var _picked_up := false
 
-func interact(_player: Node = null) -> void:
+func _do_interact(_player: Node) -> void:
 	if _picked_up:
 		return
 	_picked_up = true
 
-	# Show pickup message
-	await DialogueManager.print_lines([message])
-	await DialogueManager.hide_message_box()
-
-	# Add to inventory
-	# Inventory.add_item(item_id, amount)
-
-	# Persist removal
-	# if unique_id != "":
-	#	GameState.set_flag("picked_" + unique_id, true)
+	await DialogueManager.start_dialogue([message])
 
 	queue_free()

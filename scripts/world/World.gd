@@ -49,8 +49,8 @@ func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bo
 	return current_map
 
 func _on_button_pressed() -> void:
-	load_map(load("res://scenes/world/starting_town.tscn"), null, "StartingHouseSpawn")
+	load_map(load("res://scenes/world/towns/StartingTown/starting_town.tscn"), null, "StartingHouseSpawn")
 
 func _on_battle_pressed() -> void:
 	var encounteredPokemon = Pokemon.new_wild(10, 1)
-	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), "res://scenes/world/starting_town.tscn")
+	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), "res://scenes/world/towns/StartingTown/starting_town.tscn")

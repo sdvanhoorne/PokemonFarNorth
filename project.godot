@@ -17,15 +17,16 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-GlobalConstants="*res://scripts/GlobalConstants.gd"
+GameState="*res://scripts/globals/GameState.gd"
+GlobalConstants="*res://scripts/globals/GlobalConstants.gd"
 Pokedex="*res://scripts/pokemon/Pokedex.gd"
 EncounterManager="*res://scripts/world/EncounterManager.gd"
 BattleManager="*res://scripts/battle/BattleManager.gd"
 PlayerInventory="*res://scripts/player/PlayerInventory.gd"
-Helpers="*res://scripts/Helpers.gd"
+Helpers="*res://scripts/globals/Helpers.gd"
 DamageCalculation="*res://scripts/battle/DamageCalculation.gd"
-DialogueManager="*res://scripts/DialogueManager.gd"
-MoveDatabase="*res://scripts/MoveDatabase.gd"
+DialogueManager="*res://scripts/globals/DialogueManager.gd"
+MoveDatabase="*res://scripts/moves/MoveDatabase.gd"
 
 [display]
 

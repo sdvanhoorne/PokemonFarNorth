@@ -1,57 +1,27 @@
 extends CharacterBody2D
 
 @export var npc_id: String = "default_npc"
-@export var dialogue_file: String = "res://data/npcs.json"
+@export var dialogue_file: String = "res://data/npcs/npcs.json"
 
-@onready var interaction_area = $Area2D
 @onready var sprite = $AnimatedSprite2D
+@onready var interactable: Interactable = $Interactable
 
-var player_in_range = false
-var player_ref: Node2D = null
-var dialogue_lines = []
-var showing_dialogue = false
 var Movement = null
-var message_box: Node
 
 func _ready():
 	Movement = MovementController.new(self)
-	interaction_area.body_entered.connect(_on_body_entered)
-	interaction_area.body_exited.connect(_on_body_exited)
-	load_dialogue_from_file()
 
-func _on_body_entered(body):
-	if body.name == "Player":
-		player_in_range = true
-		player_ref = body
+func on_talk(player: Node) -> void:
+	face_toward(player.global_position)
+	await DialogueManager.start_dialogue(load_dialogue_from_file())
 
-func _on_body_exited(body):
-	if body.name == "Player":
-		player_in_range = false
-		player_ref = null
-		if(showing_dialogue):
-			DialogueManager.hide_message_box()
-		showing_dialogue = false
-
-func _unhandled_input(event):
-	if event.is_action_pressed("interact") and player_in_range and player_ref:
-		if showing_dialogue:
-			DialogueManager.hide_message_box()
-			showing_dialogue = false
-		else:
-			face_toward(player_ref.global_position)
-			showing_dialogue = true
-			DialogueManager.print_lines(dialogue_lines)
-
-func start_dialogue():
-	for line in dialogue_lines:
-		print(line) 
-
-func load_dialogue_from_file():
+func load_dialogue_from_file() -> PackedStringArray:
 	var file = FileAccess.open(dialogue_file, FileAccess.READ)
 	if file:
 		var data = JSON.parse_string(file.get_as_text())
 		if data and npc_id in data:
-			dialogue_lines = data[npc_id]
+			return data[npc_id]
+	return ["Couldn't find dialogue for npc"]
 			
 func face_toward(target_position: Vector2):
 	var direction = (target_position - global_position).normalized()

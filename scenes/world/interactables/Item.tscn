@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://c1deemrnljwky"]
 
-[ext_resource type="Script" uid="uid://bjrhdulmg2w5p" path="res://scripts/interactables/OverworldItem.gd" id="1_64835"]
+[ext_resource type="Script" uid="uid://bjrhdulmg2w5p" path="res://scripts/interactables/Item.gd" id="1_64835"]
 [ext_resource type="Texture2D" uid="uid://buf7hkcxuxaea" path="res://assets/items/poke-ball.png" id="2_u01qc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_64835"]
