@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scripts/battle/BattleUI.gd" id="2_p1d8k"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="5_1kxda"]
 [ext_resource type="Texture2D" uid="uid://c5jlr3wso5qo8" path="res://assets/pokemon/ai/Cubble.png" id="5_836qq"]
-[ext_resource type="PackedScene" uid="uid://tvog5b4ed61v" path="res://scenes/battles/BattleStatsPopUp.tscn" id="5_p1d8k"]
-[ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/BattleInfo.tscn" id="6_mxf8o"]
+[ext_resource type="PackedScene" uid="uid://tvog5b4ed61v" path="res://scenes/battles/battle_stats_tooltip.tscn" id="5_p1d8k"]
+[ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/battle_info.tscn" id="6_mxf8o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
 size = Vector2(49.6667, 45)

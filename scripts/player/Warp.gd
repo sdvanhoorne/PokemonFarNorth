@@ -1,5 +1,7 @@
 extends Area2D
 
+@export var target_map_id: String
+@export var spawn_point: String = ""
 @onready var CollisionShape: CollisionShape2D = $CollisionShape2D
 var horizontal: bool = true
 var length: int
@@ -17,22 +19,20 @@ func _ready():
 func _on_body_entered(body: Node2D) -> void:
 	if body.name != "Player":
 		return
-		
-	if has_meta("target_scene"):
-		if has_meta("target_scene"):
-			var scene_path = get_meta("target_scene")
-			var packed_scene = load(scene_path)
-			if packed_scene is PackedScene:
-				var body_position = body.global_position
-				var local_offset : Vector2 = (body_position - global_position) / GlobalConstants.TileSize
-				var spawn_point = get_meta("spawn_point")
-				var world = get_tree().root.get_node("World")
-				
-				var index : int
-				if(horizontal):
-					index = local_offset.x
-				else:
-					index = local_offset.y
-				world.load_map(packed_scene, body, spawn_point, horizontal, index)
-			else:
-				push_error("Failed to load scene at: %s" % scene_path)
+
+	var packed_scene := MapRegistry.get_map(target_map_id) 
+
+	if packed_scene == null:
+		return
+	
+	var body_position := body.global_position
+	var local_offset: Vector2 = (body_position - global_position) / GlobalConstants.TileSize
+
+	var index: int
+	if horizontal:
+		index = int(local_offset.x)
+	else:
+		index = int(local_offset.y)
+
+	var world := get_tree().root.get_node("World")
+	world.load_map(packed_scene, body, spawn_point, horizontal, index)

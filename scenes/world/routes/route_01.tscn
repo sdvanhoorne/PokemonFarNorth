@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://b5iug47ku2kcd"]
 
 [ext_resource type="TileSet" uid="uid://6b7jmwqt02xb" path="res://assets/tiles/routes.tres" id="1_bjxq3"]
-[ext_resource type="PackedScene" uid="uid://c1deemrnljwky" path="res://scenes/world/interactables/Item.tscn" id="2_bco67"]
+[ext_resource type="PackedScene" uid="uid://c1deemrnljwky" path="res://scenes/world/interactables/item.tscn" id="2_bco67"]
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="3_s483v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nv1ov"]
@@ -31,34 +31,38 @@ texture_filter = 1
 tile_map_data = PackedByteArray("AAAIAAwABAAHAAAAAAAIAA0ABAAHAAAAAAAHAA0ABAAHAAAAAAAHAA4ABAAHAAAAAAAHAA8ABAAHAAAAAAAIAA8ABAAHAAAAAAAIABAABAAHAAAAAAAJABAABAAHAAAAAAAKABAABAAHAAAAAAAKAA8ABAAHAAAAAAAKAA4ABAAHAAAAAAALAA4ABAAHAAAAAAALAA0ABAAHAAAAAAALAAwABAAHAAAAAAAKAAsABAAHAAAAAAAJAAsABAAHAAAAAAAJAAwABAAHAAAAAAAJAA0ABAAHAAAAAAAIAA4ABAAHAAAAAAAJAA4ABAAHAAAAAAAJAA8ABAAHAAAAAAAKAA0ABAAHAAAAAAAKAAwABAAHAAAAAAD6/wgABAAHAAAAAAD6/wkABAAHAAAAAAD6/woABAAHAAAAAAD6/wsABAAHAAAAAAD6/wwABAAHAAAAAAD5/wsABAAHAAAAAAD5/wwABAAHAAAAAAD5/w0ABAAHAAAAAAD5/w4ABAAHAAAAAAD5/w8ABAAHAAAAAAD5/xAABAAHAAAAAAD5/xEABAAHAAAAAAD6/xEABAAHAAAAAAD6/xIABAAHAAAAAAD7/xIABAAHAAAAAAD8/xIABAAHAAAAAAD8/xEABAAHAAAAAAD8/xAABAAHAAAAAAD8/woABAAHAAAAAAD8/wkABAAHAAAAAAD7/wkABAAHAAAAAAD7/woABAAHAAAAAAD7/wsABAAHAAAAAAD7/wwABAAHAAAAAAD7/w8ABAAHAAAAAAD7/xAABAAHAAAAAAD7/xEABAAHAAAAAAD6/xAABAAHAAAAAAD6/w8ABAAHAAAAAAD6/w4ABAAHAAAAAAD6/w0ABAAHAAAAAAD7/wgABAAHAAAAAAD7/wcABAAHAAAAAAAAAPr/BAAHAAAAAAABAPr/BAAHAAAAAAABAPn/BAAHAAAAAAACAPn/BAAHAAAAAAACAPr/BAAHAAAAAAADAPr/BAAHAAAAAAABAPj/BAAHAAAAAAD9/+//BAAHAAAAAAD9//D/BAAHAAAAAAD+//D/BAAHAAAAAAD+/+//BAAHAAAAAAD//+//BAAHAAAAAAD///D/BAAHAAAAAAD///H/BAAHAAAAAAAAAPH/BAAHAAAAAAAAAPD/BAAHAAAAAAAAAO//BAAHAAAAAAABAO7/BAAHAAAAAAABAO//BAAHAAAAAAAPAPf/BAAHAAAAAAAPAPb/BAAHAAAAAAAPAPX/BAAHAAAAAAAPAPT/BAAHAAAAAAAPAPP/BAAHAAAAAAAPAPL/BAAHAAAAAAAPAPH/BAAHAAAAAAAPAPD/BAAHAAAAAAAPAO//BAAHAAAAAAAOAO//BAAHAAAAAAAOAO7/BAAHAAAAAAAOAO3/BAAHAAAAAAAPAO3/BAAHAAAAAAAPAO7/BAAHAAAAAAANAO//BAAHAAAAAAAMAO//BAAHAAAAAAALAO//BAAHAAAAAAAKAO//BAAHAAAAAAAKAO7/BAAHAAAAAAAMAPD/BAAHAAAAAAAPAAAABAAHAAAAAAAPAP//BAAHAAAAAAAPAP7/BAAHAAAAAAAPAP3/BAAHAAAAAAAOAP3/BAAHAAAAAAAPAPz/BAAHAAAAAAAPAPv/BAAHAAAAAAAPAPr/BAAHAAAAAAAOAPr/BAAHAAAAAAANAP3/BAAHAAAAAAAEAO7/BAAHAAAAAAAEAO//BAAHAAAAAAAFAO//BAAHAAAAAAAFAO7/BAAHAAAAAAAGAO7/BAAHAAAAAAAHAO7/BAAHAAAAAAAGAO//BAAHAAAAAAAFAPD/BAAHAAAAAAAEAPD/BAAHAAAAAAADAO7/BAAHAAAAAAACAO7/BAAHAAAAAAACAPH/BAAHAAAAAAACAPL/BAAHAAAAAAABAPL/BAAHAAAAAAADAPH/BAAHAAAAAAD2//7/BAAHAAAAAAD2////BAAHAAAAAAD3////BAAHAAAAAAD2/wAABAAHAAAAAAD1/wAABAAHAAAAAAD0/wAABAAHAAAAAAD0/wEABAAHAAAAAAD1/wEABAAHAAAAAAD1/wIABAAHAAAAAAD0/wIABAAHAAAAAAD1/wMABAAHAAAAAAD2/wMABAAHAAAAAAD2/wQABAAHAAAAAAD1//H/BAAHAAAAAAD0//H/BAAHAAAAAAD0//D/BAAHAAAAAAD0/+//BAAHAAAAAAD0/+7/BAAHAAAAAAD0/+3/BAAHAAAAAAD0/+z/BAAHAAAAAAD1/+z/BAAHAAAAAAD2/+z/BAAHAAAAAAD2/+3/BAAHAAAAAAD1/+3/BAAHAAAAAAD2/+7/BAAHAAAAAAD3/+7/BAAHAAAAAAD1//D/BAAHAAAAAAD2//H/BAAHAAAAAAD2//L/BAAHAAAAAAD3//H/BAAHAAAAAAD3//L/BAAHAAAAAAD4/w4ABAAHAAAAAAD4/w8ABAAHAAAAAAA=")
 tile_set = ExtResource("1_bjxq3")
 
-[node name="StartingTownSpawn" type="Marker2D" parent="."]
+[node name="SortY" type="Node2D" parent="."]
+
+[node name="Spawns" type="Node2D" parent="."]
+
+[node name="Cave1Spawn" type="Marker2D" parent="Spawns"]
+position = Vector2(288, -16)
+
+[node name="StartingTownSpawn" type="Marker2D" parent="Spawns"]
 position = Vector2(0, 480)
 
-[node name="StartingTownWarp" type="Area2D" parent="."]
+[node name="Warps" type="Node2D" parent="."]
+
+[node name="StartingTownWarp" type="Area2D" parent="Warps"]
 position = Vector2(0, 504)
 script = ExtResource("3_s483v")
 metadata/target_scene = "res://scenes/world/starting_town.tscn"
 metadata/spawn_point = "Route1Spawn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StartingTownWarp"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/StartingTownWarp"]
 position = Vector2(0, 2.38419e-07)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_nv1ov")
 
-[node name="SortY" type="Node2D" parent="."]
-
-[node name="CaveOneWarp" type="Area2D" parent="."]
+[node name="CaveOneWarp" type="Area2D" parent="Warps"]
 position = Vector2(296, -16)
 script = ExtResource("3_s483v")
 metadata/target_scene = "res://scenes/world/CaveOne.tscn"
 metadata/spawn_point = "Route1Spawn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CaveOneWarp"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/CaveOneWarp"]
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_geinn")
 
-[node name="Cave1Spawn" type="Marker2D" parent="."]
-position = Vector2(288, -16)
-
-[connection signal="body_entered" from="StartingTownWarp" to="StartingTownWarp" method="_on_body_entered"]
-[connection signal="body_entered" from="CaveOneWarp" to="CaveOneWarp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/StartingTownWarp" to="Warps/StartingTownWarp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/CaveOneWarp" to="Warps/CaveOneWarp" method="_on_body_entered"]
