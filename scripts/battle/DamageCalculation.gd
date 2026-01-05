@@ -1,5 +1,5 @@
 extends Node
-const TypeEffectivenessChartPath = "res://data/typeEffectiveness.json"
+const TypeEffectivenessChartPath = "res://data/types/type_effectiveness.json"
 
 func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> int:	
 	var has_stab = move.type == attacking_pokemon.base_data.type1 or attacking_pokemon.base_data.type2

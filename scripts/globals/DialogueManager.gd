@@ -14,6 +14,8 @@ func _ready() -> void:
 
 func start_dialogue(lines: PackedStringArray) -> void:
 	# Public entrypoint (call this instead of print_lines directly)
+	# need a way to write the dialogue even if active, ex. battles don't wait 
+	# for confirmation
 	if _active:
 		return
 

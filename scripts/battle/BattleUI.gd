@@ -78,7 +78,7 @@ func show_dialogue():
 		
 func print_dialogue(message: PackedStringArray):
 	show_dialogue()
-	DialogueManager.print_lines(message)
+	DialogueManager.start_dialogue(message)
 	await get_tree().process_frame
 	await Helpers.wait(2)
 	

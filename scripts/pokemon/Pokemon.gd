@@ -57,11 +57,11 @@ func calculate_xp_given() -> int:
 
 func add_xp(amount: int) -> void:
 	current_xp += amount
-	await DialogueManager.print_lines([base_data.name + " gained " + str(amount) + " xp"])
+	await DialogueManager.start_dialogue([base_data.name + " gained " + str(amount) + " xp"])
 	while current_xp >= xp_to_next_level:
 		level += 1
 		xp_to_next_level = calculate_xp_to_next(level)
-		await DialogueManager.print_lines([base_data.name + " leveled up to " + str(level)])
+		await DialogueManager.start_dialogue([base_data.name + " leveled up to " + str(level)])
 		# Apply stat increases
 		
 static func calculate_xp_to_next(_level: int) -> int:

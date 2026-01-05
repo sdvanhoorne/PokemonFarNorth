@@ -5,7 +5,33 @@ const PlayerScene = preload("res://scenes/player/player.tscn")
 var current_map: Node = null
 var is_loading_map := false
 
-func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bool = true, index: int = 0) -> Node2D:
+@onready var menu := $Menu
+var menu_open := false
+
+func _ready() -> void:
+	menu.visible = false
+
+func _unhandled_key_input(event: InputEvent) -> void:
+	if event.is_action_pressed("menu"):
+		if not menu_open and not GameState.gameplay_input_enabled:
+			return
+
+		_toggle_menu()
+		get_viewport().set_input_as_handled()
+		
+func _toggle_menu() -> void:
+	menu_open = not menu_open
+	menu.visible = menu_open
+
+	if menu_open:
+		GameState.lock_gameplay_input()
+		menu.open()
+	else:
+		menu.close()
+		GameState.unlock_gameplay_input()
+
+func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bool = true, 
+index: int = 0) -> Node2D:
 	if is_loading_map:
 		return current_map
 	is_loading_map = true
@@ -13,7 +39,6 @@ func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bo
 	var new_map := map.instantiate()
 	var old_map := current_map
 
-	# Detach or instantiate the player
 	if player == null:
 		player = PlayerScene.instantiate()
 	else:
@@ -28,10 +53,13 @@ func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bo
 	if spawn_name != "":
 		var spawn := current_map.get_node("Spawns").get_node_or_null(spawn_name)
 		if spawn:
-			var base_pos : Vector2 = spawn.global_position.snapped(Vector2(GlobalConstants.TileSize, GlobalConstants.TileSize))
-			var offset : Vector2 = Vector2(index * GlobalConstants.TileSize, 0) if horizontal else Vector2(0, index * GlobalConstants.TileSize)
+			var base_pos : Vector2 = spawn.global_position.snapped(Vector2(GlobalConstants.TileSize, 
+			GlobalConstants.TileSize))
+			var offset : Vector2 = Vector2(index * GlobalConstants.TileSize, 
+			0) if horizontal else Vector2(0, index * GlobalConstants.TileSize)
 			player.global_position = base_pos + offset
-			player.target_position = (base_pos + offset).snapped(Vector2(GlobalConstants.TileSize, GlobalConstants.TileSize))
+			player.target_position = (base_pos + offset).snapped(Vector2(GlobalConstants.TileSize, 
+			GlobalConstants.TileSize))
 
 	player.is_moving = false
 	player.facing_input = Vector2.ZERO
@@ -49,8 +77,10 @@ func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bo
 	return current_map
 
 func _on_button_pressed() -> void:
-	load_map(load("res://scenes/world/towns/starting_town/starting_town.tscn"), null, "StartingHouseSpawn")
+	load_map(load("res://scenes/world/towns/starting_town/starting_town.tscn"), null, 
+	"StartingHouseSpawn")
 
 func _on_battle_pressed() -> void:
 	var encounteredPokemon = Pokemon.new_wild(10, 1)
-	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), "res://scenes/world/towns/starting_town/starting_town.tscn")
+	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), 
+	"res://scenes/world/towns/starting_town/starting_town.tscn")
