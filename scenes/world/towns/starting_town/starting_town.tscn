@@ -44,26 +44,68 @@ sign_texture = ExtResource("4_sh84i")
 
 [node name="Warps" type="Node2D" parent="."]
 
-[node name="HouseWarp" type="Area2D" parent="Warps"]
-position = Vector2(-128, -48)
+[node name="StartingHouseWarp" type="Area2D" parent="Warps"]
+position = Vector2(-208, -128)
 script = ExtResource("3_yrgqa")
 target_map_id = "starting_house"
 spawn_point = "StartingTownSpawn"
-metadata/spawn_point = "PlayerSpawn"
-metadata/target_scene = "res://scenes/world/starting_house.tscn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/HouseWarp"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/StartingHouseWarp"]
 position = Vector2(7.99999, 4)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_icgh1")
 
-[node name="Route1Warp" type="Area2D" parent="Warps"]
+[node name="House02Warp" type="Area2D" parent="Warps"]
+position = Vector2(240, -48)
+script = ExtResource("3_yrgqa")
+target_map_id = "starting_house_02"
+spawn_point = "StartingTownSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/House02Warp"]
+position = Vector2(8, 4)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_icgh1")
+
+[node name="House03Warp" type="Area2D" parent="Warps"]
+position = Vector2(-256, 208)
+script = ExtResource("3_yrgqa")
+target_map_id = "starting_house_03"
+spawn_point = "StartingTownSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/House03Warp"]
+position = Vector2(8, 4)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_icgh1")
+
+[node name="House04Warp" type="Area2D" parent="Warps"]
+position = Vector2(176, 224)
+script = ExtResource("3_yrgqa")
+target_map_id = "starting_house_04"
+spawn_point = "StartingTownSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/House04Warp"]
+position = Vector2(8, 4)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_icgh1")
+
+[node name="LabWarp" type="Area2D" parent="Warps"]
+position = Vector2(-32, 80)
+script = ExtResource("3_yrgqa")
+target_map_id = "starting_town_lab"
+spawn_point = "StartingTownSpawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/LabWarp"]
+position = Vector2(8, 4)
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_icgh1")
+
+[node name="Route01Warp" type="Area2D" parent="Warps"]
 position = Vector2(-16, -352)
 script = ExtResource("3_yrgqa")
 target_map_id = "route_01"
 spawn_point = "StartingTownSpawn"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/Route1Warp"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/Route01Warp"]
 position = Vector2(-8, 0)
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_8dtor")
@@ -71,7 +113,19 @@ shape = SubResource("RectangleShape2D_8dtor")
 [node name="Spawns" type="Node2D" parent="."]
 
 [node name="StartingHouseSpawn" type="Marker2D" parent="Spawns"]
-position = Vector2(-128, -32)
+position = Vector2(-208, -112)
+
+[node name="House02Spawn" type="Marker2D" parent="Spawns"]
+position = Vector2(240, -32)
+
+[node name="House03Spawn" type="Marker2D" parent="Spawns"]
+position = Vector2(-256, 224)
+
+[node name="House04Spawn" type="Marker2D" parent="Spawns"]
+position = Vector2(176, 240)
+
+[node name="LabSpawn" type="Marker2D" parent="Spawns"]
+position = Vector2(-32, 96)
 
 [node name="Route01Spawn" type="Marker2D" parent="Spawns"]
 position = Vector2(-32, -344)
@@ -81,5 +135,9 @@ z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 
-[connection signal="body_entered" from="Warps/HouseWarp" to="Warps/HouseWarp" method="_on_body_entered"]
-[connection signal="body_entered" from="Warps/Route1Warp" to="Warps/Route1Warp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/StartingHouseWarp" to="Warps/StartingHouseWarp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/House02Warp" to="Warps/House02Warp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/House03Warp" to="Warps/House03Warp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/House04Warp" to="Warps/House04Warp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/LabWarp" to="Warps/LabWarp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/Route01Warp" to="Warps/Route01Warp" method="_on_body_entered"]

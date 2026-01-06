@@ -9,7 +9,7 @@
 [node name="World" type="Node2D"]
 script = ExtResource("1_sl2e5")
 
-[node name="Control" type="Control" parent="."]
+[node name="DebugControls" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 4.0
@@ -18,7 +18,7 @@ offset_right = 196.0
 offset_bottom = 46.0
 script = SubResource("GDScript_sl2e5")
 
-[node name="Home" type="Button" parent="Control"]
+[node name="Home" type="Button" parent="DebugControls"]
 layout_mode = 0
 offset_left = 4.0
 offset_right = 287.0
@@ -26,7 +26,7 @@ offset_bottom = 112.0
 theme_override_font_sizes/font_size = 48
 text = "Home"
 
-[node name="Battle" type="Button" parent="Control"]
+[node name="Battle" type="Button" parent="DebugControls"]
 layout_mode = 0
 offset_left = 4.0
 offset_top = 134.0
@@ -56,5 +56,5 @@ text = "Sample Message"
 
 [node name="Menu" parent="." instance=ExtResource("3_1fp7r")]
 
-[connection signal="pressed" from="Control/Home" to="." method="_on_button_pressed"]
-[connection signal="pressed" from="Control/Battle" to="." method="_on_battle_pressed"]
+[connection signal="pressed" from="DebugControls/Home" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="DebugControls/Battle" to="." method="_on_battle_pressed"]

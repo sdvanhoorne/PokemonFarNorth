@@ -77,10 +77,15 @@ index: int = 0) -> Node2D:
 	return current_map
 
 func _on_button_pressed() -> void:
+	get_node_or_null("/root/World/DebugControls").visible = false
 	load_map(load("res://scenes/world/towns/starting_town/starting_town.tscn"), null, 
 	"StartingHouseSpawn")
 
 func _on_battle_pressed() -> void:
+	get_node_or_null("/root/World/DebugControls").visible = false
 	var encounteredPokemon = Pokemon.new_wild(10, 1)
 	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), 
 	"res://scenes/world/towns/starting_town/starting_town.tscn")
+	
+func disable_debug_buttons() -> void:
+	get_node_or_null("/root/World/DebugControls").visible = false

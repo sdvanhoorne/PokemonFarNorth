@@ -2664,7 +2664,6 @@ separation = Vector2i(1, 1)
 29:61/0 = 0
 29:61/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 30:61/0 = 0
-30:61/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 31:61/0 = 0
 31:61/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 35:61/0 = 0
