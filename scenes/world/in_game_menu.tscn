@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c2fp7sitha1lr"]
 
-[ext_resource type="Script" uid="uid://dacl26shhtmp1" path="res://scripts/world/Menu.gd" id="1_8eg44"]
+[ext_resource type="Script" uid="uid://dacl26shhtmp1" path="res://scripts/ui/InGameMenu.gd" id="1_8eg44"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hy7je"]
 content_margin_left = 4.0

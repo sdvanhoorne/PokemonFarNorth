@@ -252,7 +252,7 @@ zoom = Vector2(4, 4)
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(8, 8)
+position = Vector2(8, 10)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_x7p2l")
 
@@ -261,12 +261,11 @@ z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
-position = Vector2(0, -2)
 sprite_frames = SubResource("SpriteFrames_007i1")
 animation = &"idle_down"
 offset = Vector2(8, 6)
 
 [node name="InteractRay" type="RayCast2D" parent="."]
-position = Vector2(8, 8)
+position = Vector2(8, 10)
 target_position = Vector2(0, 0)
 collide_with_areas = true

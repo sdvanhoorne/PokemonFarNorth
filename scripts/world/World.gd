@@ -76,7 +76,7 @@ index: int = 0) -> Node2D:
 	DialogueManager.message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
 	return current_map
 
-func _on_button_pressed() -> void:
+func _on_home_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
 	load_map(load("res://scenes/world/towns/starting_town/starting_town.tscn"), null, 
 	"StartingHouseSpawn")
@@ -87,5 +87,13 @@ func _on_battle_pressed() -> void:
 	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), 
 	"res://scenes/world/towns/starting_town/starting_town.tscn")
 	
+func _on_load_pressed() -> void:
+	var save := SaveData.load_savedata()
+	if save == null:
+		return
+	var scene_path = MapRegistry.MAPS[save.current_map_id]
+	var scene = load(scene_path)
+	load_map(scene, null, )
+
 func disable_debug_buttons() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
