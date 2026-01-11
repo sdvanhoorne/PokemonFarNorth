@@ -1,117 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://w8it21f8eyqh"]
+[gd_scene load_steps=5 format=3 uid="uid://w8it21f8eyqh"]
 
 [ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_sspvn"]
-[ext_resource type="Texture2D" uid="uid://ckey6urbbibmu" path="res://assets/player/3698.png" id="2_pcwmf"]
+[ext_resource type="SpriteFrames" uid="uid://dwa140lp7kh5j" path="res://assets/npc/npc_animation.tres" id="2_dpyoa"]
 [ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="3_dpyoa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_r4bp4"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(26, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_dpyoa"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(9, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_woxlu"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(43, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_evswx"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(128, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_ay68w"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(111, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_p70cs"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(145, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hlwrr"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(179, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lvnn6"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(162, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cbmue"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(196, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1owdj"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(77, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_1duk3"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(60, 167, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wcgwu"]
-atlas = ExtResource("2_pcwmf")
-region = Rect2(94, 167, 16, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_atglx"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_r4bp4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_dpyoa")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_woxlu")
-}],
-"loop": true,
-"name": &"Move_Down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_evswx")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_ay68w")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_p70cs")
-}],
-"loop": true,
-"name": &"Move_Left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_hlwrr")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lvnn6")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cbmue")
-}],
-"loop": true,
-"name": &"Move_Right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1owdj")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_1duk3")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wcgwu")
-}],
-"loop": true,
-"name": &"Move_Up",
-"speed": 5.0
-}]
 
 [node name="Npc" type="CharacterBody2D"]
 z_index = 1
@@ -133,7 +26,7 @@ z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
 position = Vector2(8, 2)
-sprite_frames = SubResource("SpriteFrames_atglx")
+sprite_frames = ExtResource("2_dpyoa")
 animation = &"Move_Up"
 
 [node name="Interactable" type="Node2D" parent="."]

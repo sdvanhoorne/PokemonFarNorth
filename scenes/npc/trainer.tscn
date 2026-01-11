@@ -1,0 +1,28 @@
+[gd_scene load_steps=6 format=3 uid="uid://0g7pn53xa61b"]
+
+[ext_resource type="SpriteFrames" uid="uid://dwa140lp7kh5j" path="res://assets/npc/npc_animation.tres" id="1_6nqhs"]
+[ext_resource type="Script" uid="uid://qqp20ckah3uk" path="res://scripts/npc/Trainer.gd" id="1_wrhou"]
+[ext_resource type="Script" uid="uid://50qhr3jx21nm" path="res://scripts/npc/TrainerChallenge.gd" id="2_pfr17"]
+[ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="2_wrhou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ac6y7"]
+
+[node name="Trainer" type="CharacterBody2D"]
+script = ExtResource("1_wrhou")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ac6y7")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 64)
+script = ExtResource("2_pfr17")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(8, 2)
+sprite_frames = ExtResource("1_6nqhs")
+animation = &"Move_Down"
+
+[node name="NpcInteractable" type="Node2D" parent="."]
+script = ExtResource("2_wrhou")
+npc = NodePath("..")
+metadata/_custom_type_script = "uid://b3tbrbpkgd5nk"
