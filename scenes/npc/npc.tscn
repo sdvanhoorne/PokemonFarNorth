@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://w8it21f8eyqh"]
 
 [ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_sspvn"]
-[ext_resource type="SpriteFrames" uid="uid://dwa140lp7kh5j" path="res://assets/npc/npc_animation.tres" id="2_dpyoa"]
 [ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="3_dpyoa"]
+[ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="3_r4bp4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
 
@@ -16,19 +16,13 @@ script = ExtResource("1_sspvn")
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(8, 8)
+position = Vector2(8, 10)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_pcwmf")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-texture_filter = 1
-position = Vector2(8, 2)
-sprite_frames = ExtResource("2_dpyoa")
-animation = &"Move_Up"
 
 [node name="Interactable" type="Node2D" parent="."]
 script = ExtResource("3_dpyoa")
 npc = NodePath("..")
+
+[node name="CharacterAnimationController" parent="." instance=ExtResource("3_r4bp4")]
+position = Vector2(8, 4)

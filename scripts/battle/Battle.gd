@@ -9,7 +9,9 @@ func _ready():
 	BattleUI.load_enemy_pokemon(EnemyPokemon[0])
 	BattleUI.hide_moves()
 	BattleUI.hide_battle_options()
-	await BattleUI.print_dialogue([("A wild %s appeared!" % EnemyPokemon[0].base_data.name)])
+	DialogueManager.message_box = BattleUI.messageBox
+	await DialogueManager.start_dialogue([("A wild %s appeared!" % EnemyPokemon[0].base_data.name)])
+	await DialogueManager.start_dialogue(["What will you do?"])
 	BattleUI.show_battle_options()
 	
 func end_battle() -> void:
@@ -66,7 +68,7 @@ func determine_enemy_move() -> String:
 	return enemy_move
 	
 func process_move(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon, isPlayerAttacking: bool):	
-	await BattleUI.print_dialogue([attacking_pokemon.base_data.name + " used " + move.name])
+	await DialogueManager.start_dialogue([attacking_pokemon.base_data.name + " used " + move.name])
 	
 	# process each move type differently 
 	var moveCategory = move.category
@@ -85,7 +87,7 @@ func process_damage(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: 
 		
 func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 	if(pokemon.current_hp <= 0):
-		await BattleUI.print_dialogue([pokemon.base_data.name + " fainted"])
+		await DialogueManager.start_dialogue([pokemon.base_data.name + " fainted"])
 		if(isPlayer):
 			BattleUI.unload_enemy_pokemon()
 			# give xp

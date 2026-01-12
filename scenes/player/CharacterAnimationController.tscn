@@ -1,0 +1,61 @@
+[gd_scene load_steps=8 format=3 uid="uid://dnl817dmradhb"]
+
+[ext_resource type="Script" uid="uid://d3x4je5gg76vk" path="res://scripts/player/CharacterAnimationController.gd" id="1_58oal"]
+[ext_resource type="Texture2D" uid="uid://cv4aatad8nisl" path="res://assets/tiles/npcs and items.png" id="1_io4jj"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lgsoj"]
+atlas = ExtResource("1_io4jj")
+region = Rect2(26, 217, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6tprd"]
+atlas = ExtResource("1_io4jj")
+region = Rect2(128, 217, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cw35r"]
+atlas = ExtResource("1_io4jj")
+region = Rect2(179, 217, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jlb0"]
+atlas = ExtResource("1_io4jj")
+region = Rect2(77, 217, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_58oal"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lgsoj")
+}],
+"loop": true,
+"name": &"Idle_Down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6tprd")
+}],
+"loop": true,
+"name": &"Idle_Left",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cw35r")
+}],
+"loop": true,
+"name": &"Idle_Right",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jlb0")
+}],
+"loop": true,
+"name": &"Idle_Up",
+"speed": 5.0
+}]
+
+[node name="CharacterAnimationController" type="AnimatedSprite2D"]
+sprite_frames = SubResource("SpriteFrames_58oal")
+animation = &"Idle_Down"
+script = ExtResource("1_58oal")
+sprite_path = NodePath("")

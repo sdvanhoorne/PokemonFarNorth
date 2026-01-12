@@ -45,7 +45,7 @@ func unload_enemy_pokemon():
 	unload_pokemon(EnemyPokemonContainer)
 	
 func show_moves():
-	messageBox.get_node("Message").visible = false
+	messageBox.visible = false
 	messageBox.get_node("PokemonMoves").visible = true
 	set_move(0)
 	set_move(1)
@@ -75,12 +75,6 @@ func update_health_bar(damage: int, defending_pokemon: Pokemon, isPlayerAttackin
 func show_dialogue():
 	messageBox.get_node("PokemonMoves").visible = false
 	messageBox.get_node("Message").visible = true
-		
-func print_dialogue(message: PackedStringArray):
-	show_dialogue()
-	DialogueManager.start_dialogue(message)
-	await get_tree().process_frame
-	await Helpers.wait(2)
 	
 func show_battle_options():
 	BattleOptions.visible = true

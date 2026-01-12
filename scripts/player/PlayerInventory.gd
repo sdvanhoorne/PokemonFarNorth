@@ -1,4 +1,4 @@
-extends Resource
+extends Node
 
 const party_path = "res://data/player/party.json"
 var PartyPokemon = [] # array of pokemon

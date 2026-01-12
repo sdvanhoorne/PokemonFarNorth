@@ -1,20 +1,30 @@
-extends "res://scripts/npc/Npc.gd"
+extends CharacterBody2D
 
-@export var team = []  
-@export var battle_trigger_range = 100 
-@export var defeated = false
+class_name Trainer
 
-func _ready():
-	pass  # Maybe face player or idle until provoked
+@onready var sight_ray: SightRay = $SightRay
 
-func _process(delta):
-	if not defeated and player_in_range:
-		initiate_battle()
+var is_engaging := false
+var has_battled := false
+var player_ref: Node2D
 
-func initiate_battle():
-	# Lock the player, face the trainer toward them
-	# Call your BattleManager to start a battle
-	face_toward(player_ref.global_position)
-	var orientation = player_ref.global_position - global_position
-	BattleManager.start_battle(team, global_position, orientation,                                                                                                                                                                                                                                                                                                                   )
-	defeated = true  # Prevent rematching immediately
+func _ready() -> void:
+	sight_ray.player_spotted.connect(_on_player_spotted)
+
+func _on_player_spotted(p: Node2D) -> void:
+	if has_battled or is_engaging:
+		return
+
+	is_engaging = true
+	player_ref = p
+
+	sight_ray.disarm()
+
+	_start_trainer_engage()
+
+func _start_trainer_engage() -> void:
+	# show "!" + walk up + start battle
+	# find difference between player and trainer divided by GlobalConstants.tilesize
+	# move trainer in that direction, need animation controller 
+	
+	pass

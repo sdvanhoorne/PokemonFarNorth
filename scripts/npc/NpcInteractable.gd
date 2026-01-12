@@ -6,4 +6,6 @@ class_name NpcInteractable
 func _do_interact(player: Node) -> void:
 	var npc_node := get_node(npc)
 	if npc_node:
-		await npc_node.on_talk(player)
+		# need to get parent of player to get root Player node
+		# aka player here is the RayCast2D of Player
+		await npc_node.on_talk(player.get_parent())

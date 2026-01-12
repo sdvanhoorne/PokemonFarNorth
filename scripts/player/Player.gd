@@ -1,6 +1,9 @@
 extends CharacterBody2D
+
+class_name Player
 @onready var _animation_player = $SpriteAnimation
 @onready var interact_ray: RayCast2D = $InteractRay
+
 
 const MOVE_TIME = .17 # Time it takes to move one tile
 var facing_input = Vector2.ZERO
@@ -86,31 +89,7 @@ func _physics_process(delta):
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
-		_try_interact()
-
-func _try_interact() -> void:
-	_update_interact_ray()
-	interact_ray.force_raycast_update()
-
-	if not interact_ray.is_colliding():
-		return
-
-	var hit := interact_ray.get_collider()
-	var node := hit as Node
-	
-	# fix later? better interact function finding?
-	# for now just check first if the node has the interactable as a child
-	if(node.has_node("Interactable")):
-		node = node.get_node("Interactable")
-
-	while node and not node.has_method("interact"):
-		node = node.get_parent()
-
-	if node:
-		node.interact(self)
-
-func _update_interact_ray() -> void:
-	interact_ray.target_position = facing * GlobalConstants.TileSize
+		interact_ray._try_interact()
 
 func get_move_state() -> String:
 	if(facing_input == Vector2.ZERO):
