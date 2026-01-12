@@ -15,7 +15,10 @@ func _ready():
 func on_talk(player: Node) -> void:
 	anim.set_facing(player.global_position - global_position)
 	anim.play_idle()
-	await DialogueManager.start_dialogue(load_dialogue_from_file())
+	await DialogueManager.say(load_dialogue_from_file(),{
+		"lock_input": false,
+		"require_input": true
+	})
 
 func load_dialogue_from_file() -> PackedStringArray:
 	var file = FileAccess.open(dialogue_file, FileAccess.READ)

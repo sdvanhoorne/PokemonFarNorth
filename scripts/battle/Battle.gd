@@ -9,9 +9,22 @@ func _ready():
 	BattleUI.load_enemy_pokemon(EnemyPokemon[0])
 	BattleUI.hide_moves()
 	BattleUI.hide_battle_options()
-	DialogueManager.message_box = BattleUI.messageBox
-	await DialogueManager.start_dialogue([("A wild %s appeared!" % EnemyPokemon[0].base_data.name)])
-	await DialogueManager.start_dialogue(["What will you do?"])
+	# play pokemon slide in animation
+	await DialogueManager.say(PackedStringArray([("A wild %s appeared!" % EnemyPokemon[0].base_data.name)]),
+	{
+		"lock_input": false,
+		"box": BattleUI.get_node("BattleMessageBox"),
+		"require_input": true
+	})
+	await DialogueManager.say(
+		PackedStringArray(["What will you do?"]),
+		{
+			"lock_input": false,
+			"box": BattleUI.messageBox,
+			"require_input": false,
+			"auto_advance_time": 0.6
+		}
+	)
 	BattleUI.show_battle_options()
 	
 func end_battle() -> void:
@@ -68,7 +81,12 @@ func determine_enemy_move() -> String:
 	return enemy_move
 	
 func process_move(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon, isPlayerAttacking: bool):	
-	await DialogueManager.start_dialogue([attacking_pokemon.base_data.name + " used " + move.name])
+	await DialogueManager.say(PackedStringArray([attacking_pokemon.base_data.name + " used " + move.name]),
+	{
+		"lock_input": false,
+		"box": BattleUI.messageBox,
+		"require_input": true
+	})
 	
 	# process each move type differently 
 	var moveCategory = move.category
@@ -87,7 +105,12 @@ func process_damage(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: 
 		
 func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 	if(pokemon.current_hp <= 0):
-		await DialogueManager.start_dialogue([pokemon.base_data.name + " fainted"])
+		await DialogueManager.say(PackedStringArray([pokemon.base_data.name + " fainted"]),
+	{
+		"lock_input": false,
+		"box": BattleUI.messageBox,
+		"require_input": true
+	})
 		if(isPlayer):
 			BattleUI.unload_enemy_pokemon()
 			# give xp
