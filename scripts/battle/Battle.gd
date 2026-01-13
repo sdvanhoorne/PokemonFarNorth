@@ -54,17 +54,25 @@ func process_turn(move_index: int):
 	
 	# Check speed for priority and process moves
 	if(player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed):
+		# player moves first
 		await process_move(player_move, player_pokemon, enemy_pokemon, true)
+		# check if player fainted the enemy
 		if await check_faint(enemy_pokemon, true): 
 			return
+		# enemy moves after player
 		await process_move(enemy_move, enemy_pokemon, player_pokemon, false)
+		# check if enemy fainted the player
 		if await check_faint(player_pokemon, false):
 			return
 	else:
+		# enemy moves first
 		await process_move(enemy_move, enemy_pokemon, player_pokemon, false)
+		# check if enemy fainted the player
 		if await check_faint(player_pokemon, false):
 			return
+		# player moves after enemy
 		await process_move(player_move, player_pokemon, enemy_pokemon, true)
+		# check if player fainted the enemy
 		if await check_faint(enemy_pokemon, true):
 			return
 	
@@ -105,27 +113,31 @@ func process_damage(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: 
 func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 	if(pokemon.current_hp <= 0):
 		await DialogueManager.say(PackedStringArray([pokemon.base_data.name + " fainted"]),
-	{
-		"lock_input": false,
-		"require_input": true
-	})
+		{
+			"lock_input": false,
+			"require_input": true
+		})
+		pokemon.current_hp = 0
 		if(isPlayer):
 			BattleUI.unload_enemy_pokemon()
 			# give xp
 			var xp_gain = pokemon.calculate_xp_given()
 			PlayerInventory.PartyPokemon[0].add_xp(xp_gain)
-			# show xp bar increase, wait 2 sec for now
-			await Helpers.wait(2)
+			# show xp bar increase
 			EnemyPokemon.pop_front()
 			if(EnemyPokemon.size() > 0):
 				# TODO enemy uses next pokemon
 				BattleUI.load_enemy_pokemon(EnemyPokemon[0])
 			else:
 				# TODO enemy out of pokemon
+				# if(BattleManager.trainer_battle):
+					# trainer defeated...
+				
 				end_battle()
 		elif(!isPlayer):
 			# use next pokemon?
 			BattleUI.unload_player_pokemon()
+			
 			PlayerInventory.PartyPokemon.pop_front()
 			if(PlayerInventory.PartyPokemon.size() > 0):
 				# want to use your next pokemon?

@@ -4,9 +4,9 @@
 [ext_resource type="TileSet" uid="uid://6712cs13i3l5" path="res://assets/tiles/buildings.tres" id="2_h6u1r"]
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="3_yrgqa"]
 [ext_resource type="Texture2D" uid="uid://djhe0rpm63ikf" path="res://assets/items/sign.png" id="4_sh84i"]
-[ext_resource type="PackedScene" uid="uid://cafbopdsn5p6t" path="res://scenes/world/interactables/sign.tscn" id="6_jmt2q"]
+[ext_resource type="PackedScene" uid="uid://c1deemrnljwky" path="res://scenes/world/interactables/Item.tscn" id="5_h6u1r"]
+[ext_resource type="PackedScene" uid="uid://cafbopdsn5p6t" path="res://scenes/world/interactables/Sign.tscn" id="6_jmt2q"]
 [ext_resource type="PackedScene" uid="uid://w8it21f8eyqh" path="res://scenes/npc/npc.tscn" id="6_ke2kw"]
-[ext_resource type="PackedScene" uid="uid://0g7pn53xa61b" path="res://scenes/npc/trainer.tscn" id="7_h6u1r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icgh1"]
 size = Vector2(20, 10)
@@ -43,6 +43,11 @@ position = Vector2(-64, 112)
 text = "Welcome to Lake Ann.
 You are standing in front of the Pokemon Lab."
 sign_texture = ExtResource("4_sh84i")
+
+[node name="OverworldItem" parent="Items" instance=ExtResource("5_h6u1r")]
+position = Vector2(-208, -64)
+item_id = "poke_ball"
+message = "You found a Poke-Ball!"
 
 [node name="Warps" type="Node2D" parent="."]
 
@@ -142,9 +147,6 @@ y_sort_enabled = true
 
 [node name="Npc" parent="SortY/Npcs" instance=ExtResource("6_ke2kw")]
 position = Vector2(-160, -32)
-
-[node name="Trainer" parent="SortY/Npcs" instance=ExtResource("7_h6u1r")]
-position = Vector2(-136, -32)
 
 [connection signal="body_entered" from="Warps/StartingHouseWarp" to="Warps/StartingHouseWarp" method="_on_body_entered"]
 [connection signal="body_entered" from="Warps/House02Warp" to="Warps/House02Warp" method="_on_body_entered"]

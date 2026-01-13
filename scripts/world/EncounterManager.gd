@@ -33,4 +33,4 @@ func check_for_encounter_at_position(pos: Vector2, dir: Vector2, encounterLayer:
 			load_encounters("res://data/encounters/" + encounterLayer.get_parent().name + ".json")
 			var encountered_pokemon = EncounterManager.roll_encounter()
 			var scene_path = encounterLayer.get_parent().scene_file_path
-			BattleManager.start_battle([encountered_pokemon], pos, dir, scene_path)
+			BattleManager.start_battle([encountered_pokemon], pos, dir, scene_path, false)

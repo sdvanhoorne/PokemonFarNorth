@@ -57,20 +57,14 @@ func calculate_xp_given() -> int:
 
 func add_xp(amount: int) -> void:
 	current_xp += amount
-	await DialogueManager.say(PackedStringArray([base_data.name + " gained " + str(amount) + " xp"]),
-	{
-		"lock_input": false,
-		"require_input": true
-	})
-	while current_xp >= xp_to_next_level:
+	# Apply stat increases
+	
+func leveled_up() -> bool:
+	if current_xp >= xp_to_next_level:
 		level += 1
 		xp_to_next_level = calculate_xp_to_next(level)
-		await DialogueManager.say(PackedStringArray([base_data.name + " leveled up to " + str(level)]),
-	{
-		"lock_input": false,
-		"require_input": true
-	})
-		# Apply stat increases
+		return true
+	return false
 		
 static func calculate_xp_to_next(_level: int) -> int:
 	# cubic so that lvl 100 ^ 3 = 1,000,000 xp needed for final level

@@ -2,12 +2,17 @@ extends Node
 var player_position: Vector2
 var player_direction: Vector2
 var current_map_path: String
+var trainer_battle: bool = false
 
-func start_battle(enemy_pokemon: Array[Pokemon], player_pos: Vector2, player_dir: Vector2, map_path: String):
+func start_battle(enemy_pokemon: Array[Pokemon], player_pos: Vector2, player_dir: Vector2, 
+map_path: String, is_trainer: bool):
 	# Store map information
 	player_position = player_pos
 	player_direction = player_dir
 	current_map_path = map_path
+	
+	# is trainer or wild?
+	trainer_battle = is_trainer
 	
 	# Remove world scene
 	var world = get_parent().get_node("World")
@@ -19,10 +24,11 @@ func start_battle(enemy_pokemon: Array[Pokemon], player_pos: Vector2, player_dir
 	
 	# Create battle scene
 	var battle_scene = load("res://scenes/battles/battle.tscn").instantiate()
+	battle_scene.setup(enemy_pokemon, PlayerInventory.PartyPokemon)
 	battle_scene.print_tree_pretty()
 	var message_box = battle_scene.get_node_or_null("BattleUI/MessageBox")
 	DialogueManager.message_box = message_box
-	battle_scene.EnemyPokemon = enemy_pokemon
+	battle_scene.enemy_pokemon = enemy_pokemon
 	get_parent().add_child(battle_scene)
 
 func return_to_world():
