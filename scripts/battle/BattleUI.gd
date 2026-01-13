@@ -2,17 +2,21 @@ extends Control
 
 class_name BattleUI
  
-@onready var messageBox = $MessageBox
-@onready var PartyUI = $PartyUI/Party
-@onready var BattleOptions = $BattleOptions
-@onready var EnemyPokemonContainer = $EnemyPokemonUI/EnemyPokemon
-@onready var PlayerPokemonContainer = $PlayerPokemonUI/PlayerPokemon
+@onready var message_box = $MessageBox
+@onready var moves_box = $MovesBox
+@onready var party_ui = $PartyUI/Party
+@onready var battle_options = $BattleOptionsUI
+@onready var enemy_pokemon_ui = $EnemyPokemonUI/EnemyPokemon
+@onready var player_pokemon_ui = $PlayerPokemonUI/PlayerPokemon
+
+func _ready() -> void:
+	DialogueManager.message_box = message_box
 
 func load_player_pokemon(pokemon: Pokemon):
-	load_pokemon(PlayerPokemonContainer, pokemon)
+	load_pokemon(player_pokemon_ui, pokemon)
 	
 func load_enemy_pokemon(pokemon: Pokemon):
-	load_pokemon(EnemyPokemonContainer, pokemon)
+	load_pokemon(enemy_pokemon_ui, pokemon)
 
 func load_pokemon(node: Node2D, pokemon: Pokemon):
 	var sprite = node.get_node("SpriteArea").get_node("Sprite")
@@ -39,14 +43,14 @@ func unload_pokemon(node: Node2D):
 	info.visible = false
 	
 func unload_player_pokemon():
-	unload_pokemon(PlayerPokemonContainer)
+	unload_pokemon(player_pokemon_ui)
 
 func unload_enemy_pokemon():
-	unload_pokemon(EnemyPokemonContainer)
+	unload_pokemon(enemy_pokemon_ui)
 	
 func show_moves():
-	messageBox.visible = false
-	messageBox.get_node("PokemonMoves").visible = true
+	message_box.visible = false
+	moves_box.visible = true
 	set_move(0)
 	set_move(1)
 	set_move(2)
@@ -57,39 +61,41 @@ func set_move(i: int):
 	var moves = PlayerInventory.PartyPokemon[0].moves
 	if i >= moves.size():
 		return
-	var move_button = messageBox.get_node("PokemonMoves").get_node("Move" + str(i))	
+	var move_button = moves_box.get_node("PokemonMoves").get_node("Move" + str(i))	
 	var pokemon_move = moves[i]["name"]
 	if(pokemon_move == null):
 		move_button.text = ""
 	move_button.text = pokemon_move
 	
-func update_health_bar(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: bool):
+func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
 	var damagedPokemonContainer
 	if(isPlayerAttacking):
-		damagedPokemonContainer = EnemyPokemonContainer
+		damagedPokemonContainer = enemy_pokemon_ui
 	else:
-		damagedPokemonContainer = PlayerPokemonContainer
+		damagedPokemonContainer = player_pokemon_ui
 	var healthBar = damagedPokemonContainer.get_node("Info/HealthBar")
 	healthBar.value = defending_pokemon.current_hp
 	
 func show_dialogue():
-	messageBox.get_node("PokemonMoves").visible = false
-	messageBox.get_node("Message").visible = true
+	moves_box.visible = false
+	message_box.visible = true
 	
 func show_battle_options():
-	BattleOptions.visible = true
+	battle_options.visible = true
 	
 func hide_battle_options():
-	BattleOptions.visible = false
+	battle_options.visible = false
 	
 func hide_moves():
-	messageBox.get_node("PokemonMoves").visible = false
+	moves_box.visible = false
 
 func _on_switch_pressed() -> void:
 	show_party()
+	hide_battle_options()
+	hide_moves()
 	
 func show_party():
-	PartyUI.visible = true
+	party_ui.visible = true
 	
 func hide_party():
-	PartyUI.visible = false
+	party_ui.visible = false

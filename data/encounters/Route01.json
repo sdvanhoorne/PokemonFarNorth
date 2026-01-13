@@ -3,8 +3,8 @@
 		{
 			"id": 10,
 			"rate": 100,
-			"level_min": 2,
-			"level_max": 3
+			"level_min": 1,
+			"level_max": 2
 		}
 	]
 }

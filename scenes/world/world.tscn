@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cl1etwgpxg1gh" path="res://scripts/world/World.gd" id="1_sl2e5"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="2_sl2e5"]
-[ext_resource type="PackedScene" uid="uid://c2fp7sitha1lr" path="res://scenes/world/in_game_menu.tscn" id="3_1fp7r"]
+[ext_resource type="PackedScene" uid="uid://c2fp7sitha1lr" path="res://scenes/ui/in_game_menu.tscn" id="3_1fp7r"]
 
 [sub_resource type="GDScript" id="GDScript_sl2e5"]
 

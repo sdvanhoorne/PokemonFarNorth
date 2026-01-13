@@ -17,6 +17,7 @@ func interact(player: Node) -> void:
 		return
 
 	_busy = true
+	get_viewport().set_input_as_handled()
 	await _do_interact(player)
 	_busy = false
 

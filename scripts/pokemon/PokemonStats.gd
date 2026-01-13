@@ -18,15 +18,15 @@ func _init(data := {}):
 	special_defense = data["special_defense"]
 	speed = data["speed"]
 	
-static func scaled_stats( level: int, data = {}):
-	return {
+static func scaled_stats( level: int, data = {}) -> PokemonStats:
+	return PokemonStats.new({
 		"hp": scale_stat(data["hp"], level) + starting_hp,
 		"attack": scale_stat(data["attack"], level),
 		"defense": scale_stat(data["defense"], level),
 		"special_attack": scale_stat(data["special_attack"], level),
 		"special_defense": scale_stat(data["special_defense"], level),
 		"speed": scale_stat(data["speed"], level),
-	}
+	})
 
 static func scale_stat(stat: int, level: int) -> int:
 	var scaled_stat = stat * (level / stat_scaler)

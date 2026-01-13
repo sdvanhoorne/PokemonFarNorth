@@ -14,7 +14,13 @@ func _do_interact(_player: Node) -> void:
 	if _picked_up:
 		return
 	_picked_up = true
-
-	await DialogueManager.start_dialogue([message])
+	
+	await DialogueManager.say(
+		PackedStringArray([message]),
+		{
+			"lock_input": true,
+			"require_input": true
+		}
+	)
 
 	queue_free()

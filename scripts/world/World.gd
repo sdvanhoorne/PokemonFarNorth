@@ -10,6 +10,7 @@ var menu_open := false
 
 func _ready() -> void:
 	menu.visible = false
+	DialogueManager.message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("menu"):
@@ -73,7 +74,7 @@ index: int = 0) -> Node2D:
 	is_loading_map = false
 	
 	#not sure where this should go, just set the dialogue manager box every load map
-	DialogueManager.message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
+	
 	return current_map
 
 func _on_home_pressed() -> void:

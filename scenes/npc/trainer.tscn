@@ -11,11 +11,15 @@
 script = ExtResource("1_wrhou")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(8, 10)
+scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_ac6y7")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(8, 10)
 target_position = Vector2(0, 64)
 script = ExtResource("2_pfr17")
+distance_tiles = 5
 
 [node name="NpcInteractable" type="Node2D" parent="."]
 script = ExtResource("2_wrhou")
@@ -23,3 +27,4 @@ npc = NodePath("..")
 metadata/_custom_type_script = "uid://b3tbrbpkgd5nk"
 
 [node name="CharacterAnimationController" parent="." instance=ExtResource("4_pfr17")]
+position = Vector2(8, 4)

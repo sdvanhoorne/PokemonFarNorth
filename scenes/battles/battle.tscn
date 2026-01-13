@@ -6,8 +6,8 @@
 [ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scripts/battle/BattleUI.gd" id="2_p1d8k"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="5_1kxda"]
 [ext_resource type="Texture2D" uid="uid://c5jlr3wso5qo8" path="res://assets/pokemon/ai/Cubble.png" id="5_836qq"]
-[ext_resource type="PackedScene" uid="uid://tvog5b4ed61v" path="res://scenes/battles/battle_stats_tooltip.tscn" id="5_p1d8k"]
 [ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/battle_info.tscn" id="6_mxf8o"]
+[ext_resource type="PackedScene" uid="uid://dbxwbt4xfqvow" path="res://scenes/ui/party_ui.tscn" id="8_p1d8k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
 size = Vector2(49.6667, 45)
@@ -69,14 +69,10 @@ scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
 [node name="Info" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("6_mxf8o")]
-
-[node name="PopUpStats" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("5_p1d8k")]
-visible = false
-z_index = 2
-offset_left = 185.333
-offset_top = -24.6667
-offset_right = 285.333
-offset_bottom = 126.333
+offset_left = -194.667
+offset_top = -179.333
+offset_right = -154.667
+offset_bottom = -139.333
 
 [node name="EnemyPokemonUI" type="Control" parent="BattleUI"]
 layout_mode = 1
@@ -108,14 +104,13 @@ scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
 [node name="Info" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("6_mxf8o")]
-offset_left = -125.333
-offset_top = -180.0
-offset_right = -85.3333
-offset_bottom = -140.0
-
-[node name="PopUpStats" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("5_p1d8k")]
+offset_left = -600.667
+offset_top = -144.0
+offset_right = -560.667
+offset_bottom = -104.0
 
 [node name="MessageBox" type="Panel" parent="BattleUI"]
+visible = false
 custom_minimum_size = Vector2(0, 300)
 layout_direction = 1
 layout_mode = 1
@@ -139,8 +134,21 @@ theme = ExtResource("5_1kxda")
 theme_override_colors/table_border = Color(0, 0, 0, 1)
 text = "What would you like to do?"
 
-[node name="PokemonMoves" type="GridContainer" parent="BattleUI/MessageBox"]
+[node name="MovesBox" type="Panel" parent="BattleUI"]
 visible = false
+custom_minimum_size = Vector2(0, 300)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -301.0
+offset_right = 1418.0
+offset_bottom = -1.0
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
+
+[node name="PokemonMoves" type="GridContainer" parent="BattleUI/MovesBox"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -149,27 +157,28 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[node name="Move0" type="Button" parent="BattleUI/MessageBox/PokemonMoves"]
+[node name="Move0" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
-[node name="Move1" type="Button" parent="BattleUI/MessageBox/PokemonMoves"]
+[node name="Move1" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
-[node name="Move2" type="Button" parent="BattleUI/MessageBox/PokemonMoves"]
+[node name="Move2" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
-[node name="Move3" type="Button" parent="BattleUI/MessageBox/PokemonMoves"]
+[node name="Move3" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
 
-[node name="BattleOptions" type="GridContainer" parent="BattleUI"]
+[node name="BattleOptionsUI" type="GridContainer" parent="BattleUI"]
+visible = false
 custom_minimum_size = Vector2(500, 300)
 layout_mode = 1
 anchors_preset = 3
@@ -183,7 +192,7 @@ grow_horizontal = 0
 grow_vertical = 0
 columns = 2
 
-[node name="Fight" type="Button" parent="BattleUI/BattleOptions"]
+[node name="Fight" type="Button" parent="BattleUI/BattleOptionsUI"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -193,7 +202,7 @@ theme_override_font_sizes/font_size = 32
 text = "Fight"
 vertical_icon_alignment = 2
 
-[node name="Switch" type="Button" parent="BattleUI/BattleOptions"]
+[node name="Switch" type="Button" parent="BattleUI/BattleOptionsUI"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -202,7 +211,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Switch"
 
-[node name="Item" type="Button" parent="BattleUI/BattleOptions"]
+[node name="Item" type="Button" parent="BattleUI/BattleOptionsUI"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -211,8 +220,7 @@ theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_font_sizes/font_size = 32
 text = "Item"
 
-[node name="Run" type="Button" parent="BattleUI/BattleOptions"]
-visible = false
+[node name="Run" type="Button" parent="BattleUI/BattleOptionsUI"]
 custom_minimum_size = Vector2(150, 100)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -234,60 +242,18 @@ mouse_filter = 2
 [node name="Sprite2D" type="Sprite2D" parent="BattleUI"]
 visible = false
 
-[node name="PartyUI" type="Control" parent="."]
-visible = false
-z_index = 1
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Party" type="PanelContainer" parent="PartyUI"]
-z_index = 1
+[node name="PartyUI" parent="BattleUI" instance=ExtResource("8_p1d8k")]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = 98.0
-offset_bottom = 28.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("5_1kxda")
-
-[node name="Party1" type="Button" parent="PartyUI/Party"]
-layout_mode = 2
-
-[node name="Name" type="Label" parent="PartyUI/Party/Party1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="Level" type="Label" parent="PartyUI/Party/Party1"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-
-[node name="ProgressBar" type="ProgressBar" parent="PartyUI/Party/Party1"]
-layout_mode = 0
-offset_right = 4.0
-offset_bottom = 27.0
-
-[node name="Sprite2D" type="Sprite2D" parent="PartyUI/Party/Party1"]
-
-[node name="Popup" type="Popup" parent="PartyUI/Party/Party1"]
+offset_right = 0.0
 
 [connection signal="mouse_entered" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_entered"]
 [connection signal="mouse_exited" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_exited"]
 [connection signal="mouse_entered" from="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea" to="BattleUI/EnemyPokemonUI/EnemyPokemon" method="_on_sprite_area_mouse_entered"]
 [connection signal="mouse_exited" from="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea" to="BattleUI/EnemyPokemonUI/EnemyPokemon" method="_on_sprite_area_mouse_exited"]
-[connection signal="pressed" from="BattleUI/MessageBox/PokemonMoves/Move0" to="." method="_on_move_0_pressed"]
-[connection signal="pressed" from="BattleUI/MessageBox/PokemonMoves/Move1" to="." method="_on_move_1_pressed"]
-[connection signal="pressed" from="BattleUI/MessageBox/PokemonMoves/Move2" to="." method="_on_move_2_pressed"]
-[connection signal="pressed" from="BattleUI/MessageBox/PokemonMoves/Move3" to="." method="_on_move_3_pressed"]
-[connection signal="pressed" from="BattleUI/BattleOptions/Fight" to="." method="_on_fight_pressed"]
-[connection signal="pressed" from="BattleUI/BattleOptions/Switch" to="." method="_on_switch_pressed"]
-[connection signal="pressed" from="BattleUI/BattleOptions/Run" to="." method="_on_run_pressed"]
+[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move0" to="." method="_on_move_0_pressed"]
+[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move1" to="." method="_on_move_1_pressed"]
+[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move2" to="." method="_on_move_2_pressed"]
+[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move3" to="." method="_on_move_3_pressed"]
+[connection signal="pressed" from="BattleUI/BattleOptionsUI/Fight" to="." method="_on_fight_pressed"]
+[connection signal="pressed" from="BattleUI/BattleOptionsUI/Switch" to="." method="_on_switch_pressed"]
+[connection signal="pressed" from="BattleUI/BattleOptionsUI/Run" to="." method="_on_run_pressed"]

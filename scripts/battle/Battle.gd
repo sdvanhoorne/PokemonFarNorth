@@ -13,14 +13,12 @@ func _ready():
 	await DialogueManager.say(PackedStringArray([("A wild %s appeared!" % EnemyPokemon[0].base_data.name)]),
 	{
 		"lock_input": false,
-		"box": BattleUI.get_node("BattleMessageBox"),
 		"require_input": true
 	})
 	await DialogueManager.say(
 		PackedStringArray(["What will you do?"]),
 		{
 			"lock_input": false,
-			"box": BattleUI.messageBox,
 			"require_input": false,
 			"auto_advance_time": 0.6
 		}
@@ -49,6 +47,7 @@ func _on_move_3_pressed() -> void:
 func process_turn(move_index: int):
 	var player_pokemon = PlayerInventory.PartyPokemon[0]
 	var enemy_pokemon = EnemyPokemon[0]
+	BattleUI.show_dialogue()
 	BattleUI.hide_battle_options()
 	var player_move = player_pokemon.moves[move_index]
 	var enemy_move = MoveDatabase.get_move_by_name(determine_enemy_move())
@@ -84,8 +83,8 @@ func process_move(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pok
 	await DialogueManager.say(PackedStringArray([attacking_pokemon.base_data.name + " used " + move.name]),
 	{
 		"lock_input": false,
-		"box": BattleUI.messageBox,
-		"require_input": true
+		"require_input": false,
+		"auto_advance_time": 1
 	})
 	
 	# process each move type differently 
@@ -101,14 +100,13 @@ func process_move(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pok
 func process_damage(damage: int, defending_pokemon: Pokemon, isPlayerAttacking: bool):
 	# might be a better way than "isPlayerAttacking"
 	defending_pokemon.current_hp -= damage
-	BattleUI.update_health_bar(damage, defending_pokemon, isPlayerAttacking)
+	BattleUI.update_health_bar(defending_pokemon, isPlayerAttacking)
 		
 func check_faint(pokemon: Pokemon, isPlayer: bool) -> bool:
 	if(pokemon.current_hp <= 0):
 		await DialogueManager.say(PackedStringArray([pokemon.base_data.name + " fainted"]),
 	{
 		"lock_input": false,
-		"box": BattleUI.messageBox,
 		"require_input": true
 	})
 		if(isPlayer):
@@ -148,4 +146,9 @@ func process_status(move: Move, attacking_pokemon: Pokemon, defending_pokemon: P
 func process_stat_change(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> void:
 	var affected_pokemon = attacking_pokemon if move.target == "Self" else defending_pokemon	
 	var current_value = affected_pokemon.battle_stats.get(move.target_stat)
+	await DialogueManager.say(PackedStringArray([defending_pokemon.base_data.name + "'s " + move.target_stat + " fell"]),
+	{
+		"lock_input": true,
+		"require_input": true
+	})
 	affected_pokemon.battle_stats.set(move.target_stat, current_value * move.stat_multiplier)

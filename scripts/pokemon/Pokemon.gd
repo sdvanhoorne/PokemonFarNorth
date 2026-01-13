@@ -10,8 +10,8 @@ var move_names = []
 var moves = []
 var status = ""
 
-var stats = null
-var battle_stats = null
+var stats: PokemonStats = null
+var battle_stats: PokemonStats = null
 
 func _init(id: int):
 	var path = "res://data/pokemon/%s.json" % Pokedex.pokedex[id]
@@ -25,7 +25,7 @@ static func new_existing(data: Dictionary) -> Pokemon:
 	pokemon.status = data.get("status")
 	pokemon.current_xp = int(data.get("current_xp"))
 	pokemon.move_names = data["move_names"]
-	pokemon.stats = data.get("stats")
+	pokemon.stats = PokemonStats.new(data.get("stats"))
 	# might want to set battle_stats right before battle
 	pokemon.battle_stats = pokemon.stats
 	pokemon.current_hp = int(data.get("current_hp"))
@@ -57,11 +57,19 @@ func calculate_xp_given() -> int:
 
 func add_xp(amount: int) -> void:
 	current_xp += amount
-	await DialogueManager.start_dialogue([base_data.name + " gained " + str(amount) + " xp"])
+	await DialogueManager.say(PackedStringArray([base_data.name + " gained " + str(amount) + " xp"]),
+	{
+		"lock_input": false,
+		"require_input": true
+	})
 	while current_xp >= xp_to_next_level:
 		level += 1
 		xp_to_next_level = calculate_xp_to_next(level)
-		await DialogueManager.start_dialogue([base_data.name + " leveled up to " + str(level)])
+		await DialogueManager.say(PackedStringArray([base_data.name + " leveled up to " + str(level)]),
+	{
+		"lock_input": false,
+		"require_input": true
+	})
 		# Apply stat increases
 		
 static func calculate_xp_to_next(_level: int) -> int:
