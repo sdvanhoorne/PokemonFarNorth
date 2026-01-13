@@ -1,7 +1,7 @@
 extends PanelContainer
 class_name PartyMemberUI
 
-@onready var sprite_rect: TextureRect = %Sprite
+@onready var sprite_rect: TextureRect = %Sprite2D
 @onready var name_label: Label = %Name
 @onready var level_label: Label = %Level
 @onready var hp_label: Label = %Health
@@ -9,11 +9,11 @@ class_name PartyMemberUI
 
 func set_pokemon(pokemon: Pokemon) -> void:
 	# You can adjust these field names to match your data model
-	name_label.text = str(pokemon.name)
+	name_label.text = str(pokemon.base_data.name)
 	level_label.text = "Lv. %d" % int(pokemon.level)
 
 	var hp := int(pokemon.current_hp)
-	var max_hp := max(1, int(pokemon.stats.hp))
+	var max_hp = int(pokemon.stats.hp)
 
 	hp_label.text = "%d/%d" % [hp, max_hp]
 

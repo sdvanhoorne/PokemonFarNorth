@@ -4,7 +4,7 @@ class_name BattleUI
  
 @onready var message_box = $MessageBox
 @onready var moves_box = $MovesBox
-@onready var party_ui = $PartyUI/Party
+@onready var party_ui = $PartyUI
 @onready var battle_options = $BattleOptionsUI
 @onready var enemy_pokemon_ui = $EnemyPokemonUI/EnemyPokemon
 @onready var player_pokemon_ui = $PlayerPokemonUI/PlayerPokemon
@@ -90,12 +90,13 @@ func hide_moves():
 	moves_box.visible = false
 
 func _on_switch_pressed() -> void:
-	show_party()
 	hide_battle_options()
 	hide_moves()
+	show_party()
 	
 func show_party():
 	party_ui.visible = true
+	party_ui.load_party(PlayerInventory.PartyPokemon)
 	
 func hide_party():
 	party_ui.visible = false
