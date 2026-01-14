@@ -68,8 +68,8 @@ func leveled_up() -> bool:
 		
 static func calculate_xp_to_next(_level: int) -> int:
 	# cubic so that lvl 100 ^ 3 = 1,000,000 xp needed for final level
-	var level = _level - 1
-	return level * level * level
+	var xp_to_next = _level * _level * _level
+	return xp_to_next
 	
 func recalculate_stats_on_level_up() -> void:
 	stats = PokemonStats.scaled_stats(level, base_data.base_stats)

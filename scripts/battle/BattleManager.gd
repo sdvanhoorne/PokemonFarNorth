@@ -1,3 +1,6 @@
+# BattleManager is a singleton 
+# that handles transition from world to battle scene
+
 extends Node
 var player_position: Vector2
 var player_direction: Vector2

@@ -9,11 +9,16 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HealthBar" type="TextureProgressBar" parent="."]
+[node name="Control" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HealthBar" type="TextureProgressBar" parent="Control"]
 layout_mode = 0
-offset_right = 48.0
-offset_bottom = 6.0
-scale = Vector2(5.128, 2)
+offset_right = 250.0
+offset_bottom = 25.0
+scale = Vector2(1.282, 0.5)
 texture_under = ExtResource("1_mi2n6")
 texture_progress = ExtResource("2_ph01r")
 

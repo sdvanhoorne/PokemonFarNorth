@@ -1,9 +1,13 @@
+# BattleEngine handles battle logic
+# updates Pokemon objects
+# and queues events for the BattleController
+
 class_name BattleEngine
 extends RefCounted
 
 enum Side { PLAYER, ENEMY }
 
-# --- Event helpers -----------------------------------------------------------
+# Event objects 
 
 static func msg(text: String) -> Dictionary:
 	return {"type": "message", "text": text}
@@ -24,23 +28,12 @@ static func battle_end(result: String) -> Dictionary:
 	# result: "player_win" / "player_lose" / "fled" etc
 	return {"type": "battle_end", "result": result}
 
-# --- Public API --------------------------------------------------------------
-
-# state is a Dictionary
-# {
-#   "player_party": Array[Pokemon],
-#   "enemy_party": Array[Pokemon],
-#   "player_active": int,
-#   "enemy_active": int,
-#   "rng": RandomNumberGenerator (optional)
-# }
 func resolve_turn(state: Dictionary, player_move_index: int, enemy_move_name: String) -> Dictionary:
 	var events: Array = []
 
 	var player_pokemon: Pokemon = _player_active(state)
 	var enemy_pokemon: Pokemon = _enemy_active(state)
 
-	# Validate move index
 	if player_move_index < 0 or player_move_index >= player_pokemon.moves.size():
 		events.append(msg("Invalid move."))
 		return {"state": state, "events": events}
@@ -48,22 +41,20 @@ func resolve_turn(state: Dictionary, player_move_index: int, enemy_move_name: St
 	var player_move: Move = player_pokemon.moves[player_move_index]
 	var enemy_move: Move = MoveDatabase.get_move_by_name(enemy_move_name)
 
-	# Decide order (priority not implemented here; add later)
+	# Decide turn order via speed, handle priority later
 	var first_side: int = Side.PLAYER if player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed else Side.ENEMY
 	var second_side: int = Side.ENEMY if first_side == Side.PLAYER else Side.PLAYER
 
-	# Execute first action
+	# first move
 	_execute_move(state, first_side, player_move, enemy_move, events)
 	if _is_battle_over_or_faint_handled(state, events):
 		return {"state": state, "events": events}
 
-	# Execute second action (re-pull active Pokémon in case something fainted/swapped)
+	# second move
 	_execute_move(state, second_side, player_move, enemy_move, events)
 	_is_battle_over_or_faint_handled(state, events)
 
 	return {"state": state, "events": events}
-
-# --- Core resolution ---------------------------------------------------------
 
 func _execute_move(state: Dictionary, side: int, player_move: Move, enemy_move: Move, events: Array) -> void:
 	var attacker: Pokemon
@@ -132,8 +123,6 @@ func _apply_stat_change(move: Move, attacker: Pokemon, defender: Pokemon, events
 	else:
 		events.append(msg("Nothing happened."))
 
-# --- Faint handling / battle end --------------------------------------------
-
 func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 	var player_pokemon: Pokemon = _player_active(state)
 	var enemy_pokemon: Pokemon = _enemy_active(state)
@@ -147,17 +136,16 @@ func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 		_player_active(state).add_xp(xp_gain_amount)
 		events.append(xp_gain(xp_gain_amount, player_pokemon.base_data.name))
 		
-		# check for level ups
+		# check for level ups - maybe pull this out into another function
 		while player_pokemon.leveled_up():
-			events.append(level_up(player_pokemon.base_data.name, player_pokemon.level))
+			events.append(level_up(player_pokemon.base_data.name, str(player_pokemon.level)))
 
 		# Remove enemy active from party, advance if possible
-		state.enemy_party.pop_at(state.enemy_active)
-		if state.enemy_party.size() == 0:
+		if _all_fainted(state.enemy_party):
 			events.append(battle_end("player_win"))
 			return true
 
-		# Clamp active index
+		# TODO Clamp active index / determine next enemy pokemon
 		state.enemy_active = clamp(state.enemy_active, 0, state.enemy_party.size() - 1)
 		events.append(msg("Enemy sent out %s!" % _enemy_active(state).base_data.name))
 		return true 
@@ -166,11 +154,11 @@ func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 	if player_pokemon.current_hp <= 0:
 		events.append(faint(Side.PLAYER, player_pokemon.base_data.name))
 
-		state.player_party.pop_at(state.player_active)
-		if state.player_party.size() == 0:
+		if _all_fainted(state.player_party):
 			events.append(battle_end("player_lose"))
 			return true
-
+	
+		# TODO show player party UI and get new active pokemon 
 		state.player_active = clamp(state.player_active, 0, state.player_party.size() - 1)
 		events.append(msg("Go %s!" % _player_active(state).base_data.name))
 		return true
@@ -178,6 +166,12 @@ func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 	return false
 
 # --- Helpers ----------------------------------------------------------------
+
+func _all_fainted(pokemons: Array) -> bool:
+	for pokemon in pokemons:
+		if(pokemon.current_hp > 0):
+			return false
+	return true
 
 func _player_active(state: Dictionary) -> Pokemon:
 	return state.player_party[state.player_active]
