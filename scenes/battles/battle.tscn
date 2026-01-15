@@ -137,12 +137,11 @@ visible = false
 custom_minimum_size = Vector2(0, 300)
 layout_direction = 1
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 12
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -301.0
-offset_right = 1418.0
-offset_bottom = -1.0
+grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
 
@@ -176,17 +175,14 @@ size_flags_horizontal = 7
 size_flags_vertical = 7
 
 [node name="BattleOptionsUI" type="GridContainer" parent="BattleUI"]
-visible = false
 custom_minimum_size = Vector2(500, 300)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -204.0
 offset_top = -204.0
-grow_horizontal = 0
+grow_horizontal = 2
 grow_vertical = 0
 columns = 2
 

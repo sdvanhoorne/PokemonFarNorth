@@ -40,19 +40,13 @@ func _wire_signals() -> void:
 func _start_battle_intro() -> void:
 	battle_ui.load_player_pokemon(_player_active())
 	battle_ui.load_enemy_pokemon(_enemy_active())
-	battle_ui.hide_moves()
-	battle_ui.hide_battle_options()
 
 	await DialogueManager.say(
 		PackedStringArray(["A wild %s appeared!" % _enemy_active().base_data.name]),
 		{"lock_input": false, "require_input": true}
 	)
-	#await DialogueManager.say(
-		#PackedStringArray(["What will you do?"]),
-		#{"lock_input": false, "require_input": false, "auto_advance_time": 0.6}
-	#)
-
-	battle_ui.show_battle_options()
+	
+	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
 func _on_fight_pressed() -> void:
 	if input_locked: return
@@ -79,8 +73,7 @@ func _on_move_pressed(move_index: int) -> void:
 	input_locked = false
 
 func _process_turn(player_move_index: int) -> void:
-	battle_ui.show_dialogue()
-	battle_ui.hide_battle_options()
+	battle_ui.set_state(battle_ui.UIState.MESSAGE)
 
 	var enemy_move_name := _determine_enemy_move_name()
 

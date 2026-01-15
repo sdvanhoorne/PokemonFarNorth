@@ -33,7 +33,6 @@ func set_state(new_state: UIState) -> void:
 			# message_box.grab_focus()
 
 		UIState.OPTIONS:
-			message_box.visible = true # often you keep narration box visible
 			battle_options.visible = true
 			# battle_options.grab_default_focus()
 
@@ -58,14 +57,14 @@ func _hide_all() -> void:
 	battle_options.visible = false
 
 func load_player_pokemon(pokemon: Pokemon):
-	load_pokemon(player_pokemon_ui, pokemon)
+	_load_pokemon(player_pokemon_ui, pokemon)
 	
 func load_enemy_pokemon(pokemon: Pokemon):
-	load_pokemon(enemy_pokemon_ui, pokemon)
+	_load_pokemon(enemy_pokemon_ui, pokemon)
 
-func load_pokemon(node: Node2D, pokemon: Pokemon):
+func _load_pokemon(node: Node2D, pokemon: Pokemon):
 	var sprite = node.get_node("SpriteArea").get_node("Sprite")
-	sprite.texture = load("res://assets/pokemon/ai/" + pokemon.base_data.name + ".png")	
+	sprite.texture = load("res://assets/pokemon/" + pokemon.base_data.name + ".png")	
 	var nameLabel = node.get_node("Info/Name")
 	nameLabel.text = pokemon.base_data.name
 	var levelLabel = node.get_node("Info/Level")
@@ -81,7 +80,7 @@ func load_pokemon(node: Node2D, pokemon: Pokemon):
 	# might not need to do this
 	node.set_meta("pokemon", pokemon)
 
-func unload_pokemon(node: Node2D):
+func _unload_pokemon(node: Node2D):
 	var sprite_area = node.get_node("SpriteArea")
 	sprite_area.visible = false
 	# show fainting animation?
@@ -89,29 +88,28 @@ func unload_pokemon(node: Node2D):
 	info.visible = false
 	
 func unload_player_pokemon():
-	unload_pokemon(player_pokemon_ui)
+	_unload_pokemon(player_pokemon_ui)
 
 func unload_enemy_pokemon():
-	unload_pokemon(enemy_pokemon_ui)
+	_unload_pokemon(enemy_pokemon_ui)
 	
 func show_moves():
 	message_box.visible = false
 	moves_box.visible = true
-	set_move(0)
-	set_move(1)
-	set_move(2)
-	set_move(3)
+	battle_options.visible = false
+	_set_move(0)
+	_set_move(1)
+	_set_move(2)
+	_set_move(3)
 	
-func set_move(i: int):
+func _set_move(i: int):
 	# might want to set an active pokemon 
-	var moves = PlayerInventory.PartyPokemon[0].moves
-	if i >= moves.size():
+	var moves_names = PlayerInventory.PartyPokemon[0].move_names
+	if i >= moves_names.size():
 		return
 	var move_button = moves_box.get_node("PokemonMoves").get_node("Move" + str(i))	
-	var pokemon_move = moves[i]["name"]
-	if(pokemon_move == null):
-		move_button.text = ""
-	move_button.text = pokemon_move
+	var move_name = moves_names[i]
+	move_button.text = move_name
 	
 func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
 	var damagedPokemonContainer
@@ -121,16 +119,6 @@ func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
 		damagedPokemonContainer = player_pokemon_ui
 	var healthBar = damagedPokemonContainer.get_node("Info/Control/HealthBar")
 	healthBar.value = defending_pokemon.current_hp
-	
-func show_dialogue():
-	moves_box.visible = false
-	message_box.visible = true
-	
-func show_battle_options():
-	battle_options.visible = true
-	
-func hide_battle_options():
-	battle_options.visible = false
 	
 func hide_moves():
 	moves_box.visible = false

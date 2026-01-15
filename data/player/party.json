@@ -1,17 +1,17 @@
 {
 	"Party": [
 		{
-			"current_hp": 18.0,
-			"current_xp": 285.0,
-			"id": 1.0,
-			"level": 7.0,
+			"current_hp": 18,
+			"current_xp": 345,
+			"id": 1,
+			"level": 8,
 			"move_names": [
 				"Tackle",
 				"Tail Whip"
 			],
 			"stats": {
 				"attack": 9.0,
-				"defense": 5.527125,
+				"defense": 4.69805625,
 				"hp": 18.0,
 				"special_attack": 13.0,
 				"special_defense": 9.0,
