@@ -41,19 +41,24 @@ func _start_battle_intro() -> void:
 	battle_ui.load_player_pokemon(_player_active())
 	battle_ui.load_enemy_pokemon(_enemy_active())
 
+	battle_ui.set_state(BattleUI.UIState.MESSAGE)
+	# just say wild pokemon for now, add trainer dialogue later
 	await DialogueManager.say(
 		PackedStringArray(["A wild %s appeared!" % _enemy_active().base_data.name]),
 		{"lock_input": false, "require_input": true}
 	)
 	
+	battle_ui.set_moves(_player_active().move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
 func _on_fight_pressed() -> void:
 	if input_locked: return
-	battle_ui.show_moves()
+	battle_ui.set_state(BattleUI.UIState.MOVES)
 
 func _on_run_pressed() -> void:
 	if input_locked: return
+	
+	battle_ui.set_state(BattleUI.UIState.MESSAGE)
 	await DialogueManager.say(
 		PackedStringArray(["You ran away..."]),
 		{"lock_input": false, "require_input": true}
@@ -61,10 +66,8 @@ func _on_run_pressed() -> void:
 	_end_battle_commit_and_return()
 	
 func _on_switch_pressed() -> void:
-	if input_locked: return
-	# battle_ui.hide_battle_options()
-	# battle_ui.hide_moves()
-	battle_ui.show_party()
+	if input_locked: return	
+	battle_ui.set_state(BattleUI.UIState.PARTY)
 
 func _on_move_pressed(move_index: int) -> void:
 	if input_locked: return
@@ -85,8 +88,7 @@ func _process_turn(player_move_index: int) -> void:
 	if _events_contain_battle_end(result.events):
 		return
 
-	battle_ui.hide_moves()
-	battle_ui.show_battle_options()
+	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
 func _determine_enemy_move_name() -> String:
 	var enemy: Pokemon = _enemy_active()
@@ -140,6 +142,7 @@ func _play_events(events: Array) -> void:
 			"level_up":
 				# refresh pokemon level in UI
 				# show stat gains?
+				# refresh active pokemon moves in case they learned a new one
 				await DialogueManager.say(
 					PackedStringArray(["%s leveled up to level %s" % [e.name, e.level]]),
 					{"lock_input": false, "require_input": true}

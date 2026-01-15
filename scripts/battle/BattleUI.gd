@@ -15,6 +15,32 @@ var prev_state: UIState = UIState.LOCKED
 
 func _ready() -> void:
 	DialogueManager.message_box = message_box
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("ui_cancel"):
+		_handle_cancel()
+		get_viewport().set_input_as_handled()
+		return
+	
+func _handle_cancel() -> void:
+	match state:
+		UIState.MOVES:
+			set_state(UIState.OPTIONS)
+		UIState.PARTY:
+			set_state(UIState.OPTIONS)
+		UIState.OPTIONS:
+			pass
+		_:
+			pass
+
+#func _handle_accept() -> void:
+#	match state:
+#		UIState.MESSAGE:
+#			emit_signal("advance_message")
+#		_:
+#			# In OPTIONS/MOVES/PARTY, accept is usually handled by focused buttons
+#			pass
+
 
 func set_state(new_state: UIState) -> void:
 	if state == new_state:
@@ -93,22 +119,15 @@ func unload_player_pokemon():
 func unload_enemy_pokemon():
 	_unload_pokemon(enemy_pokemon_ui)
 	
-func show_moves():
-	message_box.visible = false
-	moves_box.visible = true
-	battle_options.visible = false
-	_set_move(0)
-	_set_move(1)
-	_set_move(2)
-	_set_move(3)
+# sets button text for active pokemon moves
+func set_moves(move_names: Array) -> void:
+	var button_index = 0
+	for move_name in move_names:
+		_set_move(button_index, move_name)
+		++button_index
 	
-func _set_move(i: int):
-	# might want to set an active pokemon 
-	var moves_names = PlayerInventory.PartyPokemon[0].move_names
-	if i >= moves_names.size():
-		return
+func _set_move(i: int, move_name: String):
 	var move_button = moves_box.get_node("PokemonMoves").get_node("Move" + str(i))	
-	var move_name = moves_names[i]
 	move_button.text = move_name
 	
 func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
@@ -119,13 +138,3 @@ func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
 		damagedPokemonContainer = player_pokemon_ui
 	var healthBar = damagedPokemonContainer.get_node("Info/Control/HealthBar")
 	healthBar.value = defending_pokemon.current_hp
-	
-func hide_moves():
-	moves_box.visible = false
-	
-func show_party():
-	party_ui.visible = true
-	party_ui.load_party(PlayerInventory.PartyPokemon)
-	
-func hide_party():
-	party_ui.visible = false
