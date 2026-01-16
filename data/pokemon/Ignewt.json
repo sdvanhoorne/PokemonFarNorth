@@ -1,0 +1,21 @@
+{
+	"id": 7,
+	"name": "Ignewt",
+	"type1": "Fire",
+	"type2": "",
+	"base_stats": {
+		"hp": 50,
+		"attack": 30,
+		"special_attack": 70,
+		"defense": 35,
+		"special_defense": 65,
+		"speed": 60
+	},
+	"learnable_moves": [
+		{ "level": 0, "name": "Tackle" },
+		{ "level": 0, "name": "Tail Whip" }
+	],
+	"evolutions": [
+		{ "level": 16, "id": 8 }
+	]
+}

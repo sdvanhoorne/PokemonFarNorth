@@ -1,10 +1,10 @@
 3 stage
-1st stage: 32x32 px
+1st stage: 40x40 px
 2nd stage: 48x48 px
-3rd stage: 64x64 px
+3rd stage: 56x56 px
 
 2 stage
-1st stage: 32x32 - 48x48 px
-2nd stage: 48x48 - 64x64 px
+1st stage: 40x40 - 48x48 px
+2nd stage: 56x56 px
 
-1 stage: 32x32 - 64x64 px
+1 stage: 48x48 - 56x56 px

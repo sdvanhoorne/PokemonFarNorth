@@ -21,7 +21,7 @@ func write_party():
 		var pokemon_data := {
 			"id": int(pokemon.base_data.id),
 			"level": int(pokemon.level),
-			"status": pokemon.status,
+			"status": str(pokemon.status),
 			"current_hp": pokemon.current_hp,
 			"current_xp": pokemon.current_xp,
 			"stats": {

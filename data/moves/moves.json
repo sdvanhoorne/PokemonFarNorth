@@ -19,5 +19,15 @@
 		"category": "StatChange",
 		"accuracy": 100,
 		"description": "The user wags its tail cutely, making the foe lower its Defense stat."
+	}, 
+	{
+		"id": 2,
+		"name": "Scratch",
+ 		"type": "Normal",
+ 		"target": "Enemy",
+		"power": 40,
+		"category": "Physical",
+		"accuracy": 100,
+		"description": "The user attacks with its claw."
 	}
 ]

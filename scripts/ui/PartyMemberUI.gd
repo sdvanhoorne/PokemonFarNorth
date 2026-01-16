@@ -8,7 +8,6 @@ class_name PartyMemberUI
 @onready var hp_bar: TextureProgressBar = %HealthBar
 
 func set_pokemon(pokemon: Pokemon) -> void:
-	# You can adjust these field names to match your data model
 	name_label.text = str(pokemon.base_data.name)
 	level_label.text = "Lv. %d" % int(pokemon.level)
 
@@ -22,13 +21,11 @@ func set_pokemon(pokemon: Pokemon) -> void:
 	hp_bar.max_value = max_hp
 	hp_bar.value = clamp(hp, 0, max_hp)
 
-	# Sprite
-	# If you store a Texture2D directly:
-	# sprite_rect.texture = pokemon.icon_texture
-	# If you store a path:
-	# sprite_rect.texture = load(pokemon.icon_path)
+	# we need to keep a global references file to maintain paths
+	var sprite_path = Paths.join(Paths.POKEMON_FRONT_SPRITES, pokemon.base_data.name)
+	var sprite = Paths.load_sprite(sprite_path)
+	sprite_rect.texture = sprite
 
-	# Optional: tint bar by %
 	var pct := float(hp) / float(max_hp)
 	if pct <= 0.2:
 		hp_bar.tint_progress = Color(1.0, 0.2, 0.2) # red

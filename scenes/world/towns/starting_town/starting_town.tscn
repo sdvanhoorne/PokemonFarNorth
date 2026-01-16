@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://18fqavfy4vve"]
+[gd_scene load_steps=11 format=4 uid="uid://18fqavfy4vve"]
 
 [ext_resource type="TileSet" uid="uid://6b7jmwqt02xb" path="res://assets/tiles/routes.tres" id="1_ke2kw"]
 [ext_resource type="TileSet" uid="uid://6712cs13i3l5" path="res://assets/tiles/buildings.tres" id="2_h6u1r"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://c1deemrnljwky" path="res://scenes/world/interactables/item.tscn" id="5_h6u1r"]
 [ext_resource type="PackedScene" uid="uid://cafbopdsn5p6t" path="res://scenes/world/interactables/sign.tscn" id="6_jmt2q"]
 [ext_resource type="PackedScene" uid="uid://w8it21f8eyqh" path="res://scenes/npc/npc.tscn" id="6_ke2kw"]
+[ext_resource type="PackedScene" uid="uid://0g7pn53xa61b" path="res://scenes/npc/trainer.tscn" id="8_yrgqa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icgh1"]
 size = Vector2(20, 10)
@@ -146,7 +147,11 @@ y_sort_enabled = true
 y_sort_enabled = true
 
 [node name="Npc" parent="SortY/Npcs" instance=ExtResource("6_ke2kw")]
+visible = false
 position = Vector2(-160, -32)
+
+[node name="Trainer" parent="SortY/Npcs" instance=ExtResource("8_yrgqa")]
+position = Vector2(-144, -32)
 
 [connection signal="body_entered" from="Warps/StartingHouseWarp" to="Warps/StartingHouseWarp" method="_on_body_entered"]
 [connection signal="body_entered" from="Warps/House02Warp" to="Warps/House02Warp" method="_on_body_entered"]

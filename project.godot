@@ -27,6 +27,7 @@ BattleManager="*res://scripts/battle/BattleManager.gd"
 Helpers="*res://scripts/globals/Helpers.gd"
 DamageCalculation="*res://scripts/battle/DamageCalculation.gd"
 DialogueManager="*res://scripts/globals/DialogueManager.gd"
+Paths="*res://scripts/globals/Paths.gd"
 MoveDatabase="*res://scripts/moves/MoveDatabase.gd"
 
 [display]

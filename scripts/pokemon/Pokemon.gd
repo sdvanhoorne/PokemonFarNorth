@@ -2,16 +2,17 @@ class_name Pokemon
 
 var base_data: PokemonBase
 
+enum status_types { NONE, POISONED, ASLEEP, PARALYZED, BURNED, LOCKED }
+
 var level = 0
-var current_hp
+var current_hp = 0
 var current_xp = 0
 var xp_to_next_level = 0
 var move_names = []
 var moves = []
-var status = ""
-
 var stats: PokemonStats = null
 var battle_stats: PokemonStats = null
+var status: status_types
 
 func _init(id: int):
 	var path = "res://data/pokemon/%s.json" % Pokedex.pokedex[id]
@@ -35,7 +36,7 @@ static func new_existing(data: Dictionary) -> Pokemon:
 static func new_wild(id: int, level: int) -> Pokemon:		
 	var pokemon = Pokemon.new(id)
 	pokemon.level = level
-	pokemon.status = "None"
+	pokemon.status = status_types.NONE
 	pokemon.move_names = get_learned_moves(level, pokemon.base_data.learnable_moves)
 	pokemon.stats = PokemonStats.scaled_stats(level, pokemon.base_data.base_stats)
 	pokemon.battle_stats = pokemon.stats
@@ -53,21 +54,25 @@ static func get_learned_moves(level: int, learnable_moves: Array) -> Array:
 	return learned_moves.slice(0, 4).map(func(move): return move["name"])
 
 func calculate_xp_given() -> int:
+	# need function for amount of xp to give
 	return 20
 
 func add_xp(amount: int) -> void:
 	current_xp += amount
-	# Apply stat increases
 	
 func leveled_up() -> bool:
 	if current_xp >= xp_to_next_level:
-		level += 1
-		xp_to_next_level = calculate_xp_to_next(level)
+		_level_up()
 		return true
 	return false
+
+func _level_up() -> void:
+		level += 1
+		xp_to_next_level = calculate_xp_to_next(level)
+		recalculate_stats_on_level_up()
 		
 static func calculate_xp_to_next(_level: int) -> int:
-	# cubic so that lvl 100 ^ 3 = 1,000,000 xp needed for final level
+	# cubic so that lvl 99 -> 100 = 1,000,000 xp
 	var xp_to_next = _level * _level * _level
 	return xp_to_next
 	

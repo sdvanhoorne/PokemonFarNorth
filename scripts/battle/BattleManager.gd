@@ -59,6 +59,6 @@ func _load_previous_map():
 	# Re-position the player after world has loaded
 	var player = current_map.get_node("SortY").get_node("Player")  
 	player.global_position = player_position
-	await get_tree().process_frame
 	player.facing_input = player_direction
 	player.update_facing_direction()
+	await get_tree().process_frame

@@ -104,7 +104,7 @@ func update_facing_direction():
 		facing_direction = "right"
 	elif(facing_input.x == -1):
 		facing_direction = "left"
-	elif(facing_input.y == -1):
+	elif(facing_input.y == 1):
 		facing_direction = "down"
 	else:
 		facing_direction = "up"

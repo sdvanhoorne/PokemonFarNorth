@@ -99,6 +99,7 @@ func _load_pokemon(node: Node2D, pokemon: Pokemon):
 	healthBar.max_value = pokemon.battle_stats.hp
 	healthBar.value = pokemon.battle_stats.hp
 	
+	# load moves just for battle, maybe change later
 	pokemon.moves.clear()
 	for move_name in pokemon.move_names:
 		pokemon.moves.append(MoveDatabase.get_move_by_name(move_name))
@@ -124,7 +125,7 @@ func set_moves(move_names: Array) -> void:
 	var button_index = 0
 	for move_name in move_names:
 		_set_move(button_index, move_name)
-		++button_index
+		button_index += 1
 	
 func _set_move(i: int, move_name: String):
 	var move_button = moves_box.get_node("PokemonMoves").get_node("Move" + str(i))	
