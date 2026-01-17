@@ -1,0 +1,18 @@
+{
+	"id": 24,
+	"name": "Snagatorn",
+	"type1": "Water",
+	"type2": "Dark",
+	"base_stats": {
+		"hp": 100,
+		"attack": 110,
+		"defense": 120,
+		"special_attack": 70,
+		"special_defense": 75,
+		"speed": 60
+	},
+	"learnable_moves": [
+		{ "level": 0, "name": "Tackle" },
+		{ "level": 0, "name": "Tail Whip" }
+  	]
+}

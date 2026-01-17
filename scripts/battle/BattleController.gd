@@ -11,6 +11,8 @@ var engine: BattleEngine
 var state: Dictionary
 var input_locked := false
 var enemy_pokemon: Array[Pokemon]
+var pending_player_action: BattleAction = null
+var pending_enemy_action: BattleAction = null
 
 func _ready() -> void:
 	engine = BattleEngine.new()
@@ -36,6 +38,7 @@ func _wire_signals() -> void:
 	$BattleUI/MovesBox/PokemonMoves/Move1.pressed.connect(Callable(self, "_on_move_pressed").bind(1))
 	$BattleUI/MovesBox/PokemonMoves/Move2.pressed.connect(Callable(self, "_on_move_pressed").bind(2))
 	$BattleUI/MovesBox/PokemonMoves/Move3.pressed.connect(Callable(self, "_on_move_pressed").bind(3))
+	battle_ui.party_ui.switch_requested.connect(_on_party_pokemon_chosen)
 
 func _start_battle_intro() -> void:
 	battle_ui.load_player_pokemon(_player_active())
@@ -56,6 +59,9 @@ func _on_fight_pressed() -> void:
 	battle_ui.set_state(BattleUI.UIState.MOVES)
 
 func _on_run_pressed() -> void:
+	pending_player_action = BattleAction.make_run("player")
+
+func _run() -> void:
 	if input_locked: return
 	
 	battle_ui.set_state(BattleUI.UIState.MESSAGE)
@@ -64,16 +70,29 @@ func _on_run_pressed() -> void:
 		{"lock_input": false, "require_input": true}
 	)
 	_end_battle_commit_and_return()
-	
+
 func _on_switch_pressed() -> void:
 	if input_locked: return	
 	battle_ui.set_state(BattleUI.UIState.PARTY)
+	
+func _on_party_pokemon_chosen(party_index: int) -> void:
+	if(PlayerInventory.PartyPokemon[party_index].current_hp > 0):
+		pending_player_action = BattleAction.make_switch("player", party_index)
 
 func _on_move_pressed(move_index: int) -> void:
 	if input_locked: return
 	input_locked = true
-	await _process_turn(move_index)
+	pending_player_action = BattleAction.make_move("player", move_index)
+	await new_process_turn()
 	input_locked = false
+
+func new_process_turn():
+	battle_ui.set_state(battle_ui.UIState.MESSAGE)
+	
+	if(pending_player_action.action_type == BattleAction.battle_action_type.RUN):
+		_run()
+	
+	
 
 func _process_turn(player_move_index: int) -> void:
 	battle_ui.set_state(battle_ui.UIState.MESSAGE)

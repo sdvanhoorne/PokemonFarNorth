@@ -1,7 +1,7 @@
 extends Node
 
 const party_path = "res://data/player/party.json"
-var PartyPokemon = [] # array of pokemon
+var PartyPokemon = [] 
 
 func _ready():
 	get_party()
@@ -22,15 +22,15 @@ func write_party():
 			"id": int(pokemon.base_data.id),
 			"level": int(pokemon.level),
 			"status": str(pokemon.status),
-			"current_hp": pokemon.current_hp,
-			"current_xp": pokemon.current_xp,
+			"current_hp": int(pokemon.current_hp),
+			"current_xp": int(pokemon.current_xp),
 			"stats": {
-				"hp": pokemon.stats.hp,
-				"attack": pokemon.stats.attack,
-				"defense": pokemon.stats.defense,
-				"special_attack": pokemon.stats.special_attack,
-				"special_defense": pokemon.stats.special_defense,
-				"speed": pokemon.stats.speed
+				"hp": int(pokemon.stats.hp),
+				"attack": int(pokemon.stats.attack),
+				"defense": int(pokemon.stats.defense),
+				"special_attack": int(pokemon.stats.special_attack),
+				"special_defense": int(pokemon.stats.special_defense),
+				"speed": int(pokemon.stats.speed)
 			},
 			"move_names": pokemon.move_names
 		}
@@ -38,5 +38,5 @@ func write_party():
 
 	var save_dict := { "Party": party_data }
 	var file := FileAccess.open(party_path, FileAccess.WRITE)
-	file.store_string(JSON.stringify(save_dict, "\t"))  # Pretty-print with tab spacing
+	file.store_string(JSON.stringify(save_dict, "\t")) 
 	file.close()

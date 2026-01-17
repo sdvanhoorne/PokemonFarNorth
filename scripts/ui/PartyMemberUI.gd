@@ -1,11 +1,19 @@
 extends PanelContainer
 class_name PartyMemberUI
 
+var party_index: int = 0
+signal chosen(party_index: int)
+
 @onready var sprite_rect: TextureRect = %Sprite2D
 @onready var name_label: Label = %Name
 @onready var level_label: Label = %Level
 @onready var hp_label: Label = %Health
 @onready var hp_bar: TextureProgressBar = %HealthBar
+@onready var switch_button = $Button
+
+func _ready() -> void:
+	switch_button.pressed.connect(func(): emit_signal("chosen", party_index))
+	return
 
 func set_pokemon(pokemon: Pokemon) -> void:
 	name_label.text = str(pokemon.base_data.name)

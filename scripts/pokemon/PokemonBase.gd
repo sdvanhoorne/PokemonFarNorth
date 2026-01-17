@@ -8,7 +8,7 @@ var type1: String
 var type2: String
 var base_stats = null
 var learnable_moves = []
-var evolutions = []
+var evolutions = null
 
 func _init(_id: int):
 	id = _id
@@ -25,4 +25,4 @@ func _init(_id: int):
 	type2 = data["type2"]
 	base_stats = PokemonStats.new(data["base_stats"])
 	learnable_moves = data["learnable_moves"] as Array[Dictionary]
-	evolutions = data["evolutions"] as Array[Dictionary]
+	evolutions = data.get("evolutions", [])

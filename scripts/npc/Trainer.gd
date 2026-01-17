@@ -10,6 +10,9 @@ var player_ref: Node2D
 
 func _ready() -> void:
 	sight_ray.player_spotted.connect(_on_player_spotted)
+	
+func facing() -> Vector2:
+	return get_node_or_null("CharacterAnimationController").facing
 
 func _on_player_spotted(p: Node2D) -> void:
 	if has_battled or is_engaging:

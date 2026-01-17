@@ -65,7 +65,7 @@ func _update_sight_ray() -> void:
 	if not owner.has_method("get") and not ("facing" in owner):
 		return
 
-	var facing: Vector2 = owner.get("facing")
+	var facing: Vector2 = owner.facing()
 	if facing == Vector2.ZERO:
 		return
 

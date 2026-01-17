@@ -1,6 +1,25 @@
 {
 	"Party": [
 		{
+			"current_hp": 26.0,
+			"current_xp": 532.0,
+			"id": 7.0,
+			"level": 9.0,
+			"move_names": [
+				"Tackle",
+				"Tail Whip"
+			],
+			"stats": {
+				"attack": 10.0,
+				"defense": 12.0,
+				"hp": 33.0,
+				"special_attack": 25.0,
+				"special_defense": 23.0,
+				"speed": 21.0
+			},
+			"status": "0"
+		},
+		{
 			"current_hp": 23.0,
 			"current_xp": 512.0,
 			"id": 1.0,
@@ -16,25 +35,6 @@
 				"special_attack": 14.0,
 				"special_defense": 14.0,
 				"speed": 22.0
-			},
-			"status": "0"
-		},
-		{
-			"current_hp": 26.0,
-			"current_xp": 512.0,
-			"id": 7.0,
-			"level": 8.0,
-			"move_names": [
-				"Tackle",
-				"Tail Whip"
-			],
-			"stats": {
-				"attack": 10.0,
-				"defense": 11.0,
-				"hp": 26.0,
-				"special_attack": 22.0,
-				"special_defense": 21.0,
-				"speed": 19.0
 			},
 			"status": "0"
 		}
