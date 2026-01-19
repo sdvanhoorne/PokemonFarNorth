@@ -28,6 +28,27 @@ static func battle_end(result: String) -> Dictionary:
 	# result: "player_win" / "player_lose" / "fled" etc
 	return {"type": "battle_end", "result": result}
 
+func new_resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state: Dictionary):
+	var events: Array = []
+	
+	var player_pokemon: Pokemon = _player_active(state)
+	var enemy_pokemon: Pokemon = _enemy_active(state)
+	
+	var player_speed = player_pokemon.battle_stats.speed
+	var enemy_speed = enemy_pokemon.battle_stats.speed
+	# TODO TODO TODO
+	if(player_speed > enemy_speed):
+		if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
+			
+	
+	if()
+	resolve_turn(state, )
+
+	# faster switch
+	# then slower switch
+	# then fastest mvoes
+	# then slower moves
+
 func resolve_turn(state: Dictionary, player_move_index: int, enemy_move_name: String) -> Dictionary:
 	var events: Array = []
 

@@ -20,7 +20,7 @@ func _ready() -> void:
 	_wire_signals()
 	await _start_battle_intro()
 
-func setup(enemy_party: Array, player_party: Array = []) -> void:
+func _setup(enemy_party: Array, player_party: Array = []) -> void:
 	if player_party.is_empty():
 		player_party = PlayerInventory.PartyPokemon
 	state = {
@@ -39,6 +39,12 @@ func _wire_signals() -> void:
 	$BattleUI/MovesBox/PokemonMoves/Move2.pressed.connect(Callable(self, "_on_move_pressed").bind(2))
 	$BattleUI/MovesBox/PokemonMoves/Move3.pressed.connect(Callable(self, "_on_move_pressed").bind(3))
 	battle_ui.party_ui.switch_requested.connect(_on_party_pokemon_chosen)
+	
+func _player_active() -> Pokemon:
+	return state.player_party[state.player_active]
+
+func _enemy_active() -> Pokemon:
+	return state.enemy_party[state.enemy_active]
 
 func _start_battle_intro() -> void:
 	battle_ui.load_player_pokemon(_player_active())
@@ -86,35 +92,39 @@ func _on_move_pressed(move_index: int) -> void:
 	await new_process_turn()
 	input_locked = false
 
+
+
+
+
+
 func new_process_turn():
 	battle_ui.set_state(battle_ui.UIState.MESSAGE)
 	
 	if(pending_player_action.action_type == BattleAction.battle_action_type.RUN):
 		_run()
 	
+	# no enemy switches yet, just moves
+	pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
 	
+	engine.new_resolve_turn(pending_player_action, pending_enemy_action, state)
 
 func _process_turn(player_move_index: int) -> void:
 	battle_ui.set_state(battle_ui.UIState.MESSAGE)
 
-	var enemy_move_name := _determine_enemy_move_name()
+	# var enemy_move_name := _determine_enemy_move_name()
 
-	var result: Dictionary = engine.resolve_turn(state, player_move_index, enemy_move_name)
-	state = result.state
+	# var result: Dictionary = engine.resolve_turn(state, player_move_index, enemy_move_name)
+	# state = result.state
 
-	await _play_events(result.events)
+	# await _play_events(result.events)
 
-	if _events_contain_battle_end(result.events):
-		return
+	# if _events_contain_battle_end(result.events):
+	# 	return
 
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
-func _determine_enemy_move_name() -> String:
-	var enemy: Pokemon = _enemy_active()
-	var enemy_moves: Array = enemy.get("move_names")
-	if enemy_moves.is_empty():
-		return enemy.moves[0].name
-	return enemy_moves[rng.randi_range(0, enemy_moves.size() - 1)]
+func _determine_enemy_move_index() -> int:
+	return rng.randi_range(0, _enemy_active().moves.size() - 1)
 
 func _play_events(events: Array) -> void:
 	for e in events:
@@ -180,12 +190,6 @@ func _events_contain_battle_end(events: Array) -> bool:
 		if e.type == "battle_end":
 			return true
 	return false
-
-func _player_active() -> Pokemon:
-	return state.player_party[state.player_active]
-
-func _enemy_active() -> Pokemon:
-	return state.enemy_party[state.enemy_active]
 
 func _end_battle_commit_and_return() -> void:
 	PlayerInventory.PartyPokemon = state.player_party
