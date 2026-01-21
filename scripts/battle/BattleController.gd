@@ -102,9 +102,24 @@ func new_process_turn():
 	
 	if(pending_player_action.action_type == BattleAction.battle_action_type.RUN):
 		_run()
-	
+		
 	# no enemy switches yet, just moves
 	pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
+	
+	var player_pokemon: Pokemon = _player_active()
+	var enemy_pokemon: Pokemon = _enemy_active()
+	
+	var player_speed = player_pokemon.battle_stats.speed
+	var enemy_speed = enemy_pokemon.battle_stats.speed
+	# TODO TODO TODO
+	if(player_speed > enemy_speed):
+		if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
+			events.
+
+	# faster switch
+	# then slower switch
+	# then fastest mvoes
+	# then slower moves
 	
 	engine.new_resolve_turn(pending_player_action, pending_enemy_action, state)
 
@@ -134,6 +149,9 @@ func _play_events(events: Array) -> void:
 					PackedStringArray([e.text]),
 					{"lock_input": false, "require_input": false, "auto_advance_time": 1}
 				)
+			
+			"switch":
+				
 
 			"hp_change":
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
