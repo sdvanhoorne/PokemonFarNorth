@@ -2,10 +2,10 @@ extends Control
 
 class_name BattleUI
  
-@onready var message_box = $MessageBox
-@onready var moves_box = $MovesBox
+@onready var message_box = $BottomUI/MessageContainer
+@onready var moves_box = $BottomUI/MovesContainer
 @onready var party_ui = $PartyUI
-@onready var battle_options = $BattleOptionsUI
+@onready var battle_options = $BottomUI/BattleOptionsUI
 @onready var enemy_pokemon_ui = $EnemyPokemonUI/EnemyPokemon
 @onready var player_pokemon_ui = $PlayerPokemonUI/PlayerPokemon
 
@@ -128,8 +128,16 @@ func set_moves(move_names: Array) -> void:
 		button_index += 1
 	
 func _set_move(i: int, move_name: String):
-	var move_button = moves_box.get_node("PokemonMoves").get_node("Move" + str(i))	
+	var row := $BottomUI/MovesContainer/Moves/MovesFirstRow if i < 2 else $BottomUI/MovesContainer/Moves/MovesSecondRow
+	var move_container := row.get_node("MoveContainer%d" % i) as PanelContainer
+	var move_button := move_container.get_node("MoveButton%d" % i) as Button
 	move_button.text = move_name
+	var move_type = MoveDatabase.get_move_by_name(move_name).type
+	var type_color = TypeColors.color_for(move_type)
+	
+	var sb := move_container.get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat
+	sb.bg_color = type_color
+	move_container.add_theme_stylebox_override("panel", sb)
 	
 func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
 	var damagedPokemonContainer

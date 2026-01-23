@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bihya4k8vuet"]
+[gd_scene load_steps=16 format=3 uid="uid://bihya4k8vuet"]
 
 [ext_resource type="Script" uid="uid://dsb5p8di0tfn1" path="res://scripts/battle/BattleController.gd" id="1_mxf8o"]
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scripts/battle/PokemonTooltip.gd" id="2_1kxda"]
@@ -12,6 +12,14 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
 size = Vector2(49.6667, 45)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mxf8o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngw5r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fe3c8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0meg"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7hvh"]
 content_margin_left = 64.0
@@ -107,122 +115,6 @@ offset_top = -152.667
 offset_right = -84.0
 offset_bottom = -112.667
 
-[node name="MessageBox" type="Panel" parent="BattleUI"]
-visible = false
-custom_minimum_size = Vector2(0, 300)
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
-
-[node name="Message" type="RichTextLabel" parent="BattleUI/MessageBox"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("5_1kxda")
-theme_override_colors/table_border = Color(0, 0, 0, 1)
-text = "What would you like to do?"
-
-[node name="MovesBox" type="Panel" parent="BattleUI"]
-visible = false
-custom_minimum_size = Vector2(0, 300)
-layout_direction = 1
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
-
-[node name="PokemonMoves" type="GridContainer" parent="BattleUI/MovesBox"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-columns = 2
-
-[node name="Move0" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-
-[node name="Move1" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-
-[node name="Move2" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-
-[node name="Move3" type="Button" parent="BattleUI/MovesBox/PokemonMoves"]
-layout_mode = 2
-size_flags_horizontal = 7
-size_flags_vertical = 7
-
-[node name="BattleOptionsUI" type="GridContainer" parent="BattleUI"]
-visible = false
-custom_minimum_size = Vector2(500, 300)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -204.0
-grow_horizontal = 2
-grow_vertical = 0
-columns = 2
-
-[node name="Fight" type="Button" parent="BattleUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Fight"
-vertical_icon_alignment = 2
-
-[node name="Switch" type="Button" parent="BattleUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Switch"
-
-[node name="Item" type="Button" parent="BattleUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Item"
-
-[node name="Run" type="Button" parent="BattleUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
-text = "Run"
-
 [node name="ColorRect" type="ColorRect" parent="BattleUI"]
 z_index = -1
 layout_mode = 1
@@ -233,7 +125,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="BattleUI"]
+[node name="Background" type="Sprite2D" parent="BattleUI"]
 visible = false
 
 [node name="PartyUI" parent="BattleUI" instance=ExtResource("8_p1d8k")]
@@ -242,11 +134,163 @@ custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
 party_member_scene = ExtResource("9_mxf8o")
 
+[node name="BottomUI" type="Control" parent="BattleUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -303.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MovesContainer" type="PanelContainer" parent="BattleUI/BottomUI"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Moves" type="VBoxContainer" parent="BattleUI/BottomUI/MovesContainer"]
+layout_mode = 2
+
+[node name="MovesFirstRow" type="HBoxContainer" parent="BattleUI/BottomUI/MovesContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoveContainer0" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton0" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer0" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mxf8o")
+
+[node name="MoveContainer1" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton1" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer1" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ngw5r")
+
+[node name="MovesSecondRow" type="HBoxContainer" parent="BattleUI/BottomUI/MovesContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoveContainer2" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton2" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer2" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fe3c8")
+
+[node name="MoveContainer3" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton3" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer3" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 64
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s0meg")
+
+[node name="MessageContainer" type="Panel" parent="BattleUI/BottomUI"]
+visible = false
+custom_minimum_size = Vector2(0, 300)
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
+
+[node name="Message" type="RichTextLabel" parent="BattleUI/BottomUI/MessageContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("5_1kxda")
+theme_override_colors/table_border = Color(0, 0, 0, 1)
+text = "What would you like to do?"
+
+[node name="BattleOptionsUI" type="GridContainer" parent="BattleUI/BottomUI"]
+visible = false
+custom_minimum_size = Vector2(500, 300)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -300.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 2
+
+[node name="Fight" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Fight"
+vertical_icon_alignment = 2
+
+[node name="Switch" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Switch"
+
+[node name="Item" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Item"
+
+[node name="Run" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(150, 100)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 32
+text = "Run"
+
 [connection signal="mouse_entered" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_entered"]
 [connection signal="mouse_exited" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_exited"]
 [connection signal="mouse_entered" from="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea" to="BattleUI/EnemyPokemonUI/EnemyPokemon" method="_on_sprite_area_mouse_entered"]
 [connection signal="mouse_exited" from="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea" to="BattleUI/EnemyPokemonUI/EnemyPokemon" method="_on_sprite_area_mouse_exited"]
-[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move0" to="." method="_on_move_0_pressed"]
-[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move1" to="." method="_on_move_1_pressed"]
-[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move2" to="." method="_on_move_2_pressed"]
-[connection signal="pressed" from="BattleUI/MovesBox/PokemonMoves/Move3" to="." method="_on_move_3_pressed"]
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer0/MoveButton0" to="." method="_on_move_0_pressed"]
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer1/MoveButton1" to="." method="_on_move_1_pressed"]
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer2/MoveButton2" to="." method="_on_move_2_pressed"]
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer3/MoveButton3" to="." method="_on_move_3_pressed"]

@@ -2,12 +2,13 @@
 	"Party": [
 		{
 			"current_hp": 26.0,
-			"current_xp": 532.0,
+			"current_xp": 612.0,
 			"id": 7.0,
 			"level": 9.0,
 			"move_names": [
 				"Tackle",
-				"Tail Whip"
+				"Tail Whip",
+				"Ember"
 			],
 			"stats": {
 				"attack": 10.0,

@@ -29,5 +29,15 @@
 		"category": "Physical",
 		"accuracy": 100,
 		"description": "The user attacks with its claw."
+	}, 
+	{
+		"id": 3,
+		"name": "Ember",
+ 		"type": "Fire",
+ 		"target": "Enemy",
+		"power": 40,
+		"category": "Special",
+		"accuracy": 100,
+		"description": "The user sprays fire at the enemy."
 	}
 ]
