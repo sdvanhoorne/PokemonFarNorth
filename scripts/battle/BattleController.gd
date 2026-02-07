@@ -81,61 +81,47 @@ func _on_switch_pressed() -> void:
 	battle_ui.set_state(BattleUI.UIState.PARTY)
 	
 func _on_party_pokemon_chosen(party_index: int) -> void:
-	if(PlayerInventory.PartyPokemon[party_index].current_hp > 0):
-		pending_player_action = BattleAction.make_switch("player", party_index)
+	pending_player_action = BattleAction.make_switch("player", party_index)
 
 func _on_move_pressed(button: Button) -> void:
 	if input_locked: return
 	input_locked = true
 	var move_index := int(button.name.trim_prefix("MoveButton"))
-	await _process_turn(move_index)
+	pending_player_action = BattleAction.make_move("player", move_index)
+	await _process_turn()
 	input_locked = false
 
-
-
-
-
-
-#func new_process_turn():
-	#battle_ui.set_state(battle_ui.UIState.MESSAGE)
-	#
-	#if(pending_player_action.action_type == BattleAction.battle_action_type.RUN):
-		#_run()
-		#
-	## no enemy switches yet, just moves
-	#pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
-	#
-	#var player_pokemon: Pokemon = _player_active()
-	#var enemy_pokemon: Pokemon = _enemy_active()
-	#
-	#var player_speed = player_pokemon.battle_stats.speed
-	#var enemy_speed = enemy_pokemon.battle_stats.speed
-	## TODO TODO TODO
-	#if(player_speed > enemy_speed):
-		#if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
-			#events.
-
-	# faster switch
-	# then slower switch
-	# then fastest mvoes
-	# then slower moves
-	
-	engine.new_resolve_turn(pending_player_action, pending_enemy_action, state)
-
-func _process_turn(player_move_index: int) -> void:
+func _process_turn():
 	battle_ui.set_state(battle_ui.UIState.MESSAGE)
-
-	var enemy_move_name := _determine_enemy_move_name()
-
-	var result: Dictionary = engine.resolve_turn(state, player_move_index, enemy_move_name)
+	
+	if(pending_player_action.action_type == BattleAction.battle_action_type.RUN):
+		_run()
+		
+	# no enemy switches yet, just moves
+	pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
+		
+	var result: Dictionary = engine.resolve_turn(pending_player_action, pending_enemy_action, state)
 	state = result.state
-
 	await _play_events(result.events)
-
 	if _events_contain_battle_end(result.events):
 		return
 
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
+
+#func _process_turn(player_move_index: int) -> void:
+	#battle_ui.set_state(battle_ui.UIState.MESSAGE)
+#
+	#var enemy_move_name := _determine_enemy_move_index()
+#
+	#var result: Dictionary = engine.resolve_turn(state, player_move_index, enemy_move_name)
+	#state = result.state
+#
+	#await _play_events(result.events)
+#
+	#if _events_contain_battle_end(result.events):
+		#return
+#
+	#battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
 func _determine_enemy_move_index() -> int:
 	return rng.randi_range(0, _enemy_active().moves.size() - 1)
@@ -153,8 +139,17 @@ func _play_events(events: Array) -> void:
 					{"lock_input": false, "require_input": false, "auto_advance_time": 1}
 				)
 			
-			#"switch":
+			"switch":
+				# some redundant code with hp change
+				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
+				var target_pokemon: Pokemon
+				if target_is_player:
+					target_pokemon = _player_active() 
+				else:
+					target_pokemon = _enemy_active()
 				
+				battle_ui.unload_player_pokemon()
+				battle_ui.load_player_pokemon(PlayerInventory.PartyPokemon[e.switch_index])
 
 			"hp_change":
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)

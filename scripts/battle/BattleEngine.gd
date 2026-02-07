@@ -12,6 +12,9 @@ enum Side { PLAYER, ENEMY }
 static func msg(text: String) -> Dictionary:
 	return {"type": "message", "text": text}
 
+static func switch(side: int, switch_index: int) -> Dictionary:
+	return { "type": "switch", "side": side, "switch_index": switch_index}
+
 static func hp_change(side: int, new_hp: int, max_hp: int, amount: int) -> Dictionary:
 	return {"type": "hp_change", "side": side, "new_hp": new_hp, "max_hp": max_hp, "amount": amount}
 
@@ -28,54 +31,73 @@ static func battle_end(result: String) -> Dictionary:
 	# result: "player_win" / "player_lose" / "fled" etc
 	return {"type": "battle_end", "result": result}
 
-func new_resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state: Dictionary):
+func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state: Dictionary):
 	var events: Array = []
 	
-	
-
-func resolve_turn(state: Dictionary, player_move_index: int, enemy_move_name: String) -> Dictionary:
-	var events: Array = []
-
 	var player_pokemon: Pokemon = _player_active(state)
 	var enemy_pokemon: Pokemon = _enemy_active(state)
-
-	if player_move_index < 0 or player_move_index >= player_pokemon.moves.size():
-		events.append(msg("Invalid move."))
-		return {"state": state, "events": events}
-
-	var player_move: Move = player_pokemon.moves[player_move_index]
-	var enemy_move: Move = MoveDatabase.get_move_by_name(enemy_move_name)
-
-	# Decide turn order via speed, handle priority later
+	
+	# determine first side to go via speed
 	var first_side: int = Side.PLAYER if player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed else Side.ENEMY
 	var second_side: int = Side.ENEMY if first_side == Side.PLAYER else Side.PLAYER
-
-	# first move
-	_execute_move(state, first_side, player_move, enemy_move, events)
-	if _is_battle_over_or_faint_handled(state, events):
-		return {"state": state, "events": events}
-
-	# second move
-	_execute_move(state, second_side, player_move, enemy_move, events)
-	_is_battle_over_or_faint_handled(state, events)
-
-	return {"state": state, "events": events}
-
-func _execute_move(state: Dictionary, side: int, player_move: Move, enemy_move: Move, events: Array) -> void:
-	var attacker: Pokemon
-	var defender: Pokemon
-	var move: Move
-
-	if side == Side.PLAYER:
-		attacker = _player_active(state)
-		defender = _enemy_active(state)
-		move = player_move
+	
+	if(first_side == Side.PLAYER):
+		match player_action.action_type:
+			BattleAction.battle_action_type.SWITCH:
+				events.append(switch(Side.PLAYER, player_action.switch_index))
+				events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))
+			BattleAction.battle_action_type.MOVE:
+				var player_move: Move = player_pokemon.moves[player_action.move_index]
+				_execute_move(Side.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
+				
+		match enemy_action.action_type:
+			BattleAction.battle_action_type.SWITCH:
+				# TODO
+				pass
+			BattleAction.battle_action_type.MOVE:
+				var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
+				_execute_move(Side.PLAYER, enemy_pokemon, player_pokemon, enemy_move, events)	
+				
+		
+		if _is_battle_over_or_faint_handled(state, events):
+			return {"state": state, "events": events}
+	
 	else:
-		attacker = _enemy_active(state)
-		defender = _player_active(state)
-		move = enemy_move
+		match enemy_action:
+			BattleAction.battle_action_type.MOVE:
+				var enemy_move: Move = enemy_pokemon.moves[enemy_pokemon.move_index]
+				_execute_move(enemy_pokemon, player_pokemon, enemy_move, events)
 
-	# If attacker already fainted (possible if you later add recoil/end-of-turn etc)
+#func resolve_turn(state: Dictionary, player_move_index: int, enemy_move_name: String) -> Dictionary:
+	#var events: Array = []
+#
+	#var player_pokemon: Pokemon = _player_active(state)
+	#var enemy_pokemon: Pokemon = _enemy_active(state)
+	#
+	#if player_move_index < 0 or player_move_index >= player_pokemon.moves.size():
+		#events.append(msg("Invalid move."))
+		#return {"state": state, "events": events}
+#
+	#var player_move: Move = player_pokemon.moves[player_move_index]
+	#var enemy_move: Move = MoveDatabase.get_move_by_name(enemy_move_name)
+#
+	## Decide turn order via speed, handle priority later
+	#var first_side: int = Side.PLAYER if player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed else Side.ENEMY
+	#var second_side: int = Side.ENEMY if first_side == Side.PLAYER else Side.PLAYER
+#
+	## first move
+	#_execute_move(state, first_side, player_move, enemy_move, events)
+	#if _is_battle_over_or_faint_handled(state, events):
+		#return {"state": state, "events": events}
+#
+	## second move
+	#_execute_move(state, second_side, player_move, enemy_move, events)
+	#_is_battle_over_or_faint_handled(state, events)
+#
+	#return {"state": state, "events": events}
+
+func _execute_move(side: int, attacker: Pokemon, defender: Pokemon, move: Move, events: Array) -> void:
+	# If attacker already fainted (possible later add recoil/end-of-turn etc)
 	if attacker.current_hp <= 0:
 		return
 
@@ -83,7 +105,7 @@ func _execute_move(state: Dictionary, side: int, player_move: Move, enemy_move: 
 
 	match move.category:
 		"Physical", "Special":
-			_apply_damage(state, side, move, attacker, defender, events)
+			_apply_damage(side, move, attacker, defender, events)
 		"Status":
 			_apply_status(move, attacker, defender, events)
 		"StatChange":
@@ -91,7 +113,7 @@ func _execute_move(state: Dictionary, side: int, player_move: Move, enemy_move: 
 		_:
 			events.append(msg("But it failed."))
 
-func _apply_damage(state: Dictionary, attacker_side: int, move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
+func _apply_damage(attacker_side: int, move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
 	var damage: int = DamageCalculation.get_damage(move, attacker, defender)
 	if damage < 0:
 		damage = 0
