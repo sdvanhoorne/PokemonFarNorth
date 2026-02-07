@@ -41,60 +41,49 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 	var first_side: int = Side.PLAYER if player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed else Side.ENEMY
 	var second_side: int = Side.ENEMY if first_side == Side.PLAYER else Side.PLAYER
 	
+	# if player faster
 	if(first_side == Side.PLAYER):
-		match player_action.action_type:
-			BattleAction.battle_action_type.SWITCH:
-				events.append(switch(Side.PLAYER, player_action.switch_index))
-				events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))
-			BattleAction.battle_action_type.MOVE:
-				var player_move: Move = player_pokemon.moves[player_action.move_index]
-				_execute_move(Side.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
-				
-		match enemy_action.action_type:
-			BattleAction.battle_action_type.SWITCH:
-				# TODO
-				pass
-			BattleAction.battle_action_type.MOVE:
-				var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
-				_execute_move(Side.PLAYER, enemy_pokemon, player_pokemon, enemy_move, events)	
-				
-		
+	# player switch
+		if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
+			events.append(switch(Side.PLAYER, player_action.switch_index))
+			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))	
+	# enemy switch
+		if(enemy_action.action_type == BattleAction.battle_action_type.SWITCH):
+			events.append(switch(Side.ENEMY, enemy_action.switch_index))
+			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))	
+	# player move
+		if(player_action.action_type == BattleAction.battle_action_type.MOVE):
+			var player_move: Move = player_pokemon.moves[player_action.move_index]
+			_execute_move(Side.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
+	# enemy move
+		if(enemy_action.action_type == BattleAction.battle_action_type.MOVE):
+			var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
+			_execute_move(Side.ENEMY, enemy_pokemon, player_pokemon, enemy_move, events)
+	# check faint
 		if _is_battle_over_or_faint_handled(state, events):
 			return {"state": state, "events": events}
-	
-	else:
-		match enemy_action:
-			BattleAction.battle_action_type.MOVE:
-				var enemy_move: Move = enemy_pokemon.moves[enemy_pokemon.move_index]
-				_execute_move(enemy_pokemon, player_pokemon, enemy_move, events)
 
-#func resolve_turn(state: Dictionary, player_move_index: int, enemy_move_name: String) -> Dictionary:
-	#var events: Array = []
-#
-	#var player_pokemon: Pokemon = _player_active(state)
-	#var enemy_pokemon: Pokemon = _enemy_active(state)
-	#
-	#if player_move_index < 0 or player_move_index >= player_pokemon.moves.size():
-		#events.append(msg("Invalid move."))
-		#return {"state": state, "events": events}
-#
-	#var player_move: Move = player_pokemon.moves[player_move_index]
-	#var enemy_move: Move = MoveDatabase.get_move_by_name(enemy_move_name)
-#
-	## Decide turn order via speed, handle priority later
-	#var first_side: int = Side.PLAYER if player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed else Side.ENEMY
-	#var second_side: int = Side.ENEMY if first_side == Side.PLAYER else Side.PLAYER
-#
-	## first move
-	#_execute_move(state, first_side, player_move, enemy_move, events)
-	#if _is_battle_over_or_faint_handled(state, events):
-		#return {"state": state, "events": events}
-#
-	## second move
-	#_execute_move(state, second_side, player_move, enemy_move, events)
-	#_is_battle_over_or_faint_handled(state, events)
-#
-	#return {"state": state, "events": events}
+	# if enemy faster
+	else:
+	# enemy switch
+		if(enemy_action.action_type == BattleAction.battle_action_type.SWITCH):
+			events.append(switch(Side.ENEMY, enemy_action.switch_index))
+			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))	
+	# player switch
+		if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
+			events.append(switch(Side.PLAYER, player_action.switch_index))
+			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))	
+	# enemy move
+		if(enemy_action.action_type == BattleAction.battle_action_type.MOVE):
+			var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
+			_execute_move(Side.ENEMY, enemy_pokemon, player_pokemon, enemy_move, events)
+	# player move
+		if(player_action.action_type == BattleAction.battle_action_type.MOVE):
+			var player_move: Move = player_pokemon.moves[player_action.move_index]
+			_execute_move(Side.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
+	# check faint
+		if _is_battle_over_or_faint_handled(state, events):
+			return {"state": state, "events": events}
 
 func _execute_move(side: int, attacker: Pokemon, defender: Pokemon, move: Move, events: Array) -> void:
 	# If attacker already fainted (possible later add recoil/end-of-turn etc)

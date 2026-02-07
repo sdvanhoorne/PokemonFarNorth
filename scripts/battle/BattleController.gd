@@ -108,21 +108,6 @@ func _process_turn():
 
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
-#func _process_turn(player_move_index: int) -> void:
-	#battle_ui.set_state(battle_ui.UIState.MESSAGE)
-#
-	#var enemy_move_name := _determine_enemy_move_index()
-#
-	#var result: Dictionary = engine.resolve_turn(state, player_move_index, enemy_move_name)
-	#state = result.state
-#
-	#await _play_events(result.events)
-#
-	#if _events_contain_battle_end(result.events):
-		#return
-#
-	#battle_ui.set_state(BattleUI.UIState.OPTIONS)
-
 func _determine_enemy_move_index() -> int:
 	return rng.randi_range(0, _enemy_active().moves.size() - 1)
 	
