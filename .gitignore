@@ -13,3 +13,6 @@ export_credentials.cfg
 .mono/
 data_*/
 mono_crash.*.json
+assets/pokemon/.DS_Store
+assets/.DS_Store
+.DS_Store
