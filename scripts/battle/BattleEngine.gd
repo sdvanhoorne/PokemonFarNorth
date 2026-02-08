@@ -47,11 +47,12 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 		if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
 			events.append(switch(Side.PLAYER, player_action.switch_index))
 			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))
-			player_pokemon = 
+			player_pokemon = _execute_switch(Side.PLAYER, player_action.switch_index, state)
 	# enemy switch
 		if(enemy_action.action_type == BattleAction.battle_action_type.SWITCH):
 			events.append(switch(Side.ENEMY, enemy_action.switch_index))
-			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))	
+			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))
+			enemy_pokemon = _execute_switch(Side.ENEMY, enemy_action.switch_index, state)
 	# player move
 		if(player_action.action_type == BattleAction.battle_action_type.MOVE):
 			var player_move: Move = player_pokemon.moves[player_action.move_index]
@@ -70,11 +71,13 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 	# enemy switch
 		if(enemy_action.action_type == BattleAction.battle_action_type.SWITCH):
 			events.append(switch(Side.ENEMY, enemy_action.switch_index))
-			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))	
+			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))
+			enemy_pokemon = _execute_switch(Side.ENEMY, enemy_action.switch_index, state)
 	# player switch
 		if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
 			events.append(switch(Side.PLAYER, player_action.switch_index))
-			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))	
+			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))
+			player_pokemon = _execute_switch(Side.PLAYER, player_action.switch_index, state)
 	# enemy move
 		if(enemy_action.action_type == BattleAction.battle_action_type.MOVE):
 			var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
@@ -89,6 +92,14 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 				return {"state": state, "events": events}
 	
 	return {"state": state, "events": events}
+
+func _execute_switch(side: int, switch_index: int, state: Dictionary) -> Pokemon:
+	if(side == Side.PLAYER):
+		state.player_active = switch_index
+		return _player_active(state)
+	else:
+		state.enemy_active = switch_index
+		return _enemy_active(state)
 
 func _execute_move(side: int, attacker: Pokemon, defender: Pokemon, move: Move, events: Array) -> void:
 	# If attacker already fainted (possible later add recoil/end-of-turn etc)

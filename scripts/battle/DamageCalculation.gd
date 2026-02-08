@@ -26,7 +26,7 @@ func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokem
 	# should damage round to nearest int?
 	var damage = move.power * (float(attacker_stat) / float(defender_stat)) 
 	damage =  damage * stab_multiplier * type_effectiveness_1 * type_effectiveness_2 / 6
-	return int(damage)
+	return int(ceil(damage))
 	
 func get_type_effectiveness(move_type: String, type: String) -> float:
 	var file = FileAccess.open(TypeEffectivenessChartPath, FileAccess.READ)

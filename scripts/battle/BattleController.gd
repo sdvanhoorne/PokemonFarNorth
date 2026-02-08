@@ -140,7 +140,7 @@ func _play_events(events: Array) -> void:
 					state.enemy_active = e.switch_index
 				
 				battle_ui.unload_player_pokemon()
-				battle_ui.load_player_pokemon(PlayerInventory.PartyPokemon[e.switch_index])
+				battle_ui.load_player_pokemon(state.player_party[e.switch_index])
 
 			"hp_change":
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
