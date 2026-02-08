@@ -46,7 +46,8 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 	# player switch
 		if(player_action.action_type == BattleAction.battle_action_type.SWITCH):
 			events.append(switch(Side.PLAYER, player_action.switch_index))
-			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))	
+			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))
+			player_pokemon = 
 	# enemy switch
 		if(enemy_action.action_type == BattleAction.battle_action_type.SWITCH):
 			events.append(switch(Side.ENEMY, enemy_action.switch_index))
