@@ -89,13 +89,18 @@ func load_enemy_pokemon(pokemon: Pokemon):
 	_load_pokemon(enemy_pokemon_ui, pokemon)
 
 func _load_pokemon(node: Node2D, pokemon: Pokemon):
-	var sprite = node.get_node("SpriteArea").get_node("Sprite")
-	sprite.texture = load("res://assets/pokemon/" + pokemon.base_data.name + ".png")	
-	var nameLabel = node.get_node("Info/Name")
+	var sprite_area = node.get_node("SpriteArea")
+	sprite_area.visible = true
+	var sprite = sprite_area.get_node("Sprite")
+	sprite.texture = load("res://assets/pokemon/" + pokemon.base_data.name + ".png")
+	
+	var info = node.get_node("Info")
+	info.visible = true
+	var nameLabel = info.get_node("Name")
 	nameLabel.text = pokemon.base_data.name
-	var levelLabel = node.get_node("Info/Level")
+	var levelLabel = info.get_node("Level")
 	levelLabel.text = str(pokemon.level)
-	var healthBar = node.get_node("Info/Control/HealthBar")
+	var healthBar = info.get_node("Control/HealthBar")
 	healthBar.max_value = pokemon.battle_stats.hp
 	healthBar.value = pokemon.battle_stats.hp
 	

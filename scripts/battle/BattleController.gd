@@ -81,7 +81,11 @@ func _on_switch_pressed() -> void:
 	battle_ui.set_state(BattleUI.UIState.PARTY)
 	
 func _on_party_pokemon_chosen(party_index: int) -> void:
+	if input_locked: return
+	input_locked = true
 	pending_player_action = BattleAction.make_switch("player", party_index)
+	await _process_turn()
+	input_locked = false
 
 func _on_move_pressed(button: Button) -> void:
 	if input_locked: return
@@ -130,8 +134,10 @@ func _play_events(events: Array) -> void:
 				var target_pokemon: Pokemon
 				if target_is_player:
 					target_pokemon = _player_active() 
+					state.player_active = e.switch_index
 				else:
 					target_pokemon = _enemy_active()
+					state.enemy_active = e.switch_index
 				
 				battle_ui.unload_player_pokemon()
 				battle_ui.load_player_pokemon(PlayerInventory.PartyPokemon[e.switch_index])

@@ -55,13 +55,14 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 		if(player_action.action_type == BattleAction.battle_action_type.MOVE):
 			var player_move: Move = player_pokemon.moves[player_action.move_index]
 			_execute_move(Side.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
+			if _is_battle_over_or_faint_handled(state, events):
+				return {"state": state, "events": events}
 	# enemy move
 		if(enemy_action.action_type == BattleAction.battle_action_type.MOVE):
 			var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
 			_execute_move(Side.ENEMY, enemy_pokemon, player_pokemon, enemy_move, events)
-	# check faint
-		if _is_battle_over_or_faint_handled(state, events):
-			return {"state": state, "events": events}
+			if _is_battle_over_or_faint_handled(state, events):
+				return {"state": state, "events": events}
 
 	# if enemy faster
 	else:
@@ -77,13 +78,16 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 		if(enemy_action.action_type == BattleAction.battle_action_type.MOVE):
 			var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
 			_execute_move(Side.ENEMY, enemy_pokemon, player_pokemon, enemy_move, events)
+			if _is_battle_over_or_faint_handled(state, events):
+				return {"state": state, "events": events}
 	# player move
 		if(player_action.action_type == BattleAction.battle_action_type.MOVE):
 			var player_move: Move = player_pokemon.moves[player_action.move_index]
 			_execute_move(Side.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
-	# check faint
-		if _is_battle_over_or_faint_handled(state, events):
-			return {"state": state, "events": events}
+			if _is_battle_over_or_faint_handled(state, events):
+				return {"state": state, "events": events}
+	
+	return {"state": state, "events": events}
 
 func _execute_move(side: int, attacker: Pokemon, defender: Pokemon, move: Move, events: Array) -> void:
 	# If attacker already fainted (possible later add recoil/end-of-turn etc)
