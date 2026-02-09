@@ -122,7 +122,6 @@ func _apply_damage(attacker_side: int, move: Move, attacker: Pokemon, defender: 
 	var damage: int = DamageCalculation.get_damage(move, attacker, defender)
 	var old_hp = defender.current_hp
 	var new_hp = max(defender.current_hp - damage, 0)
-	defender.current_hp -= damage
 	var defender_side: int = Side.ENEMY if attacker_side == Side.PLAYER else Side.PLAYER
 	events.append(hp_change(defender_side, damage))
 

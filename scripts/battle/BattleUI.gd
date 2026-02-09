@@ -41,7 +41,6 @@ func _handle_cancel() -> void:
 #			# In OPTIONS/MOVES/PARTY, accept is usually handled by focused buttons
 #			pass
 
-
 func set_state(new_state: UIState) -> void:
 	if state == new_state:
 		return
@@ -124,25 +123,27 @@ func unload_player_pokemon():
 
 func unload_enemy_pokemon():
 	_unload_pokemon(enemy_pokemon_ui)
-	
-# sets button text for active pokemon moves
+
 func set_moves(move_names: Array) -> void:
-	var button_index = 0
-	for move_name in move_names:
-		_set_move(button_index, move_name)
-		button_index += 1
-	
-func _set_move(i: int, move_name: String):
-	var row := $BottomUI/MovesContainer/Moves/MovesFirstRow if i < 2 else $BottomUI/MovesContainer/Moves/MovesSecondRow
-	var move_container := row.get_node("MoveContainer%d" % i) as PanelContainer
-	var move_button := move_container.get_node("MoveButton%d" % i) as Button
-	move_button.text = move_name
-	var move_type = MoveDatabase.get_move_by_name(move_name).type
-	var type_color = TypeColors.color_for(move_type)
-	
-	var sb := move_container.get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat
-	sb.bg_color = type_color
-	move_container.add_theme_stylebox_override("panel", sb)
+	for i in range(4):
+		var row := $BottomUI/MovesContainer/Moves/MovesFirstRow if i < 2 else $BottomUI/MovesContainer/Moves/MovesSecondRow
+		var move_container := row.get_node("MoveContainer%d" % i) as PanelContainer
+		var move_button := move_container.get_node("MoveButton%d" % i) as Button
+		if i < move_names.size():
+			var name = move_names[i]
+			move_button.text = name
+			move_button.disabled = false
+			var move_type = MoveDatabase.get_move_by_name(name).type
+			var type_color = TypeColors.color_for(move_type)
+			var sb := move_container.get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat
+			sb.bg_color = type_color
+			move_container.add_theme_stylebox_override("panel", sb)
+		else:
+			move_button.text = ""
+			move_button.disabled = true
+			var sb := move_container.get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat
+			sb.bg_color = Color(0.2, 0.2, 0.2, 1)
+			move_container.add_theme_stylebox_override("panel", sb)
 	
 func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
 	var damagedPokemonContainer
