@@ -15,8 +15,8 @@ static func msg(text: String) -> Dictionary:
 static func switch(side: int, switch_index: int) -> Dictionary:
 	return { "type": "switch", "side": side, "switch_index": switch_index}
 
-static func hp_change(side: int, new_hp: int, max_hp: int, amount: int) -> Dictionary:
-	return {"type": "hp_change", "side": side, "new_hp": new_hp, "max_hp": max_hp, "amount": amount}
+static func hp_change(side: int, damage: int) -> Dictionary:
+	return {"type": "hp_change", "side": side, "damage": damage}
 
 static func faint(side: int, name: String) -> Dictionary:
 	return {"type": "faint", "side": side, "name": name}
@@ -120,13 +120,11 @@ func _execute_move(side: int, attacker: Pokemon, defender: Pokemon, move: Move, 
 
 func _apply_damage(attacker_side: int, move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
 	var damage: int = DamageCalculation.get_damage(move, attacker, defender)
-	if damage < 0:
-		damage = 0
-
-	defender.current_hp = max(defender.current_hp - damage, 0)
+	var old_hp = defender.current_hp
+	var new_hp = max(defender.current_hp - damage, 0)
 
 	var defender_side: int = Side.ENEMY if attacker_side == Side.PLAYER else Side.PLAYER
-	events.append(hp_change(defender_side, defender.current_hp, defender.battle_stats.hp, -damage))
+	events.append(hp_change(defender_side, damage))
 
 func _apply_status(move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
 	var status_type = move.status

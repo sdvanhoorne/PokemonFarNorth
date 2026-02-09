@@ -9,6 +9,7 @@ var rng := RandomNumberGenerator.new()
 
 var engine: BattleEngine
 var state: Dictionary
+var display_state: Dictionary
 var input_locked := false
 var enemy_pokemon: Array[Pokemon]
 var pending_player_action: BattleAction = null
@@ -103,6 +104,7 @@ func _process_turn():
 		
 	# no enemy switches yet, just moves
 	pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
+	display_state = state.duplicate(true)
 		
 	var result: Dictionary = engine.resolve_turn(pending_player_action, pending_enemy_action, state)
 	state = result.state
@@ -134,23 +136,24 @@ func _play_events(events: Array) -> void:
 				var target_pokemon: Pokemon
 				if target_is_player:
 					target_pokemon = _player_active() 
-					state.player_active = e.switch_index
+					display_state.player_active = e.switch_index
 				else:
 					target_pokemon = _enemy_active()
-					state.enemy_active = e.switch_index
+					display_state.enemy_active = e.switch_index
 				
 				battle_ui.unload_player_pokemon()
-				battle_ui.load_player_pokemon(state.player_party[e.switch_index])
+				battle_ui.load_player_pokemon(display_state.player_party[e.switch_index])
 
 			"hp_change":
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
 				var target_pokemon: Pokemon
 				if target_is_player:
-					target_pokemon = _player_active() 
+					target_pokemon = display_state.player_party[display_state.player_active] 
 				else:
-					target_pokemon = _enemy_active()
+					target_pokemon = display_state.enemy_party[display_state.enemy_active] 
 
 				var is_player_attacking = (e.side == BattleEngine.Side.ENEMY)
+				target_pokemon.current_hp -= e.damage
 				battle_ui.update_health_bar(target_pokemon, is_player_attacking)
 
 			"faint":
@@ -161,11 +164,11 @@ func _play_events(events: Array) -> void:
 
 				if e.side == BattleEngine.Side.PLAYER:
 					battle_ui.unload_player_pokemon()
-					if state.player_party.size() > 0:
+					if display_state.player_party.size() > 0:
 						battle_ui.load_player_pokemon(_player_active())
 				else:
 					battle_ui.unload_enemy_pokemon()
-					if state.enemy_party.size() > 0:
+					if display_state.enemy_party.size() > 0:
 						battle_ui.load_enemy_pokemon(_enemy_active())
 
 			"xp_gain":
@@ -191,6 +194,7 @@ func _play_events(events: Array) -> void:
 
 			_:
 				pass
+		display_state = state
 
 func _events_contain_battle_end(events: Array) -> bool:
 	for e in events:
