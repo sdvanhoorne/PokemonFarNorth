@@ -129,7 +129,7 @@ func _play_events(events: Array) -> void:
 					PackedStringArray([e.text]),
 					{"lock_input": false, "require_input": false, "auto_advance_time": 1}
 				)
-			
+				
 			"switch":
 				# some redundant code with hp change
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
@@ -137,13 +137,14 @@ func _play_events(events: Array) -> void:
 				if target_is_player:
 					target_pokemon = _player_active() 
 					display_state.player_active = e.switch_index
+					battle_ui.unload_player_pokemon()
+					battle_ui.load_player_pokemon(display_state.player_party[e.switch_index])
 				else:
 					target_pokemon = _enemy_active()
 					display_state.enemy_active = e.switch_index
-				
-				battle_ui.unload_player_pokemon()
-				battle_ui.load_player_pokemon(display_state.player_party[e.switch_index])
-
+					battle_ui.unload_enemy_pokemon()
+					battle_ui.load_enemy_pokemon(display_state.enemy_party[e.switch_index])
+					
 			"hp_change":
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
 				var target_pokemon: Pokemon
