@@ -1,3 +1,4 @@
+extends Resource
 class_name PokemonStats
 
 const stat_scaler = 25.0
@@ -10,13 +11,23 @@ var special_attack = 0
 var special_defense = 0
 var speed = 0
 
-func _init(data := {}):
-	hp = data["hp"]
-	attack = data["attack"]
-	defense = data["defense"]
-	special_attack = data["special_attack"]
-	special_defense = data["special_defense"]
-	speed = data["speed"]
+func _init(data: Dictionary = {}):
+	hp = int(data.get("hp", 0))
+	attack = int(data.get("attack", 0))
+	defense = int(data.get("defense", 0))
+	special_attack = int(data.get("special_attack", 0))
+	special_defense = int(data.get("special_defense", 0))
+	speed = int(data.get("speed", 0))
+	
+func clone() -> PokemonStats:
+	var s := PokemonStats.new()
+	s.hp = hp
+	s.attack = attack
+	s.defense = defense
+	s.special_attack = special_attack
+	s.special_defense = special_defense
+	s.speed = speed
+	return s
 	
 static func scaled_stats( level: int, data = {}) -> PokemonStats:
 	return PokemonStats.new({

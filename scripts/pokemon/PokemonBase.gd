@@ -1,5 +1,4 @@
 extends Resource
-
 class_name PokemonBase
 
 var id: int

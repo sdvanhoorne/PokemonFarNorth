@@ -1,3 +1,4 @@
+extends Resource
 class_name Pokemon
 
 var base_data: PokemonBase
@@ -19,6 +20,38 @@ func _init(id: int):
 	var file = FileAccess.open(path, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
 	base_data = PokemonBase.new(data["id"])
+
+# creates deep copy
+func clone(id: int) -> Pokemon:
+	var p := Pokemon.new(id)
+
+	# Copy primitives
+	p.level = level
+	p.current_hp = current_hp
+	p.current_xp = current_xp
+	p.xp_to_next_level = xp_to_next_level
+	p.status = status
+
+	# Share immutable dex data (recommended)
+	p.base_data = base_data
+
+	# Arrays
+	p.move_names = move_names.duplicate(true)
+
+	# If they are Resources, clone each.
+	p.moves = []
+	for m in moves:
+		if m is Resource:
+			p.moves.append((m as Resource).duplicate(true))
+		else:
+			p.moves.append(m)
+
+	if stats != null:
+		p.stats = stats.clone()
+	if battle_stats != null:
+		p.battle_stats = battle_stats.clone()
+		
+	return p
 	
 static func new_existing(data: Dictionary) -> Pokemon:
 	var pokemon = Pokemon.new(data.get("id"))

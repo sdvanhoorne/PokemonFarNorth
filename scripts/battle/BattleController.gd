@@ -25,11 +25,37 @@ func setup(enemy_party: Array, player_party: Array = []) -> void:
 	if player_party.is_empty():
 		player_party = PlayerInventory.PartyPokemon
 	state = {
-		"player_party": player_party.duplicate(),
-		"enemy_party": enemy_party.duplicate(),
+		"player_party": player_party.duplicate(true),
+		"enemy_party": enemy_party.duplicate(true),
 		"player_active": 0,
 		"enemy_active": 0,
 	}
+
+func _set_display_state_from_state() -> void:
+	display_state = _deep_copy_state(state)
+
+func _deep_copy_state(src: Dictionary) -> Dictionary:
+	var dst: Dictionary = {}
+
+	dst["player_active"] = src.get("player_active", 0)
+	dst["enemy_active"] = src.get("enemy_active", 0)
+
+	dst["player_party"] = _deep_copy_party(src.get("player_party", []))
+	dst["enemy_party"] = _deep_copy_party(src.get("enemy_party", []))
+
+	return dst
+
+func _deep_copy_party(party: Array) -> Array[Pokemon]:
+	var out: Array[Pokemon] = []
+	out.resize(party.size())
+
+	for i in party.size():
+		var original := party[i] as Pokemon
+		assert(original != null, "Party entry %d is null" % i)
+
+		out[i] = original.clone(original.base_data.id)
+
+	return out
 
 func _wire_signals() -> void:
 	$BattleUI/BottomUI/BattleOptionsUI/Fight.pressed.connect(_on_fight_pressed)
@@ -110,7 +136,7 @@ func _process_turn():
 		
 	# no enemy switches yet, just moves
 	pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
-	display_state = state.duplicate(true)
+	_set_display_state_from_state()
 		
 	var result: Dictionary = engine.resolve_turn(pending_player_action, pending_enemy_action, state)
 	state = result.state
@@ -195,7 +221,6 @@ func _play_events(events: Array) -> void:
 
 			_:
 				pass
-		display_state = state
 
 func _events_contain_battle_end(events: Array) -> bool:
 	for e in events:
