@@ -122,7 +122,7 @@ func _apply_damage(attacker_side: int, move: Move, attacker: Pokemon, defender: 
 	var damage: int = DamageCalculation.get_damage(move, attacker, defender)
 	var old_hp = defender.current_hp
 	var new_hp = max(defender.current_hp - damage, 0)
-
+	defender.current_hp -= damage
 	var defender_side: int = Side.ENEMY if attacker_side == Side.PLAYER else Side.PLAYER
 	events.append(hp_change(defender_side, damage))
 
@@ -177,6 +177,7 @@ func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 
 		# TODO Clamp active index / determine next enemy pokemon
 		state.enemy_active = clamp(state.enemy_active, 0, state.enemy_party.size() - 1)
+		events.append(switch(Side.ENEMY, state.enemy_active))
 		events.append(msg("Enemy sent out %s!" % _enemy_active(state).base_data.name))
 		return true 
 

@@ -12,7 +12,7 @@
 		"speed": 70
 	},
 	"learnable_moves": [
-		{ "level": 0, "name": "Scratch" },
+		{ "level": 0, "name": "Tackle" },
 		{ "level": 0, "name": "Tail Whip" }
   	],
 	"evolutions": [

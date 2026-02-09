@@ -42,9 +42,15 @@ func _wire_signals() -> void:
 	
 func _player_active() -> Pokemon:
 	return state.player_party[state.player_active]
+	
+func _player_active_display() -> Pokemon:
+	return display_state.player_party[display_state.player_active]
 
 func _enemy_active() -> Pokemon:
 	return state.enemy_party[state.enemy_active]
+	
+func _enemy_active_display() -> Pokemon:
+	return display_state.enemy_party[display_state.enemy_active]
 
 func _start_battle_intro() -> void:
 	battle_ui.load_player_pokemon(_player_active())
@@ -133,25 +139,23 @@ func _play_events(events: Array) -> void:
 			"switch":
 				# some redundant code with hp change
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
-				var target_pokemon: Pokemon
 				if target_is_player:
-					target_pokemon = _player_active() 
 					display_state.player_active = e.switch_index
 					battle_ui.unload_player_pokemon()
-					battle_ui.load_player_pokemon(display_state.player_party[e.switch_index])
+					battle_ui.load_player_pokemon(_player_active_display())
+					battle_ui.set_moves(_player_active_display().move_names)
 				else:
-					target_pokemon = _enemy_active()
 					display_state.enemy_active = e.switch_index
 					battle_ui.unload_enemy_pokemon()
-					battle_ui.load_enemy_pokemon(display_state.enemy_party[e.switch_index])
+					battle_ui.load_enemy_pokemon(_enemy_active_display())
 					
 			"hp_change":
 				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
 				var target_pokemon: Pokemon
 				if target_is_player:
-					target_pokemon = display_state.player_party[display_state.player_active] 
+					target_pokemon = _player_active_display() 
 				else:
-					target_pokemon = display_state.enemy_party[display_state.enemy_active] 
+					target_pokemon = _enemy_active_display()
 
 				var is_player_attacking = (e.side == BattleEngine.Side.ENEMY)
 				target_pokemon.current_hp -= e.damage
@@ -165,12 +169,8 @@ func _play_events(events: Array) -> void:
 
 				if e.side == BattleEngine.Side.PLAYER:
 					battle_ui.unload_player_pokemon()
-					if display_state.player_party.size() > 0:
-						battle_ui.load_player_pokemon(_player_active())
 				else:
 					battle_ui.unload_enemy_pokemon()
-					if display_state.enemy_party.size() > 0:
-						battle_ui.load_enemy_pokemon(_enemy_active())
 
 			"xp_gain":
 				# animate xp bar gain
