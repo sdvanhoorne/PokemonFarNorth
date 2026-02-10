@@ -30,8 +30,8 @@ func _start_trainer_engage() -> void:
 	GameState.lock_gameplay_input()
 	# show "!" + walk up + start battle
 	play_alert()
-	is_engaging = false
 	# find difference between player and trainer divided by GlobalConstants.tilesize
+	
 	# move trainer in that direction, need animation controller 
 	
 	pass

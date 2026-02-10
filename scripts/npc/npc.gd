@@ -9,7 +9,7 @@ extends CharacterBody2D
 var Movement = null
 
 func _ready():
-	Movement = MovementController.new(self)
+	# Movement = MovementController.new(self)
 	anim.set_facing(Vector2.DOWN) # default
 
 func on_talk(player: Node) -> void:

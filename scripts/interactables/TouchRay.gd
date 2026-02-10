@@ -24,4 +24,4 @@ func _try_interact() -> void:
 		node.interact(self)
 
 func _update_interact_ray() -> void:
-	target_position = get_parent().facing * GlobalConstants.TileSize
+	target_position = get_parent().facing * GlobalConstants.tile_size

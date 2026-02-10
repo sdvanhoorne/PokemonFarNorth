@@ -4,8 +4,6 @@ class_name Player
 @onready var _animation_player = $SpriteAnimation
 @onready var interact_ray: RayCast2D = $InteractRay
 
-
-const MOVE_TIME = .17 # Time it takes to move one tile
 var facing_input = Vector2.ZERO
 var hold_timer = 0.0
 const HOLD_THRESHOLD = 0.03
@@ -18,25 +16,26 @@ var facing = Vector2.ZERO
 
 func _ready():
 	# align player to grid
-	global_position = global_position.snapped(Vector2(GlobalConstants.TileSize, GlobalConstants.TileSize)) 
+	global_position = global_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size)) 
 	target_position = global_position
 
 func _physics_process(delta):
 	if not GameState.gameplay_input_enabled:
 		velocity = Vector2.ZERO
 		move_and_slide()
+		_animation_player.play("idle_" + facing_direction)
 		return
 	if is_moving:
 		# Continue moving toward target
 		var direction = (target_position - global_position).normalized()
 		velocity = Vector2.ZERO
-		velocity = direction * (GlobalConstants.TileSize / MOVE_TIME)
+		velocity = direction * (GlobalConstants.tile_size / GlobalConstants.move_time)
 		if(sprinting):
 			velocity = velocity * sprint_multipier
 		move_and_slide()
 		
-		if abs(global_position.distance_to(target_position)) < (velocity.length() / (GlobalConstants.TileSize / MOVE_TIME)):
-			global_position = target_position.snapped(Vector2(GlobalConstants.TileSize, GlobalConstants.TileSize))
+		if abs(global_position.distance_to(target_position)) < (velocity.length() / (GlobalConstants.tile_size / GlobalConstants.move_time)):
+			global_position = target_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size))
 			is_moving = false
 			velocity = Vector2.ZERO
 			check_for_encounter()
@@ -75,7 +74,7 @@ func _physics_process(delta):
 		else:
 			hold_timer += delta
 			if hold_timer >= HOLD_THRESHOLD:
-				var offset = input * GlobalConstants.TileSize
+				var offset = input * GlobalConstants.tile_size
 				if !test_move(global_transform, offset):
 					target_position = global_position + offset
 					is_moving = true

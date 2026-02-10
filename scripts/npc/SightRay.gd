@@ -69,4 +69,4 @@ func _update_sight_ray() -> void:
 	if facing == Vector2.ZERO:
 		return
 
-	target_position = facing.normalized() * float(distance_tiles) * GlobalConstants.TileSize
+	target_position = facing.normalized() * float(distance_tiles) * GlobalConstants.tile_size

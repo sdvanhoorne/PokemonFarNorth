@@ -54,13 +54,13 @@ index: int = 0) -> Node2D:
 	if spawn_name != "":
 		var spawn := current_map.get_node("Spawns").get_node_or_null(spawn_name)
 		if spawn:
-			var base_pos : Vector2 = spawn.global_position.snapped(Vector2(GlobalConstants.TileSize, 
-			GlobalConstants.TileSize))
-			var offset : Vector2 = Vector2(index * GlobalConstants.TileSize, 
-			0) if horizontal else Vector2(0, index * GlobalConstants.TileSize)
+			var base_pos : Vector2 = spawn.global_position.snapped(Vector2(GlobalConstants.tile_size, 
+			GlobalConstants.tile_size))
+			var offset : Vector2 = Vector2(index * GlobalConstants.tile_size, 
+			0) if horizontal else Vector2(0, index * GlobalConstants.tile_size)
 			player.global_position = base_pos + offset
-			player.target_position = (base_pos + offset).snapped(Vector2(GlobalConstants.TileSize, 
-			GlobalConstants.TileSize))
+			player.target_position = (base_pos + offset).snapped(Vector2(GlobalConstants.tile_size, 
+			GlobalConstants.tile_size))
 
 	player.is_moving = false
 	player.facing_input = Vector2.ZERO
