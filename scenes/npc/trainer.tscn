@@ -1,16 +1,58 @@
-[gd_scene load_steps=6 format=3 uid="uid://0g7pn53xa61b"]
+[gd_scene load_steps=11 format=3 uid="uid://0g7pn53xa61b"]
 
 [ext_resource type="Script" uid="uid://qqp20ckah3uk" path="res://scripts/npc/Trainer.gd" id="1_wrhou"]
 [ext_resource type="Script" uid="uid://50qhr3jx21nm" path="res://scripts/npc/SightRay.gd" id="2_pfr17"]
 [ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="2_wrhou"]
 [ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="4_pfr17"]
+[ext_resource type="Texture2D" uid="uid://bdqri77hip7v6" path="res://assets/tiles/Icons.png" id="5_u28ke"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ac6y7"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1loa"]
+atlas = ExtResource("5_u28ke")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_avke7"]
+atlas = ExtResource("5_u28ke")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yc3wg"]
+atlas = ExtResource("5_u28ke")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_dhgqo"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1loa")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avke7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avke7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_avke7")
+}, {
+"duration": 16.0,
+"texture": SubResource("AtlasTexture_yc3wg")
+}],
+"loop": true,
+"name": &"alert",
+"speed": 12.0
+}]
+
 [node name="Trainer" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 script = ExtResource("1_wrhou")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
 position = Vector2(8, 10)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_ac6y7")
@@ -26,5 +68,15 @@ script = ExtResource("2_wrhou")
 npc = NodePath("..")
 metadata/_custom_type_script = "uid://b3tbrbpkgd5nk"
 
-[node name="CharacterAnimationController" parent="." instance=ExtResource("4_pfr17")]
+[node name="Sprites" type="Node2D" parent="."]
 position = Vector2(8, 4)
+
+[node name="AlertAnimation" type="AnimatedSprite2D" parent="Sprites"]
+visible = false
+position = Vector2(0, -19)
+sprite_frames = SubResource("SpriteFrames_dhgqo")
+animation = &"alert"
+frame = 4
+frame_progress = 0.228771
+
+[node name="CharacterAnimationController" parent="Sprites" instance=ExtResource("4_pfr17")]

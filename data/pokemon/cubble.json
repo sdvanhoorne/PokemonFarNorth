@@ -12,7 +12,8 @@
 		"speed": 55
 	},
 	"learnable_moves": [
-		{ "level": 0, "name": "Tackle" }
+		{ "level": 0, "name": "Tackle" },
+		{ "level": 5, "name": "Growl" }
 	],
 	"evolutions": [
 		{ "level": 16, "id": 11 }
