@@ -1,118 +1,71 @@
 extends CharacterBody2D
-
 class_name Player
-@onready var _animation_player = $SpriteAnimation
+
 @onready var interact_ray: RayCast2D = $InteractRay
+@onready var movement_controller: MovementController = $MovementController
+@onready var animation_controller: CharacterAnimationController = $AnimationController
 
-var facing_input = Vector2.ZERO
-var hold_timer = 0.0
-const HOLD_THRESHOLD = 0.03
-var is_moving = false
-var target_position = Vector2.ZERO
-var sprinting = false
-var sprint_multipier = 2
-var facing_direction = "down"
-var facing = Vector2.ZERO
+func _ready() -> void:
+	movement_controller.snap_to_grid()
+	movement_controller.moved_to_tile.connect(_on_moved_to_tile)
 
-func _ready():
-	# align player to grid
-	global_position = global_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size)) 
-	target_position = global_position
+func _on_moved_to_tile(new_global_pos: Vector2) -> void:
+	check_for_encounter(new_global_pos)
 
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if not GameState.gameplay_input_enabled:
-		velocity = Vector2.ZERO
-		move_and_slide()
-		_animation_player.play("idle_" + facing_direction)
-		return
-	if is_moving:
-		# Continue moving toward target
-		var direction = (target_position - global_position).normalized()
-		velocity = Vector2.ZERO
-		velocity = direction * (GlobalConstants.tile_size / GlobalConstants.move_time)
-		if(sprinting):
-			velocity = velocity * sprint_multipier
-		move_and_slide()
-		
-		if abs(global_position.distance_to(target_position)) < (velocity.length() / (GlobalConstants.tile_size / GlobalConstants.move_time)):
-			global_position = target_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size))
-			is_moving = false
-			velocity = Vector2.ZERO
-			check_for_encounter()
+		movement_controller.stop()
+		movement_controller.clear_input()
+		animation_controller.play_idle(movement_controller.facing_direction)
 		return
 
-	var input = Vector2.ZERO
+	# If currently stepping, controller will keep moving
+	if movement_controller.is_moving:
+		movement_controller.tick(delta)
+		animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
+		return
 
-	var move_state = get_move_state()
+	# Read player input
+	var dir := Vector2.ZERO
 	if Input.is_action_pressed("ui_up"):
-		input.y -= 1
-		facing_direction = "up"
+		dir = Vector2.UP
 	elif Input.is_action_pressed("ui_down"):
-		input.y += 1
-		facing_direction = "down"
+		dir = Vector2.DOWN
 	elif Input.is_action_pressed("ui_left"):
-		input.x -= 1
-		facing_direction = "left"
+		dir = Vector2.LEFT
 	elif Input.is_action_pressed("ui_right"):
-		input.x += 1
-		facing_direction = "right"
-	_animation_player.play(move_state + "_" + facing_direction)
-		
-	# if there is movement input
-	if input != Vector2.ZERO:
-		input = input.normalized()
-		facing = input
-		if(Input.is_action_pressed("sprint")):
-			sprinting = true
-		else:
-			sprinting = false
-		
-		# If new direction is different, update facing direction instantly
-		if input != facing_input:
-			facing_input = input
-			hold_timer = 0.0
-		else:
-			hold_timer += delta
-			if hold_timer >= HOLD_THRESHOLD:
-				var offset = input * GlobalConstants.tile_size
-				if !test_move(global_transform, offset):
-					target_position = global_position + offset
-					is_moving = true
-	
-	# no movement input
+		dir = Vector2.RIGHT
+
+	var want_sprint := Input.is_action_pressed("sprint")
+
+	# Feed desired input into the controller
+	if dir != Vector2.ZERO:
+		movement_controller.set_desired_input(dir, want_sprint)
 	else:
-		# Reset if no direction held
-		facing_input = Vector2.ZERO
-		hold_timer = 0.0
-		_animation_player.play("idle_" + facing_direction)
+		movement_controller.clear_input()
+
+	movement_controller.tick(delta)
+
+	# Animation
+	var state := movement_controller.get_move_state()
+	var facing_direction := movement_controller.facing_direction
+	animation_controller.play_animation(state, facing_direction)
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):
 		interact_ray._try_interact()
 
-func get_move_state() -> String:
-	if(facing_input == Vector2.ZERO):
-		return "idle"
-	elif(sprinting):
-		return "sprint" 
-	else:
-		return "move"
-		
-func update_facing_direction():
-	if(facing_input.x == 1):
-		facing_direction = "right"
-	elif(facing_input.x == -1):
-		facing_direction = "left"
-	elif(facing_input.y == 1):
-		facing_direction = "down"
-	else:
-		facing_direction = "up"
-
-func check_for_encounter():
+func check_for_encounter(pos: Vector2) -> void:
 	var current_map = get_parent().get_parent()
-	if(current_map == null): # no map
+	if current_map == null:
 		return
-	var encounter_layer = current_map.get_node("EncounterLayer")
-	if(encounter_layer == null):
+
+	var encounter_layer = current_map.get_node_or_null("EncounterLayer")
+	if encounter_layer == null:
 		return
-	EncounterManager.check_for_encounter_at_position(global_position, facing_input, encounter_layer)
+
+	EncounterManager.check_for_encounter_at_position(
+		pos,
+		movement_controller.facing_input,
+		encounter_layer
+	)

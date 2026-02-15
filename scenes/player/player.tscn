@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d2236iavdsvwx"]
+[gd_scene load_steps=32 format=3 uid="uid://dutcvifkop8y4"]
 
 [ext_resource type="Script" uid="uid://bg6jvoetwhsri" path="res://scripts/player/Player.gd" id="1_rn7t0"]
 [ext_resource type="Texture2D" uid="uid://qapnl4a7edr0" path="res://assets/player/player_down_idle.png" id="2_8qjgm"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b3w1ea6twktyn" path="res://assets/player/moving up 2.png" id="13_76i7i"]
 [ext_resource type="Texture2D" uid="uid://tw87rjfq10p0" path="res://assets/player/Player Sprites.png" id="14_mndc6"]
 [ext_resource type="Script" uid="uid://cqrpkg7kobw2m" path="res://scripts/interactables/TouchRay.gd" id="15_1hh02"]
+[ext_resource type="Script" uid="uid://d3x4je5gg76vk" path="res://scripts/player/CharacterAnimationController.gd" id="15_ejd4k"]
 [ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="16_8qjgm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7p2l"]
@@ -258,7 +259,7 @@ position = Vector2(8, 10)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_x7p2l")
 
-[node name="SpriteAnimation" type="AnimatedSprite2D" parent="."]
+[node name="AnimationController" type="AnimatedSprite2D" parent="."]
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
@@ -266,6 +267,7 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_007i1")
 animation = &"idle_down"
 offset = Vector2(8, 6)
+script = ExtResource("15_ejd4k")
 
 [node name="InteractRay" type="RayCast2D" parent="."]
 position = Vector2(8, 10)
@@ -275,3 +277,4 @@ script = ExtResource("15_1hh02")
 
 [node name="MovementController" type="Node2D" parent="."]
 script = ExtResource("16_8qjgm")
+body_path = NodePath("..")

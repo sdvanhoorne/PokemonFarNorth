@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://0g7pn53xa61b"]
+[gd_scene load_steps=12 format=3 uid="uid://0g7pn53xa61b"]
 
 [ext_resource type="Script" uid="uid://qqp20ckah3uk" path="res://scripts/npc/Trainer.gd" id="1_wrhou"]
 [ext_resource type="Script" uid="uid://50qhr3jx21nm" path="res://scripts/npc/SightRay.gd" id="2_pfr17"]
 [ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="2_wrhou"]
 [ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="4_pfr17"]
 [ext_resource type="Texture2D" uid="uid://bdqri77hip7v6" path="res://assets/tiles/Icons.png" id="5_u28ke"]
+[ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="6_u28ke"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ac6y7"]
 
@@ -63,6 +64,7 @@ position = Vector2(8, 10)
 target_position = Vector2(0, 64)
 script = ExtResource("2_pfr17")
 distance_tiles = 5
+scan_interval = 0.5
 
 [node name="NpcInteractable" type="Node2D" parent="."]
 script = ExtResource("2_wrhou")
@@ -81,3 +83,7 @@ frame = 4
 frame_progress = 0.228771
 
 [node name="CharacterAnimationController" parent="Sprites" instance=ExtResource("4_pfr17")]
+
+[node name="MovementController" type="Node2D" parent="."]
+script = ExtResource("6_u28ke")
+body_path = NodePath("..")

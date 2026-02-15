@@ -59,14 +59,13 @@ index: int = 0) -> Node2D:
 			var offset : Vector2 = Vector2(index * GlobalConstants.tile_size, 
 			0) if horizontal else Vector2(0, index * GlobalConstants.tile_size)
 			player.global_position = base_pos + offset
-			player.target_position = (base_pos + offset).snapped(Vector2(GlobalConstants.tile_size, 
+			player.movement_controller.target_position = (base_pos + offset).snapped(Vector2(GlobalConstants.tile_size, 
 			GlobalConstants.tile_size))
 
-	player.is_moving = false
-	player.facing_input = Vector2.ZERO
-	player.sprinting = false
-	player.hold_timer = 0.0
-	player.velocity = Vector2.ZERO
+	player.movement_controller.is_moving = false
+	player.movement_controller.facing_input = Vector2.ZERO
+	player.movement_controller.sprinting = false
+	player.movement_controller.hold_timer = 0.0
 	
 	if old_map:
 		old_map.queue_free()
