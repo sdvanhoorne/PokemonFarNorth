@@ -32,7 +32,7 @@ func _on_body_entered(body: Node2D) -> void:
 	world.load_map(packed_scene, body, spawn_point, horizontal, offset)
 	
 func get_warp_offset(player_position: Vector2) -> int:
-	var local_offset: Vector2 = (player_position - global_position) / GlobalConstants.TileSize
+	var local_offset: Vector2 = (player_position - global_position) / GlobalConstants.tile_size
 
 	var warp_offset: int
 	if horizontal:

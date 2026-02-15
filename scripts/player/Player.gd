@@ -16,7 +16,7 @@ func _physics_process(delta: float) -> void:
 	if not GameState.gameplay_input_enabled:
 		movement_controller.stop()
 		movement_controller.clear_input()
-		animation_controller.play_idle(movement_controller.facing_direction)
+		animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
 		return
 
 	# If currently stepping, controller will keep moving
