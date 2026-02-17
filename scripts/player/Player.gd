@@ -14,9 +14,9 @@ func _on_moved_to_tile(new_global_pos: Vector2) -> void:
 
 func _physics_process(delta: float) -> void:
 	if not GameState.gameplay_input_enabled:
-		movement_controller.stop()
+		# movement_controller.stop()
 		movement_controller.clear_input()
-		animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
+		# animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
 		return
 
 	# If currently stepping, controller will keep moving
@@ -47,9 +47,7 @@ func _physics_process(delta: float) -> void:
 	movement_controller.tick(delta)
 
 	# Animation
-	var state := movement_controller.get_move_state()
-	var facing_direction := movement_controller.facing_direction
-	animation_controller.play_animation(state, facing_direction)
+	animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):

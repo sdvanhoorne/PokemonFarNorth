@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://w8it21f8eyqh"]
+[gd_scene load_steps=8 format=3 uid="uid://w8it21f8eyqh"]
 
 [ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_sspvn"]
 [ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="3_dpyoa"]
 [ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="3_r4bp4"]
+[ext_resource type="SpriteFrames" uid="uid://dwa140lp7kh5j" path="res://assets/npc/npc_animation.tres" id="4_ay68w"]
 [ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="4_r4bp4"]
 [ext_resource type="Script" uid="uid://p8ogu4uv7xc4" path="res://scenes/npc/WanderController.gd" id="5_woxlu"]
 
@@ -28,7 +29,8 @@ npc = NodePath("..")
 
 [node name="CharacterAnimationController" parent="." instance=ExtResource("3_r4bp4")]
 position = Vector2(8, 4)
-animation = &"idle_up"
+sprite_frames = ExtResource("4_ay68w")
+animation = &"move_up"
 
 [node name="MovementController" type="Node2D" parent="."]
 script = ExtResource("4_r4bp4")

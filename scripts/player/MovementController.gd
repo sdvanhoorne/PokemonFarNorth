@@ -58,12 +58,12 @@ func stop() -> void:
 	body.velocity = Vector2.ZERO
 
 func get_move_state() -> String:
-	if facing_input == Vector2.ZERO:
-		return "idle"
-	elif sprinting:
-		return "sprint"
-	else:
+	if facing_input != Vector2.ZERO:
+		if sprinting:
+			return "sprint"
 		return "move"
+
+	return "idle"
 
 func clear_input() -> void:
 	facing_input = Vector2.ZERO
@@ -100,8 +100,6 @@ func request_step(dir: Vector2, want_sprint: bool = false) -> void:
 		return
 
 	set_desired_input(dir, want_sprint)
-
-	var old_threshold := hold_threshold
 	hold_timer = hold_threshold
 	tick(0.0)
 

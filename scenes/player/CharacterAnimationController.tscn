@@ -56,5 +56,5 @@ animations = [{
 
 [node name="CharacterAnimationController" type="AnimatedSprite2D"]
 sprite_frames = SubResource("SpriteFrames_58oal")
-animation = &"Idle_Down"
+animation = &"idle_down"
 script = ExtResource("1_58oal")

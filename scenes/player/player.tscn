@@ -117,7 +117,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_down",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -134,7 +134,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_left",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -151,7 +151,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_right",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -168,7 +168,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_up",
-"speed": 8.0
+"speed": 6.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -252,6 +252,7 @@ y_sort_enabled = true
 zoom = Vector2(4, 4)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
@@ -265,11 +266,12 @@ z_as_relative = false
 y_sort_enabled = true
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_007i1")
-animation = &"idle_down"
+animation = &"sprint_up"
 offset = Vector2(8, 6)
 script = ExtResource("15_ejd4k")
 
 [node name="InteractRay" type="RayCast2D" parent="."]
+visible = false
 position = Vector2(8, 10)
 target_position = Vector2(0, 0)
 collide_with_areas = true
