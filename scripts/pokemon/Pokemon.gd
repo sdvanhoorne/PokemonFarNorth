@@ -16,7 +16,7 @@ var battle_stats: PokemonStats = null
 var status: status_types
 
 func _init(id: int):
-	var path = "res://data/pokemon/%s.json" % Pokedex.pokedex[id]
+	var path = "res://data/pokemon/%s.json" % Pokedex.pokedex[id].to_lower()
 	var file = FileAccess.open(path, FileAccess.READ)
 	var data = JSON.parse_string(file.get_as_text())
 	base_data = PokemonBase.new(data["id"])

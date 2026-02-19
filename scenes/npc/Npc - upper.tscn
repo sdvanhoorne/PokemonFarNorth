@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://w8it21f8eyqh"]
+
+[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_uf2wo"]
+[ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="2_8jwjc"]
+[ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="3_8h7sj"]
+[ext_resource type="SpriteFrames" uid="uid://dwa140lp7kh5j" path="res://assets/npc/npc_animation.tres" id="4_jefaa"]
+[ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="5_ulc3t"]
+[ext_resource type="Script" uid="uid://p8ogu4uv7xc4" path="res://scripts/npc/WanderController.gd" id="6_jdl32"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
+
+[node name="Npc" type="CharacterBody2D"]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+script = ExtResource("1_uf2wo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 1
+z_as_relative = false
+y_sort_enabled = true
+position = Vector2(8, 10)
+scale = Vector2(0.5, 0.5)
+shape = SubResource("RectangleShape2D_pcwmf")
+
+[node name="Interactable" type="Node2D" parent="."]
+script = ExtResource("2_8jwjc")
+npc = NodePath("..")
+
+[node name="CharacterAnimationController" parent="." instance=ExtResource("3_8h7sj")]
+position = Vector2(8, 4)
+sprite_frames = ExtResource("4_jefaa")
+animation = &"move_down"
+
+[node name="MovementController" type="Node2D" parent="."]
+script = ExtResource("5_ulc3t")
+body_path = NodePath("..")
+
+[node name="WanderController" type="Node2D" parent="."]
+script = ExtResource("6_jdl32")
+movement_controller_path = NodePath("../MovementController")
