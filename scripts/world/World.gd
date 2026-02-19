@@ -78,14 +78,14 @@ index: int = 0) -> Node2D:
 
 func _on_home_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
-	load_map(load("res://scenes/world/towns/starting_town/starting_town.tscn"), null, 
+	load_map(MapRegistry.get_map("starting_town"), null, 
 	"StartingHouseSpawn")
 
 func _on_battle_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
 	var encounteredPokemon = Pokemon.new_wild(14, 1)
 	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), 
-	"res://scenes/world/towns/starting_town/starting_town.tscn", false)
+	"", false)
 	
 func _on_load_pressed() -> void:
 	var save := SaveData.load_savedata()
