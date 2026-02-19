@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://w8it21f8eyqh"]
 
-[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_uf2wo"]
+[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc - upper.gd" id="1_uf2wo"]
 [ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="2_8jwjc"]
 [ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="3_8h7sj"]
 [ext_resource type="SpriteFrames" uid="uid://dwa140lp7kh5j" path="res://assets/npc/npc_animation.tres" id="4_jefaa"]
