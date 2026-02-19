@@ -1,14 +1,14 @@
 [gd_scene load_steps=16 format=3 uid="uid://bihya4k8vuet"]
 
-[ext_resource type="Script" uid="uid://dsb5p8di0tfn1" path="res://scripts/battle/BattleController.gd" id="1_cfqpo"]
-[ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scripts/battle/BattleUI.gd" id="2_0t7ug"]
-[ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scripts/battle/PokemonTooltip.gd" id="3_k32nv"]
-[ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="4_v4b2u"]
-[ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/BattleInfo.tscn" id="5_0arhx"]
-[ext_resource type="Texture2D" uid="uid://c5jlr3wso5qo8" path="res://assets/pokemon/ai/Cubble.png" id="6_gsqij"]
-[ext_resource type="PackedScene" uid="uid://dbxwbt4xfqvow" path="res://scenes/ui/PartyUI - upper.tscn" id="7_uh6o0"]
-[ext_resource type="PackedScene" uid="uid://iahi0fr58n5" path="res://scenes/ui/PartyMemberUI.tscn" id="8_wia7h"]
-[ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="9_edfr6"]
+[ext_resource type="Script" uid="uid://dsb5p8di0tfn1" path="res://scripts/battle/BattleController.gd" id="1_7gd76"]
+[ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scripts/battle/BattleUI.gd" id="2_0pul7"]
+[ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scripts/battle/PokemonTooltip.gd" id="3_34g4o"]
+[ext_resource type="Texture2D" uid="uid://di2o18kvjt22e" path="res://assets/pokemon/ai/Minket.png" id="4_ys77n"]
+[ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/BattleInfo.tscn" id="5_tbq5m"]
+[ext_resource type="Texture2D" uid="uid://c5jlr3wso5qo8" path="res://assets/pokemon/ai/Cubble.png" id="6_kvxa7"]
+[ext_resource type="PackedScene" uid="uid://dbxwbt4xfqvow" path="res://scenes/ui/PartyUI.tscn" id="7_mtsvn"]
+[ext_resource type="PackedScene" uid="uid://iahi0fr58n5" path="res://scenes/ui/PartyMemberUI.tscn" id="8_84xrd"]
+[ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="9_2iovi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
 size = Vector2(49.6667, 45)
@@ -38,7 +38,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="Battle" type="Node2D"]
-script = ExtResource("1_cfqpo")
+script = ExtResource("1_7gd76")
 
 [node name="BattleUI" type="Control" parent="."]
 layout_mode = 3
@@ -46,7 +46,7 @@ anchor_right = 0.875
 offset_right = 1920.0
 offset_bottom = 1080.0
 mouse_filter = 2
-script = ExtResource("2_0t7ug")
+script = ExtResource("2_0pul7")
 
 [node name="PlayerPokemonUI" type="Control" parent="BattleUI"]
 layout_mode = 1
@@ -58,7 +58,7 @@ mouse_filter = 2
 [node name="PlayerPokemon" type="Node2D" parent="BattleUI/PlayerPokemonUI"]
 position = Vector2(300, 300)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("3_k32nv")
+script = ExtResource("3_34g4o")
 
 [node name="SpriteArea" type="Area2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon"]
 position = Vector2(24, 0)
@@ -67,7 +67,7 @@ position = Vector2(24, 0)
 texture_filter = 1
 position = Vector2(1.33333, 27.3333)
 scale = Vector2(5, 5)
-texture = ExtResource("4_v4b2u")
+texture = ExtResource("4_ys77n")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea"]
@@ -75,7 +75,7 @@ position = Vector2(1, 44.3333)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("5_0arhx")]
+[node name="Info" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("5_tbq5m")]
 offset_left = -113.333
 offset_top = -134.0
 offset_right = -73.3333
@@ -93,7 +93,7 @@ grow_horizontal = 0
 [node name="EnemyPokemon" type="Node2D" parent="BattleUI/EnemyPokemonUI"]
 position = Vector2(610, 344)
 scale = Vector2(1.5, 1.5)
-script = ExtResource("3_k32nv")
+script = ExtResource("3_34g4o")
 
 [node name="SpriteArea" type="Area2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon"]
 position = Vector2(0, -0.666667)
@@ -101,7 +101,7 @@ position = Vector2(0, -0.666667)
 [node name="Sprite" type="Sprite2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea"]
 texture_filter = 1
 scale = Vector2(5, 5)
-texture = ExtResource("6_gsqij")
+texture = ExtResource("6_kvxa7")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea"]
 z_index = 1
@@ -109,7 +109,7 @@ position = Vector2(0, 23.3333)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("5_0arhx")]
+[node name="Info" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("5_tbq5m")]
 offset_left = -124.0
 offset_top = -152.667
 offset_right = -84.0
@@ -128,11 +128,11 @@ mouse_filter = 2
 [node name="Background" type="Sprite2D" parent="BattleUI"]
 visible = false
 
-[node name="PartyUI" parent="BattleUI" instance=ExtResource("7_uh6o0")]
+[node name="PartyUI" parent="BattleUI" instance=ExtResource("7_mtsvn")]
 visible = false
 custom_minimum_size = Vector2(1920, 1080)
 layout_mode = 1
-party_member_scene = ExtResource("8_wia7h")
+party_member_scene = ExtResource("8_84xrd")
 
 [node name="BottomUI" type="Control" parent="BattleUI"]
 layout_mode = 1
@@ -232,7 +232,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("9_edfr6")
+theme = ExtResource("9_2iovi")
 theme_override_colors/table_border = Color(0, 0, 0, 1)
 text = "What would you like to do?"
 

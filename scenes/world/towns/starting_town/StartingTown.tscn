@@ -2,10 +2,10 @@
 
 [ext_resource type="TileSet" uid="uid://6b7jmwqt02xb" path="res://assets/tiles/routes.tres" id="1_eieiu"]
 [ext_resource type="TileSet" uid="uid://6712cs13i3l5" path="res://assets/tiles/buildings.tres" id="2_g5t2g"]
-[ext_resource type="PackedScene" uid="uid://cafbopdsn5p6t" path="res://scenes/world/interactables/Sign - upper.tscn" id="3_7l530"]
+[ext_resource type="PackedScene" uid="uid://cafbopdsn5p6t" path="res://scenes/world/interactables/Sign.tscn" id="3_7l530"]
 [ext_resource type="Texture2D" uid="uid://djhe0rpm63ikf" path="res://assets/items/sign.png" id="4_vexvy"]
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="5_tsaxn"]
-[ext_resource type="PackedScene" uid="uid://w8it21f8eyqh" path="res://scenes/npc/Npc - upper.tscn" id="6_1sqhx"]
+[ext_resource type="PackedScene" uid="uid://w8it21f8eyqh" path="res://scenes/npc/Npc.tscn" id="6_1sqhx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icgh1"]
 size = Vector2(20, 10)

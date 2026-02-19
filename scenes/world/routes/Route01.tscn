@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://b5iug47ku2kcd"]
 
 [ext_resource type="TileSet" uid="uid://6b7jmwqt02xb" path="res://assets/tiles/routes.tres" id="1_bjxq3"]
-[ext_resource type="PackedScene" uid="uid://c1deemrnljwky" path="res://scenes/world/interactables/Item - upper.tscn" id="2_bco67"]
+[ext_resource type="PackedScene" uid="uid://c1deemrnljwky" path="res://scenes/world/interactables/Item.tscn" id="2_bco67"]
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="3_s483v"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nv1ov"]
