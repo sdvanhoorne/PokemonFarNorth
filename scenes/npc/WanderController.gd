@@ -31,6 +31,8 @@ func _physics_process(delta: float) -> void:
 		return
 	if move.is_moving:
 		return
+	else:
+		move.clear_input()
 
 	_timer += delta
 	if _timer < _next_time:

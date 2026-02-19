@@ -102,5 +102,3 @@ func request_step(dir: Vector2, want_sprint: bool = false) -> void:
 	set_desired_input(dir, want_sprint)
 	hold_timer = hold_threshold
 	tick(0.0)
-
-	clear_input()

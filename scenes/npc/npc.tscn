@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="3_r4bp4"]
 [ext_resource type="SpriteFrames" uid="uid://dwa140lp7kh5j" path="res://assets/npc/npc_animation.tres" id="4_ay68w"]
 [ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="4_r4bp4"]
-[ext_resource type="Script" path="res://scenes/npc/WanderController.gd" id="5_woxlu"]
+[ext_resource type="Script" uid="uid://p8ogu4uv7xc4" path="res://scenes/npc/WanderController.gd" id="5_woxlu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
 
