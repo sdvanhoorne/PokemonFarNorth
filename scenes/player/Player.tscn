@@ -1,78 +1,78 @@
 [gd_scene load_steps=32 format=3 uid="uid://dutcvifkop8y4"]
 
-[ext_resource type="Script" uid="uid://bg6jvoetwhsri" path="res://scripts/player/Player.gd" id="1_rn7t0"]
-[ext_resource type="Texture2D" uid="uid://qapnl4a7edr0" path="res://assets/player/player_down_idle.png" id="2_8qjgm"]
-[ext_resource type="Texture2D" uid="uid://qcikspsy7a74" path="res://assets/player/player_left_idle.png" id="3_ejd4k"]
-[ext_resource type="Texture2D" uid="uid://dtnpw774a6y38" path="res://assets/player/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png" id="4_2xrq6"]
-[ext_resource type="Texture2D" uid="uid://bu5vtalxdd5de" path="res://assets/player/player_up_idle.png" id="5_pi3ps"]
-[ext_resource type="Texture2D" uid="uid://c4fxgprgfeewq" path="res://assets/player/player down move.png" id="6_kswpp"]
-[ext_resource type="Texture2D" uid="uid://bk2ov8reqenaj" path="res://assets/player/moving down 2.png" id="7_v5i4m"]
-[ext_resource type="Texture2D" uid="uid://c8ieknn6gf2yu" path="res://assets/player/moving left 1.png" id="8_p1lr0"]
-[ext_resource type="Texture2D" uid="uid://cpuvqs7sc2jhp" path="res://assets/player/moving left 2.png" id="9_ro0t8"]
-[ext_resource type="Texture2D" uid="uid://cl8add61frquw" path="res://assets/player/moving right 2.png" id="10_8nn5r"]
-[ext_resource type="Texture2D" uid="uid://5bgtc8redxwy" path="res://assets/player/moving right 1.png" id="11_kvwax"]
-[ext_resource type="Texture2D" uid="uid://cvn0cj4c0jr14" path="res://assets/player/moving up 1.png" id="12_x3qp0"]
-[ext_resource type="Texture2D" uid="uid://b3w1ea6twktyn" path="res://assets/player/moving up 2.png" id="13_76i7i"]
-[ext_resource type="Texture2D" uid="uid://tw87rjfq10p0" path="res://assets/player/Player Sprites.png" id="14_mndc6"]
-[ext_resource type="Script" uid="uid://cqrpkg7kobw2m" path="res://scripts/interactables/TouchRay.gd" id="15_1hh02"]
-[ext_resource type="Script" uid="uid://d3x4je5gg76vk" path="res://scripts/player/CharacterAnimationController.gd" id="15_ejd4k"]
-[ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="16_8qjgm"]
+[ext_resource type="Script" uid="uid://bg6jvoetwhsri" path="res://scripts/player/Player.gd" id="1_ejd4k"]
+[ext_resource type="Texture2D" uid="uid://qapnl4a7edr0" path="res://assets/player/player_down_idle.png" id="2_2xrq6"]
+[ext_resource type="Texture2D" uid="uid://qcikspsy7a74" path="res://assets/player/player_left_idle.png" id="3_pi3ps"]
+[ext_resource type="Texture2D" uid="uid://dtnpw774a6y38" path="res://assets/player/Game Boy Advance - Pokemon FireRed LeafGreen - Overworld NPCs.png" id="4_kswpp"]
+[ext_resource type="Texture2D" uid="uid://bu5vtalxdd5de" path="res://assets/player/player_up_idle.png" id="5_v5i4m"]
+[ext_resource type="Texture2D" uid="uid://c4fxgprgfeewq" path="res://assets/player/player down move.png" id="6_p1lr0"]
+[ext_resource type="Texture2D" uid="uid://bk2ov8reqenaj" path="res://assets/player/moving down 2.png" id="7_ro0t8"]
+[ext_resource type="Texture2D" uid="uid://c8ieknn6gf2yu" path="res://assets/player/moving left 1.png" id="8_8nn5r"]
+[ext_resource type="Texture2D" uid="uid://cpuvqs7sc2jhp" path="res://assets/player/moving left 2.png" id="9_kvwax"]
+[ext_resource type="Texture2D" uid="uid://cl8add61frquw" path="res://assets/player/moving right 2.png" id="10_x3qp0"]
+[ext_resource type="Texture2D" uid="uid://5bgtc8redxwy" path="res://assets/player/moving right 1.png" id="11_76i7i"]
+[ext_resource type="Texture2D" uid="uid://cvn0cj4c0jr14" path="res://assets/player/moving up 1.png" id="12_mndc6"]
+[ext_resource type="Texture2D" uid="uid://b3w1ea6twktyn" path="res://assets/player/moving up 2.png" id="13_1hh02"]
+[ext_resource type="Texture2D" uid="uid://tw87rjfq10p0" path="res://assets/player/Player Sprites.png" id="14_5ttev"]
+[ext_resource type="Script" uid="uid://d3x4je5gg76vk" path="res://scripts/player/CharacterAnimationController.gd" id="15_geaob"]
+[ext_resource type="Script" uid="uid://cqrpkg7kobw2m" path="res://scripts/interactables/TouchRay.gd" id="16_qsmrd"]
+[ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="17_jtlb7"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_x7p2l"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcs02"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(68, 48, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_myrg7"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(85, 48, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kvlxm"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(102, 48, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uf5tr"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(68, 114, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lgqa7"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(85, 114, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8ydkj"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(102, 114, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ugbui"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(68, 147, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cnsyf"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(85, 147, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_007i1"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(102, 147, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3j4b4"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(102, 81, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_yj68g"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(85, 81, 16, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ioxgp"]
-atlas = ExtResource("14_mndc6")
+atlas = ExtResource("14_5ttev")
 region = Rect2(68, 81, 16, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_007i1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_8qjgm")
+"texture": ExtResource("2_2xrq6")
 }],
 "loop": true,
 "name": &"idle_down",
@@ -80,7 +80,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_ejd4k")
+"texture": ExtResource("3_pi3ps")
 }],
 "loop": true,
 "name": &"idle_left",
@@ -88,7 +88,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("4_2xrq6")
+"texture": ExtResource("4_kswpp")
 }],
 "loop": true,
 "name": &"idle_right",
@@ -96,7 +96,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("5_pi3ps")
+"texture": ExtResource("5_v5i4m")
 }],
 "loop": true,
 "name": &"idle_up",
@@ -104,16 +104,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("6_kswpp")
+"texture": ExtResource("6_p1lr0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_8qjgm")
+"texture": ExtResource("2_2xrq6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_v5i4m")
+"texture": ExtResource("7_ro0t8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("2_8qjgm")
+"texture": ExtResource("2_2xrq6")
 }],
 "loop": true,
 "name": &"move_down",
@@ -121,16 +121,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_p1lr0")
+"texture": ExtResource("8_8nn5r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_ejd4k")
+"texture": ExtResource("3_pi3ps")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_ro0t8")
+"texture": ExtResource("9_kvwax")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_ejd4k")
+"texture": ExtResource("3_pi3ps")
 }],
 "loop": true,
 "name": &"move_left",
@@ -138,16 +138,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("10_8nn5r")
+"texture": ExtResource("10_x3qp0")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_2xrq6")
+"texture": ExtResource("4_kswpp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_kvwax")
+"texture": ExtResource("11_76i7i")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_2xrq6")
+"texture": ExtResource("4_kswpp")
 }],
 "loop": true,
 "name": &"move_right",
@@ -155,16 +155,16 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("12_x3qp0")
+"texture": ExtResource("12_mndc6")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_pi3ps")
+"texture": ExtResource("5_v5i4m")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_76i7i")
+"texture": ExtResource("13_1hh02")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_pi3ps")
+"texture": ExtResource("5_v5i4m")
 }],
 "loop": true,
 "name": &"move_up",
@@ -243,7 +243,7 @@ animations = [{
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
-script = ExtResource("1_rn7t0")
+script = ExtResource("1_ejd4k")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 z_index = 1
@@ -268,15 +268,15 @@ texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_007i1")
 animation = &"sprint_up"
 offset = Vector2(8, 6)
-script = ExtResource("15_ejd4k")
+script = ExtResource("15_geaob")
 
 [node name="InteractRay" type="RayCast2D" parent="."]
 visible = false
 position = Vector2(8, 10)
 target_position = Vector2(0, 0)
 collide_with_areas = true
-script = ExtResource("15_1hh02")
+script = ExtResource("16_qsmrd")
 
 [node name="MovementController" type="Node2D" parent="."]
-script = ExtResource("16_8qjgm")
+script = ExtResource("17_jtlb7")
 body_path = NodePath("..")
