@@ -21,6 +21,8 @@ func _physics_process(delta: float) -> void:
 	# Animation
 	var state := movement_controller.get_move_state()
 	var facing_direction := movement_controller.facing_direction
+	if(state == "move"):
+		var test = 1
 	character_animation_controller.play_animation(state, facing_direction)
 
 func on_talk(player: Node) -> void:
@@ -28,7 +30,7 @@ func on_talk(player: Node) -> void:
 	movement_controller._update_facing_direction_from_vector(player.global_position - global_position)
 	character_animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
 	await DialogueManager.say(load_dialogue_from_file(),{
-		"lock_input": false,
+		"lock_input": true,
 		"require_input": true
 	})
 	wander_controller.enabled = true
