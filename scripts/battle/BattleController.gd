@@ -17,6 +17,7 @@ var pending_enemy_action: BattleAction = null
 
 func _ready() -> void:
 	engine = BattleEngine.new()
+	engine.setup()
 	rng.randomize()
 	_wire_signals()
 	await _start_battle_intro()

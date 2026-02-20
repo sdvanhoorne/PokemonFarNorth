@@ -2,12 +2,16 @@
 # updates Pokemon objects
 # and queues events for the BattleController
 
+extends Node
 class_name BattleEngine
-extends RefCounted
+
+const DamageCalculation := preload("res://scripts/battle/DamageCalculation.gd")
+var damage_calculation: DamageCalculation
 
 enum Side { PLAYER, ENEMY }
 
-# Event objects 
+func setup() -> void:
+	damage_calculation = DamageCalculation.new()
 
 static func msg(text: String) -> Dictionary:
 	return {"type": "message", "text": text}
@@ -119,7 +123,7 @@ func _execute_move(side: int, attacker: Pokemon, defender: Pokemon, move: Move, 
 			events.append(msg("But it failed."))
 
 func _apply_damage(attacker_side: int, move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
-	var damage: int = DamageCalculation.get_damage(move, attacker, defender)
+	var damage: int = damage_calculation.get_damage(move, attacker, defender)
 	var old_hp = defender.current_hp
 	var new_hp = max(defender.current_hp - damage, 0)
 	defender.current_hp -= damage
@@ -175,7 +179,6 @@ func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 			events.append(battle_end("player_win"))
 			return true
 
-		# TODO Clamp active index / determine next enemy pokemon
 		state.enemy_active = clamp(state.enemy_active, 0, state.enemy_party.size() - 1)
 		events.append(switch(Side.ENEMY, state.enemy_active))
 		events.append(msg("Enemy sent out %s!" % _enemy_active(state).base_data.name))

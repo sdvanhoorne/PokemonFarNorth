@@ -1,4 +1,6 @@
 extends Node
+class_name DamageCalculation
+
 const TypeEffectivenessChartPath = "res://data/types/type_effectiveness.json"
 
 func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> int:	
