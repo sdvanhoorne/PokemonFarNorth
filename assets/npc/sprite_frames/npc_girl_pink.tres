@@ -1,63 +1,56 @@
-[gd_scene load_steps=21 format=3 uid="uid://w8it21f8eyqh"]
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://cwwfmm3bc5t4i"]
 
-[ext_resource type="Script" uid="uid://2ubv4urhpaiy" path="res://scripts/npc/Npc.gd" id="1_uf2wo"]
-[ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="2_8jwjc"]
-[ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="3_8h7sj"]
-[ext_resource type="Texture2D" uid="uid://cv4aatad8nisl" path="res://assets/tiles/npcs and items.png" id="4_f3n3r"]
-[ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="5_ulc3t"]
-[ext_resource type="Script" uid="uid://p8ogu4uv7xc4" path="res://scripts/npc/WanderController.gd" id="6_jdl32"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pcwmf"]
+[ext_resource type="Texture2D" uid="uid://cv4aatad8nisl" path="res://assets/tiles/npcs and items.png" id="1_sjnrq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dcrxv"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(26, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_uoc4r"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(128, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sbfk7"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(179, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4xy0x"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(77, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6mfu7"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(9, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nh1ho"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(43, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rv8sj"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(111, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_147ix"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(145, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3slcr"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(162, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ue5c2"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(196, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fg5hv"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(60, 192, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_skos2"]
-atlas = ExtResource("4_f3n3r")
+atlas = ExtResource("1_sjnrq")
 region = Rect2(94, 192, 16, 24)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_vexvy"]
+[resource]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -159,33 +152,3 @@ animations = [{
 "name": &"move_up",
 "speed": 8.0
 }]
-
-[node name="Npc" type="CharacterBody2D"]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-script = ExtResource("1_uf2wo")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-z_index = 1
-z_as_relative = false
-y_sort_enabled = true
-position = Vector2(8, 10)
-scale = Vector2(0.5, 0.5)
-shape = SubResource("RectangleShape2D_pcwmf")
-
-[node name="Interactable" type="Node2D" parent="."]
-script = ExtResource("2_8jwjc")
-npc = NodePath("..")
-
-[node name="CharacterAnimationController" parent="." instance=ExtResource("3_8h7sj")]
-position = Vector2(8, 4)
-sprite_frames = SubResource("SpriteFrames_vexvy")
-
-[node name="MovementController" type="Node2D" parent="."]
-script = ExtResource("5_ulc3t")
-body_path = NodePath("..")
-
-[node name="WanderController" type="Node2D" parent="."]
-script = ExtResource("6_jdl32")
-movement_controller_path = NodePath("../MovementController")

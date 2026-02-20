@@ -1,7 +1,9 @@
 extends CharacterBody2D
+class_name Npc
 
 @export var npc_id: String = "default_npc"
 @export var dialogue_file: String = "res://data/npcs/npcs.json"
+@export var sprite_frames: SpriteFrames
 
 @onready var character_animation_controller: CharacterAnimationController = $CharacterAnimationController
 @onready var movement_controller: MovementController = $MovementController
@@ -11,7 +13,7 @@ extends CharacterBody2D
 var Movement = null
 
 func _ready():
-	# Movement = MovementController.new(self)
+	character_animation_controller.sprite_frames = sprite_frames
 	movement_controller._update_facing_direction_from_vector(Vector2.DOWN) 
 	movement_controller.snap_to_grid()
 	
