@@ -23,8 +23,6 @@ func _physics_process(delta: float) -> void:
 	# Animation
 	var state := movement_controller.get_move_state()
 	var facing_direction := movement_controller.facing_direction
-	if(state == "move"):
-		var test = 1
 	character_animation_controller.play_animation(state, facing_direction)
 
 func on_talk(player: Node) -> void:

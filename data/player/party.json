@@ -2,21 +2,21 @@
 	"Party": [
 		{
 			"current_hp": 33,
-			"current_xp": 712,
+			"current_xp": 732,
 			"id": 7,
-			"level": 9,
+			"level": 10,
 			"move_names": [
 				"Tackle",
 				"Tail Whip",
 				"Ember"
 			],
 			"stats": {
-				"attack": 10,
-				"defense": 12,
-				"hp": 33,
-				"special_attack": 25,
-				"special_defense": 23,
-				"speed": 21
+				"attack": 12,
+				"defense": 9,
+				"hp": 35,
+				"special_attack": 28,
+				"special_defense": 26,
+				"speed": 24
 			},
 			"status": "0"
 		},

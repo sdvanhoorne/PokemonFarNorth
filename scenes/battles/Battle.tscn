@@ -255,7 +255,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Fight"
 vertical_icon_alignment = 2
 
@@ -265,7 +265,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Switch"
 
 [node name="Item" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
@@ -274,7 +274,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Item"
 
 [node name="Run" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
@@ -283,7 +283,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 64
 text = "Run"
 
 [connection signal="mouse_entered" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_entered"]

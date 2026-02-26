@@ -66,21 +66,21 @@ static func new_existing(data: Dictionary) -> Pokemon:
 	pokemon.xp_to_next_level = calculate_xp_to_next(pokemon.level)
 	return pokemon
 
-static func new_wild(id: int, level: int) -> Pokemon:		
+static func new_wild(id: int, lvl: int) -> Pokemon:		
 	var pokemon = Pokemon.new(id)
-	pokemon.level = level
+	pokemon.level = lvl
 	pokemon.status = status_types.NONE
-	pokemon.move_names = get_learned_moves(level, pokemon.base_data.learnable_moves)
-	pokemon.stats = PokemonStats.scaled_stats(level, pokemon.base_data.base_stats)
+	pokemon.move_names = get_learned_moves(lvl, pokemon.base_data.learnable_moves)
+	pokemon.stats = PokemonStats.scaled_stats(lvl, pokemon.base_data.base_stats)
 	pokemon.battle_stats = pokemon.stats
 	pokemon.current_hp = pokemon.battle_stats.hp		
 	return pokemon
 
-static func get_learned_moves(level: int, learnable_moves: Array) -> Array:
+static func get_learned_moves(lvl: int, learnable_moves: Array) -> Array:
 	var learned_moves = []
 
 	for learnable_move in learnable_moves:
-		if learnable_move["level"] <= level:
+		if learnable_move["level"] <= lvl:
 			learned_moves.append(learnable_move)
 
 	learned_moves.sort_custom(func(a, b): return b["level"] - a["level"])
@@ -114,5 +114,5 @@ func recalculate_stats_on_level_up() -> void:
 	current_hp = battle_stats.hp
 	battle_stats = stats
 
-static func get_xp_given(level: int) -> int:
-	return int(level * level * level / 4)
+static func get_xp_given(lvl: int) -> int:
+	return int(lvl * lvl * lvl / 4)

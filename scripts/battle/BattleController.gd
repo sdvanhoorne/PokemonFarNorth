@@ -99,6 +99,7 @@ func _on_fight_pressed() -> void:
 
 func _on_run_pressed() -> void:
 	pending_player_action = BattleAction.make_run("player")
+	await _process_turn()
 
 func _run() -> void:
 	if input_locked: return
@@ -134,18 +135,18 @@ func _process_turn():
 	
 	if(pending_player_action.action_type == BattleAction.battle_action_type.RUN):
 		_run()
+	else:
+		# no enemy switches yet, just moves
+		pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
+		_set_display_state_from_state()
 		
-	# no enemy switches yet, just moves
-	pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
-	_set_display_state_from_state()
-		
-	var result: Dictionary = engine.resolve_turn(pending_player_action, pending_enemy_action, state)
-	state = result.state
-	await _play_events(result.events)
-	if _events_contain_battle_end(result.events):
-		return
+		var result: Dictionary = engine.resolve_turn(pending_player_action, pending_enemy_action, state)
+		state = result.state
+		await _play_events(result.events)
+		if _events_contain_battle_end(result.events):
+			return
 
-	battle_ui.set_state(BattleUI.UIState.OPTIONS)
+		battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
 func _determine_enemy_move_index() -> int:
 	return rng.randi_range(0, _enemy_active().moves.size() - 1)
