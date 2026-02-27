@@ -36,7 +36,7 @@ func set_desired_input(dir: Vector2, want_sprint: bool) -> void:
 
 func tick(delta: float) -> void:
 	if is_moving:
-		_continue_move()
+		_continue_move(delta)
 		return
 
 	# no input held
@@ -69,7 +69,7 @@ func clear_input() -> void:
 	facing_input = Vector2.ZERO
 	hold_timer = 0.0
 
-func _continue_move() -> void:
+func _continue_move(delta: float) -> void:
 	var dir := (target_position - body.global_position).normalized()
 	body.velocity = dir * (GlobalConstants.tile_size / GlobalConstants.move_time)
 	if sprinting:
@@ -78,7 +78,7 @@ func _continue_move() -> void:
 	body.move_and_slide()
 
 	if body.global_position.distance_to(target_position) <= body.velocity.length() * get_physics_process_delta_time():
-		body.global_position = target_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size))
+		body.global_position = target_position
 		is_moving = false
 		body.velocity = Vector2.ZERO
 		emit_signal("moved_to_tile", body.global_position)

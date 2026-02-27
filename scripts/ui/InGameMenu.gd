@@ -7,3 +7,6 @@ func open() -> void:
 
 func close() -> void:
 	visible = false
+
+func _on_pokemon_pressed() -> void:
+	visible = false

@@ -250,6 +250,7 @@ z_index = 1
 z_as_relative = false
 y_sort_enabled = true
 zoom = Vector2(4, 4)
+position_smoothing_speed = 120.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false

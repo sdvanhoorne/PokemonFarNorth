@@ -89,3 +89,5 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Option"
+
+[connection signal="pressed" from="Control/MarginContainer/PanelContainer/VBoxContainer/PokemonContainer/Button" to="." method="_on_pokemon_pressed"]
