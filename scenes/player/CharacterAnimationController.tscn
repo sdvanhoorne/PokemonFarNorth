@@ -1,60 +1,15 @@
-[gd_scene load_steps=8 format=3 uid="uid://dnl817dmradhb"]
+[gd_scene load_steps=4 format=3 uid="uid://dnl817dmradhb"]
 
 [ext_resource type="Script" uid="uid://d3x4je5gg76vk" path="res://scripts/player/CharacterAnimationController.gd" id="1_58oal"]
-[ext_resource type="Texture2D" uid="uid://cv4aatad8nisl" path="res://assets/tiles/npcs and items.png" id="1_io4jj"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_lgsoj"]
-atlas = ExtResource("1_io4jj")
-region = Rect2(26, 217, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6tprd"]
-atlas = ExtResource("1_io4jj")
-region = Rect2(128, 217, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_cw35r"]
-atlas = ExtResource("1_io4jj")
-region = Rect2(179, 217, 16, 24)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_5jlb0"]
-atlas = ExtResource("1_io4jj")
-region = Rect2(77, 217, 16, 24)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_58oal"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_lgsoj")
-}],
-"loop": true,
-"name": &"idle_down",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6tprd")
-}],
-"loop": true,
-"name": &"idle_left",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_cw35r")
-}],
-"loop": true,
-"name": &"idle_right",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_5jlb0")
-}],
-"loop": true,
-"name": &"idle_up",
-"speed": 5.0
-}]
+[ext_resource type="SpriteFrames" path="res://assets/npc/sprite_frames/npc_guy_large.tres" id="1_lgsoj"]
+[ext_resource type="Texture2D" uid="uid://rosf23ddge0c" path="res://assets/character/Character_Shadow.png" id="3_6tprd"]
 
 [node name="CharacterAnimationController" type="AnimatedSprite2D"]
-sprite_frames = SubResource("SpriteFrames_58oal")
-animation = &"idle_up"
+sprite_frames = ExtResource("1_lgsoj")
+animation = &"idle_down"
 script = ExtResource("1_58oal")
+
+[node name="Shadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(0, 6)
+texture = ExtResource("3_6tprd")

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cpuvqs7sc2jhp"
-path="res://.godot/imported/moving left 2.png-3e7ecc131418a7d49140e76723d8d1ae.ctex"
+uid="uid://rosf23ddge0c"
+path="res://.godot/imported/Character_Shadow.png-a050767c657d09b715c4554bf4e7aba2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/player/moving left 2.png"
-dest_files=["res://.godot/imported/moving left 2.png-3e7ecc131418a7d49140e76723d8d1ae.ctex"]
+source_file="res://assets/character/Character_Shadow.png"
+dest_files=["res://.godot/imported/Character_Shadow.png-a050767c657d09b715c4554bf4e7aba2.ctex"]
 
 [params]
 

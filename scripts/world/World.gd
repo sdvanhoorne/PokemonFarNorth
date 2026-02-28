@@ -1,7 +1,7 @@
 extends Node2D
 
 # @onready var player = $Player
-const PlayerScene = preload("res://scenes/player/player.tscn")
+const PlayerScene = preload("res://scenes/player/Player.tscn")
 var current_map: Node = null
 var is_loading_map := false
 

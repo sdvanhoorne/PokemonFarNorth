@@ -3,7 +3,7 @@ class_name Player
 
 @onready var interact_ray: RayCast2D = $InteractRay
 @onready var movement_controller: MovementController = $MovementController
-@onready var animation_controller: CharacterAnimationController = $AnimationController
+@onready var animation_controller: CharacterAnimationController = $CharacterAnimationController
 
 func _ready() -> void:
 	movement_controller.snap_to_grid()
