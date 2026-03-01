@@ -38,8 +38,8 @@ script = ExtResource("1_7gd76")
 [node name="BattleUI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_right = 960.0
-offset_bottom = 640.0
+offset_right = 240.0
+offset_bottom = 160.0
 mouse_filter = 2
 script = ExtResource("2_0pul7")
 

@@ -13,4 +13,4 @@ class_name Sign
 @onready var sprite: Sprite2D = $Sprite2D
 
 func _do_interact(_player: Node) -> void:
-	await DialogueManager.start_dialogue([text])
+	await DialogueManager.say([text])
