@@ -1,5 +1,6 @@
-[gd_scene load_steps=6 format=4 uid="uid://b5iug47ku2kcd"]
+[gd_scene load_steps=7 format=4 uid="uid://b5iug47ku2kcd"]
 
+[ext_resource type="Script" uid="uid://b370wgf4mu5lc" path="res://scripts/world/MapBase.gd" id="1_3t070"]
 [ext_resource type="TileSet" uid="uid://6b7jmwqt02xb" path="res://assets/tiles/routes.tres" id="1_bjxq3"]
 [ext_resource type="PackedScene" uid="uid://c1deemrnljwky" path="res://scenes/world/interactables/Item.tscn" id="2_bco67"]
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="3_s483v"]
@@ -11,6 +12,8 @@ size = Vector2(80, 20)
 size = Vector2(16, 8)
 
 [node name="Route01" type="Node2D"]
+script = ExtResource("1_3t070")
+map_display_name = "Route 01"
 
 [node name="GroundLayer" type="TileMapLayer" parent="."]
 texture_filter = 1

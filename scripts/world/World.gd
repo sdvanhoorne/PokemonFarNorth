@@ -5,7 +5,8 @@ const PlayerScene = preload("res://scenes/player/Player.tscn")
 var current_map: Node = null
 var is_loading_map := false
 
-@onready var menu := $Menu
+@onready var menu := $GameMenuCanvas
+@onready var map_name_control: Control = $MapNameCanvas/MapName
 var menu_open := false
 
 func _ready() -> void:
@@ -72,7 +73,10 @@ index: int = 0) -> Node2D:
 
 	is_loading_map = false
 	
-	#not sure where this should go, just set the dialogue manager box every load map
+	# show area name card
+	if new_map != null and new_map.has_method("get"):
+		var map_display_name = new_map.get("map_display_name")
+		map_name_control.show_map_name_card(map_display_name)
 	
 	return current_map
 

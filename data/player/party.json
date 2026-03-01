@@ -2,7 +2,7 @@
 	"Party": [
 		{
 			"current_hp": 33,
-			"current_xp": 772,
+			"current_xp": 792,
 			"id": 7,
 			"level": 10,
 			"move_names": [
@@ -12,7 +12,7 @@
 			],
 			"stats": {
 				"attack": 12,
-				"defense": 9,
+				"defense": 7,
 				"hp": 35,
 				"special_attack": 28,
 				"special_defense": 26,
