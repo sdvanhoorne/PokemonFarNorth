@@ -59,9 +59,9 @@ func _deep_copy_party(party: Array) -> Array[Pokemon]:
 	return out
 
 func _wire_signals() -> void:
-	$BattleUI/BottomUI/BattleOptionsUI/Fight.pressed.connect(_on_fight_pressed)
-	$BattleUI/BottomUI/BattleOptionsUI/Run.pressed.connect(_on_run_pressed)
-	$BattleUI/BottomUI/BattleOptionsUI/Switch.pressed.connect(_on_switch_pressed)
+	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer/Fight.pressed.connect(_on_fight_pressed)
+	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer4/Run.pressed.connect(_on_run_pressed)
+	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer2/Switch.pressed.connect(_on_switch_pressed)
 	for b in get_tree().get_nodes_in_group("MoveButtons"):
 		var btn := b as Button
 		btn.pressed.connect(_on_move_pressed.bind(btn))

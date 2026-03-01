@@ -11,39 +11,41 @@ offset_bottom = 40.0
 
 [node name="Control" type="Control" parent="."]
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
 
 [node name="HealthBar" type="TextureProgressBar" parent="Control"]
 layout_mode = 0
 offset_right = 250.0
 offset_bottom = 25.0
-scale = Vector2(1.282, 0.5)
+scale = Vector2(0.3, 0.1)
 texture_under = ExtResource("1_mi2n6")
 texture_progress = ExtResource("2_ph01r")
 
 [node name="Name" type="Label" parent="."]
 layout_mode = 0
-offset_top = 10.0
-offset_right = 55.0
-offset_bottom = 33.0
+offset_top = 5.0
+offset_right = 143.0
+offset_bottom = 28.0
+scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 0
 text = "<pokemon_name>"
 
 [node name="Level" type="Label" parent="."]
 layout_mode = 0
-offset_left = 218.0
-offset_top = 10.0
-offset_right = 246.0
-offset_bottom = 33.0
+offset_left = 84.0
+offset_top = 5.0
+offset_right = 112.0
+offset_bottom = 28.0
+scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "?"
 
 [node name="Lv" type="Label" parent="."]
 layout_mode = 0
-offset_left = 195.0
-offset_top = 10.0
-offset_right = 218.0
-offset_bottom = 33.0
+offset_left = 72.0
+offset_top = 5.0
+offset_right = 95.0
+offset_bottom = 28.0
+scale = Vector2(0.5, 0.5)
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 text = "Lv."

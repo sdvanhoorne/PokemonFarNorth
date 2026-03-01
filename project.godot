@@ -32,8 +32,10 @@ TypeColors="*res://scripts/globals/TypeColors.gd"
 
 [display]
 
-window/size/viewport_width=1440
-window/size/viewport_height=960
+window/size/viewport_width=960
+window/size/viewport_height=640
+window/stretch/mode="canvas_items"
+window/stretch/scale_mode="integer"
 
 [dotnet]
 

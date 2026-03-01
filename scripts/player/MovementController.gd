@@ -5,7 +5,7 @@ signal moved_to_tile(new_global_pos: Vector2)
 
 @export var body_path: NodePath
 @export var hold_threshold: float = 0.03
-@export var sprint_multiplier: float = 2.0
+@export var sprint_multiplier: float = 2.25
 
 @onready var body: CharacterBody2D = get_node(body_path)
 

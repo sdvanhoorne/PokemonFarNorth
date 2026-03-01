@@ -18,7 +18,8 @@ script = ExtResource("1_ejd4k")
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
-zoom = Vector2(4, 4)
+offset = Vector2(8, 4)
+zoom = Vector2(2, 2)
 position_smoothing_speed = 120.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

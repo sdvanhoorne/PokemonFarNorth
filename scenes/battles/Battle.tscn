@@ -10,7 +10,7 @@
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="9_2iovi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
-size = Vector2(49.6667, 45)
+size = Vector2(64, 64)
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mxf8o"]
 
@@ -26,10 +26,6 @@ content_margin_top = 64.0
 content_margin_right = 64.0
 content_margin_bottom = 64.0
 bg_color = Color(0.74978, 0.74978, 0.74978, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
 border_color = Color(0, 0, 0, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
@@ -41,80 +37,67 @@ script = ExtResource("1_7gd76")
 
 [node name="BattleUI" type="Control" parent="."]
 layout_mode = 3
-anchor_right = 0.875
-offset_right = 1920.0
-offset_bottom = 1080.0
-size_flags_horizontal = 3
-size_flags_vertical = 3
+anchors_preset = 0
+offset_right = 960.0
+offset_bottom = 640.0
 mouse_filter = 2
 script = ExtResource("2_0pul7")
 
 [node name="PlayerPokemonUI" type="Control" parent="BattleUI"]
 layout_mode = 1
 anchors_preset = 0
-offset_right = 960.0
-offset_bottom = 780.0
+offset_right = 120.0
+offset_bottom = 100.0
 mouse_filter = 2
 
 [node name="PlayerPokemon" type="Node2D" parent="BattleUI/PlayerPokemonUI"]
-position = Vector2(300, 300)
-scale = Vector2(1.5, 1.5)
 script = ExtResource("3_34g4o")
 
 [node name="SpriteArea" type="Area2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon"]
-position = Vector2(24, 0)
+position = Vector2(40, 64)
 
 [node name="Sprite" type="Sprite2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea"]
 texture_filter = 1
-position = Vector2(1.33333, 27.3333)
-scale = Vector2(5, 5)
 texture = ExtResource("4_ufufc")
 flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea"]
-position = Vector2(1, 44.3333)
-scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
 [node name="Info" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("5_tbq5m")]
-offset_left = -113.333
-offset_top = -134.0
-offset_right = -73.3333
-offset_bottom = -94.0
+offset_left = 6.0
+offset_top = 13.0
+offset_right = 45.9997
+offset_bottom = 53.0
 
 [node name="EnemyPokemonUI" type="Control" parent="BattleUI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -960.0
-offset_bottom = 779.0
+offset_left = -120.0
+offset_bottom = 100.0
 grow_horizontal = 0
 
 [node name="EnemyPokemon" type="Node2D" parent="BattleUI/EnemyPokemonUI"]
-position = Vector2(610, 344)
-scale = Vector2(1.5, 1.5)
 script = ExtResource("3_34g4o")
 
 [node name="SpriteArea" type="Area2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon"]
-position = Vector2(0, -0.666667)
+position = Vector2(80, 64)
 
 [node name="Sprite" type="Sprite2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea"]
 texture_filter = 1
-scale = Vector2(5, 5)
 texture = ExtResource("4_ufufc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea"]
 z_index = 1
-position = Vector2(0, 23.3333)
-scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_1kxda")
 
 [node name="Info" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("5_tbq5m")]
-offset_left = -124.0
-offset_top = -152.667
-offset_right = -84.0
-offset_bottom = -112.667
+offset_left = 22.0
+offset_top = 13.0
+offset_right = 62.0
+offset_bottom = 53.0
 
 [node name="ColorRect" type="ColorRect" parent="BattleUI"]
 z_index = -1
@@ -141,11 +124,12 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -303.0
+offset_top = -60.0
 grow_horizontal = 2
 grow_vertical = 0
 
 [node name="MovesContainer" type="PanelContainer" parent="BattleUI/BottomUI"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -169,7 +153,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_mxf8o")
 
 [node name="MoveContainer1" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow"]
@@ -181,7 +165,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_ngw5r")
 
 [node name="MovesSecondRow" type="HBoxContainer" parent="BattleUI/BottomUI/MovesContainer/Moves"]
@@ -197,7 +181,7 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_fe3c8")
 
 [node name="MoveContainer3" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow"]
@@ -209,19 +193,18 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_horizontal = 7
 size_flags_vertical = 7
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 12
 theme_override_styles/normal = SubResource("StyleBoxEmpty_s0meg")
 
 [node name="MessageContainer" type="Panel" parent="BattleUI/BottomUI"]
 visible = false
-custom_minimum_size = Vector2(0, 300)
 layout_direction = 1
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -300.0
+offset_top = -60.0
 grow_horizontal = 2
 grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
@@ -238,53 +221,52 @@ theme_override_colors/table_border = Color(0, 0, 0, 1)
 text = "What would you like to do?"
 
 [node name="BattleOptionsUI" type="GridContainer" parent="BattleUI/BottomUI"]
-visible = false
-custom_minimum_size = Vector2(500, 300)
+custom_minimum_size = Vector2(240, 60)
 layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -300.0
-grow_horizontal = 2
-grow_vertical = 0
+offset_right = 240.0
+offset_bottom = 60.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="Fight" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
+[node name="CenterContainer" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
-text = "Fight"
-vertical_icon_alignment = 2
 
-[node name="Switch" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
+[node name="Fight" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 12
+text = "Fight"
+
+[node name="CenterContainer2" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="Switch" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Switch"
 
-[node name="Item" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
+[node name="CenterContainer3" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
-text = "Item"
 
-[node name="Run" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI"]
-custom_minimum_size = Vector2(150, 100)
+[node name="Bag" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer3"]
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 12
+text = "Bag"
+
+[node name="CenterContainer4" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="Run" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
 text = "Run"
 
 [connection signal="mouse_entered" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_entered"]
