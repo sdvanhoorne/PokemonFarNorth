@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://dy3lsbw7h82ln"]
+
+[node name="Pokedex" type="Node2D"]
+
+[node name="PokedexCanvas" type="CanvasLayer" parent="."]
+
+[node name="Root" type="Control" parent="PokedexCanvas"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Background" type="TextureRect" parent="PokedexCanvas/Root"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="PokedexCanvas/Root"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ListPanel" type="PanelContainer" parent="PokedexCanvas/Root/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PokedexCanvas/Root/HBoxContainer/ListPanel"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PokedexCanvas/Root/HBoxContainer/ListPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="VerticalListContainer" type="VBoxContainer" parent="PokedexCanvas/Root/HBoxContainer/ListPanel/MarginContainer/ScrollContainer"]
+layout_mode = 2
+
+[node name="InfoPanel" type="PanelContainer" parent="PokedexCanvas/Root/HBoxContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="PokedexCanvas/Root/HBoxContainer/InfoPanel"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PokedexCanvas/Root/HBoxContainer/InfoPanel/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="PokedexCanvas/Root/HBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Sprite2D" type="Sprite2D" parent="PokedexCanvas/Root/HBoxContainer/InfoPanel/MarginContainer/VBoxContainer"]
