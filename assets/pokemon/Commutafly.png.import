@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://iybxqx4bjbch"
-path="res://.godot/imported/Spork.png-5ffe7febc730435b7cf4c2d99e20f1bf.ctex"
+uid="uid://jxmjt5nc6r1"
+path="res://.godot/imported/Commutafly.png-10448210d2fcd7d9859c98ce640c2e2d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pokemon/Spork.png"
-dest_files=["res://.godot/imported/Spork.png-5ffe7febc730435b7cf4c2d99e20f1bf.ctex"]
+source_file="res://assets/pokemon/Commutafly.png"
+dest_files=["res://.godot/imported/Commutafly.png-10448210d2fcd7d9859c98ce640c2e2d.ctex"]
 
 [params]
 

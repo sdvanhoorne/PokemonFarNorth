@@ -3,7 +3,7 @@ class_name PartyMenu
 
 signal switch_requested(party_index: int)
 
-@onready var party_list: VFlowContainer = $"MarginContainer/Party"
+@onready var party_list: VFlowContainer = $"Party"
 
 @export var party_member_scene: PackedScene 
 

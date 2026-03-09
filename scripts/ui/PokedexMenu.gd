@@ -3,10 +3,10 @@ extends CanvasLayer
 @onready var entry_list: VBoxContainer = $"Root/HBoxContainer/ListPanel/MarginContainer/ScrollContainer/VerticalListContainer"
 @onready var pokedex_path = Paths.POKEDEX_ROOT + "/pokedex.json"
 
-@onready var name_label: Label = $Root/HBoxContainer/DetailPanel/MarginContainer/VBoxContainer/HeaderRow/NameLabel
-@onready var number_label: Label = $Root/HBoxContainer/DetailPanel/MarginContainer/VBoxContainer/HeaderRow/NumberLabel
-@onready var description_label: Label = $Root/HBoxContainer/DetailPanel/MarginContainer/VBoxContainer/DescriptionLabel
-@onready var pokemon_sprite: TextureRect = $Root/HBoxContainer/DetailPanel/MarginContainer/VBoxContainer/SpriteContainer/PokemonSprite
+@onready var name_label: Label = $Root/HBoxContainer/InfoPanel/MarginContainer/VBoxContainer/Label
+@onready var type1_control: Control = $Root/HBoxContainer/InfoPanel/MarginContainer/VBoxContainer/HBoxContainer/Type1
+@onready var type2_control: Control = $Root/HBoxContainer/InfoPanel/MarginContainer/VBoxContainer/HBoxContainer/Type2
+@onready var pokemon_sprite: TextureRect = $Root/HBoxContainer/InfoPanel/MarginContainer/VBoxContainer/Control/CenterContainer/TextureRect
 
 
 var pokedex_entry_scene := preload("res://scenes/ui/PokedexEntry.tscn")
@@ -25,18 +25,27 @@ func load_pokemon_list() -> void:
 		entry_list.add_child(entry)
 		
 func _on_entry_hovered(pokemon_id: int) -> void:
-	var pokemon = get_pokemon_data(pokemon_id)
-	update_detail_panel(pokemon)
+	var pokemon_base_data = PokemonBase.new(pokemon_id)
+	_update_detail_panel(pokemon_base_data)
 	
-func get_pokemon_data(pokemon_id: int) -> Dictionary:
-	for pokemon in pokemon_data:
-		if pokemon.id == pokemon_id:
-			return pokemon
-	return {}
+func _update_detail_panel(pokemon: PokemonBase) -> void:
+	name_label.text = pokemon.name
 	
-func update_detail_panel(pokemon: Dictionary) -> void:
-	var x = 1
-	#number_label.text = "#%03d" % pokemon.id
-	#name_label.text = pokemon.name
-	#description_label.text = pokemon.description
-	#pokemon_sprite.texture = load(pokemon.sprite_path)
+	_set_type_control(type1_control, pokemon.type1)
+	_set_type_control(type2_control, pokemon.type2)
+	
+	pokemon_sprite.texture = pokemon.sprite
+	
+func _set_type_control(type_control: Control, type: String) -> void:
+	if type == null or type.is_empty():
+		type_control.visible = false
+		return
+	type_control.visible = true
+	var label = type_control.get_node("Label")
+	var color_rect = type_control.get_node("ColorRect")
+	
+	label.text = type
+	var background_color = TypeColors.color_for(type)
+	var font_color = TypeColors.font_color_for(type)
+	color_rect.color = background_color
+	label.add_theme_color_override("font_color", font_color)

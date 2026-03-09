@@ -26,6 +26,7 @@ func _unhandled_key_input(event: InputEvent) -> void:
 
 func _open_main_menu() -> void:
 	GameState.lock_gameplay_input()
+	current_menu = menu_state.MAIN
 	main_menu.visible = true
 	
 func _close_main_menu() -> void:
@@ -42,7 +43,7 @@ func _on_pokedex_pressed() -> void:
 func _on_party_pressed() -> void:
 	main_menu.visible = false
 	party_menu.visible = true
-	party_menu.load_party(PlayerInventory.get_party())
+	party_menu.load_party(PlayerInventory.PartyPokemon)
 	current_menu = menu_state.PARTY
 	
 func _close_pokedex_menu() -> void:

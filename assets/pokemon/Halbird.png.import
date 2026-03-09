@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://jxmjt5nc6r1"
-path="res://.godot/imported/Monaroute.png-27219bffde1f2eefc0606b1d4b8e7424.ctex"
+uid="uid://c5bc2wuu2c4rm"
+path="res://.godot/imported/Halbird.png-0998685c3405d17f2c9ae9328e38afd4.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pokemon/Monaroute.png"
-dest_files=["res://.godot/imported/Monaroute.png-27219bffde1f2eefc0606b1d4b8e7424.ctex"]
+source_file="res://assets/pokemon/Halbird.png"
+dest_files=["res://.godot/imported/Halbird.png-0998685c3405d17f2c9ae9328e38afd4.ctex"]
 
 [params]
 

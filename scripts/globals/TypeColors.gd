@@ -21,6 +21,27 @@ const TYPE_COLOR: Dictionary = {
 	&"fairy":    Color("#D685AD"),
 }
 
+const TYPE_FONT_COLOR: Dictionary = {
+	&"normal":   Color("#1F1F1A"),
+	&"fire":     Color("#FFF7F1"),
+	&"water":    Color("#F8FBFF"),
+	&"electric": Color("#2A2400"),
+	&"grass":    Color("#10210A"),
+	&"ice":      Color("#14302F"),
+	&"fighting": Color("#FFF5F5"),
+	&"poison":   Color("#FFF7FF"),
+	&"ground":   Color("#2B2110"),
+	&"flying":   Color("#171327"),
+	&"psychic":  Color("#FFF7FA"),
+	&"bug":      Color("#1A1F05"),
+	&"rock":     Color("#211C08"),
+	&"ghost":    Color("#FBF9FF"),
+	&"dragon":   Color("#FAF7FF"),
+	&"dark":     Color("#FFF8F3"),
+	&"steel":    Color("#1E2230"),
+	&"fairy":    Color("#2A1320"),
+}
+
 const DEFAULT_COLOR := Color.WHITE
 
 static func color_for(type_name: StringName) -> Color:
@@ -28,3 +49,9 @@ static func color_for(type_name: StringName) -> Color:
 	if not TYPE_COLOR.has(key):
 		key = StringName(String(type_name).to_lower())
 	return TYPE_COLOR.get(key, DEFAULT_COLOR)
+	
+static func font_color_for(type_name: StringName) -> Color:
+	var key := type_name
+	if not TYPE_FONT_COLOR.has(key):
+		key = StringName(String(type_name).to_lower())
+	return TYPE_FONT_COLOR.get(key, DEFAULT_COLOR)

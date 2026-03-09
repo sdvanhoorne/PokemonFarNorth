@@ -40,7 +40,7 @@ func tick(delta: float) -> void:
 		return
 
 	# no input held
-	if facing_input == Vector2.ZERO:
+	if facing_input == Vector2.ZERO or not GameState.gameplay_input_enabled:
 		hold_timer = 0.0
 		return
 

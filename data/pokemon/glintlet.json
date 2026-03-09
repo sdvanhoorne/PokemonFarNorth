@@ -1,7 +1,7 @@
 {
-	"id": 10,
-	"name": "Pawlit",
-	"type1": "Normal",
+	"id": 25,
+	"name": "Glintlet",
+	"type1": "Flying",
 	"type2": "",
 	"base_stats": {
 		"hp": 65,
@@ -16,6 +16,8 @@
 		{ "level": 5, "name": "Growl" }
 	],
 	"evolutions": [
-		{ "level": 16, "id": 11 }
+		{ "level": 20, "id": 26 },
+		{ "level": 20, "id": 27 },
+		{ "level": 20, "id": 28 }
 	]
 }

@@ -21,8 +21,8 @@
 	{"id": 15, "name": "Bearnavern"},
 	{"id": 16, "name": "Grizzeral"},
 	
-	{"id": 17, "name": "Turmble"},
-	{"id": 18, "name": "Sturken"},
+	{"id": 17, "name": "Hobblet"},
+	{"id": 18, "name": "Bumbluff"},
 	{"id": 19, "name": "Frosture"},
 	
 	{"id": 20, "name": "Scindle"},
@@ -36,4 +36,15 @@
 	{"id": 26, "name": "Owlistare"},
 	{"id": 27, "name": "Minerowl"},
 	{"id": 28, "name": "Boreowlis"},
+	
+	{"id": 29, "name": "Chartapillar"},
+	{"id": 30, "name": "Cocoompass"},
+	{"id": 31, "name": "Commutafly"},
+	
+	{"id": 32, "name": "Sapplar"},
+	{"id": 33, "name": "Stalwood"},
+	{"id": 34, "name": "Sequoiath"},
+	
+	{"id": 35, "name": "Lambrawl"},
+	{"id": 36, "name": "Rivalram"},
 ]
