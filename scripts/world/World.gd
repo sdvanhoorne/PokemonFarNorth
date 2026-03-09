@@ -10,27 +10,7 @@ var is_loading_map := false
 var menu_open := false
 
 func _ready() -> void:
-	menu.visible = false
 	DialogueManager.message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
-
-func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_action_pressed("menu"):
-		if not menu_open and not GameState.gameplay_input_enabled:
-			return
-
-		_toggle_menu()
-		get_viewport().set_input_as_handled()
-		
-func _toggle_menu() -> void:
-	menu_open = not menu_open
-	menu.visible = menu_open
-
-	if menu_open:
-		GameState.lock_gameplay_input()
-		menu.open()
-	else:
-		menu.close()
-		GameState.unlock_gameplay_input()
 
 func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bool = true, 
 index: int = 0) -> Node2D:
@@ -74,9 +54,10 @@ index: int = 0) -> Node2D:
 	is_loading_map = false
 	
 	# show area name card
-	if new_map != null and new_map.has_method("get"):
+	if new_map != null:
 		var map_display_name = new_map.get("map_display_name")
-		map_name_control.show_map_name_card(map_display_name)
+		if map_display_name != null:
+			map_name_control.show_map_name_card(map_display_name)
 	
 	return current_map
 

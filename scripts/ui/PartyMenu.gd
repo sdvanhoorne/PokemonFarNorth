@@ -1,5 +1,5 @@
-extends PanelContainer
-class_name PartyUI
+extends CanvasLayer
+class_name PartyMenu
 
 signal switch_requested(party_index: int)
 

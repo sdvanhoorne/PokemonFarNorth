@@ -6,6 +6,9 @@ const POKEMON_ROOT := ASSETS_ROOT + "/pokemon"
 const UI_ROOT := ASSETS_ROOT + "/ui"
 const AUDIO_ROOT := ASSETS_ROOT + "/audio"
 
+const DATA_ROOT := "res://data"
+const POKEDEX_ROOT := DATA_ROOT + "/pokedex"
+
 # --- Pokemon specific subfolders ---
 const POKEMON_FRONT_SPRITES := POKEMON_ROOT
 #const POKEMON_BACK_SPRITES  := POKEMON_ROOT + "/back"

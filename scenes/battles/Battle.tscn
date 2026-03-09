@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scripts/battle/PokemonTooltip.gd" id="3_34g4o"]
 [ext_resource type="Texture2D" uid="uid://buxdcl0i5n5hx" path="res://assets/pokemon/Chasmurk.png" id="4_ufufc"]
 [ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/BattleInfo.tscn" id="5_tbq5m"]
-[ext_resource type="PackedScene" uid="uid://dbxwbt4xfqvow" path="res://scenes/ui/PartyUI.tscn" id="7_mtsvn"]
+[ext_resource type="PackedScene" uid="uid://dbxwbt4xfqvow" path="res://scenes/ui/PartyMenu.tscn" id="7_mtsvn"]
 [ext_resource type="PackedScene" uid="uid://iahi0fr58n5" path="res://scenes/ui/PartyMemberUI.tscn" id="8_84xrd"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="9_2iovi"]
 
