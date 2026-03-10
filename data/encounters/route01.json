@@ -1,8 +1,20 @@
 {
 	"encounters": [
 		{
-			"id": 24,
-			"rate": 100,
+			"id": 12,
+			"rate": 40,
+			"level_min": 1,
+			"level_max": 2
+		},
+		{
+			"id": 14,
+			"rate": 40,
+			"level_min": 1,
+			"level_max": 2
+		},
+		{
+			"id": 17,
+			"rate": 20,
 			"level_min": 1,
 			"level_max": 2
 		}

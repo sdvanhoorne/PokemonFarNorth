@@ -44,6 +44,9 @@ position = Vector2(288, -16)
 [node name="StartingTownSpawn" type="Marker2D" parent="Spawns"]
 position = Vector2(-24, 480)
 
+[node name="MapleCitySpawn" type="Marker2D" parent="Spawns"]
+position = Vector2(184, -800)
+
 [node name="Warps" type="Node2D" parent="."]
 
 [node name="StartingTownWarp" type="Area2D" parent="Warps"]
@@ -53,6 +56,16 @@ target_map_id = "starting_town"
 spawn_point = "Route01Spawn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/StartingTownWarp"]
+scale = Vector2(0.8, 0.8)
+shape = SubResource("RectangleShape2D_nv1ov")
+
+[node name="MapleCityWarp" type="Area2D" parent="Warps"]
+position = Vector2(192, -824)
+script = ExtResource("3_s483v")
+target_map_id = "maple_city"
+spawn_point = "Route01Spawn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warps/MapleCityWarp"]
 scale = Vector2(0.8, 0.8)
 shape = SubResource("RectangleShape2D_nv1ov")
 
@@ -67,4 +80,5 @@ position = Vector2(0, -12)
 shape = SubResource("RectangleShape2D_geinn")
 
 [connection signal="body_entered" from="Warps/StartingTownWarp" to="Warps/StartingTownWarp" method="_on_body_entered"]
+[connection signal="body_entered" from="Warps/MapleCityWarp" to="Warps/MapleCityWarp" method="_on_body_entered"]
 [connection signal="body_entered" from="Warps/Cave01Warp" to="Warps/Cave01Warp" method="_on_body_entered"]

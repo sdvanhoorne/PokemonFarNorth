@@ -1,0 +1,18 @@
+{
+	"id": 41,
+	"name": "Shalisk",
+	"type1": "Ground",
+	"type2": "Dragon",
+	"base_stats": {
+		"hp": 0,
+		"attack": 0,
+		"defense": 0,
+		"special_attack": 0,
+		"special_defense": 0,
+		"speed": 0
+	},
+	"learnable_moves": [
+		{ "level": 0, "id": 0 },
+		{ "level": 0, "id": 1 }
+  	]
+}
