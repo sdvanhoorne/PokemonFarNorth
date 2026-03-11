@@ -1,39 +1,37 @@
-extends Node
-
+extends RefCounted
 class_name BattleAction
-enum battle_action_type { MOVE, SWITCH, ITEM, RUN }
 
-var actor: String = ""
-var action_type: battle_action_type
+var actor: BattleDefinitions.BattleSide
+var action: BattleDefinitions.BattleAction
 var move_index: int = 0
 var switch_index: int = 0
 var priority: int = 0
 var speed: int = 0
 
-static func make_move(actor: String, move_index: int) -> BattleAction:
+static func make_move(actor: BattleDefinitions.BattleSide, move_index: int) -> BattleAction:
 	var a := BattleAction.new()
 	a.actor = actor
-	a.action_type = battle_action_type.MOVE
+	a.action = BattleDefinitions.BattleAction.MOVE
 	a.move_index = move_index
 	a.switch_index = -1
 	return a
 
-static func make_switch(actor: String, party_index: int) -> BattleAction:
+static func make_switch(actor: BattleDefinitions.BattleSide, party_index: int) -> BattleAction:
 	var a := BattleAction.new()
 	a.actor = actor
-	a.action_type = battle_action_type.SWITCH
+	a.action = BattleDefinitions.BattleAction.SWITCH
 	a.switch_index = party_index
 	a.move_index = -1
 	return a
 
-static func make_item(actor: String) -> BattleAction:
+static func make_item(actor: BattleDefinitions.BattleSide) -> BattleAction:
 	var a := BattleAction.new()
 	a.actor = actor
-	a.action_type = battle_action_type.ITEM
+	a.action = BattleDefinitions.BattleAction.ITEM
 	return a
 
-static func make_run(actor: String) -> BattleAction:
+static func make_run(actor: BattleDefinitions.BattleSide) -> BattleAction:
 	var a := BattleAction.new()
 	a.actor = actor
-	a.action_type = battle_action_type.RUN
+	a.action = BattleDefinitions.BattleAction.RUN
 	return a

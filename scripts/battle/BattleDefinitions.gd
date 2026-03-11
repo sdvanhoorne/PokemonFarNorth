@@ -1,0 +1,38 @@
+extends RefCounted
+class_name BattleDefinitions
+
+enum BattleOutcome { WIN, LOSE, ESCAPE, CAPTURE }
+
+enum BattleType { WILD, TRAINER }
+
+enum BattleAction { MOVE, SWITCH, ITEM, RUN }
+
+enum BattleSide { PLAYER, ENEMY }
+
+enum BattlePhase {
+	INTRO,
+	COMMAND,
+	MOVE_SELECT,
+	PARTY_SELECT,
+	ITEM_SELECT,
+	RESOLVING_TURN,
+	MESSAGE,
+	FORCED_SWITCH,
+	VICTORY,
+	DEFEAT,
+	ESCAPE,
+	CAPTURE,
+	ENDED
+}
+
+enum BattleEvent {
+	MESSAGE,
+	DAMAGE_APPLIED,
+	HP_CHANGED,
+	FAINTED,
+	SWITCH_PERFORMED,
+	RUN_SUCCEEDED,
+	RUN_FAILED,
+	MOVE_USED,
+	MOVE_MISSED
+}

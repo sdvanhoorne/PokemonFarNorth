@@ -1,15 +1,15 @@
 class_name Move
 
 var id: int
-var name = ""
-var power = 0
-var type = ""
-var category = ""
-var target = ""
-var target_stat = ""
-var stat_multiplier = 1.0
-var accuracy = 1.0
-var description = ""
+var name: String = ""
+var power: int = 0
+var type: String = ""
+var category: String = ""
+var target: String = ""
+var target_stat: String = ""
+var stat_multiplier: float = 1.0
+var accuracy: float = 1.0
+var description: String = ""
 
 func _init(move_data: Dictionary):
 	id = int(move_data.get("id"))
