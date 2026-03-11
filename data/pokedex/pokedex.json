@@ -25,8 +25,8 @@
 	{"id": 18, "name": "Bumbluff"},
 	{"id": 19, "name": "Frosture"},
 	
-	{"id": 20, "name": "Scindle"},
-	{"id": 21, "name": "Scattric"},
+	{"id": 20, "name": "Chickuff"},
+	{"id": 21, "name": "Pecknock"},
 	
 	{"id": 22, "name": "Shelbyte"},
 	{"id": 23, "name": "Shellurk"},
@@ -45,16 +45,19 @@
 	{"id": 33, "name": "Stalwood"},
 	{"id": 34, "name": "Sequoiath"},
 	
-	{"id": 35, "name": "Lambrawl"},
-	{"id": 36, "name": "Rivalram"},
+	{"id": 35, "name": "Scindle"},
+	{"id": 36, "name": "Scattric"},
 	
-	{"id": 37, "name": "Mussprig"},
-	{"id": 38, "name": "Infestide"},
+	{"id": 37, "name": "Lambrawl"},
+	{"id": 38, "name": "Rivalram"},
 	
-	{"id": 39, "name": "Larvice"},
-	{"id": 40, "name": "Hemovire"},
+	{"id": 39, "name": "Mussprig"},
+	{"id": 40, "name": "Infestide"},
 	
-	{"id": 41, "name": "Shalisk"},
-	{"id": 42, "name": "Sedilisk"},
-	{"id": 43, "name": "Stratagon"},
+	{"id": 41, "name": "Larvice"},
+	{"id": 42, "name": "Hemovire"},
+	
+	{"id": 43, "name": "Shalisk"},
+	{"id": 44, "name": "Sedilisk"},
+	{"id": 45, "name": "Stratagon"},
 ]

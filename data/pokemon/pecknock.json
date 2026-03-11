@@ -1,0 +1,20 @@
+{
+	"id": 21,
+	"name": "Pecknock",
+	"type1": "Flying",
+	"type2": "Fighting",
+	"base_stats": {
+		"hp": 65,
+		"attack": 60,
+		"special_attack": 25,
+		"defense": 50,
+		"special_defense": 45,
+		"speed": 55
+	},
+	"learnable_moves": [
+		{ "level": 0, "name": "Tackle" },
+		{ "level": 5, "name": "Growl" }
+	],
+	"evolutions": [
+	]
+}
