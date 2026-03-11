@@ -98,7 +98,7 @@ func _on_fight_pressed() -> void:
 	battle_ui.set_state(BattleUI.UIState.MOVES)
 
 func _on_run_pressed() -> void:
-	pending_player_action = BattleAction.make_run("player")
+	pending_player_action = BattleAction.make_run(BattleDefinitions.BattleSide.PLAYER)
 	await _process_turn()
 
 func _run() -> void:
@@ -118,7 +118,7 @@ func _on_switch_pressed() -> void:
 func _on_party_pokemon_chosen(party_index: int) -> void:
 	if input_locked: return
 	input_locked = true
-	pending_player_action = BattleAction.make_switch("player", party_index)
+	pending_player_action = BattleAction.make_switch(BattleDefinitions.BattleSide.PLAYER, party_index)
 	await _process_turn()
 	input_locked = false
 
@@ -126,18 +126,18 @@ func _on_move_pressed(button: Button) -> void:
 	if input_locked: return
 	input_locked = true
 	var move_index := int(button.name.trim_prefix("MoveButton"))
-	pending_player_action = BattleAction.make_move("player", move_index)
+	pending_player_action = BattleAction.make_move(BattleDefinitions.BattleSide.PLAYER, move_index)
 	await _process_turn()
 	input_locked = false
 
 func _process_turn():
 	battle_ui.set_state(battle_ui.UIState.MESSAGE)
 	
-	if(pending_player_action.action_type == BattleAction.battle_action_type.RUN):
+	if(pending_player_action.action == BattleDefinitions.BattleAction.RUN):
 		_run()
 	else:
 		# no enemy switches yet, just moves
-		pending_enemy_action = BattleAction.make_move("enemy", _determine_enemy_move_index())
+		pending_enemy_action = BattleAction.make_move(BattleDefinitions.BattleSide.ENEMY, _determine_enemy_move_index())
 		_set_display_state_from_state()
 		
 		var result: Dictionary = engine.resolve_turn(pending_player_action, pending_enemy_action, state)
@@ -166,7 +166,7 @@ func _play_events(events: Array) -> void:
 				
 			"switch":
 				# some redundant code with hp change
-				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
+				var target_is_player = (e.side == BattleDefinitions.BattleSide.PLAYER)
 				if target_is_player:
 					display_state.player_active = e.switch_index
 					battle_ui.unload_player_pokemon()
@@ -178,14 +178,14 @@ func _play_events(events: Array) -> void:
 					battle_ui.load_enemy_pokemon(_enemy_active_display())
 					
 			"hp_change":
-				var target_is_player = (e.side == BattleEngine.Side.PLAYER)
+				var target_is_player = (e.side == BattleDefinitions.BattleSide.PLAYER)
 				var target_pokemon: Pokemon
 				if target_is_player:
 					target_pokemon = _player_active_display() 
 				else:
 					target_pokemon = _enemy_active_display()
 
-				var is_player_attacking = (e.side == BattleEngine.Side.ENEMY)
+				var is_player_attacking = (e.side == BattleDefinitions.BattleSide.ENEMY)
 				target_pokemon.current_hp -= e.damage
 				battle_ui.update_health_bar(target_pokemon, is_player_attacking)
 
@@ -195,7 +195,7 @@ func _play_events(events: Array) -> void:
 					{"lock_input": false, "require_input": true}
 				)
 
-				if e.side == BattleEngine.Side.PLAYER:
+				if e.side == BattleDefinitions.BattleSide.PLAYER:
 					battle_ui.unload_player_pokemon()
 				else:
 					battle_ui.unload_enemy_pokemon()

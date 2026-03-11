@@ -96,7 +96,7 @@ func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state
 	return {"state": state, "events": events}
 
 func _execute_switch(side: int, switch_index: int, state: Dictionary) -> Pokemon:
-	if(side == Side.PLAYER):
+	if(side == BattleDefinitions.BattleSide.PLAYER):
 		state.player_active = switch_index
 		return _player_active(state)
 	else:
@@ -161,7 +161,7 @@ func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 
 	# Enemy fainted
 	if enemy_pokemon.current_hp <= 0:
-		events.append(faint(Side.ENEMY, enemy_pokemon.base_data.name))
+		events.append(faint(BattleDefinitions.BattleSide.ENEMY, enemy_pokemon.base_data.name))
 
 		# give xp
 		var xp_gain_amount: int = enemy_pokemon.calculate_xp_given()
@@ -178,13 +178,13 @@ func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
 			return true
 
 		state.enemy_active = clamp(state.enemy_active, 0, state.enemy_party.size() - 1)
-		events.append(switch(Side.ENEMY, state.enemy_active))
+		events.append(switch(BattleDefinitions.BattleSide.ENEMY, state.enemy_active))
 		events.append(msg("Enemy sent out %s!" % _enemy_active(state).base_data.name))
 		return true 
 
 	# Player fainted
 	if player_pokemon.current_hp <= 0:
-		events.append(faint(Side.PLAYER, player_pokemon.base_data.name))
+		events.append(faint(BattleDefinitions.BattleSide.PLAYER, player_pokemon.base_data.name))
 
 		if _all_fainted(state.player_party):
 			events.append(battle_end("player_lose"))

@@ -17,7 +17,8 @@ index: int = 0) -> Node2D:
 	if is_loading_map:
 		return current_map
 	is_loading_map = true
-
+	if map == null:
+		return current_map
 	var new_map := map.instantiate()
 	var old_map := current_map
 
