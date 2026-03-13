@@ -106,3 +106,21 @@ static func run_failed(reason: String) -> BattleEvent:
 		"reason": reason
 	}
 	return e
+
+static func xp_gained(pokemon_name: String, xp_gain_amount: int) -> BattleEvent:
+	var e := BattleEvent.new()
+	e.event_type = BattleDefinitions.BattleEvent.XP_GAINED
+	e.payload = {
+		"pokemon_name": pokemon_name,
+		"xp_gain_amount": xp_gain_amount
+	}
+	return e
+	
+static func level_up(pokemon_name: String, level: int) -> BattleEvent:
+	var e := BattleEvent.new()
+	e.event_type = BattleDefinitions.BattleEvent.XP_GAINED
+	e.payload = {
+		"pokemon_name": pokemon_name,
+		"level": level
+	}
+	return e

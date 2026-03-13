@@ -10,28 +10,93 @@ var damage_calculation: DamageCalculation
 
 func setup() -> void:
 	damage_calculation = DamageCalculation.new()
-
-static func msg(text: String) -> Dictionary:
-	return {"type": "message", "text": text}
-
-static func switch(side: int, switch_index: int) -> Dictionary:
-	return { "type": "switch", "side": side, "switch_index": switch_index}
-
-static func hp_change(side: int, damage: int) -> Dictionary:
-	return {"type": "hp_change", "side": side, "damage": damage}
-
-static func faint(side: int, name: String) -> Dictionary:
-	return {"type": "faint", "side": side, "name": name}
-
-static func xp_gain(amount: int, name: String) -> Dictionary:
-	return {"type": "xp_gain", "amount": amount, "name": name}
-
-static func level_up(name: String, level: String) -> Dictionary:
-	return {"type": "level_up", "name": name, "level": level}
-
-static func battle_end(result: String) -> Dictionary:
 	# result: "player_win" / "player_lose" / "fled" etc
 	return {"type": "battle_end", "result": result}
+
+func _handle_post_action_state(session: BattleSession, events: Array[BattleEvent]) -> bool:
+	var enemy_pokemon := session.get_active_enemy()
+	if enemy_pokemon.current_hp <= 0:
+		return _handle_enemy_fainted(session, events)
+
+	var player_pokemon := session.get_active_player()
+	if player_pokemon.current_hp <= 0:
+		return _handle_player_fainted(session, events)
+
+	return false
+	
+func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -> bool:
+	var fainted_enemy := session.get_active_enemy()
+	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.ENEMY, fainted_enemy.base_data.name))
+
+	_award_xp_for_enemy_faint(session, fainted_enemy, events)
+
+	if not session.has_usable_enemy_pokemon():
+		_set_battle_result(session, BattleDefinitions.BattleOutcome.WIN)
+		events.append(BattleEvent.battle_ended(session.result))
+		return true
+
+	var next_index := _find_next_usable_enemy_index(session)
+	if next_index == -1:
+		_set_battle_result(session, BattleDefinitions.BattleOutcome.WIN)
+		events.append(BattleEvent.battle_ended(session.result))
+		return true
+
+	var old_name := fainted_enemy.base_data.name
+	session.switch_enemy_to(next_index)
+	var next_enemy := session.get_active_enemy()
+
+	events.append(BattleEvent.switch_performed(
+		BattleDefinitions.BattleSide.ENEMY,
+		old_name,
+		next_enemy.base_data.name,
+		next_index
+	))
+	events.append(BattleEvent.message("%s was sent out!" % next_enemy.base_data.name))
+	return true
+
+func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) -> bool:
+	var fainted_player := session.get_active_player()
+	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.PLAYER, fainted_player.base_data.name))
+
+	if not session.has_usable_player_pokemon():
+		_set_battle_result(session, BattleDefinitions.BattleOutcome.LOSE)
+		events.append(BattleEvent.battle_ended(session.result))
+		return true
+
+	events.append(BattleEvent.message("Choose your next Pokémon."))
+	events.append(BattleEvent.player_switch_required())
+	return true
+
+func _award_xp_for_enemy_faint(session: BattleSession, fainted_enemy: Pokemon, events: Array[BattleEvent]) -> void:
+	var active_player := session.get_active_player()
+	var xp_gain_amount: int = fainted_enemy.calculate_xp_given()
+
+	active_player.add_xp(xp_gain_amount)
+	events.append(BattleEvent.xp_gained(
+		active_player.base_data.name,
+		xp_gain_amount
+	))
+
+	while active_player.leveled_up():
+		events.append(BattleEvent.level_up(
+			active_player.base_data.name,
+			active_player.level
+		))
+
+func _set_battle_result(session: BattleSession, outcome: BattleDefinitions.BattleOutcome) -> void:
+	var result := BattleResult.new()
+	result.battle_type = session.battle_type
+	result.outcome = outcome
+	session.result = result
+
+func resolve_turn(session: BattleSession, player_action: BattleAction, enemy_action: BattleAction) -> Array[BattleEvent]:
+	var events: Array[BattleEvent] = []
+	
+	var player_pokemon: Pokemon = session.get_active_player()
+	var enemy_pokemon: Pokemon = session.get_active_enemy()
+	
+	
+	return events
 
 func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state: Dictionary):
 	var events: Array = []
@@ -126,7 +191,7 @@ func _apply_damage(attacker_side: int, move: Move, attacker: Pokemon, defender: 
 	var new_hp = max(defender.current_hp - damage, 0)
 	defender.current_hp -= damage
 	var defender_side: int = BattleDefinitions.BattleSide.ENEMY if attacker_side == BattleDefinitions.BattleSide.PLAYER else BattleDefinitions.BattleSide.PLAYER
-	events.append(hp_change(defender_side, damage))
+	events.append(BattleEvent.hp_changed(defender_side, defender.base_data.name, old_hp, defender.current_hp, defender.base_data.base_stats.hp))
 
 func _apply_status(move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
 	var status_type = move.status
@@ -155,58 +220,20 @@ func _apply_stat_change(move: Move, attacker: Pokemon, defender: Pokemon, events
 	else:
 		events.append(msg("Nothing happened."))
 
-func _is_battle_over_or_faint_handled(state: Dictionary, events: Array) -> bool:
-	var player_pokemon: Pokemon = _player_active(state)
-	var enemy_pokemon: Pokemon = _enemy_active(state)
-
-	# Enemy fainted
-	if enemy_pokemon.current_hp <= 0:
-		events.append(faint(BattleDefinitions.BattleSide.ENEMY, enemy_pokemon.base_data.name))
-
-		# give xp
-		var xp_gain_amount: int = enemy_pokemon.calculate_xp_given()
-		_player_active(state).add_xp(xp_gain_amount)
-		events.append(xp_gain(xp_gain_amount, player_pokemon.base_data.name))
-		
-		# check for level ups - maybe pull this out into another function
-		while player_pokemon.leveled_up():
-			events.append(level_up(player_pokemon.base_data.name, str(player_pokemon.level)))
-
-		# Remove enemy active from party, advance if possible
-		if _all_fainted(state.enemy_party):
-			events.append(battle_end("player_win"))
-			return true
-
-		state.enemy_active = clamp(state.enemy_active, 0, state.enemy_party.size() - 1)
-		events.append(switch(BattleDefinitions.BattleSide.ENEMY, state.enemy_active))
-		events.append(msg("Enemy sent out %s!" % _enemy_active(state).base_data.name))
-		return true 
-
-	# Player fainted
-	if player_pokemon.current_hp <= 0:
-		events.append(faint(BattleDefinitions.BattleSide.PLAYER, player_pokemon.base_data.name))
-
-		if _all_fainted(state.player_party):
-			events.append(battle_end("player_lose"))
-			return true
+func _find_next_usable_enemy_index(session: BattleSession) -> int:
+	for i in range(session.enemy_party.size()):
+		if i == session.active_enemy_index:
+			continue
+		var pokemon: Pokemon = session.enemy_party[i]
+		if pokemon.current_hp > 0:
+			return i
+	return -1
 	
-		# TODO show player party UI and get new active pokemon 
-		state.player_active = clamp(state.player_active, 0, state.player_party.size() - 1)
-		events.append(msg("Go %s!" % _player_active(state).base_data.name))
-		return true
-
-	return false
-
-# --- Helpers ----------------------------------------------------------------
-
-func _all_fainted(pokemons: Array) -> bool:
-	for pokemon in pokemons:
-		if(pokemon.current_hp > 0):
-			return false
-	return true
-
-func _player_active(state: Dictionary) -> Pokemon:
-	return state.player_party[state.player_active]
-
-func _enemy_active(state: Dictionary) -> Pokemon:
-	return state.enemy_party[state.enemy_active]
+func _find_next_usable_player_index(session: BattleSession) -> int:
+	for i in range(session.player_party.size()):
+		if i == session.active_player_index:
+			continue
+		var pokemon: Pokemon = session.player_party[i]
+		if pokemon.current_hp > 0:
+			return i
+	return -1
