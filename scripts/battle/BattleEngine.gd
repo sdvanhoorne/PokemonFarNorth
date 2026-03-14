@@ -10,8 +10,6 @@ var damage_calculation: DamageCalculation
 
 func setup() -> void:
 	damage_calculation = DamageCalculation.new()
-	# result: "player_win" / "player_lose" / "fled" etc
-	return {"type": "battle_end", "result": result}
 
 func _handle_post_action_state(session: BattleSession, events: Array[BattleEvent]) -> bool:
 	var enemy_pokemon := session.get_active_enemy()
@@ -91,134 +89,201 @@ func _set_battle_result(session: BattleSession, outcome: BattleDefinitions.Battl
 
 func resolve_turn(session: BattleSession, player_action: BattleAction, enemy_action: BattleAction) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
-	
-	var player_pokemon: Pokemon = session.get_active_player()
-	var enemy_pokemon: Pokemon = session.get_active_enemy()
-	
-	
+
+	var ordered_actions := _get_ordered_actions(session, player_action, enemy_action)
+
+	for action in ordered_actions:
+		if session.is_over():
+			break
+
+		var user := _get_action_user(session, action)
+		if user == null or user.current_hp <= 0:
+			continue
+
+		events.append_array(_resolve_action(session, action))
+
+		if _handle_post_action_state(session, events):
+			break
+
 	return events
 
-func resolve_turn(player_action: BattleAction, enemy_action: BattleAction, state: Dictionary):
-	var events: Array = []
-	
-	var player_pokemon: Pokemon = _player_active(state)
-	var enemy_pokemon: Pokemon = _enemy_active(state)
-	
-	# determine first side to go via speed
-	var first_side: int = BattleDefinitions.BattleSide.PLAYER if player_pokemon.battle_stats.speed >= enemy_pokemon.battle_stats.speed else BattleDefinitions.BattleSide.ENEMY
-	var second_side: int = BattleDefinitions.BattleSide.ENEMY if first_side == BattleDefinitions.BattleSide.PLAYER else BattleDefinitions.BattleSide.PLAYER
-	
-	# if player faster
-	if(first_side == BattleDefinitions.BattleSide.PLAYER):
-	# player switch
-		if(player_action.action == BattleDefinitions.BattleAction.SWITCH):
-			events.append(switch(BattleDefinitions.BattleSide.PLAYER, player_action.switch_index))
-			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))
-			player_pokemon = _execute_switch(BattleDefinitions.BattleSide.PLAYER, player_action.switch_index, state)
-	# enemy switch
-		if(enemy_action.action == BattleDefinitions.BattleAction.SWITCH):
-			events.append(switch(BattleDefinitions.BattleSide.ENEMY, enemy_action.switch_index))
-			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))
-			enemy_pokemon = _execute_switch(BattleDefinitions.BattleSide.ENEMY, enemy_action.switch_index, state)
-	# player move
-		if(player_action.action == BattleDefinitions.BattleAction.MOVE):
-			var player_move: Move = player_pokemon.moves[player_action.move_index]
-			_execute_move(BattleDefinitions.BattleSide.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
-			if _is_battle_over_or_faint_handled(state, events):
-				return {"state": state, "events": events}
-	# enemy move
-		if(enemy_action.action == BattleDefinitions.BattleAction.MOVE):
-			var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
-			_execute_move(BattleDefinitions.BattleSide.ENEMY, enemy_pokemon, player_pokemon, enemy_move, events)
-			if _is_battle_over_or_faint_handled(state, events):
-				return {"state": state, "events": events}
+func _resolve_action(session: BattleSession, action: BattleAction) -> Array[BattleEvent]:
+	match action.action:
+		BattleDefinitions.BattleAction.MOVE:
+			return _resolve_move_action(session, action)
+		BattleDefinitions.BattleAction.SWITCH:
+			return _resolve_switch_action(session, action)
+		#BattleDefinitions.BattleAction.RUN:
+		#	return _resolve_run_action(session, action)
+		#BattleDefinitions.BattleAction.ITEM:
+		#	return _resolve_item_action(session, action)
+	return []
 
-	# if enemy faster
+func _get_action_user(session: BattleSession, action: BattleAction) -> Pokemon:
+	match action.actor:
+		BattleDefinitions.BattleSide.PLAYER:
+			return session.get_active_player()
+		BattleDefinitions.BattleSide.ENEMY:
+			return session.get_active_enemy()
+	return null
+	
+func _get_action_target(session: BattleSession, action: BattleAction) -> Pokemon:
+	match action.actor:
+		BattleDefinitions.BattleSide.PLAYER:
+			return session.get_active_enemy()
+		BattleDefinitions.BattleSide.ENEMY:
+			return session.get_active_player()
+	return null
+
+func _get_move_target(move: Move, user: Pokemon, opponent: Pokemon) -> Pokemon:
+	match move.target:
+		"Self":
+			return user
+		"Enemy":
+			return opponent
+	return opponent
+
+func _get_ordered_actions(session: BattleSession, player_action: BattleAction, enemy_action: BattleAction) -> Array[BattleAction]:
+	var actions: Array[BattleAction] = [player_action, enemy_action]
+
+	actions.sort_custom(func(a: BattleAction, b: BattleAction) -> bool:
+		var a_priority := _get_action_priority(session, a)
+		var b_priority := _get_action_priority(session, b)
+
+		if a_priority != b_priority:
+			return a_priority > b_priority
+
+		var a_speed := _get_action_speed(session, a)
+		var b_speed := _get_action_speed(session, b)
+
+		if a_speed != b_speed:
+			return a_speed > b_speed
+
+		return randf() < 0.5
+	)
+
+	return actions
+
+func _get_action_speed(session: BattleSession, action: BattleAction) -> int:
+	var user := _get_action_user(session, action)
+	if user == null:
+		return 0
+	return user.battle_stats.speed
+
+func _get_action_priority(session: BattleSession, action: BattleAction) -> int:
+	# implement move priority later
+	return 1
+
+func _resolve_switch_action(session: BattleSession, action: BattleAction) -> Array[BattleEvent]:
+	var events: Array[BattleEvent] = []
+	var old_pokemon_name: String
+	var new_pokemon_name: String
+	if(action.actor == BattleDefinitions.BattleSide.PLAYER):
+		old_pokemon_name = session.get_active_player().base_data.name
+		session.switch_player_to(action.switch_index)
+		new_pokemon_name = session.get_active_player().base_data.name
 	else:
-	# enemy switch
-		if(enemy_action.action_type == BattleDefinitions.BattleAction.SWITCH):
-			events.append(switch(BattleDefinitions.BattleSide.ENEMY, enemy_action.switch_index))
-			events.append(msg("Opponent sent out %s" % [state.enemy_party[enemy_action.switch_index].base_data.name]))
-			enemy_pokemon = _execute_switch(BattleDefinitions.BattleSide.ENEMY, enemy_action.switch_index, state)
-	# player switch
-		if(player_action.action_type == BattleDefinitions.BattleAction.SWITCH):
-			events.append(switch(BattleDefinitions.BattleSide.PLAYER, player_action.switch_index))
-			events.append(msg("You sent out %s" % [PlayerInventory.PartyPokemon[player_action.switch_index].base_data.name]))
-			player_pokemon = _execute_switch(BattleDefinitions.BattleSide.PLAYER, player_action.switch_index, state)
-	# enemy move
-		if(enemy_action.action_type == BattleDefinitions.BattleAction.MOVE):
-			var enemy_move: Move = enemy_pokemon.moves[enemy_action.move_index]
-			_execute_move(BattleDefinitions.BattleSide.ENEMY, enemy_pokemon, player_pokemon, enemy_move, events)
-			if _is_battle_over_or_faint_handled(state, events):
-				return {"state": state, "events": events}
-	# player move
-		if(player_action.action_type == BattleDefinitions.BattleAction.MOVE):
-			var player_move: Move = player_pokemon.moves[player_action.move_index]
-			_execute_move(BattleDefinitions.BattleSide.PLAYER, player_pokemon, enemy_pokemon, player_move, events)
-			if _is_battle_over_or_faint_handled(state, events):
-				return {"state": state, "events": events}
-	
-	return {"state": state, "events": events}
+		old_pokemon_name = session.get_active_enemy().base_data.name
+		session.switch_enemy_to(action.switch_index)
+		new_pokemon_name = session.get_active_enemy().base_data.name
+	events.append(BattleEvent.switch_performed(action.actor, old_pokemon_name, new_pokemon_name, action.switch_index))
+	return events
 
-func _execute_switch(side: int, switch_index: int, state: Dictionary) -> Pokemon:
-	if(side == BattleDefinitions.BattleSide.PLAYER):
-		state.player_active = switch_index
-		return _player_active(state)
-	else:
-		state.enemy_active = switch_index
-		return _enemy_active(state)
+func _resolve_move_action(session: BattleSession, action: BattleAction) -> Array[BattleEvent]:
+	var events: Array[BattleEvent] = []
 
-func _execute_move(side: int, attacker: Pokemon, defender: Pokemon, move: Move, events: Array) -> void:
-	# If attacker already fainted (possible later add recoil/end-of-turn etc)
-	if attacker.current_hp <= 0:
-		return
+	var user := _get_action_user(session, action)
+	var opponent := _get_action_target(session, action)
 
-	events.append(msg("%s used %s" % [attacker.base_data.name, move.name]))
+	if user == null or opponent == null:
+		return events
+
+	if action.move_index < 0 or action.move_index >= user.moves.size():
+		return events
+
+	var move: Move = user.moves[action.move_index]
+	if move == null:
+		return events
+
+	events.append(BattleEvent.move_used(
+		action.actor,
+		user.base_data.name,
+		move.name
+	))
 
 	match move.category:
 		"Physical", "Special":
-			_apply_damage(side, move, attacker, defender, events)
+			var target := _get_move_target(move, user, opponent)
+			events.append_array(_resolve_damage_move(action.actor, move, user, target))
+
 		"Status":
-			_apply_status(move, attacker, defender, events)
+			var target := _get_move_target(move, user, opponent)
+			events.append_array(_resolve_status_move(action.actor, move, user, target))
+
 		"StatChange":
-			_apply_stat_change(move, attacker, defender, events)
+			var target := _get_move_target(move, user, opponent)
+			events.append_array(_resolve_stat_change_move(action.actor, move, user, target))
+
 		_:
-			events.append(msg("But it failed."))
+			events.append(BattleEvent.message("But it failed."))
 
-func _apply_damage(attacker_side: int, move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
-	var damage: int = damage_calculation.get_damage(move, attacker, defender)
+	return events
+	
+func _resolve_damage_move(attacker_side: BattleDefinitions.BattleSide, move: Move, attacker: Pokemon, defender: Pokemon) -> Array[BattleEvent]:
+	var events: Array[BattleEvent] = []
+
+	if attacker == null or defender == null:
+		return events
+
+	if attacker.current_hp <= 0:
+		return events
+
 	var old_hp = defender.current_hp
-	var new_hp = max(defender.current_hp - damage, 0)
-	defender.current_hp -= damage
-	var defender_side: int = BattleDefinitions.BattleSide.ENEMY if attacker_side == BattleDefinitions.BattleSide.PLAYER else BattleDefinitions.BattleSide.PLAYER
-	events.append(BattleEvent.hp_changed(defender_side, defender.base_data.name, old_hp, defender.current_hp, defender.base_data.base_stats.hp))
+	var damage: int = damage_calculation.get_damage(move, attacker, defender)
+	defender.current_hp = max(defender.current_hp - damage, 0)
 
-func _apply_status(move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
+	var defender_side := BattleDefinitions.BattleSide.ENEMY
+	if attacker_side == BattleDefinitions.BattleSide.ENEMY:
+		defender_side = BattleDefinitions.BattleSide.PLAYER
+
+	events.append(BattleEvent.hp_changed(
+		defender_side,
+		defender.base_data.name,
+		old_hp,
+		defender.current_hp,
+		defender.battle_stats.hp
+	))
+
+	return events
+
+func _resolve_status_move(attacker_side: BattleDefinitions.BattleSide, move: Move, user: Pokemon, target: Pokemon) -> Array[BattleEvent]:
 	var status_type = move.status
 	if move.target == "Self":
-		attacker.status = status_type
-		events.append(msg("%s is now %s." % [attacker.base_data.name, str(status_type)]))
+		user.status = status_type
+		events.append(BattleEvent.move_used())
 	elif move.target == "Enemy":
 		defender.status = status_type
 		events.append(msg("%s is now %s." % [defender.base_data.name, str(status_type)]))
 
-func _apply_stat_change(move: Move, attacker: Pokemon, defender: Pokemon, events: Array) -> void:
-	var target: Pokemon = attacker if move.target == "Self" else defender
-	var name := target.base_data.name
+func _resolve_stat_change_move(attacker_side: BattleDefinitions.BattleSide, move: Move, user: Pokemon, target: Pokemon) -> Array[BattleEvent]:
+	var events: Array[BattleEvent] = []
 
-	# replace with stat stages later
 	var stat_name: String = move.target_stat
 	var current_value = target.battle_stats.get(stat_name)
 	target.battle_stats.set(stat_name, current_value * move.stat_multiplier)
 
-	var went_up = move.stat_multiplier > 1.0
-	var went_down = move.stat_multiplier < 1.0
-	if went_up:
-		events.append(msg("%s's %s rose." % [name, stat_name]))
-	elif went_down:
-		events.append(msg("%s's %s fell." % [name, stat_name]))
+	var target_side := attacker_side
+	if target != user:
+		target_side = _opposing_side(attacker_side)
+
+	if move.stat_multiplier > 1.0:
+		events.append(BattleEvent.message("%s's %s rose." % [target.base_data.name, stat_name]))
+	elif move.stat_multiplier < 1.0:
+		events.append(BattleEvent.message("%s's %s fell." % [target.base_data.name, stat_name]))
 	else:
-		events.append(msg("Nothing happened."))
+		events.append(BattleEvent.message("Nothing happened."))
+
+	return events
 
 func _find_next_usable_enemy_index(session: BattleSession) -> int:
 	for i in range(session.enemy_party.size()):
