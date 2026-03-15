@@ -21,15 +21,10 @@ func _on_body_entered(body: Node2D) -> void:
 	# don't care about non players
 	if body.name != "Player":
 		return
-
-	# make sure target scene is valid
-	var packed_scene := MapRegistry.get_map(target_map_id) 
-	if packed_scene == null:
-		return
 	
 	var offset = get_warp_offset(body.global_position)
 	var world := get_tree().root.get_node("World")
-	world.load_map(packed_scene, body, spawn_point, horizontal, offset)
+	world.load_map(target_map_id, body, spawn_point, horizontal, offset)
 	
 func get_warp_offset(player_position: Vector2) -> int:
 	var local_offset: Vector2 = (player_position - global_position) / GlobalConstants.tile_size

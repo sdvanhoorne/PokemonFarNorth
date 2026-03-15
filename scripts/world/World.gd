@@ -12,11 +12,12 @@ var menu_open := false
 func _ready() -> void:
 	DialogueManager.message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
 
-func load_map(map: PackedScene, player: Node2D, spawn_name := "", horizontal: bool = true, 
+func load_map(map_id: String, player: Node2D, spawn_name := "", horizontal: bool = true, 
 index: int = 0) -> Node2D:
 	if is_loading_map:
 		return current_map
 	is_loading_map = true
+	var map = MapRegistry.get_map(map_id)
 	if map == null:
 		return current_map
 	var new_map := map.instantiate()
@@ -54,8 +55,9 @@ index: int = 0) -> Node2D:
 
 	is_loading_map = false
 	
-	# show area name card
+	# show area name card and set id
 	if new_map != null:
+		new_map.map_id = map_id
 		var map_display_name = new_map.get("map_display_name")
 		if map_display_name != null:
 			map_name_control.show_map_name_card(map_display_name)
@@ -64,8 +66,7 @@ index: int = 0) -> Node2D:
 
 func _on_home_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
-	load_map(MapRegistry.get_map("starting_town"), null, 
-	"StartingHouseSpawn")
+	load_map("starting_town", null, "StartingHouseSpawn")
 
 func _on_battle_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false

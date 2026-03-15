@@ -85,13 +85,7 @@ func _load_previous_map(_result: BattleResult = null) -> void:
 		push_warning("BattleManager._load_previous_map: current_request was null")
 		return
 
-	var map_path = MapRegistry.get_map(current_request.map_id)
-	if map_path == "":
-		push_warning("BattleManager._load_previous_map: no map path for map_id %s" % current_request.map_id)
-		return
-
-	var current_map_scene = load(map_path)
-	var current_map = await world_scene.load_map(current_map_scene, null, "")
+	var current_map = await world_scene.load_map(current_request.map_id, null, "")
 
 	var player = current_map.get_node("SortY/Player")
 	player.global_position = current_request.player_position

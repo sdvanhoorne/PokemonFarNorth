@@ -1,8 +1,8 @@
 {
-	"id": 21,
-	"name": "Scattric",
-	"type1": "Electric",
-	"type2": "Fighting",
+	"id": 42,
+	"name": "Thundart",
+	"type1": "Flying",
+	"type2": "Electric",
 	"base_stats": {
 		"hp": 0,
 		"attack": 0,
