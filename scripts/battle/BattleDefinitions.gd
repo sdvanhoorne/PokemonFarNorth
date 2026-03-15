@@ -1,7 +1,7 @@
 extends RefCounted
 class_name BattleDefinitions
 
-enum BattleOutcome { WIN, LOSE, ESCAPE, CAPTURE }
+enum BattleOutcome { WIN, LOSE, RUN, CAPTURE }
 
 enum BattleType { WILD, TRAINER }
 

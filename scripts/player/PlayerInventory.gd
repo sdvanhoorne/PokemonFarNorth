@@ -1,7 +1,7 @@
 extends Node
 
 const party_path = "res://data/player/party.json"
-var PartyPokemon = [] 
+var PartyPokemon: Array[Pokemon] = [] 
 
 func _ready():
 	get_party()

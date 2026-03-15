@@ -70,8 +70,7 @@ func _on_home_pressed() -> void:
 func _on_battle_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
 	var encounteredPokemon = Pokemon.new_wild(14, 1)
-	BattleManager.start_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), 
-	"", false)
+	BattleManager.start_wild_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), "")
 	
 func _on_load_pressed() -> void:
 	var save := SaveData.load_savedata()

@@ -204,7 +204,7 @@ func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -
 
 	_award_xp_for_enemy_faint(session, fainted_enemy, events)
 
-	if not session.has_usable_enemy_pokemon():
+	if not session.has_usable_enemy():
 		_set_battle_result(session, BattleDefinitions.BattleOutcome.WIN)
 		events.append(BattleEvent.battle_ended(session.result))
 		return true

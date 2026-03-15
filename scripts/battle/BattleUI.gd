@@ -145,11 +145,11 @@ func set_moves(move_names: Array) -> void:
 			sb.bg_color = Color(0.2, 0.2, 0.2, 1)
 			move_container.add_theme_stylebox_override("panel", sb)
 	
-func update_health_bar(defending_pokemon: Pokemon, isPlayerAttacking: bool):
+func update_health_bar(side: BattleDefinitions.BattleSide, current_hp: int, max_hp: int):
 	var damagedPokemonContainer
-	if(isPlayerAttacking):
+	if(side == BattleDefinitions.BattleSide.ENEMY):
 		damagedPokemonContainer = enemy_pokemon_ui
 	else:
 		damagedPokemonContainer = player_pokemon_ui
 	var healthBar = damagedPokemonContainer.get_node("Info/Control/HealthBar")
-	healthBar.value = defending_pokemon.current_hp
+	healthBar.value = current_hp

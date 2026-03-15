@@ -11,48 +11,38 @@ var updated_party: Array[Pokemon] = []
 static func make(
 	battle_type_: BattleDefinitions.BattleType,
 	outcome_: BattleDefinitions.BattleOutcome,
-	updated_party_: Array[Pokemon] = [],
 	defeated_trainer_id_: String = "",
 	captured_pokemon_: Pokemon = null
 ) -> BattleResult:
 	var result := BattleResult.new()
 	result.battle_type = battle_type_
 	result.outcome = outcome_
-	result.updated_party = updated_party_
 	result.defeated_trainer_id = defeated_trainer_id_
 	result.captured_pokemon = captured_pokemon_
 	return result
 
 static func win(
 	battle_type_: BattleDefinitions.BattleType,
-	updated_party_: Array[Pokemon] = [],
 	defeated_trainer_id_: String = ""
 ) -> BattleResult:
 	return make(
 		battle_type_,
 		BattleDefinitions.BattleOutcome.WIN,
-		updated_party_,
 		defeated_trainer_id_
 	)
 
 static func lose(
-	battle_type_: BattleDefinitions.BattleType,
-	updated_party_: Array[Pokemon] = []
+	battle_type_: BattleDefinitions.BattleType
 ) -> BattleResult:
 	return make(
 		battle_type_,
 		BattleDefinitions.BattleOutcome.LOSE,
-		updated_party_
 	)
 
-static func escape(
-	battle_type_: BattleDefinitions.BattleType,
-	updated_party_: Array[Pokemon] = []
-) -> BattleResult:
+static func run() -> BattleResult:
 	return make(
-		battle_type_,
-		BattleDefinitions.BattleOutcome.ESCAPE,
-		updated_party_
+		BattleDefinitions.BattleType.WILD,
+		BattleDefinitions.BattleOutcome.RUN
 	)
 
 static func capture(
@@ -63,7 +53,6 @@ static func capture(
 	return make(
 		battle_type_,
 		BattleDefinitions.BattleOutcome.CAPTURE,
-		updated_party_,
 		"",
 		captured_pokemon_
 	)

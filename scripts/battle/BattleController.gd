@@ -21,10 +21,10 @@ func _ready() -> void:
 	engine.setup()
 	rng.randomize()
 	_wire_signals()
-	await _start_battle_intro()
 
-func setup(request: BattleStartRequest, player_party: Array = []) -> void:
+func setup(request: BattleStartRequest, player_party: Array[Pokemon]) -> void:
 	session = BattleSession.from_request(request, player_party)
+	await _start_battle_intro()
 
 func _set_display_state_from_state() -> void:
 	display_state = _deep_copy_state(state)
@@ -60,31 +60,25 @@ func _wire_signals() -> void:
 		var btn := b as Button
 		btn.pressed.connect(_on_move_pressed.bind(btn))
 	battle_ui.party_ui.switch_requested.connect(_on_party_pokemon_chosen)
-	
-func _player_active() -> Pokemon:
-	return state.player_party[state.player_active]
-	
+
 func _player_active_display() -> Pokemon:
 	return display_state.player_party[display_state.player_active]
 
-func _enemy_active() -> Pokemon:
-	return state.enemy_party[state.enemy_active]
-	
 func _enemy_active_display() -> Pokemon:
 	return display_state.enemy_party[display_state.enemy_active]
 
 func _start_battle_intro() -> void:
-	battle_ui.load_player_pokemon(_player_active())
-	battle_ui.load_enemy_pokemon(_enemy_active())
+	battle_ui.load_player_pokemon(session.get_active_player())
+	battle_ui.load_enemy_pokemon(session.get_active_enemy())
 
 	battle_ui.set_state(BattleUI.UIState.MESSAGE)
 	# just say wild pokemon for now, add trainer dialogue later
 	await DialogueManager.say(
-		PackedStringArray(["A wild %s appeared!" % _enemy_active().base_data.name]),
+		PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().base_data.name]),
 		{"lock_input": false, "require_input": true}
 	)
 	
-	battle_ui.set_moves(_player_active().move_names)
+	battle_ui.set_moves(session.get_active_player().move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
 func _on_fight_pressed() -> void:
@@ -97,14 +91,14 @@ func _on_run_pressed() -> void:
 
 func _run() -> void:
 	if input_locked: return
-	var result = BattleResult
+	var result = BattleResult.run()
 	
 	battle_ui.set_state(BattleUI.UIState.MESSAGE)
 	await DialogueManager.say(
 		PackedStringArray(["You ran away..."]),
 		{"lock_input": false, "require_input": true}
 	)
-	_finish_battle()
+	_finish_battle(result)
 
 func _on_switch_pressed() -> void:
 	if input_locked: return	
@@ -144,11 +138,11 @@ func _process_turn():
 		battle_ui.set_state(BattleUI.UIState.OPTIONS)
 
 func _determine_enemy_move_index() -> int:
-	return rng.randi_range(0, _enemy_active().moves.size() - 1)
+	return rng.randi_range(0, session.get_active_enemy().moves.size() - 1)
 	
 func _determine_enemy_move_name() -> String:
 	var index = _determine_enemy_move_index()
-	return _enemy_active().moves[index].name
+	return session.get_active_enemy().moves[index].name
 
 func _play_events(events: Array[BattleEvent]) -> void:
 	for e in events:
@@ -192,13 +186,13 @@ func _play_events(events: Array[BattleEvent]) -> void:
 				var max_hp: int = e.payload["max_hp"]
 
 				if target_is_player:
-					battle_ui.update_hp(
+					battle_ui.update_health_bar(
 						BattleDefinitions.BattleSide.PLAYER,
 						current_hp,
 						max_hp
 					)
 				else:
-					battle_ui.update_hp(
+					battle_ui.update_health_bar(
 						BattleDefinitions.BattleSide.ENEMY,
 						current_hp,
 						max_hp
@@ -262,7 +256,7 @@ func _play_events(events: Array[BattleEvent]) -> void:
 					PackedStringArray([
 						"%s gained %s XP!" % [
 							e.payload["pokemon_name"],
-							e.payload["amount"]
+							e.payload["xp_gain_amount"]
 						]
 					]),
 					{"lock_input": false, "require_input": true}
@@ -297,8 +291,7 @@ func _play_events(events: Array[BattleEvent]) -> void:
 				)
 
 			BattleDefinitions.BattleEvent.BATTLE_ENDED:
-				var result: BattleResult = e.payload["result"]
-				_finish_battle(result)
+				_finish_battle(e)
 				return
 
 			_:
@@ -325,7 +318,7 @@ func _events_contain_battle_end(events: Array[BattleEvent]) -> bool:
 			return true
 	return false
 
-func _finish_battle(result: BattleResult) -> void:
-	PlayerInventory.PartyPokemon = result.updated_party
+func _finish_battle(result: BattleEvent) -> void:
+	PlayerInventory.PartyPokemon = session.player_party
 	# handle other result info
-	BattleManager.return_to_world()
+	BattleManager.return_to_world(session.result)

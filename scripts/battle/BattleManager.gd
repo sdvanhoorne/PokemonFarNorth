@@ -1,64 +1,100 @@
-# BattleManager is a singleton 
-# that handles transition from world to battle scene
-
 extends Node
-var player_position: Vector2
-var player_direction: Vector2
-var current_map_path: String
-var trainer_battle: bool = false
 
-func start_battle(enemy_pokemon: Array[Pokemon], player_pos: Vector2, player_dir: Vector2, 
-map_path: String, is_trainer: bool):
-	# Store map information
-	player_position = player_pos
-	player_direction = player_dir
-	current_map_path = map_path
-	
-	# is trainer or wild?
-	trainer_battle = is_trainer
-	
-	# Remove world scene
-	var world = get_parent().get_node("World")
-	if(world == null):
-		print("World not found")
+var current_request: BattleStartRequest = null
+
+func start_battle(request: BattleStartRequest) -> void:
+	current_request = request
+
+	var world := get_parent().get_node_or_null("World")
+	if world == null:
+		push_warning("BattleManager.start_battle: World not found")
 		return
+
 	world.queue_free()
 	await get_tree().process_frame
-	
-	# Create battle scene
-	var battle_scene = load("res://scenes/battles/battle.tscn").instantiate()
-	battle_scene.setup(enemy_pokemon, PlayerInventory.PartyPokemon)
-	battle_scene.print_tree_pretty()
-	var message_box = battle_scene.get_node_or_null("BattleUI/MessageBox")
-	DialogueManager.message_box = message_box
-	battle_scene.enemy_pokemon = enemy_pokemon
+
+	var battle_scene = load("res://scenes/battles/Battle.tscn").instantiate()
 	get_parent().add_child(battle_scene)
 
-func return_to_world():
-	# Use a deferred call to make sure the current scene fully unloads first
-	call_deferred("_load_previous_map")
-	
-func _load_previous_map():
-	# Remove battle scene
-	get_node("/root").print_tree_pretty()
-	var battle = get_parent().get_node("Battle")
-	if(battle == null):
-		print("Battle not found")
-	battle.queue_free()
-	await get_tree().process_frame
-	
-	#i suspect we will need to store the world node somewhere
-	# between sessions and events like battles
-	
-	# Load current map scene
+	# BattleController / battle scene should take the request and build the session.
+	if battle_scene.has_method("setup"):
+		battle_scene.setup(request, PlayerInventory.PartyPokemon)
+
+	# Point DialogueManager at the battle message box if present.
+	var message_box = battle_scene.get_node_or_null("BattleUI/BottomUI/MessageContainer")
+	if message_box != null:
+		DialogueManager.message_box = message_box
+
+
+# Temporary migration helper for wild battles.
+func start_wild_battle(
+	enemy_party: Array[Pokemon],
+	player_position: Vector2,
+	player_direction: Vector2,
+	map_id: String,
+	intro_lines: PackedStringArray = PackedStringArray()
+) -> void:
+	var request := BattleStartRequest.for_wild_battle(
+		enemy_party,
+		player_position,
+		player_direction,
+		map_id,
+		intro_lines
+	)
+	await start_battle(request)
+
+
+# Temporary migration helper for trainer battles.
+func start_trainer_battle(
+	enemy_party: Array[Pokemon],
+	player_position: Vector2,
+	player_direction: Vector2,
+	map_id: String,
+	trainer_id: String,
+	trainer_name: String,
+	intro_lines: PackedStringArray = PackedStringArray()
+) -> void:
+	var request := BattleStartRequest.for_trainer_battle(
+		enemy_party,
+		player_position,
+		player_direction,
+		map_id,
+		trainer_id,
+		trainer_name,
+		intro_lines
+	)
+	await start_battle(request)
+
+
+func return_to_world(result: BattleResult = null) -> void:
+	call_deferred("_load_previous_map", result)
+
+
+func _load_previous_map(_result: BattleResult = null) -> void:
+	var battle := get_parent().get_node_or_null("Battle")
+	if battle == null:
+		push_warning("BattleManager._load_previous_map: Battle scene not found")
+	else:
+		battle.queue_free()
+		await get_tree().process_frame
+
 	var world_scene = load("res://scenes/world/world.tscn").instantiate()
 	get_parent().add_child(world_scene)
-	var current_map_scene = load(current_map_path)
-	var current_map = await world_scene.load_map(current_map_scene, null, "") 
-	
-	# Re-position the player after world has loaded
-	var player = current_map.get_node("SortY").get_node("Player")  
-	player.global_position = player_position
-	# player.facing_input = player_direction
-	player.movement_controller.set_desired_input(player_direction, false)
+
+	if current_request == null:
+		push_warning("BattleManager._load_previous_map: current_request was null")
+		return
+
+	var map_path = MapRegistry.get_map(current_request.map_id)
+	if map_path == "":
+		push_warning("BattleManager._load_previous_map: no map path for map_id %s" % current_request.map_id)
+		return
+
+	var current_map_scene = load(map_path)
+	var current_map = await world_scene.load_map(current_map_scene, null, "")
+
+	var player = current_map.get_node("SortY/Player")
+	player.global_position = current_request.player_position
+	player.movement_controller.set_desired_input(current_request.player_direction, false)
+
 	await get_tree().process_frame
