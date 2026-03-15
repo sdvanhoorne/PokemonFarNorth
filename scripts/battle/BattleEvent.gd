@@ -33,13 +33,7 @@ static func move_missed(side_: BattleDefinitions.BattleSide, user_name: String, 
 	}
 	return e
 
-static func damage_applied(
-	side_: BattleDefinitions.BattleSide,
-	pokemon_name: String,
-	damage: int,
-	current_hp: int,
-	max_hp: int
-) -> BattleEvent:
+static func damage_applied(side_: BattleDefinitions.BattleSide, pokemon_name: String, damage: int, current_hp: int, max_hp: int) -> BattleEvent:
 	var e := BattleEvent.new()
 	e.event_type = BattleDefinitions.BattleEvent.DAMAGE_APPLIED
 	e.side = side_
@@ -51,13 +45,7 @@ static func damage_applied(
 	}
 	return e
 
-static func hp_changed(
-	side_: BattleDefinitions.BattleSide,
-	pokemon_name: String,
-	old_hp: int,
-	current_hp: int,
-	max_hp: int
-) -> BattleEvent:
+static func hp_changed(side_: BattleDefinitions.BattleSide, pokemon_name: String, old_hp: int, current_hp: int, max_hp: int) -> BattleEvent:
 	var e := BattleEvent.new()
 	e.event_type = BattleDefinitions.BattleEvent.HP_CHANGED
 	e.side = side_
@@ -78,12 +66,7 @@ static func fainted(side_: BattleDefinitions.BattleSide, pokemon_name: String) -
 	}
 	return e
 
-static func switch_performed(
-	side_: BattleDefinitions.BattleSide,
-	old_pokemon_name: String,
-	new_pokemon_name: String,
-	new_index: int
-) -> BattleEvent:
+static func switch_performed(side_: BattleDefinitions.BattleSide, old_pokemon_name: String, new_pokemon_name: String, new_index: int) -> BattleEvent:
 	var e := BattleEvent.new()
 	e.event_type = BattleDefinitions.BattleEvent.SWITCH_PERFORMED
 	e.side = side_
@@ -138,3 +121,11 @@ static func player_switch_required() -> BattleEvent:
 	var e := BattleEvent.new()
 	e.event_type = BattleDefinitions.BattleEvent.SWITCH_REQUIRED
 	return e
+
+static func status_applied(status: String) -> BattleEvent:
+	var event := BattleEvent.new()
+	event.event_type = BattleDefinitions.BattleEvent.STATUS_APPLIED
+	event.payload = {
+		"status": status
+	}
+	return event

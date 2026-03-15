@@ -39,5 +39,15 @@
 		"category": "Special",
 		"accuracy": 100,
 		"description": "The user sprays fire at the enemy."
+	},
+	{
+		"id": 4,
+		"name": "Thunder Wave",
+		"type": "Electric",
+		"target": "Enemy",
+		"power": -1,
+		"category": "Status",
+		"accuracy": 100,
+		"description": "The user shoots a paralyzing wave at the enemy."
 	}
 ]

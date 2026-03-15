@@ -12,6 +12,16 @@ var state
 var turn_number: int
 var result: BattleResult
 
+static func from_request(request: BattleStartRequest, player_party_source: Array[Pokemon]) -> BattleSession:
+	var session := BattleSession.new()
+	session.battle_type = request.battle_type
+	session.player_party = player_party_source.duplicate(true)
+	session.enemy_party = request.enemy_party.duplicate(true)
+	session.active_player_index = 0
+	session.active_enemy_index = 0
+	session.can_run = request.can_run
+	return session
+
 func get_active_player() -> Pokemon:
 	return player_party[active_player_index]
 

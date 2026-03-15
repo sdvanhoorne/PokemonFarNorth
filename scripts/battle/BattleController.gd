@@ -6,6 +6,7 @@ class_name BattleController
 
 @onready var battle_ui: BattleUI = $BattleUI
 var rng := RandomNumberGenerator.new()
+var session: BattleSession
 
 var engine: BattleEngine
 var state: Dictionary
@@ -22,15 +23,8 @@ func _ready() -> void:
 	_wire_signals()
 	await _start_battle_intro()
 
-func setup(enemy_party: Array, player_party: Array = []) -> void:
-	if player_party.is_empty():
-		player_party = PlayerInventory.PartyPokemon
-	state = {
-		"player_party": player_party.duplicate(true),
-		"enemy_party": enemy_party.duplicate(true),
-		"player_active": 0,
-		"enemy_active": 0,
-	}
+func setup(request: BattleStartRequest, player_party: Array = []) -> void:
+	session = BattleSession.from_request(request, player_party)
 
 func _set_display_state_from_state() -> void:
 	display_state = _deep_copy_state(state)
@@ -140,7 +134,7 @@ func _process_turn():
 		pending_enemy_action = BattleAction.make_move(BattleDefinitions.BattleSide.ENEMY, _determine_enemy_move_index())
 		_set_display_state_from_state()
 		
-		var result: Dictionary = engine.resolve_turn(pending_player_action, pending_enemy_action, state)
+		var result: Array[BattleEvents] = engine.resolve_turn(pending_player_action, pending_enemy_action)
 		state = result.state
 		await _play_events(result.events)
 		if _events_contain_battle_end(result.events):
