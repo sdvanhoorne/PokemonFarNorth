@@ -97,13 +97,14 @@ func _on_run_pressed() -> void:
 
 func _run() -> void:
 	if input_locked: return
+	var result = BattleResult
 	
 	battle_ui.set_state(BattleUI.UIState.MESSAGE)
 	await DialogueManager.say(
 		PackedStringArray(["You ran away..."]),
 		{"lock_input": false, "require_input": true}
 	)
-	_end_battle_commit_and_return()
+	_finish_battle()
 
 func _on_switch_pressed() -> void:
 	if input_locked: return	
@@ -131,13 +132,13 @@ func _process_turn():
 		_run()
 	else:
 		# no enemy switches yet, just moves
+		# random move selection, no AI yet
 		pending_enemy_action = BattleAction.make_move(BattleDefinitions.BattleSide.ENEMY, _determine_enemy_move_index())
 		_set_display_state_from_state()
 		
-		var result: Array[BattleEvents] = engine.resolve_turn(pending_player_action, pending_enemy_action)
-		state = result.state
-		await _play_events(result.events)
-		if _events_contain_battle_end(result.events):
+		var events: Array[BattleEvent] = engine.resolve_turn(session, pending_player_action, pending_enemy_action)
+		await _play_events(events)
+		if _events_contain_battle_end(events):
 			return
 
 		battle_ui.set_state(BattleUI.UIState.OPTIONS)
@@ -149,43 +150,76 @@ func _determine_enemy_move_name() -> String:
 	var index = _determine_enemy_move_index()
 	return _enemy_active().moves[index].name
 
-func _play_events(events: Array) -> void:
+func _play_events(events: Array[BattleEvent]) -> void:
 	for e in events:
-		match e.type:
-			"message":
+		match e.event_type:
+			BattleDefinitions.BattleEvent.MESSAGE:
 				await DialogueManager.say(
-					PackedStringArray([e.text]),
-					{"lock_input": false, "require_input": false, "auto_advance_time": 1}
+					PackedStringArray([e.payload["text"]]),
+					{"lock_input": false, "require_input": false, "auto_advance_time": 1.0}
 				)
-				
-			"switch":
-				# some redundant code with hp change
-				var target_is_player = (e.side == BattleDefinitions.BattleSide.PLAYER)
-				if target_is_player:
-					display_state.player_active = e.switch_index
-					battle_ui.unload_player_pokemon()
-					battle_ui.load_player_pokemon(_player_active_display())
-					battle_ui.set_moves(_player_active_display().move_names)
-				else:
-					display_state.enemy_active = e.switch_index
-					battle_ui.unload_enemy_pokemon()
-					battle_ui.load_enemy_pokemon(_enemy_active_display())
-					
-			"hp_change":
-				var target_is_player = (e.side == BattleDefinitions.BattleSide.PLAYER)
-				var target_pokemon: Pokemon
-				if target_is_player:
-					target_pokemon = _player_active_display() 
-				else:
-					target_pokemon = _enemy_active_display()
 
-				var is_player_attacking = (e.side == BattleDefinitions.BattleSide.ENEMY)
-				target_pokemon.current_hp -= e.damage
-				battle_ui.update_health_bar(target_pokemon, is_player_attacking)
-
-			"faint":
+			BattleDefinitions.BattleEvent.MOVE_USED:
 				await DialogueManager.say(
-					PackedStringArray(["%s fainted" % e.name]),
+					PackedStringArray([
+						"%s used %s!" % [
+							e.payload["user_name"],
+							e.payload["move_name"]
+						]
+					]),
+					{"lock_input": false, "require_input": false, "auto_advance_time": 0.8}
+				)
+
+			BattleDefinitions.BattleEvent.MOVE_MISSED:
+				await DialogueManager.say(
+					PackedStringArray([
+						"%s's %s missed!" % [
+							e.payload["user_name"],
+							e.payload["move_name"]
+						]
+					]),
+					{"lock_input": false, "require_input": false, "auto_advance_time": 0.8}
+				)
+
+			BattleDefinitions.BattleEvent.DAMAGE_APPLIED:
+				# Optional: keep this if you want damage numbers or extra effects later.
+				# For now, HP_CHANGED is probably the one that actually drives the UI bar.
+				pass
+
+			BattleDefinitions.BattleEvent.HP_CHANGED:
+				var target_is_player := e.side == BattleDefinitions.BattleSide.PLAYER
+				var current_hp: int = e.payload["current_hp"]
+				var max_hp: int = e.payload["max_hp"]
+
+				if target_is_player:
+					battle_ui.update_hp(
+						BattleDefinitions.BattleSide.PLAYER,
+						current_hp,
+						max_hp
+					)
+				else:
+					battle_ui.update_hp(
+						BattleDefinitions.BattleSide.ENEMY,
+						current_hp,
+						max_hp
+					)
+
+			BattleDefinitions.BattleEvent.STATUS_APPLIED:
+				await DialogueManager.say(
+					PackedStringArray([
+						_status_applied_text(
+							e.payload["pokemon_name"],
+							e.payload["status_type"]
+						)
+					]),
+					{"lock_input": false, "require_input": true}
+				)
+
+			BattleDefinitions.BattleEvent.FAINTED:
+				await DialogueManager.say(
+					PackedStringArray([
+						"%s fainted!" % e.payload["pokemon_name"]
+					]),
 					{"lock_input": false, "require_input": true}
 				)
 
@@ -194,37 +228,104 @@ func _play_events(events: Array) -> void:
 				else:
 					battle_ui.unload_enemy_pokemon()
 
-			"xp_gain":
-				# animate xp bar gain
-				await DialogueManager.say(
-					PackedStringArray(["%s gained %s xp" % [e.name, e.amount]]),
-					{"lock_input": false, "require_input": true}
-				)
-				
-			"level_up":
-				# refresh pokemon level in UI
-				# show stat gains?
-				# refresh active pokemon moves in case they learned a new one
-				await DialogueManager.say(
-					PackedStringArray(["%s leveled up to level %s" % [e.name, e.level]]),
-					{"lock_input": false, "require_input": true}
-				)
-				pass
+			BattleDefinitions.BattleEvent.SWITCH_REQUIRED:
+				if e.side == BattleDefinitions.BattleSide.PLAYER:
+					battle_ui.set_state(BattleUI.UIState.PARTY)
+					# If you support a forced-switch mode later, call that here instead.
+					# Example:
+					# battle_ui.show_party(session.player_party, true)
+					return
 
-			"battle_end":
-				_end_battle_commit_and_return()
+			BattleDefinitions.BattleEvent.SWITCH_PERFORMED:
+				var target_is_player := e.side == BattleDefinitions.BattleSide.PLAYER
+				var new_index: int = e.payload["new_index"]
+
+				if target_is_player:
+					session.active_player_index = new_index
+					battle_ui.unload_player_pokemon()
+					battle_ui.load_player_pokemon(session.get_active_player())
+					battle_ui.set_moves(session.get_active_player().move_names)
+				else:
+					session.active_enemy_index = new_index
+					battle_ui.unload_enemy_pokemon()
+					battle_ui.load_enemy_pokemon(session.get_active_enemy())
+
+				await DialogueManager.say(
+					PackedStringArray([
+						"%s entered the battle!" % e.payload["new_pokemon_name"]
+					]),
+					{"lock_input": false, "require_input": false, "auto_advance_time": 0.8}
+				)
+
+			BattleDefinitions.BattleEvent.XP_GAINED:
+				await DialogueManager.say(
+					PackedStringArray([
+						"%s gained %s XP!" % [
+							e.payload["pokemon_name"],
+							e.payload["amount"]
+						]
+					]),
+					{"lock_input": false, "require_input": true}
+				)
+
+			BattleDefinitions.BattleEvent.LEVEL_UP:
+				await DialogueManager.say(
+					PackedStringArray([
+						"%s grew to level %s!" % [
+							e.payload["pokemon_name"],
+							e.payload["level"]
+						]
+					]),
+					{"lock_input": false, "require_input": true}
+				)
+
+				# Optional: refresh the currently displayed player Pokémon info if needed
+				if e.side == BattleDefinitions.BattleSide.PLAYER:
+					battle_ui.load_player_pokemon(session.get_active_player())
+					battle_ui.set_moves(session.get_active_player().move_names)
+
+			BattleDefinitions.BattleEvent.RUN_SUCCEEDED:
+				await DialogueManager.say(
+					PackedStringArray(["Got away safely!"]),
+					{"lock_input": false, "require_input": true}
+				)
+
+			BattleDefinitions.BattleEvent.RUN_FAILED:
+				await DialogueManager.say(
+					PackedStringArray([e.payload["reason"]]),
+					{"lock_input": false, "require_input": true}
+				)
+
+			BattleDefinitions.BattleEvent.BATTLE_ENDED:
+				var result: BattleResult = e.payload["result"]
+				_finish_battle(result)
 				return
 
 			_:
 				pass
 
-func _events_contain_battle_end(events: Array) -> bool:
+func _status_applied_text(pokemon_name: String, status_type: String) -> String:
+	match status_type:
+		"Poison":
+			return "%s was poisoned!" % pokemon_name
+		"Burn":
+			return "%s was burned!" % pokemon_name
+		"Sleep":
+			return "%s fell asleep!" % pokemon_name
+		"Paralysis":
+			return "%s was paralyzed!" % pokemon_name
+		"Freeze":
+			return "%s was frozen solid!" % pokemon_name
+		_:
+			return "%s was afflicted with %s." % [pokemon_name, str(status_type)]
+
+func _events_contain_battle_end(events: Array[BattleEvent]) -> bool:
 	for e in events:
-		if e.type == "battle_end":
+		if e.event_type == BattleDefinitions.BattleEvent.BATTLE_ENDED:
 			return true
 	return false
 
-func _end_battle_commit_and_return() -> void:
-	PlayerInventory.PartyPokemon = state.player_party
-	PlayerInventory.write_party()
+func _finish_battle(result: BattleResult) -> void:
+	PlayerInventory.PartyPokemon = result.updated_party
+	# handle other result info
 	BattleManager.return_to_world()
