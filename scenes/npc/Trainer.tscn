@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://0g7pn53xa61b"]
+[gd_scene load_steps=13 format=3 uid="uid://0g7pn53xa61b"]
 
 [ext_resource type="Script" uid="uid://qqp20ckah3uk" path="res://scripts/npc/Trainer.gd" id="1_om7oh"]
 [ext_resource type="Script" uid="uid://50qhr3jx21nm" path="res://scripts/npc/SightRay.gd" id="2_gl88s"]
 [ext_resource type="Script" uid="uid://b3tbrbpkgd5nk" path="res://scripts/npc/NpcInteractable.gd" id="3_6ium5"]
 [ext_resource type="Texture2D" uid="uid://bdqri77hip7v6" path="res://assets/tiles/Icons.png" id="4_36jd0"]
 [ext_resource type="PackedScene" uid="uid://dnl817dmradhb" path="res://scenes/player/CharacterAnimationController.tscn" id="5_rmkdd"]
+[ext_resource type="SpriteFrames" uid="uid://chnaiqgig3x1" path="res://assets/character/npc/sprite_frames/npc_guy_blue.tres" id="6_gl88s"]
 [ext_resource type="Script" uid="uid://dhjec2xtjj4ew" path="res://scripts/player/MovementController.gd" id="6_jxogu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ac6y7"]
@@ -83,6 +84,7 @@ frame = 4
 frame_progress = 0.228771
 
 [node name="CharacterAnimationController" parent="Sprites" instance=ExtResource("5_rmkdd")]
+sprite_frames = ExtResource("6_gl88s")
 
 [node name="MovementController" type="Node2D" parent="."]
 script = ExtResource("6_jxogu")
