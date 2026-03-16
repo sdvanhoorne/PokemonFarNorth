@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://18fqavfy4vve"]
+[gd_scene load_steps=25 format=4 uid="uid://18fqavfy4vve"]
 
 [ext_resource type="Script" uid="uid://b370wgf4mu5lc" path="res://scripts/world/MapBase.gd" id="1_7l530"]
 [ext_resource type="TileSet" uid="uid://6b7jmwqt02xb" path="res://assets/tiles/routes.tres" id="1_eieiu"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="5_tsaxn"]
 [ext_resource type="PackedScene" uid="uid://w8it21f8eyqh" path="res://scenes/npc/Npc.tscn" id="6_1sqhx"]
 [ext_resource type="Texture2D" uid="uid://cv4aatad8nisl" path="res://assets/tiles/npcs and items.png" id="7_7l530"]
+[ext_resource type="PackedScene" uid="uid://0g7pn53xa61b" path="res://scenes/npc/Trainer.tscn" id="9_vexvy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_icgh1"]
 size = Vector2(20, 10)
@@ -297,6 +298,9 @@ y_sort_enabled = true
 [node name="Npc" parent="SortY/Npcs" instance=ExtResource("6_1sqhx")]
 position = Vector2(-144, -32)
 sprite_frames = SubResource("SpriteFrames_vexvy")
+
+[node name="Trainer" parent="SortY/Npcs" instance=ExtResource("9_vexvy")]
+position = Vector2(-48, -32)
 
 [connection signal="body_entered" from="Warps/StartingHouseWarp" to="Warps/StartingHouseWarp" method="_on_body_entered"]
 [connection signal="body_entered" from="Warps/House02Warp" to="Warps/House02Warp" method="_on_body_entered"]
