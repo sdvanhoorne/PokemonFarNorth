@@ -10,14 +10,14 @@ class_name WanderController
 @export_range(0.0, 1.0, 0.05) var idle_chance: float = 0.25
 @export_range(0.0, 1.0, 0.05) var bias_toward_home: float = 0.65
 
-@export var enabled := true
-
+var enabled: bool = false
 var _spawn_tile: Vector2i
 var _rng := RandomNumberGenerator.new()
 var _timer := 0.0
 var _next_time := 1.0
 
 func _ready() -> void:
+	enabled = get_parent().wander
 	_rng.randomize()
 
 	# Assumes NPC is already snapped to grid (or close enough)

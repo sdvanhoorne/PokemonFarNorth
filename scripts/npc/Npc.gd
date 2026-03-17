@@ -4,6 +4,7 @@ class_name Npc
 @export var npc_id: String = "default_npc"
 @export var dialogue_file: String = "res://data/npcs/npcs.json"
 @export var sprite_frames: SpriteFrames
+@export var wander: bool = false
 
 @onready var character_animation_controller: CharacterAnimationController = $CharacterAnimationController
 @onready var movement_controller: MovementController = $MovementController

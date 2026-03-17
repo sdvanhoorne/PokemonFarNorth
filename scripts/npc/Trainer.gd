@@ -1,9 +1,8 @@
-extends CharacterBody2D
-
+extends Npc
 class_name Trainer
 
 @onready var sight_ray: SightRay = $SightRay
-@onready var alert_animation: AnimatedSprite2D = $Sprites/AlertAnimation
+@onready var alert_animation: AnimatedSprite2D = $AlertAnimation
 
 var is_engaging := false
 var has_battled := false
