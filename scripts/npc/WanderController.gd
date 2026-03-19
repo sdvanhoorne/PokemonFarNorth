@@ -27,7 +27,7 @@ func _ready() -> void:
 	_schedule_next()
 
 func _physics_process(delta: float) -> void:
-	if not enabled:
+	if not enabled or not GameState.gameplay_input_enabled:
 		return
 
 	# Let committed movement finish untouched.

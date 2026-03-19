@@ -106,7 +106,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_down",
-"speed": 8.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -123,7 +123,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_left",
-"speed": 8.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -140,7 +140,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_right",
-"speed": 8.0
+"speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -157,7 +157,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"move_up",
-"speed": 8.0
+"speed": 5.0
 }]
 
 [node name="Npc" type="CharacterBody2D"]
@@ -181,6 +181,8 @@ npc = NodePath("..")
 [node name="CharacterAnimationController" parent="." instance=ExtResource("3_8h7sj")]
 position = Vector2(8, 4)
 sprite_frames = SubResource("SpriteFrames_vexvy")
+animation = &"idle_right"
+frame_progress = 0.563387
 
 [node name="MovementController" type="Node2D" parent="."]
 script = ExtResource("5_ulc3t")

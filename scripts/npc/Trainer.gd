@@ -52,18 +52,19 @@ func play_alert() -> void:
 	alert_animation.visible = true
 	alert_animation.play("alert")
 
-	var end_pos := Vector2(0, -24)
-	var start_pos := end_pos + Vector2(0, -16)
+	var end_pos := Vector2(8, -24)
+	var start_pos := Vector2(8, -16)
 
 	alert_animation.position = start_pos
 	alert_animation.modulate.a = 1.0
+	var slow := 4.0 # 1.0 = normal, 4.0 = 4x slower
 
 	var t := create_tween()
 	t.set_trans(Tween.TRANS_BACK)
 	t.set_ease(Tween.EASE_OUT)
-	t.tween_property(alert_animation, "position", end_pos, 0.18)
-	t.tween_property(alert_animation, "position", end_pos + Vector2(0, 2), 0.06).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	t.tween_property(alert_animation, "position", end_pos, 0.06).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	t.tween_interval(0.4)
-	t.tween_property(alert_animation, "modulate:a", 0.0, 0.12)
+	t.tween_property(alert_animation, "position", end_pos, 0.18 * slow)
+	t.tween_property(alert_animation, "position", end_pos + Vector2(0, 2), 0.06 * slow).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.tween_property(alert_animation, "position", end_pos, 0.06 * slow).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	t.tween_interval(0.4 * slow)
+	t.tween_property(alert_animation, "modulate:a", 0.0, 0.12 * slow)
 	t.tween_callback(func(): alert_animation.visible = false)

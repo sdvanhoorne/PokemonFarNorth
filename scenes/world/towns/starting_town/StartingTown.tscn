@@ -8,7 +8,7 @@
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="5_tsaxn"]
 [ext_resource type="PackedScene" uid="uid://w8it21f8eyqh" path="res://scenes/npc/Npc.tscn" id="6_1sqhx"]
 [ext_resource type="Texture2D" uid="uid://cv4aatad8nisl" path="res://assets/tiles/npcs and items.png" id="7_7l530"]
-[ext_resource type="PackedScene" uid="uid://s1tr0mwdlqkb" path="res://scenes/npc/Trainer_New.tscn" id="9_vexvy"]
+[ext_resource type="PackedScene" uid="uid://s1tr0mwdlqkb" path="res://scenes/npc/Trainer.tscn" id="9_vexvy"]
 [ext_resource type="Script" uid="uid://qqp20ckah3uk" path="res://scripts/npc/Trainer.gd" id="10_tsaxn"]
 [ext_resource type="SpriteFrames" uid="uid://chnaiqgig3x1" path="res://assets/character/npc/sprite_frames/npc_guy_blue.tres" id="11_1sqhx"]
 
