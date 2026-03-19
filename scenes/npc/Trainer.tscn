@@ -52,4 +52,4 @@ visible = false
 z_index = 3
 sprite_frames = SubResource("SpriteFrames_8sw5o")
 animation = &"alert"
-frame_progress = 0.357459
+frame_progress = 0.129985
