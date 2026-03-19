@@ -46,7 +46,6 @@ position = Vector2(8, 10)
 target_position = Vector2(0, 64)
 script = ExtResource("2_l1bnp")
 distance_tiles = 5
-scan_interval = 0.5
 
 [node name="AlertAnimation" type="AnimatedSprite2D" parent="." index="6"]
 visible = false

@@ -4,8 +4,6 @@ class_name CharacterAnimationController
 var _last_anim := ""
 
 func play_animation(move_state: String, facing_direction: String) -> void:
-	if not GameState.gameplay_input_enabled:
-		return
 	var animation_name = move_state + "_" + facing_direction
 	if animation_name == _last_anim:
 		return

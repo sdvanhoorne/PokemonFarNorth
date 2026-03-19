@@ -13,19 +13,24 @@ func _on_moved_to_tile(new_global_pos: Vector2) -> void:
 	check_for_encounter(new_global_pos)
 
 func _physics_process(delta: float) -> void:
-	if not GameState.gameplay_input_enabled:
-		# movement_controller.stop()
-		movement_controller.clear_input()
-		# animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
-		return
-
-	# If currently stepping, controller will keep moving
+	# Always allow a committed step to finish.
 	if movement_controller.is_moving:
 		movement_controller.tick(delta)
-		animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
+		animation_controller.play_animation(
+			movement_controller.get_move_state(),
+			movement_controller.facing_direction
+		)
 		return
 
-	# Read player input
+	# Input lock should prevent NEW input, not cancel current movement state.
+	if not GameState.gameplay_input_enabled:
+		movement_controller.clear_input()
+		animation_controller.play_animation(
+			movement_controller.get_move_state(),
+			movement_controller.facing_direction
+		)
+		return
+
 	var dir := Vector2.ZERO
 	if Input.is_action_pressed("ui_up"):
 		dir = Vector2.UP
@@ -38,16 +43,16 @@ func _physics_process(delta: float) -> void:
 
 	var want_sprint := Input.is_action_pressed("sprint")
 
-	# Feed desired input into the controller
 	if dir != Vector2.ZERO:
 		movement_controller.set_desired_input(dir, want_sprint)
 	else:
 		movement_controller.clear_input()
 
 	movement_controller.tick(delta)
-
-	# Animation
-	animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
+	animation_controller.play_animation(
+		movement_controller.get_move_state(),
+		movement_controller.facing_direction
+	)
 
 func _unhandled_key_input(event: InputEvent) -> void:
 	if event.is_action_pressed("interact"):

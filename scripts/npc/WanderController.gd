@@ -29,10 +29,10 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	if not enabled:
 		return
+
+	# Let committed movement finish untouched.
 	if move.is_moving:
 		return
-	else:
-		move.clear_input()
 
 	_timer += delta
 	if _timer < _next_time:
@@ -42,11 +42,16 @@ func _physics_process(delta: float) -> void:
 	_schedule_next()
 
 	if _rng.randf() < idle_chance:
+		move.clear_input()
 		return
 
 	var dir := _choose_step_dir()
 	if dir != Vector2.ZERO:
-		move.request_step(dir, false)
+		var started := move.request_step(dir, false)
+		if not started:
+			move.clear_input()
+	else:
+		move.clear_input()
 
 func _schedule_next() -> void:
 	_next_time = _rng.randf_range(min_wait, max_wait)

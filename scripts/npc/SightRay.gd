@@ -3,29 +3,22 @@ class_name SightRay
 
 @export var distance_tiles: int = 6
 @export var auto_scan: bool = true
-@export var scan_interval: float = 0.15
 @export var trigger_once: bool = true
 
 signal player_spotted(player: Node2D)
 
 var _armed: bool = true
-var _accum: float = 0.0
 
 func _ready() -> void:
 	_update_sight_ray()
 	if not auto_scan:
 		set_physics_process(false)
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if not auto_scan:
 		return
 	if not _armed:
 		return
-
-	_accum += delta
-	if _accum < scan_interval:
-		return
-	_accum = 0.0
 
 	scan()
 
