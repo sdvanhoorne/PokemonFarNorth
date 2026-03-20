@@ -13,24 +13,6 @@ func _on_moved_to_tile(new_global_pos: Vector2) -> void:
 	check_for_encounter(new_global_pos)
 
 func _physics_process(delta: float) -> void:
-	# Always allow a committed step to finish.
-	if movement_controller.is_moving:
-		movement_controller.tick(delta)
-		animation_controller.play_animation(
-			movement_controller.get_move_state(),
-			movement_controller.facing_direction
-		)
-		return
-
-	# Input lock should prevent NEW input, not cancel current movement state.
-	if not GameState.gameplay_input_enabled:
-		movement_controller.clear_input()
-		animation_controller.play_animation(
-			movement_controller.get_move_state(),
-			movement_controller.facing_direction
-		)
-		return
-
 	var dir := Vector2.ZERO
 	if Input.is_action_pressed("ui_up"):
 		dir = Vector2.UP
@@ -43,15 +25,22 @@ func _physics_process(delta: float) -> void:
 
 	var want_sprint := Input.is_action_pressed("sprint")
 
-	if dir != Vector2.ZERO:
-		movement_controller.set_desired_input(dir, want_sprint)
+	# Keep desired input updated every frame, even during a committed step,
+	# so releasing the key stops chaining after the current tile finishes.
+	if GameState.gameplay_input_enabled:
+		if dir != Vector2.ZERO:
+			movement_controller.set_desired_input(dir, want_sprint)
+		else:
+			movement_controller.clear_input()
 	else:
+		# Let current tile finish, but do not allow chaining into another tile.
 		movement_controller.clear_input()
 
 	movement_controller.tick(delta)
+
 	animation_controller.play_animation(
 		movement_controller.get_move_state(),
-		movement_controller.facing_direction
+		movement_controller.get_animation_direction()
 	)
 
 func _unhandled_key_input(event: InputEvent) -> void:

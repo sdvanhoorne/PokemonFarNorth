@@ -26,13 +26,20 @@ func snap_to_grid() -> void:
 	body.global_position = body.global_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size))
 	target_position = body.global_position
 
+func get_animation_direction() -> String:
+	if is_moving:
+		return move_facing_direction
+	return facing_direction
+
 func set_desired_input(dir: Vector2, want_sprint: bool) -> void:
 	sprinting = want_sprint
 
 	if dir != Vector2.ZERO:
 		dir = dir.normalized()
 		facing = dir
-		_update_facing_direction_from_vector(dir)
+
+		if not is_moving:
+			_update_facing_direction_from_vector(dir)
 
 		if dir != facing_input:
 			facing_input = dir
@@ -43,22 +50,37 @@ func tick(delta: float) -> void:
 		_continue_move(delta)
 		return
 
-	# no input held
 	if facing_input == Vector2.ZERO or not GameState.gameplay_input_enabled:
 		hold_timer = 0.0
+		body.velocity = Vector2.ZERO
 		return
 
-	# input held, count hold time and step when threshold reached
 	hold_timer += delta
 	if hold_timer >= hold_threshold:
 		hold_timer = 0.0
-		var offset := facing_input * GlobalConstants.tile_size
-		if not body.test_move(body.global_transform, offset):
-			target_position = body.global_position + offset
-			is_moving = true
-			move_direction = facing_input
-			move_facing_direction = facing_direction
-			move_sprinting = sprinting
+		_try_start_step(facing_input, sprinting)
+
+func _try_start_step(dir: Vector2, want_sprint: bool) -> bool:
+	var offset := dir * GlobalConstants.tile_size
+	if body.test_move(body.global_transform, offset):
+		return false
+
+	target_position = body.global_position + offset
+	is_moving = true
+	move_direction = dir
+	move_facing_direction = _direction_to_name(dir)
+	move_sprinting = want_sprint
+	return true
+	
+func _direction_to_name(v: Vector2) -> String:
+	if v.x > 0.0:
+		return "right"
+	elif v.x < 0.0:
+		return "left"
+	elif v.y > 0.0:
+		return "down"
+	else:
+		return "up"
 
 func stop() -> void:
 	is_moving = false
@@ -78,31 +100,36 @@ func clear_input() -> void:
 	hold_timer = 0.0
 
 func _continue_move(delta: float) -> void:
-	var dir := (target_position - body.global_position).normalized()
-	body.velocity = dir * (GlobalConstants.tile_size / GlobalConstants.move_time)
+	var speed := GlobalConstants.tile_size / GlobalConstants.move_time
 	if move_sprinting:
-		body.velocity *= sprint_multiplier
+		speed *= sprint_multiplier
 
-	body.move_and_slide()
+	var to_target := target_position - body.global_position
+	var distance_this_frame := speed * delta
 
-	if body.global_position.distance_to(target_position) <= body.velocity.length() * get_physics_process_delta_time():
+	if to_target.length() <= distance_this_frame:
 		body.global_position = target_position
-		is_moving = false
 		body.velocity = Vector2.ZERO
+		is_moving = false
+
+		# Promote the completed move direction to the idle facing.
+		facing_direction = move_facing_direction
+
 		move_direction = Vector2.ZERO
 		move_sprinting = false
 		emit_signal("moved_to_tile", body.global_position)
 
+		if facing_input != Vector2.ZERO and GameState.gameplay_input_enabled:
+			_try_start_step(facing_input, sprinting)
+
+		return
+
+	body.velocity = to_target.normalized() * speed
+	body.move_and_slide()
+
 func _update_facing_direction_from_vector(v: Vector2) -> void:
-	if v.x > 0.0:
-		facing_direction = "right"
-	elif v.x < 0.0:
-		facing_direction = "left"
-	elif v.y > 0.0:
-		facing_direction = "down"
-	else:
-		facing_direction = "up"
-		
+	facing_direction = _direction_to_name(v)
+
 func request_step(dir: Vector2, want_sprint: bool = false) -> bool:
 	if is_moving:
 		return false
@@ -113,8 +140,6 @@ func request_step(dir: Vector2, want_sprint: bool = false) -> bool:
 	hold_timer = hold_threshold
 	tick(0.0)
 
-	# This was an AI-requested single step, not held input.
-	# Keep the committed move going, but prevent chaining more steps.
 	if is_moving:
 		clear_input()
 
