@@ -25,6 +25,11 @@ var move_sprinting := false
 func snap_to_grid() -> void:
 	body.global_position = body.global_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size))
 	target_position = body.global_position
+	GridMovementRegistry.set_occupied(body.global_position, body)
+	
+func _exit_tree() -> void:
+	GridMovementRegistry.clear_occupied(body.global_position, body)
+	GridMovementRegistry.release_reserved(target_position, body)
 
 func get_animation_direction() -> String:
 	if is_moving:
@@ -62,10 +67,20 @@ func tick(delta: float) -> void:
 
 func _try_start_step(dir: Vector2, want_sprint: bool) -> bool:
 	var offset := dir * GlobalConstants.tile_size
+	var next_position := body.global_position + offset
+
 	if body.test_move(body.global_transform, offset):
 		return false
 
-	target_position = body.global_position + offset
+	if GridMovementRegistry.is_blocked(next_position, body):
+		return false
+
+	if not GridMovementRegistry.reserve_tile(next_position, body):
+		return false
+
+	GridMovementRegistry.clear_occupied(body.global_position, body)
+
+	target_position = next_position
 	is_moving = true
 	move_direction = dir
 	move_facing_direction = _direction_to_name(dir)
@@ -85,6 +100,8 @@ func _direction_to_name(v: Vector2) -> String:
 func stop() -> void:
 	is_moving = false
 	body.velocity = Vector2.ZERO
+	GridMovementRegistry.release_reserved(target_position, body)
+	GridMovementRegistry.set_occupied(body.global_position, body)
 
 func get_move_state() -> String:
 	if is_moving:
@@ -112,16 +129,16 @@ func _continue_move(delta: float) -> void:
 		body.velocity = Vector2.ZERO
 		is_moving = false
 
-		# Promote the completed move direction to the idle facing.
-		facing_direction = move_facing_direction
+		GridMovementRegistry.release_reserved(target_position, body)
+		GridMovementRegistry.set_occupied(target_position, body)
 
+		facing_direction = move_facing_direction
 		move_direction = Vector2.ZERO
 		move_sprinting = false
 		emit_signal("moved_to_tile", body.global_position)
 
 		if facing_input != Vector2.ZERO and GameState.gameplay_input_enabled:
 			_try_start_step(facing_input, sprinting)
-
 		return
 
 	body.velocity = to_target.normalized() * speed
@@ -144,8 +161,3 @@ func request_step(dir: Vector2, want_sprint: bool = false) -> bool:
 		clear_input()
 
 	return is_moving
-
-# leave the grid registry
-func _exit_tree() -> void:
-	GridMovementRegistry.clear_occupied(body.global_position, body)
-	GridMovementRegistry.release_reserved(target_position, body)
