@@ -144,3 +144,8 @@ func request_step(dir: Vector2, want_sprint: bool = false) -> bool:
 		clear_input()
 
 	return is_moving
+
+# leave the grid registry
+func _exit_tree() -> void:
+	GridMovementRegistry.clear_occupied(body.global_position, body)
+	GridMovementRegistry.release_reserved(target_position, body)

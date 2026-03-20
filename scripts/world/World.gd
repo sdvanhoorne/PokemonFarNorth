@@ -33,6 +33,7 @@ index: int = 0) -> Node2D:
 	current_map = new_map
 	add_child(current_map)
 	current_map.get_node("SortY").add_child(player)
+	GridMovementRegistry.clear_all()
 
 	if spawn_name != "":
 		var spawn := current_map.get_node("Spawns").get_node_or_null(spawn_name)

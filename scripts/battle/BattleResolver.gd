@@ -226,7 +226,7 @@ func _resolve_run_action(session: BattleSession, _action: BattleAction) -> Array
 	if escaped:
 		var result := BattleResult.new()
 		result.battle_type = session.battle_type
-		result.outcome = BattleDefinitions.BattleOutcome.ESCAPE
+		result.outcome = BattleDefinitions.BattleOutcome.RUN
 		session.result = result
 
 		events.append(BattleEvent.run_succeeded())

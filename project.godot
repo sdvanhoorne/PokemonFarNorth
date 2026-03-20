@@ -29,6 +29,7 @@ DialogueManager="*res://scripts/globals/DialogueManager.gd"
 Paths="*res://scripts/globals/Paths.gd"
 MoveDatabase="*res://scripts/moves/MoveDatabase.gd"
 TypeColors="*res://scripts/globals/TypeColors.gd"
+GridMovementRegistry="*res://scripts/globals/GridMovementRegistry.gd"
 
 [display]
 
