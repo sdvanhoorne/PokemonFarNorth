@@ -1,13 +1,16 @@
 extends Control
-
 class_name BattleUI
  
 @onready var message_box = $BottomUI/MessageContainer
 @onready var moves_box = $BottomUI/MovesContainer
-@onready var party_ui = $PartyUI
 @onready var battle_options = $BottomUI/BattleOptionsUI
-@onready var enemy_pokemon_ui = $EnemyPokemonUI/EnemyPokemon
-@onready var player_pokemon_ui = $PlayerPokemonUI/PlayerPokemon
+@onready var party_ui = $PartyUI
+
+@onready var enemy_ui = $EnemyUI
+@onready var enemy_pokemon_ui = enemy_ui.get_node("PokemonUI")
+@onready var player_ui = $PlayerUI
+@onready var player_pokemon_ui = player_ui.get_node("PokemonUI")
+@onready var enemy_trainer_sprite = enemy_ui.get_node("EnemyTrainerSprite")
 
 enum UIState { MESSAGE, OPTIONS, MOVES, PARTY, LOCKED }
 var state: UIState = UIState.LOCKED
@@ -32,14 +35,6 @@ func _handle_cancel() -> void:
 			pass
 		_:
 			pass
-
-#func _handle_accept() -> void:
-#	match state:
-#		UIState.MESSAGE:
-#			emit_signal("advance_message")
-#		_:
-#			# In OPTIONS/MOVES/PARTY, accept is usually handled by focused buttons
-#			pass
 
 func set_state(new_state: UIState) -> void:
 	if state == new_state:
@@ -75,11 +70,22 @@ func set_state(new_state: UIState) -> void:
 			message_box.visible = true
 			# no inputs
 
+func _show_pokemon_info(node: Control) -> void:
+	node.get_node("")
+	return
+
 func _hide_all() -> void:
 	message_box.visible = false
 	moves_box.visible = false
 	party_ui.visible = false
 	battle_options.visible = false
+
+func show_trainer_portrait(portrait: Texture2D) -> void:
+	enemy_trainer_sprite.texture = portrait
+	enemy_trainer_sprite.visible = true
+
+func hide_trainer_portrait() -> void:
+	enemy_trainer_sprite.visible = false
 
 func load_player_pokemon(pokemon: Pokemon):
 	_load_pokemon(player_pokemon_ui, pokemon)
@@ -87,11 +93,12 @@ func load_player_pokemon(pokemon: Pokemon):
 func load_enemy_pokemon(pokemon: Pokemon):
 	_load_pokemon(enemy_pokemon_ui, pokemon)
 
-func _load_pokemon(node: Node2D, pokemon: Pokemon):
+func _load_pokemon(node: Control, pokemon: Pokemon):
+	node.visible = true
 	var sprite_area = node.get_node("SpriteArea")
 	sprite_area.visible = true
 	var sprite = sprite_area.get_node("Sprite")
-	sprite.texture = load("res://assets/pokemon/" + pokemon.base_data.name + ".png")
+	sprite.texture = Paths.load_sprite(Paths.join(Paths.POKEMON_FRONT_SPRITES, pokemon.base_data.name))
 	
 	var info = node.get_node("Info")
 	info.visible = true
@@ -111,7 +118,7 @@ func _load_pokemon(node: Node2D, pokemon: Pokemon):
 	# might not need to do this
 	node.set_meta("pokemon", pokemon)
 
-func _unload_pokemon(node: Node2D):
+func _unload_pokemon(node: Control):
 	var sprite_area = node.get_node("SpriteArea")
 	sprite_area.visible = false
 	# show fainting animation?

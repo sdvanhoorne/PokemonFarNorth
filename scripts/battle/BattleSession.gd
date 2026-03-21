@@ -7,7 +7,7 @@ var enemy_party: Array[Pokemon]
 var active_player_index: int
 var active_enemy_index: int
 var can_run: bool
-var trainer_data: Dictionary
+var trainer_data: BattleTrainerData
 var state
 var turn_number: int
 var result: BattleResult
@@ -20,6 +20,7 @@ static func from_request(request: BattleStartRequest, player_party_source: Array
 	session.active_player_index = 0
 	session.active_enemy_index = 0
 	session.can_run = request.can_run
+	session.trainer_data = request.trainer_data
 	return session
 
 func get_active_player() -> Pokemon:

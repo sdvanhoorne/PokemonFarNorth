@@ -66,7 +66,7 @@ static func new_existing(data: Dictionary) -> Pokemon:
 	pokemon.xp_to_next_level = calculate_xp_to_next(pokemon.level)
 	return pokemon
 
-static func new_wild(id: int, lvl: int) -> Pokemon:		
+static func new_wild(id: int, lvl: int) -> Pokemon:
 	var pokemon = Pokemon.new(id)
 	pokemon.level = lvl
 	pokemon.status = status_types.NONE
@@ -74,6 +74,14 @@ static func new_wild(id: int, lvl: int) -> Pokemon:
 	pokemon.stats = PokemonStats.scaled_stats(lvl, pokemon.base_data.base_stats)
 	pokemon.battle_stats = pokemon.stats
 	pokemon.current_hp = pokemon.battle_stats.hp		
+	return pokemon
+
+static func new_trainer_pokemon(data: Dictionary) -> Pokemon:
+	var pokemon = Pokemon.new(data.get("id"))
+	pokemon.current_hp = pokemon.base_data.base_stats.hp
+	pokemon.level = int(data.get("level"))
+	pokemon.battle_stats = PokemonStats.scaled_stats(pokemon.level, pokemon.base_data.base_stats)
+	pokemon.move_names = data["move_names"]
 	return pokemon
 
 static func get_learned_moves(lvl: int, learnable_moves: Array) -> Array:

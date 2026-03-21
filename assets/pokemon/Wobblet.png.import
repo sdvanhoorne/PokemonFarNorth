@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1hhiiho428re"
-path="res://.godot/imported/Turmble.png-36c0cc35f4fa051eb363ff7c7590bbd1.ctex"
+path="res://.godot/imported/Wobblet.png-0b134501bea3d97fb27e7a88597a35e2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/pokemon/Turmble.png"
-dest_files=["res://.godot/imported/Turmble.png-36c0cc35f4fa051eb363ff7c7590bbd1.ctex"]
+source_file="res://assets/pokemon/Wobblet.png"
+dest_files=["res://.godot/imported/Wobblet.png-0b134501bea3d97fb27e7a88597a35e2.ctex"]
 
 [params]
 

@@ -68,16 +68,27 @@ func _enemy_active_display() -> Pokemon:
 	return display_state.enemy_party[display_state.enemy_active]
 
 func _start_battle_intro() -> void:
+	battle_ui.set_state(BattleUI.UIState.MESSAGE)
+	
+	match session.battle_type:
+		BattleDefinitions.BattleType.WILD:
+			await DialogueManager.say(
+				PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().base_data.name]),
+				{"lock_input": false, "require_input": true}
+			)
+		BattleDefinitions.BattleType.TRAINER:
+			battle_ui.show_trainer_portrait(session.trainer_data.portrait)
+			
+			await DialogueManager.say(
+				PackedStringArray(session.trainer_data.intro_lines),
+				{"lock_input": false, "require_input": true}
+			)
+			
+			battle_ui.hide_trainer_portrait()
+	
 	battle_ui.load_player_pokemon(session.get_active_player())
 	battle_ui.load_enemy_pokemon(session.get_active_enemy())
 
-	battle_ui.set_state(BattleUI.UIState.MESSAGE)
-	# just say wild pokemon for now, add trainer dialogue later
-	await DialogueManager.say(
-		PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().base_data.name]),
-		{"lock_input": false, "require_input": true}
-	)
-	
 	battle_ui.set_moves(session.get_active_player().move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 

@@ -14,17 +14,17 @@ func _ready() -> void:
 	else:
 		push_error("Invalid trainers.json format")
 
-func get_trainer_data(id: String) -> Dictionary:
+func get_trainer_class(id: String) -> String:
 	if trainers.has(id):
-		return trainers[id]
-	push_error("Could not find data for trainer %d", id)
-	return trainers.get("default_trainer", {})
+		return trainers[id]["trainer_class"]
+	push_error("Could not find class for trainer %d", id)
+	return ""
 	
 func get_trainer_pokemon(id: String) -> Array[Pokemon]:
 	if trainers.has(id):
 		var pokemon: Array[Pokemon] = []
 		for p in trainers[id]["battle_team"]:
-			pokemon.append(Pokemon.new_existing(p))
+			pokemon.append(Pokemon.new_trainer_pokemon(p))
 		return pokemon
 	push_error("Could not find pokemon for trainer %d", id)
 	return []

@@ -3,6 +3,7 @@ extends Node
 # --- Root folders ---
 const ASSETS_ROOT := "res://assets"
 const POKEMON_ROOT := ASSETS_ROOT + "/pokemon"
+const CHARACTER_ROOT := ASSETS_ROOT + "/character"
 const UI_ROOT := ASSETS_ROOT + "/ui"
 const AUDIO_ROOT := ASSETS_ROOT + "/audio"
 
@@ -13,6 +14,9 @@ const POKEDEX_ROOT := DATA_ROOT + "/pokedex"
 const POKEMON_FRONT_SPRITES := POKEMON_ROOT
 #const POKEMON_BACK_SPRITES  := POKEMON_ROOT + "/back"
 #const POKEMON_ICONS         := POKEMON_ROOT + "/icons"
+
+# --- trainer subfolders ---
+const TRAINER_BATTLE_SPRITES := CHARACTER_ROOT + "/trainer/battle_sprites"
 
 static func join(a: String, b: String) -> String:
 	if a.ends_with("/"):

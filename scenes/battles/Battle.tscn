@@ -1,12 +1,11 @@
-[gd_scene load_steps=15 format=3 uid="uid://bihya4k8vuet"]
+[gd_scene load_steps=14 format=3 uid="uid://bihya4k8vuet"]
 
 [ext_resource type="Script" uid="uid://dsb5p8di0tfn1" path="res://scripts/battle/BattleController.gd" id="1_7gd76"]
 [ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scripts/battle/BattleUI.gd" id="2_0pul7"]
 [ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scripts/battle/PokemonTooltip.gd" id="3_34g4o"]
 [ext_resource type="Texture2D" uid="uid://buxdcl0i5n5hx" path="res://assets/pokemon/Chasmurk.png" id="4_ufufc"]
 [ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/BattleInfo.tscn" id="5_tbq5m"]
-[ext_resource type="PackedScene" uid="uid://dbxwbt4xfqvow" path="res://scenes/ui/PartyMenu.tscn" id="7_mtsvn"]
-[ext_resource type="PackedScene" uid="uid://iahi0fr58n5" path="res://scenes/ui/PartyMemberUI.tscn" id="8_84xrd"]
+[ext_resource type="PackedScene" uid="uid://dspxwq63y8f0w" path="res://scenes/ui/PartyMenu.tscn" id="7_mtsvn"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="9_2iovi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
@@ -43,34 +42,37 @@ offset_bottom = 160.0
 mouse_filter = 2
 script = ExtResource("2_0pul7")
 
-[node name="PlayerPokemonUI" type="Control" parent="BattleUI"]
+[node name="PlayerUI" type="Control" parent="BattleUI"]
 layout_mode = 1
 anchors_preset = 0
 offset_right = 120.0
 offset_bottom = 100.0
 mouse_filter = 2
 
-[node name="PlayerPokemon" type="Node2D" parent="BattleUI/PlayerPokemonUI"]
+[node name="PokemonUI" type="Control" parent="BattleUI/PlayerUI"]
+anchors_preset = 0
 script = ExtResource("3_34g4o")
 
-[node name="SpriteArea" type="Area2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon"]
+[node name="SpriteArea" type="Area2D" parent="BattleUI/PlayerUI/PokemonUI"]
+visible = false
 position = Vector2(40, 64)
 
-[node name="Sprite" type="Sprite2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea"]
+[node name="Sprite" type="Sprite2D" parent="BattleUI/PlayerUI/PokemonUI/SpriteArea"]
 texture_filter = 1
 texture = ExtResource("4_ufufc")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/PlayerUI/PokemonUI/SpriteArea"]
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" parent="BattleUI/PlayerPokemonUI/PlayerPokemon" instance=ExtResource("5_tbq5m")]
+[node name="Info" parent="BattleUI/PlayerUI/PokemonUI" instance=ExtResource("5_tbq5m")]
+visible = false
 offset_left = 6.0
 offset_top = 13.0
 offset_right = 45.9997
 offset_bottom = 53.0
 
-[node name="EnemyPokemonUI" type="Control" parent="BattleUI"]
+[node name="EnemyUI" type="Control" parent="BattleUI"]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -79,25 +81,39 @@ offset_left = -120.0
 offset_bottom = 100.0
 grow_horizontal = 0
 
-[node name="EnemyPokemon" type="Node2D" parent="BattleUI/EnemyPokemonUI"]
+[node name="PokemonUI" type="Control" parent="BattleUI/EnemyUI"]
+anchors_preset = 0
 script = ExtResource("3_34g4o")
 
-[node name="SpriteArea" type="Area2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon"]
+[node name="SpriteArea" type="Area2D" parent="BattleUI/EnemyUI/PokemonUI"]
+visible = false
 position = Vector2(80, 64)
 
-[node name="Sprite" type="Sprite2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea"]
+[node name="Sprite" type="Sprite2D" parent="BattleUI/EnemyUI/PokemonUI/SpriteArea"]
 texture_filter = 1
 texture = ExtResource("4_ufufc")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/EnemyUI/PokemonUI/SpriteArea"]
 z_index = 1
 shape = SubResource("RectangleShape2D_1kxda")
 
-[node name="Info" parent="BattleUI/EnemyPokemonUI/EnemyPokemon" instance=ExtResource("5_tbq5m")]
+[node name="Info" parent="BattleUI/EnemyUI/PokemonUI" instance=ExtResource("5_tbq5m")]
+visible = false
 offset_left = 22.0
 offset_top = 13.0
 offset_right = 62.0
 offset_bottom = 53.0
+
+[node name="EnemyTrainerSprite" type="TextureRect" parent="BattleUI/EnemyUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="ColorRect" type="ColorRect" parent="BattleUI"]
 z_index = -1
@@ -114,9 +130,6 @@ visible = false
 
 [node name="PartyUI" parent="BattleUI" instance=ExtResource("7_mtsvn")]
 visible = false
-custom_minimum_size = Vector2(1920, 1080)
-layout_mode = 1
-party_member_scene = ExtResource("8_84xrd")
 
 [node name="BottomUI" type="Control" parent="BattleUI"]
 layout_mode = 1
@@ -269,10 +282,6 @@ layout_mode = 2
 theme_override_font_sizes/font_size = 12
 text = "Run"
 
-[connection signal="mouse_entered" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_entered"]
-[connection signal="mouse_exited" from="BattleUI/PlayerPokemonUI/PlayerPokemon/SpriteArea" to="BattleUI/PlayerPokemonUI/PlayerPokemon" method="_on_sprite_area_mouse_exited"]
-[connection signal="mouse_entered" from="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea" to="BattleUI/EnemyPokemonUI/EnemyPokemon" method="_on_sprite_area_mouse_entered"]
-[connection signal="mouse_exited" from="BattleUI/EnemyPokemonUI/EnemyPokemon/SpriteArea" to="BattleUI/EnemyPokemonUI/EnemyPokemon" method="_on_sprite_area_mouse_exited"]
 [connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer0/MoveButton0" to="." method="_on_move_0_pressed"]
 [connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer1/MoveButton1" to="." method="_on_move_1_pressed"]
 [connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer2/MoveButton2" to="." method="_on_move_2_pressed"]

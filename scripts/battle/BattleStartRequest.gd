@@ -3,11 +3,7 @@ class_name BattleStartRequest
 
 var battle_type: BattleDefinitions.BattleType
 var enemy_party: Array[Pokemon] = []
-var trainer_id: String = ""
-var trainer_name: String = ""
-var intro_lines: PackedStringArray = []
-var outro_lines_win: PackedStringArray = []
-var outro_lines_lose: PackedStringArray = []
+var trainer_data: BattleTrainerData
 var can_run: bool = true
 
 var player_position: Vector2
@@ -19,11 +15,7 @@ static func make(
 	enemy_party_: Array[Pokemon],
 	player_position_: Vector2,
 	player_direction_: Vector2,
-	trainer_id_: String = "",
-	trainer_name_: String = "",
-	intro_lines_: PackedStringArray = PackedStringArray(),
-	outro_lines_win_: PackedStringArray = PackedStringArray(),
-	outro_lines_lose_: PackedStringArray = PackedStringArray(),
+	trainer_data_: BattleTrainerData,
 	can_run_: bool = true
 ) -> BattleStartRequest:
 	var request := BattleStartRequest.new()
@@ -31,11 +23,7 @@ static func make(
 	request.enemy_party = enemy_party_.duplicate(true)
 	request.player_position = player_position_
 	request.player_direction = player_direction_
-	request.trainer_id = trainer_id_
-	request.trainer_name = trainer_name_
-	request.intro_lines = intro_lines_
-	request.outro_lines_win = outro_lines_win_
-	request.outro_lines_lose = outro_lines_lose_
+	request.trainer_data = trainer_data_
 	request.can_run = can_run_
 	return request
 
@@ -43,21 +31,14 @@ static func for_wild_battle(
 	enemy_party_: Array[Pokemon],
 	player_position_: Vector2,
 	player_direction_: Vector2,
-	map_id_: String,
-	intro_lines_: PackedStringArray = PackedStringArray(),
-	outro_lines_win_: PackedStringArray = PackedStringArray(),
-	outro_lines_lose_: PackedStringArray = PackedStringArray()
+	map_id_: String
 ) -> BattleStartRequest:
 	return make(
 		BattleDefinitions.BattleType.WILD,
 		enemy_party_,
 		player_position_,
 		player_direction_,
-		"",
-		"",
-		intro_lines_,
-		outro_lines_win_,
-		outro_lines_lose_,
+		null,
 		true
 	)
 
@@ -65,22 +46,14 @@ static func for_trainer_battle(
 	enemy_party_: Array[Pokemon],
 	player_position_: Vector2,
 	player_direction_: Vector2,
-	trainer_id_: String,
-	trainer_name_: String,
-	intro_lines_: PackedStringArray = PackedStringArray(),
-	outro_lines_win_: PackedStringArray = PackedStringArray(),
-	outro_lines_lose_: PackedStringArray = PackedStringArray()
+	trainer_data: BattleTrainerData
 ) -> BattleStartRequest:
 	return make(
 		BattleDefinitions.BattleType.TRAINER,
 		enemy_party_,
 		player_position_,
 		player_direction_,
-		trainer_id_,
-		trainer_name_,
-		intro_lines_,
-		outro_lines_win_,
-		outro_lines_lose_,
+		trainer_data,
 		false
 	)
 

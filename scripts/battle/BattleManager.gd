@@ -38,9 +38,8 @@ func start_wild_battle(
 		enemy_party,
 		player_position,
 		player_direction,
-		map_id,
-		intro_lines
-	)
+		map_id
+		)
 	await start_battle(request)
 
 
@@ -49,17 +48,13 @@ func start_trainer_battle(
 	enemy_party: Array[Pokemon],
 	player_position: Vector2,
 	player_direction: Vector2,
-	trainer_id: String,
-	trainer_name: String,
-	intro_lines: PackedStringArray = PackedStringArray()
+	trainer_data: BattleTrainerData
 ) -> void:
 	var request := BattleStartRequest.for_trainer_battle(
 		enemy_party,
 		player_position,
 		player_direction,
-		trainer_id,
-		trainer_name,
-		intro_lines
+		trainer_data
 	)
 	await start_battle(request)
 

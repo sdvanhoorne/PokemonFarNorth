@@ -39,6 +39,7 @@ func on_talk(player: Node) -> void:
 
 func _load_npc_data() -> void:
 	var data = NpcDatabase.get_npc_data(npc_id)
+	npc_name = data.get("name")
 	dialogue = data.get("dialogue", {})
 
 func _get_dialogue(dialogue_key: String = "default") -> Array[String]:
@@ -47,7 +48,7 @@ func _get_dialogue(dialogue_key: String = "default") -> Array[String]:
 	if not dialogue.has(dialogue_key):
 		return result
 
-	var lines: Array = dialogue[dialogue_key]
+	var lines: Array[String] = dialogue[dialogue_key]
 	for line in lines:
 		result.append(str(line))
 

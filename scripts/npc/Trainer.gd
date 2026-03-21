@@ -7,19 +7,23 @@ class_name Trainer
 var is_engaging := false
 var has_battled := false
 var player_ref: Player
+var portrait: Texture2D
 
-var pokemon: Array[Pokemon] = []
-var intro_lines = []
-var outro_lines_win = []
-var outro_lines_lose = []
+var party: Array[Pokemon] = []
+var trainer_class: String
+var intro_lines: Array[String] = []
+var outro_lines_win: Array[String] = []
+var outro_lines_lose: Array[String] = []
 
 func _ready() -> void:
 	super()
 	sight_ray.player_spotted.connect(_on_player_spotted)
-	pokemon = TrainerDatabase.get_trainer_pokemon(npc_id)
-	intro_lines = dialogue["battle_intro"]
-	outro_lines_win = dialogue["after_battle_win"]
-	outro_lines_lose = dialogue["after_battle_lose"]
+	party = TrainerDatabase.get_trainer_pokemon(npc_id)
+	intro_lines = Array(dialogue.get("battle_intro", []), TYPE_STRING, "", null)
+	outro_lines_win = Array(dialogue.get("after_battle_win", []), TYPE_STRING, "", null)
+	outro_lines_lose = Array(dialogue.get("after_battle_lose", []), TYPE_STRING, "", null)
+	trainer_class = TrainerDatabase.get_trainer_class(npc_id)
+	portrait = Paths.load_sprite(Paths.join(Paths.TRAINER_BATTLE_SPRITES, trainer_class))
 
 func _on_player_spotted(p: Node2D) -> void:
 	if has_battled or is_engaging:
@@ -59,10 +63,12 @@ func _on_player_finished_step(_new_global_pos: Vector2) -> void:
 		"require_input": true
 	})
 	
-	await BattleManager.start_battle(to_battle_request(
-	player_ref.global_position,
-	player_ref.movement_controller.facing
-	))
+	await BattleManager.start_trainer_battle(
+		party,
+		player_ref.global_position,
+		player_ref.movement_controller.facing,
+		BattleTrainerData.from_trainer(self)
+		)
 	
 func _walk_to_player() -> void:
 	while global_position.distance_to(player_ref.global_position) > GlobalConstants.tile_size:
@@ -74,18 +80,6 @@ func _walk_to_player() -> void:
 
 		await movement_controller.moved_to_tile
 
-func to_battle_request(player_position: Vector2, player_direction: Vector2) -> BattleStartRequest:
-	return BattleStartRequest.for_trainer_battle(
-		pokemon,
-		player_position,
-		player_direction,
-		npc_id,
-		npc_name,
-		intro_lines,
-		outro_lines_win,
-		outro_lines_lose
-	)
-
 func play_alert() -> void:
 	alert_animation.visible = true
 	alert_animation.play("alert")
@@ -95,7 +89,7 @@ func play_alert() -> void:
 
 	alert_animation.position = start_pos
 	alert_animation.modulate.a = 1.0
-	var slow := 4.0 # 1.0 = normal, 4.0 = 4x slower
+	var slow := 1.0 # 1.0 = normal, 4.0 = 4x slower
 
 	var t := create_tween()
 	t.set_trans(Tween.TRANS_BACK)
