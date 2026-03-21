@@ -10,7 +10,7 @@ var is_loading_map := false
 var menu_open := false
 
 func _ready() -> void:
-	DialogueManager.message_box = get_node_or_null("/root/World/CanvasLayer/MessageBox")
+	DialogueManager.message_box = get_node_or_null("/root/World/DialogueCanvas/MessageBox")
 
 func load_map(map_id: String, player: Node2D, spawn_name := "", horizontal: bool = true, 
 index: int = 0) -> Node2D:
@@ -54,6 +54,7 @@ index: int = 0) -> Node2D:
 	if old_map:
 		old_map.queue_free()
 
+	GameState.current_map_id = map_id
 	is_loading_map = false
 	
 	# show area name card and set id

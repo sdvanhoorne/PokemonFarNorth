@@ -49,7 +49,6 @@ func start_trainer_battle(
 	enemy_party: Array[Pokemon],
 	player_position: Vector2,
 	player_direction: Vector2,
-	map_id: String,
 	trainer_id: String,
 	trainer_name: String,
 	intro_lines: PackedStringArray = PackedStringArray()
@@ -58,7 +57,6 @@ func start_trainer_battle(
 		enemy_party,
 		player_position,
 		player_direction,
-		map_id,
 		trainer_id,
 		trainer_name,
 		intro_lines
@@ -85,7 +83,7 @@ func _load_previous_map(_result: BattleResult = null) -> void:
 		push_warning("BattleManager._load_previous_map: current_request was null")
 		return
 
-	var current_map = await world_scene.load_map(current_request.map_id, null, "")
+	var current_map = await world_scene.load_map(GameState.current_map_id, null, "")
 
 	var player = current_map.get_node("SortY/Player")
 	player.global_position = current_request.player_position

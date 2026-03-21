@@ -55,7 +55,7 @@ func tick(delta: float) -> void:
 		_continue_move(delta)
 		return
 
-	if facing_input == Vector2.ZERO or not GameState.gameplay_input_enabled:
+	if facing_input == Vector2.ZERO:
 		hold_timer = 0.0
 		body.velocity = Vector2.ZERO
 		return

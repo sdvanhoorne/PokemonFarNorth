@@ -302,9 +302,10 @@ position = Vector2(-144, -32)
 sprite_frames = SubResource("SpriteFrames_vexvy")
 wander = true
 
-[node name="Npc2" parent="SortY/Npcs" instance=ExtResource("9_vexvy")]
-position = Vector2(-48, -48)
+[node name="Trainer" parent="SortY/Npcs" instance=ExtResource("9_vexvy")]
+position = Vector2(-304, -176)
 script = ExtResource("10_tsaxn")
+npc_id = "trainer_1"
 sprite_frames = ExtResource("11_1sqhx")
 
 [connection signal="body_entered" from="Warps/StartingHouseWarp" to="Warps/StartingHouseWarp" method="_on_body_entered"]

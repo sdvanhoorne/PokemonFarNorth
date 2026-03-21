@@ -8,9 +8,18 @@ var is_engaging := false
 var has_battled := false
 var player_ref: Player
 
+var pokemon: Array[Pokemon] = []
+var intro_lines = []
+var outro_lines_win = []
+var outro_lines_lose = []
+
 func _ready() -> void:
 	super()
 	sight_ray.player_spotted.connect(_on_player_spotted)
+	pokemon = TrainerDatabase.get_trainer_pokemon(npc_id)
+	intro_lines = dialogue["battle_intro"]
+	outro_lines_win = dialogue["after_battle_win"]
+	outro_lines_lose = dialogue["after_battle_lose"]
 
 func _on_player_spotted(p: Node2D) -> void:
 	if has_battled or is_engaging:
@@ -41,12 +50,41 @@ func _on_player_finished_step(_new_global_pos: Vector2) -> void:
 	player_ref.movement_controller.snap_to_grid()
 	player_ref.movement_controller.clear_input()
 
-	play_alert()
+	await play_alert()
 
-	# Put your trainer walk-up / battle start flow here.
-	# Example:
-	# await _walk_to_player()
-	# _start_battle_sequence()
+	await _walk_to_player()
+	
+	await DialogueManager.say(dialogue["before_battle"],{
+		"lock_input": true,
+		"require_input": true
+	})
+	
+	await BattleManager.start_battle(to_battle_request(
+	player_ref.global_position,
+	player_ref.movement_controller.facing
+	))
+	
+func _walk_to_player() -> void:
+	while global_position.distance_to(player_ref.global_position) > GlobalConstants.tile_size:
+		var delta := player_ref.global_position - global_position
+		var step_dir := delta.sign()
+
+		if not movement_controller.request_step(step_dir):
+			break
+
+		await movement_controller.moved_to_tile
+
+func to_battle_request(player_position: Vector2, player_direction: Vector2) -> BattleStartRequest:
+	return BattleStartRequest.for_trainer_battle(
+		pokemon,
+		player_position,
+		player_direction,
+		npc_id,
+		npc_name,
+		intro_lines,
+		outro_lines_win,
+		outro_lines_lose
+	)
 
 func play_alert() -> void:
 	alert_animation.visible = true

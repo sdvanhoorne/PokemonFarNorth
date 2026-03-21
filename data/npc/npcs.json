@@ -1,0 +1,46 @@
+{
+"default_npc": {
+	"id": "default_npc",
+	"name": "Villager",
+	"type": "npc",
+	"dialogue": {
+		"default": [
+			"Welcome to the starting town!",
+			"Please submit bug reports!"
+		]
+	}
+},
+"grumpy_grandpa": {
+	"id": "grumpy_grandpa",
+	"name": "Grumpy Grandpa",
+	"type": "npc",
+	"dialogue": {
+		"default": [
+			"Kids these days...",
+			"Always running through my lawn!"
+		]
+	}
+},
+"trainer_1": {
+	"id": "trainer_1",
+	"name": "Trainer 1",
+	"type": "trainer",
+	"dialogue": {
+		"before_battle": [
+			"Bird Pokémon are the best!"
+		],
+		"battle_intro": [
+			"We're gonna take you down!"
+		],
+		"after_battle_win": [
+			"Aw, man! I lost!"
+		],
+		"after_battle_lose": [
+			"That'll teach ya!"
+		],
+		"after_battle_rematch": [
+			"I'm training even harder now."
+		]
+		}
+	}
+}

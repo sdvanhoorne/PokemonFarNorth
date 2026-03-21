@@ -291,7 +291,7 @@ func _play_events(events: Array[BattleEvent]) -> void:
 				)
 
 			BattleDefinitions.BattleEvent.BATTLE_ENDED:
-				_finish_battle(e)
+				_finish_battle(e.result)
 				return
 
 			_:
@@ -318,7 +318,7 @@ func _events_contain_battle_end(events: Array[BattleEvent]) -> bool:
 			return true
 	return false
 
-func _finish_battle(result: BattleEvent) -> void:
+func _finish_battle(result: BattleResult) -> void:
 	PlayerInventory.PartyPokemon = session.player_party
 	# handle other result info
 	BattleManager.return_to_world(session.result)

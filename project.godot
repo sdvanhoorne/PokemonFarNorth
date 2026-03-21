@@ -30,6 +30,8 @@ Paths="*res://scripts/globals/Paths.gd"
 MoveDatabase="*res://scripts/moves/MoveDatabase.gd"
 TypeColors="*res://scripts/globals/TypeColors.gd"
 GridMovementRegistry="*res://scripts/globals/GridMovementRegistry.gd"
+NpcDatabase="*res://scripts/npc/NpcDatabase.gd"
+TrainerDatabase="*res://scripts/npc/TrainerDatabase.gd"
 
 [display]
 

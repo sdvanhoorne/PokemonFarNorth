@@ -1,0 +1,29 @@
+{
+  "trainer_1": {
+	"trainer_class": "Youngster",
+	"vision_range": 4,
+	"reward_money": 100,
+	"battle_team": [
+	  {
+			"current_hp": 9,
+			"current_xp": 852,
+			"id": 7,
+			"level": 10,
+			"move_names": [
+				"Tackle",
+				"Tail Whip",
+				"Ember"
+			],
+			"stats": {
+				"attack": 12,
+				"defense": 7,
+				"hp": 35,
+				"special_attack": 28,
+				"special_defense": 26,
+				"speed": 24
+			},
+			"status": "0"
+		}
+	]
+  }
+}
