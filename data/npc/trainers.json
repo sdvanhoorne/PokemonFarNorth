@@ -6,13 +6,11 @@
 	"battle_team": [
 	  {
 			"current_hp": 9,
-			"current_xp": 852,
-			"id": 7,
-			"level": 10,
+			"id": 17,
+			"level": 3,
 			"move_names": [
 				"Tackle",
-				"Tail Whip",
-				"Ember"
+				"Tail Whip"
 			],
 			"stats": {
 				"attack": 12,
