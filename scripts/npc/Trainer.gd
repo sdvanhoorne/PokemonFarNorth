@@ -19,9 +19,9 @@ func _ready() -> void:
 	super()
 	sight_ray.player_spotted.connect(_on_player_spotted)
 	party = TrainerDatabase.get_trainer_pokemon(npc_id)
-	intro_lines = Array(dialogue.get("battle_intro", []), TYPE_STRING, "", null)
-	outro_lines_win = Array(dialogue.get("after_battle_win", []), TYPE_STRING, "", null)
-	outro_lines_lose = Array(dialogue.get("after_battle_lose", []), TYPE_STRING, "", null)
+	intro_lines = Array(dialogue.get("intro_lines", []), TYPE_STRING, "", null)
+	outro_lines_win = Array(dialogue.get("outro_lines_win", []), TYPE_STRING, "", null)
+	outro_lines_lose = Array(dialogue.get("outro_lines_lose", []), TYPE_STRING, "", null)
 	trainer_class = TrainerDatabase.get_trainer_class(npc_id)
 	portrait = Paths.load_sprite(Paths.join(Paths.TRAINER_BATTLE_SPRITES, trainer_class))
 
@@ -100,3 +100,5 @@ func play_alert() -> void:
 	t.tween_interval(0.4 * slow)
 	t.tween_property(alert_animation, "modulate:a", 0.0, 0.12 * slow)
 	t.tween_callback(func(): alert_animation.visible = false)
+
+	await t.finished

@@ -21,22 +21,38 @@ static func make(
 	result.captured_pokemon = captured_pokemon_
 	return result
 
-static func win(
+static func trainer_win(
 	battle_type_: BattleDefinitions.BattleType,
 	defeated_trainer_id_: String = ""
 ) -> BattleResult:
 	return make(
 		battle_type_,
-		BattleDefinitions.BattleOutcome.WIN,
+		BattleDefinitions.BattleOutcome.TRAINER_WIN,
 		defeated_trainer_id_
 	)
 
-static func lose(
+static func trainer_lose(
 	battle_type_: BattleDefinitions.BattleType
 ) -> BattleResult:
 	return make(
 		battle_type_,
-		BattleDefinitions.BattleOutcome.LOSE,
+		BattleDefinitions.BattleOutcome.TRAINER_LOSE,
+	)
+	
+static func wild_win(
+	battle_type_: BattleDefinitions.BattleType,
+) -> BattleResult:
+	return make(
+		battle_type_,
+		BattleDefinitions.BattleOutcome.WILD_WIN
+	)
+	
+static func wild_lose(
+	battle_type_: BattleDefinitions.BattleType
+) -> BattleResult:
+	return make(
+		battle_type_,
+		BattleDefinitions.BattleOutcome.WILD_LOSE,
 	)
 
 static func run() -> BattleResult:

@@ -29,13 +29,13 @@
 		"before_battle": [
 			"Bird Pokémon are the best!"
 		],
-		"battle_intro": [
+		"intro_lines": [
 			"We're gonna take you down!"
 		],
-		"after_battle_win": [
+		"outro_lines_win": [
 			"Aw, man! I lost!"
 		],
-		"after_battle_lose": [
+		"outro_lines_lose": [
 			"That'll teach ya!"
 		],
 		"after_battle_rematch": [

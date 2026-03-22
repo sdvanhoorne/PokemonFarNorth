@@ -205,13 +205,16 @@ func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -
 	_award_xp_for_enemy_faint(session, fainted_enemy, events)
 
 	if not session.has_usable_enemy():
-		_set_battle_result(session, BattleDefinitions.BattleOutcome.WIN)
+		if session.battle_type == BattleDefinitions.BattleType.WILD:
+			_set_battle_result(session, BattleDefinitions.BattleOutcome.WILD_WIN)
+		elif session.battle_type == BattleDefinitions.BattleType.TRAINER:
+			_set_battle_result(session, BattleDefinitions.BattleOutcome.TRAINER_WIN)
 		events.append(BattleEvent.battle_ended(session.result))
 		return true
 
 	var next_index := _find_next_usable_enemy_index(session)
 	if next_index == -1:
-		_set_battle_result(session, BattleDefinitions.BattleOutcome.WIN)
+		_set_battle_result(session, BattleDefinitions.BattleOutcome.WILD_WIN)
 		events.append(BattleEvent.battle_ended(session.result))
 		return true
 
@@ -225,7 +228,7 @@ func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -
 		next_enemy.base_data.name,
 		next_index
 	))
-	events.append(BattleEvent.message("%s was sent out!" % next_enemy.base_data.name))
+	events.append(BattleEvent.message("%s sent out %s" % [session.trainer_data.display_name, next_enemy.base_data.name]))
 	return true
 
 func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) -> bool:
@@ -233,7 +236,10 @@ func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) 
 	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.PLAYER, fainted_player.base_data.name))
 
 	if not session.has_usable_player_pokemon():
-		_set_battle_result(session, BattleDefinitions.BattleOutcome.LOSE)
+		if session.battle_type == BattleDefinitions.BattleType.WILD:
+			_set_battle_result(session, BattleDefinitions.BattleOutcome.WILD_LOSE)
+		elif session.battle_type == BattleDefinitions.BattleType.TRAINER:
+			_set_battle_result(session, BattleDefinitions.BattleOutcome.TRAINER_LOSE)
 		events.append(BattleEvent.battle_ended(session.result))
 		return true
 

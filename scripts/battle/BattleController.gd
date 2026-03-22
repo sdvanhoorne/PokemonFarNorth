@@ -26,6 +26,15 @@ func setup(request: BattleStartRequest, player_party: Array[Pokemon]) -> void:
 	session = BattleSession.from_request(request, player_party)
 	await _start_battle_intro()
 
+func _wire_signals() -> void:
+	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer/Fight.pressed.connect(_on_fight_pressed)
+	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer4/Run.pressed.connect(_on_run_pressed)
+	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer2/Switch.pressed.connect(_on_switch_pressed)
+	for b in get_tree().get_nodes_in_group("MoveButtons"):
+		var btn := b as Button
+		btn.pressed.connect(_on_move_pressed.bind(btn))
+	battle_ui.party_ui.switch_requested.connect(_on_party_pokemon_chosen)
+
 func _set_display_state_from_state() -> void:
 	display_state = _deep_copy_state(state)
 
@@ -51,15 +60,6 @@ func _deep_copy_party(party: Array) -> Array[Pokemon]:
 		out[i] = original.clone(original.base_data.id)
 
 	return out
-
-func _wire_signals() -> void:
-	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer/Fight.pressed.connect(_on_fight_pressed)
-	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer4/Run.pressed.connect(_on_run_pressed)
-	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer2/Switch.pressed.connect(_on_switch_pressed)
-	for b in get_tree().get_nodes_in_group("MoveButtons"):
-		var btn := b as Button
-		btn.pressed.connect(_on_move_pressed.bind(btn))
-	battle_ui.party_ui.switch_requested.connect(_on_party_pokemon_chosen)
 
 func _player_active_display() -> Pokemon:
 	return display_state.player_party[display_state.player_active]
@@ -102,14 +102,14 @@ func _on_run_pressed() -> void:
 
 func _run() -> void:
 	if input_locked: return
-	var result = BattleResult.run()
+	session.result = BattleResult.run()
 	
 	battle_ui.set_state(BattleUI.UIState.MESSAGE)
 	await DialogueManager.say(
 		PackedStringArray(["You ran away..."]),
 		{"lock_input": false, "require_input": true}
 	)
-	_finish_battle(result)
+	_handle_win()
 
 func _on_switch_pressed() -> void:
 	if input_locked: return	
@@ -302,7 +302,46 @@ func _play_events(events: Array[BattleEvent]) -> void:
 				)
 
 			BattleDefinitions.BattleEvent.BATTLE_ENDED:
-				_finish_battle(e.result)
+				match session.result.outcome:
+					BattleDefinitions.BattleOutcome.TRAINER_WIN:
+						await DialogueManager.say(
+							PackedStringArray(["%s was defeated." % session.trainer_data.display_name]),
+							{"lock_input": false, "require_input": true}
+						)
+						battle_ui.show_trainer_portrait(session.trainer_data.portrait)
+						await DialogueManager.say(
+							PackedStringArray(session.trainer_data.outro_lines_win),
+							{"lock_input": false, "require_input": true}
+						)
+						_handle_win()
+						
+					BattleDefinitions.BattleOutcome.TRAINER_LOSE:
+						await DialogueManager.say(
+							PackedStringArray(["You ran out of usable Pokemon."]),
+							{"lock_input": false, "require_input": true}
+						)
+						await DialogueManager.say(
+							PackedStringArray(session.trainer_data.outro_lines_lose),
+							{"lock_input": false, "require_input": true}
+						)
+						_handle_loss()
+						
+					BattleDefinitions.BattleOutcome.WILD_WIN:
+						_handle_win()
+						
+					BattleDefinitions.BattleOutcome.WILD_LOSE:
+						await DialogueManager.say(
+							PackedStringArray(["You ran out of usable Pokemon."]),
+							{"lock_input": false, "require_input": true}
+						)
+						_handle_loss()
+						
+					BattleDefinitions.BattleOutcome.CAPTURE:
+						await DialogueManager.say(
+							PackedStringArray(["You captured %s" % session.result.captured_pokemon.base_data.name]),
+							{"lock_input": false, "require_input": true}
+						)
+						_handle_capture()
 				return
 
 			_:
@@ -329,7 +368,17 @@ func _events_contain_battle_end(events: Array[BattleEvent]) -> bool:
 			return true
 	return false
 
-func _finish_battle(result: BattleResult) -> void:
-	PlayerInventory.PartyPokemon = session.player_party
-	# handle other result info
-	BattleManager.return_to_world(session.result)
+func _handle_win() -> void:
+	# write party
+	# return to world
+	return
+
+func _handle_loss() -> void:
+	# load last save
+	return
+	
+func _handle_capture() -> void:
+	# add to party or send to box
+	# write party
+	# return to world
+	return
