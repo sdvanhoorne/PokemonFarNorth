@@ -24,7 +24,14 @@ func _on_body_entered(body: Node2D) -> void:
 	
 	var offset = get_warp_offset(body.global_position)
 	var world := get_tree().root.get_node("World")
-	world.load_map(target_map_id, body, spawn_point, horizontal, offset)
+	var request := MapLoadRequest.for_spawn(
+		target_map_id,
+		spawn_point,
+		body.movement_controller.facing_direction,
+		horizontal,
+		offset
+	)
+	world.load_map(request, body)
 	
 func get_warp_offset(player_position: Vector2) -> int:
 	var local_offset: Vector2 = (player_position - global_position) / GlobalConstants.tile_size
