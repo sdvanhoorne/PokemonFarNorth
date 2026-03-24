@@ -32,6 +32,7 @@ TypeColors="*res://scripts/globals/TypeColors.gd"
 GridMovementRegistry="*res://scripts/globals/GridMovementRegistry.gd"
 NpcDatabase="*res://scripts/npc/NpcDatabase.gd"
 TrainerDatabase="*res://scripts/npc/TrainerDatabase.gd"
+SaveData="*res://scripts/globals/SaveData.gd"
 
 [display]
 

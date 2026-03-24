@@ -76,12 +76,10 @@ func _on_battle_pressed() -> void:
 	BattleManager.start_wild_battle([encounteredPokemon], Vector2(0,0), Vector2(0,0), "")
 	
 func _on_load_pressed() -> void:
-	var save := SaveData.load_savedata()
+	var save := SaveData.load_game()
 	if save == null:
 		return
-	var scene_path = MapRegistry.MAPS[save.current_map_id]
-	var scene = load(scene_path)
-	load_map(scene, null, )
+	load_map(GameState.current_map_id, null, )
 
 func disable_debug_buttons() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false

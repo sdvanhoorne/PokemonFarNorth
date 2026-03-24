@@ -87,6 +87,14 @@ func show_trainer_portrait(portrait: Texture2D) -> void:
 func hide_trainer_portrait() -> void:
 	enemy_trainer_sprite.visible = false
 
+func show_player_back_portrait() -> void:
+	# show the back sprite of the player
+	return
+
+func hide_player_back_portrait() -> void:
+	# hide the back sprite of the player
+	return
+
 func load_player_pokemon(pokemon: Pokemon):
 	_load_pokemon(player_pokemon_ui, pokemon)
 	

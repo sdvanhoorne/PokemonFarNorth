@@ -5,7 +5,6 @@
 extends Node
 class_name BattleEngine
 
-const DamageCalculation := preload("res://scripts/battle/DamageCalculation.gd")
 var damage_calculation: DamageCalculation
 
 func setup() -> void:
@@ -304,15 +303,6 @@ func _find_next_usable_enemy_index(session: BattleSession) -> int:
 		if i == session.active_enemy_index:
 			continue
 		var pokemon: Pokemon = session.enemy_party[i]
-		if pokemon.current_hp > 0:
-			return i
-	return -1
-	
-func _find_next_usable_player_index(session: BattleSession) -> int:
-	for i in range(session.player_party.size()):
-		if i == session.active_player_index:
-			continue
-		var pokemon: Pokemon = session.player_party[i]
 		if pokemon.current_hp > 0:
 			return i
 	return -1

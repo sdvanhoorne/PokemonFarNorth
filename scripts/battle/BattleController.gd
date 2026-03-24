@@ -7,12 +7,8 @@ class_name BattleController
 @onready var battle_ui: BattleUI = $BattleUI
 var rng := RandomNumberGenerator.new()
 var session: BattleSession
-
 var engine: BattleEngine
-var state: Dictionary
-var display_state: Dictionary
 var input_locked := false
-var enemy_pokemon: Array[Pokemon]
 var pending_player_action: BattleAction = null
 var pending_enemy_action: BattleAction = null
 
@@ -35,62 +31,47 @@ func _wire_signals() -> void:
 		btn.pressed.connect(_on_move_pressed.bind(btn))
 	battle_ui.party_ui.switch_requested.connect(_on_party_pokemon_chosen)
 
-func _set_display_state_from_state() -> void:
-	display_state = _deep_copy_state(state)
-
-func _deep_copy_state(src: Dictionary) -> Dictionary:
-	var dst: Dictionary = {}
-
-	dst["player_active"] = src.get("player_active", 0)
-	dst["enemy_active"] = src.get("enemy_active", 0)
-
-	dst["player_party"] = _deep_copy_party(src.get("player_party", []))
-	dst["enemy_party"] = _deep_copy_party(src.get("enemy_party", []))
-
-	return dst
-
-func _deep_copy_party(party: Array) -> Array[Pokemon]:
-	var out: Array[Pokemon] = []
-	out.resize(party.size())
-
-	for i in party.size():
-		var original := party[i] as Pokemon
-		assert(original != null, "Party entry %d is null" % i)
-
-		out[i] = original.clone(original.base_data.id)
-
-	return out
-
-func _player_active_display() -> Pokemon:
-	return display_state.player_party[display_state.player_active]
-
-func _enemy_active_display() -> Pokemon:
-	return display_state.enemy_party[display_state.enemy_active]
-
 func _start_battle_intro() -> void:
 	battle_ui.set_state(BattleUI.UIState.MESSAGE)
 	
 	match session.battle_type:
 		BattleDefinitions.BattleType.WILD:
-			await DialogueManager.say(
-				PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().base_data.name]),
-				{"lock_input": false, "require_input": true}
-			)
+			_start_wild_intro()
 		BattleDefinitions.BattleType.TRAINER:
-			battle_ui.show_trainer_portrait(session.trainer_data.portrait)
-			
-			await DialogueManager.say(
-				PackedStringArray(session.trainer_data.intro_lines),
-				{"lock_input": false, "require_input": true}
-			)
-			
-			battle_ui.hide_trainer_portrait()
+			_start_trainer_intro()
+
+func _start_wild_intro() -> void:
+	battle_ui.show_player_back_portrait()
+	battle_ui.load_enemy_pokemon(session.get_active_enemy())
+	
+	await DialogueManager.say(
+		PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().base_data.name]),
+		{"lock_input": false, "require_input": true}
+	)
+	battle_ui.load_player_pokemon(session.get_active_player())
+	
+	battle_ui.set_moves(session.get_active_player().move_names)
+	battle_ui.set_state(BattleUI.UIState.OPTIONS)
+	return
+
+func _start_trainer_intro() -> void:
+	battle_ui.show_player_back_portrait()
+	battle_ui.show_trainer_portrait(session.trainer_data.portrait)
+	
+	await DialogueManager.say(
+		PackedStringArray(session.trainer_data.intro_lines),
+		{"lock_input": false, "require_input": true}
+	)
+	
+	battle_ui.hide_player_back_portrait()
+	battle_ui.hide_trainer_portrait()
 	
 	battle_ui.load_player_pokemon(session.get_active_player())
 	battle_ui.load_enemy_pokemon(session.get_active_enemy())
-
+	
 	battle_ui.set_moves(session.get_active_player().move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
+	return
 
 func _on_fight_pressed() -> void:
 	if input_locked: return
@@ -139,8 +120,6 @@ func _process_turn():
 		# no enemy switches yet, just moves
 		# random move selection, no AI yet
 		pending_enemy_action = BattleAction.make_move(BattleDefinitions.BattleSide.ENEMY, _determine_enemy_move_index())
-		_set_display_state_from_state()
-		
 		var events: Array[BattleEvent] = engine.resolve_turn(session, pending_player_action, pending_enemy_action)
 		await _play_events(events)
 		if _events_contain_battle_end(events):
