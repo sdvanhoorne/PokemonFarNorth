@@ -14,6 +14,7 @@ func _ready() -> void:
 	DialogueManager.message_box = get_node_or_null("/root/World/DialogueCanvas/MessageBox")
 
 func load_map(request: MapLoadRequest, player: Node2D = null) -> Node2D:
+	get_node_or_null("/root/World/DebugControls").visible = false
 	if is_loading_map:
 		return current_map
 
@@ -144,7 +145,7 @@ func _on_home_pressed() -> void:
 func _on_battle_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
 	var encounteredPokemon = Pokemon.new_wild(14, 1)
-	BattleManager.start_wild_battle([encounteredPokemon], Vector2(0, 0), Vector2(0, 0), "")
+	BattleManager.start_wild_battle([encounteredPokemon], Vector2(0, 0), "down")
 
 func _on_load_pressed() -> void:
 	if not SaveData.load_game():

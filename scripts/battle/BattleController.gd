@@ -90,7 +90,7 @@ func _run() -> void:
 		PackedStringArray(["You ran away..."]),
 		{"lock_input": false, "require_input": true}
 	)
-	_handle_win()
+	await BattleManager.return_to_world(session.result)
 
 func _on_switch_pressed() -> void:
 	if input_locked: return	
@@ -281,6 +281,9 @@ func _play_events(events: Array[BattleEvent]) -> void:
 				)
 
 			BattleDefinitions.BattleEvent.BATTLE_ENDED:
+				
+				PlayerInventory.PartyPokemon = session.player_party
+				
 				match session.result.outcome:
 					BattleDefinitions.BattleOutcome.TRAINER_WIN:
 						await DialogueManager.say(
@@ -292,7 +295,7 @@ func _play_events(events: Array[BattleEvent]) -> void:
 							PackedStringArray(session.trainer_data.outro_lines_win),
 							{"lock_input": false, "require_input": true}
 						)
-						_handle_win()
+						await BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.TRAINER_LOSE:
 						await DialogueManager.say(
@@ -303,24 +306,24 @@ func _play_events(events: Array[BattleEvent]) -> void:
 							PackedStringArray(session.trainer_data.outro_lines_lose),
 							{"lock_input": false, "require_input": true}
 						)
-						_handle_loss()
+						await BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.WILD_WIN:
-						_handle_win()
+						await BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.WILD_LOSE:
 						await DialogueManager.say(
 							PackedStringArray(["You ran out of usable Pokemon."]),
 							{"lock_input": false, "require_input": true}
 						)
-						_handle_loss()
+						await BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.CAPTURE:
 						await DialogueManager.say(
 							PackedStringArray(["You captured %s" % session.result.captured_pokemon.base_data.name]),
 							{"lock_input": false, "require_input": true}
 						)
-						_handle_capture()
+						await BattleManager.return_to_world(session.result)
 				return
 
 			_:
@@ -346,18 +349,3 @@ func _events_contain_battle_end(events: Array[BattleEvent]) -> bool:
 		if e.event_type == BattleDefinitions.BattleEvent.BATTLE_ENDED:
 			return true
 	return false
-
-func _handle_win() -> void:
-	# write party
-	# return to world
-	return
-
-func _handle_loss() -> void:
-	# load last save
-	return
-	
-func _handle_capture() -> void:
-	# add to party or send to box
-	# write party
-	# return to world
-	return

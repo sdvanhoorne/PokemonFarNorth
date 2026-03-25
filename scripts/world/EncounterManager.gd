@@ -46,7 +46,7 @@ func roll_encounter() -> Pokemon:
 
 func check_for_encounter_at_position(
 	pos: Vector2,
-	dir: Vector2,
+	dir: String,
 	encounter_layer: TileMapLayer
 ) -> void:
 	if encounter_layer == null:
@@ -90,7 +90,6 @@ func check_for_encounter_at_position(
 		[encountered_pokemon],
 		pos,
 		dir,
-		map_id,
 		intro_lines
 	)
 

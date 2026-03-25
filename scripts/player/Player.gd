@@ -58,6 +58,6 @@ func check_for_encounter(pos: Vector2) -> void:
 
 	EncounterManager.check_for_encounter_at_position(
 		pos,
-		movement_controller.facing_input,
+		movement_controller.facing_direction,
 		encounter_layer
 	)

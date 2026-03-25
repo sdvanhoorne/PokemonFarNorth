@@ -7,14 +7,13 @@ var trainer_data: BattleTrainerData
 var can_run: bool = true
 
 var player_position: Vector2
-var player_direction: Vector2
-var map_id: String = ""
+var player_direction: String
 
 static func make(
 	battle_type_: BattleDefinitions.BattleType,
 	enemy_party_: Array[Pokemon],
 	player_position_: Vector2,
-	player_direction_: Vector2,
+	player_direction_: String,
 	trainer_data_: BattleTrainerData,
 	can_run_: bool = true
 ) -> BattleStartRequest:
@@ -30,8 +29,7 @@ static func make(
 static func for_wild_battle(
 	enemy_party_: Array[Pokemon],
 	player_position_: Vector2,
-	player_direction_: Vector2,
-	map_id_: String
+	player_direction_: String
 ) -> BattleStartRequest:
 	return make(
 		BattleDefinitions.BattleType.WILD,
@@ -45,7 +43,7 @@ static func for_wild_battle(
 static func for_trainer_battle(
 	enemy_party_: Array[Pokemon],
 	player_position_: Vector2,
-	player_direction_: Vector2,
+	player_direction_: String,
 	trainer_data: BattleTrainerData
 ) -> BattleStartRequest:
 	return make(

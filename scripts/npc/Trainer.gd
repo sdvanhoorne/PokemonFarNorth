@@ -66,7 +66,7 @@ func _on_player_finished_step(_new_global_pos: Vector2) -> void:
 	await BattleManager.start_trainer_battle(
 		party,
 		player_ref.global_position,
-		player_ref.movement_controller.facing,
+		player_ref.movement_controller.facing_direction,
 		BattleTrainerData.from_trainer(self)
 		)
 	
