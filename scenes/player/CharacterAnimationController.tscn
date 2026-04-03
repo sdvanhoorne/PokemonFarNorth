@@ -1,15 +1,16 @@
 [gd_scene load_steps=4 format=3 uid="uid://dnl817dmradhb"]
 
 [ext_resource type="Script" uid="uid://d3x4je5gg76vk" path="res://scripts/player/CharacterAnimationController.gd" id="1_58oal"]
-[ext_resource type="SpriteFrames" path="res://assets/npc/sprite_frames/npc_guy_large.tres" id="1_lgsoj"]
+[ext_resource type="SpriteFrames" uid="uid://cjyeh1lp6agcg" path="res://assets/character/npc/sprite_frames/npc_guy_large.tres" id="1_lgsoj"]
 [ext_resource type="Texture2D" uid="uid://rosf23ddge0c" path="res://assets/character/Character_Shadow.png" id="3_6tprd"]
 
 [node name="CharacterAnimationController" type="AnimatedSprite2D"]
 sprite_frames = ExtResource("1_lgsoj")
 animation = &"idle_down"
+offset = Vector2(0, -1)
 script = ExtResource("1_58oal")
 
 [node name="Shadow" type="Sprite2D" parent="."]
 z_index = -1
-position = Vector2(0, 6)
+position = Vector2(0, 5)
 texture = ExtResource("3_6tprd")

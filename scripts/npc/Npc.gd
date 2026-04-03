@@ -31,6 +31,9 @@ func on_talk(player: Node) -> void:
 	wander_controller.enabled = false
 	movement_controller._update_facing_direction_from_vector(player.global_position - global_position)
 	character_animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
+	
+	# need to handle trainers
+	
 	await DialogueManager.say(dialogue["default"],{
 		"lock_input": true,
 		"require_input": true

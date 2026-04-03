@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=4 uid="uid://t81j4l7hyl0m"]
+[gd_scene load_steps=5 format=4 uid="uid://t81j4l7hyl0m"]
 
+[ext_resource type="Script" uid="uid://b370wgf4mu5lc" path="res://scripts/world/MapBase.gd" id="1_14dab"]
 [ext_resource type="TileSet" uid="uid://cx6opeh8aqvdd" path="res://assets/tiles/fancy_interior.tres" id="1_37p6g"]
 [ext_resource type="Script" uid="uid://c6x2o5hdge8ca" path="res://scripts/player/Warp.gd" id="3_37p6g"]
 
@@ -7,6 +8,8 @@
 size = Vector2(20, 10)
 
 [node name="StartingHouse" type="Node2D"]
+script = ExtResource("1_14dab")
+map_display_name = "Starting House"
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 texture_filter = 1

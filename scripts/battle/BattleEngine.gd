@@ -266,6 +266,8 @@ func _set_battle_result(session: BattleSession, outcome: BattleDefinitions.Battl
 	var result := BattleResult.new()
 	result.battle_type = session.battle_type
 	result.outcome = outcome
+	if outcome == BattleDefinitions.BattleOutcome.TRAINER_WIN:
+		result.defeated_trainer_id = session.trainer_data.trainer_id
 	session.result = result
 
 func _opposing_side(side: BattleDefinitions.BattleSide) -> BattleDefinitions.BattleSide:

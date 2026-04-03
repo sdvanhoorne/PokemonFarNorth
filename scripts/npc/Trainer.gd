@@ -26,7 +26,7 @@ func _ready() -> void:
 	portrait = Paths.load_sprite(Paths.join(Paths.TRAINER_BATTLE_SPRITES, trainer_class))
 
 func _on_player_spotted(p: Node2D) -> void:
-	if has_battled or is_engaging:
+	if GameState.is_trainer_defeated(npc_id) or is_engaging:
 		return
 	if not p is Player:
 		return
@@ -54,7 +54,7 @@ func _on_player_finished_step(_new_global_pos: Vector2) -> void:
 	player_ref.movement_controller.snap_to_grid()
 	player_ref.movement_controller.clear_input()
 
-	await play_alert()
+	await _play_alert()
 
 	await _walk_to_player()
 	
@@ -80,7 +80,7 @@ func _walk_to_player() -> void:
 
 		await movement_controller.moved_to_tile
 
-func play_alert() -> void:
+func _play_alert() -> void:
 	alert_animation.visible = true
 	alert_animation.play("alert")
 
