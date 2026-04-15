@@ -1,42 +1,30 @@
-hoenn
 
-littleroot town
-route 1
-oldale town
-route 2 
-route 3
-petelburg town
-route 4
-petelburg forest
-route 5
-rustboro town
-route 6
-dewford town
-granite cave
-slateport town
-route 7
-mauville city
-route 8
-route 9
-Rustboro Tunnel
-New Mauville
-
-
-far north
-
-Maple Town
-Route 1
+Maple City
 Cedar Town
-Route 2
 Heartwood Forest
 Lake Ann - Gym (Bug)
-Mission Point - Gym (Ghost)
-Traverse City - Gym (
-
-Hickory Forest
-Boardman Lake
-Boardman River
 Platte River
-Silver Lake
+Sleeping Bear Dunes
+Glen Arbor - Gym (Ground)
 Glen Arbor - Gym (Normal)
-Alligator Hill/Trail
+Tart Trail
+Leelanau - Gym (Fighting)
+Hickory Forest
+Silver Lake - Gym (Water)
+Copperwood Mine
+Copperwood - Gym (Steel)
+Union Dam
+Boardman River
+Boardman Lake
+Traverse City - Gym (Electric)
+Old Mission Peninsula
+Old Mission Lighthouse
+Mission Point - Gym (Ghost)
+
+Player starts in Cedar Town
+Walks Cedar Run to Heartwood Forest
+Walks through Heartwood Forest to Lake Ann
+Fights gym in Lake Ann
+Walks Platte River to Sleeping Bear Dunes
+Something to do in the dunes
+Fights ground gym in Glen Arbor
