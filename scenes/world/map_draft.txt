@@ -1,0 +1,42 @@
+hoenn
+
+littleroot town
+route 1
+oldale town
+route 2 
+route 3
+petelburg town
+route 4
+petelburg forest
+route 5
+rustboro town
+route 6
+dewford town
+granite cave
+slateport town
+route 7
+mauville city
+route 8
+route 9
+Rustboro Tunnel
+New Mauville
+
+
+far north
+
+Maple Town
+Route 1
+Cedar Town
+Route 2
+Heartwood Forest
+Lake Ann - Gym (Bug)
+Mission Point - Gym (Ghost)
+Traverse City - Gym (
+
+Hickory Forest
+Boardman Lake
+Boardman River
+Platte River
+Silver Lake
+Glen Arbor - Gym (Normal)
+Alligator Hill/Trail
