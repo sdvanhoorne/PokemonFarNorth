@@ -16,22 +16,22 @@ Old Mission Lighthouse
 
 Start at lake ann
 south to interlochen
-gym 1
+gym 1 - bug
 east via platte river to honor
 north to sleeping bear dunes
-gym 2
+gym 2 - ground
 north to glen arbor
-gym 3
+gym 3 - water
 east to maple city
-gym 4
+gym 4 - normal
 east to cedar
-gym 5
+gym 5 - steel
 east to leelanau
-gym 6
+gym 6 - fighting
 tart trail into traverse city
-gym 7
+gym 7 - electric
 boardman river and lake stuff
 up the old mission peninsula
-gym 8
+gym 8 - ghost
 surf across west bay to suttons bay
 north to northport and elite four
