@@ -3,24 +3,35 @@ Map Locations
 Maple City
 Cedar Town
 Heartwood Forest
-Lake Ann - Gym (Bug)
 Platte River
 Sleeping Bear Dunes
-
-Glen Arbor - Gym (Ground)
-Glen Arbor - Gym (Normal)
-
 Tart Trail
-Leelanau - Gym (Fighting)
 Hickory Forest
-Silver Lake - Gym (Water)
 Copperwood Mine
-Copperwood - Gym (Steel)
 Union Dam
 Boardman River
 Boardman Lake
-Traverse City - Gym (Electric)
 Old Mission Peninsula
 Old Mission Lighthouse
-Mission Point - Gym (Ghost)
 
+Start at lake ann
+south to interlochen
+gym 1
+east via platte river to honor
+north to sleeping bear dunes
+gym 2
+north to glen arbor
+gym 3
+east to maple city
+gym 4
+east to cedar
+gym 5
+east to leelanau
+gym 6
+tart trail into traverse city
+gym 7
+boardman river and lake stuff
+up the old mission peninsula
+gym 8
+surf across west bay to suttons bay
+north to northport and elite four
