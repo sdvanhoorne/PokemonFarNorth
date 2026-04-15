@@ -43,4 +43,16 @@
 		]
 		}
 	}
+},
+gym_leader_kieran": {
+	"id": "gym_leader_kieran",
+	"name": Gym Leader Kieran",
+	"type": "gym leader",
+	"dialogue": {
+		"before_battle": [],
+		"intro_lines": [],
+		"outro_lines_win": [],
+		"outro_lines_lose": [],
+		"after_battle": []
+	}
 }
