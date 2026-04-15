@@ -1,3 +1,4 @@
+Map Locations
 
 Maple City
 Cedar Town
@@ -5,8 +6,10 @@ Heartwood Forest
 Lake Ann - Gym (Bug)
 Platte River
 Sleeping Bear Dunes
+
 Glen Arbor - Gym (Ground)
 Glen Arbor - Gym (Normal)
+
 Tart Trail
 Leelanau - Gym (Fighting)
 Hickory Forest
@@ -21,10 +24,3 @@ Old Mission Peninsula
 Old Mission Lighthouse
 Mission Point - Gym (Ghost)
 
-Player starts in Cedar Town
-Walks Cedar Run to Heartwood Forest
-Walks through Heartwood Forest to Lake Ann
-Fights gym in Lake Ann
-Walks Platte River to Sleeping Bear Dunes
-Something to do in the dunes
-Fights ground gym in Glen Arbor
