@@ -1,6 +1,8 @@
 extends CharacterBody2D
 class_name Npc
 
+enum type { BASIC, TRAINER, BOSS }
+
 @onready var character_animation_controller: CharacterAnimationController = $CharacterAnimationController
 @onready var movement_controller: MovementController = $MovementController
 @onready var wander_controller: WanderController = $WanderController
@@ -9,6 +11,7 @@ class_name Npc
 @export var npc_id: String = "default_npc_id"
 @export var sprite_frames: SpriteFrames
 @export var wander: bool = false
+@export var npc_type: type = type.BASIC 
 
 var npc_name: String = "default_npc_name"
 var dialogue: Dictionary = {}
@@ -33,8 +36,13 @@ func on_talk(player: Node) -> void:
 	character_animation_controller.play_animation(movement_controller.get_move_state(), movement_controller.facing_direction)
 	
 	# need to handle trainers
-	
-	await DialogueManager.say(dialogue["default"],{
+	var lines = []
+	match npc_type:
+		type.BASIC:
+			lines = dialogue["default"]
+		type.TRAINER:
+			lines = dialogue["after_battle"]
+	await DialogueManager.say(lines,{
 		"lock_input": true,
 		"require_input": true
 	})
@@ -42,6 +50,7 @@ func on_talk(player: Node) -> void:
 
 func _load_npc_data() -> void:
 	var data = NpcDatabase.get_npc_data(npc_id)
+	npc_type = data.get("type", type.BASIC)
 	npc_name = data.get("name")
 	dialogue = data.get("dialogue", {})
 

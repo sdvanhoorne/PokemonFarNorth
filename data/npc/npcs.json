@@ -2,7 +2,7 @@
 "default_npc": {
 	"id": "default_npc",
 	"name": "Villager",
-	"type": "npc",
+	"type": 0,
 	"dialogue": {
 		"default": [
 			"Welcome to the starting town!",
@@ -13,7 +13,7 @@
 "grumpy_grandpa": {
 	"id": "grumpy_grandpa",
 	"name": "Grumpy Grandpa",
-	"type": "npc",
+	"type": 0,
 	"dialogue": {
 		"default": [
 			"Kids these days...",
@@ -24,7 +24,7 @@
 "trainer_1": {
 	"id": "trainer_1",
 	"name": "Trainer 1",
-	"type": "trainer",
+	"type": 1,
 	"dialogue": {
 		"before_battle": [
 			"Bird Pokémon are the best!"
@@ -38,21 +38,21 @@
 		"outro_lines_lose": [
 			"That'll teach ya!"
 		],
-		"after_battle_rematch": [
+		"after_battle": [
 			"I'm training even harder now."
 		]
-		}
 	}
 },
-gym_leader_kieran": {
-	"id": "gym_leader_kieran",
-	"name": Gym Leader Kieran",
-	"type": "gym leader",
-	"dialogue": {
-		"before_battle": [],
-		"intro_lines": [],
-		"outro_lines_win": [],
-		"outro_lines_lose": [],
-		"after_battle": []
+	"gym_leader_kieran": {
+		"id": "gym_leader_kieran",
+		"name": "Gym Leader Kieran",
+		"type": 2,
+		"dialogue": {
+			"before_battle": [],
+			"intro_lines": [],
+			"outro_lines_win": [],
+			"outro_lines_lose": [],
+			"after_battle": []
+		}
 	}
 }
