@@ -1,53 +1,89 @@
 [
-	{
-		"id": 0,
-		"name": "Tackle",
-		"power": 40,
- 		"type": "Normal",
- 		"target": "Enemy",
-		"category": "Physical",
-		"accuracy": 100,
-		"description": "A physical attack in which the user charges, full body, into the foe."
-	}, 
-	{
-		"id": 1,
-		"name": "Tail Whip",
- 		"type": "Normal",
- 		"target": "Enemy",
-		"target_stat": "defense",
-		"stat_multiplier": 0.85,
-		"category": "StatChange",
-		"accuracy": 100,
-		"description": "The user wags its tail cutely, making the foe lower its Defense stat."
-	}, 
-	{
-		"id": 2,
-		"name": "Scratch",
- 		"type": "Normal",
- 		"target": "Enemy",
-		"power": 40,
-		"category": "Physical",
-		"accuracy": 100,
-		"description": "The user attacks with its claw."
-	}, 
-	{
-		"id": 3,
-		"name": "Ember",
- 		"type": "Fire",
- 		"target": "Enemy",
-		"power": 40,
-		"category": "Special",
-		"accuracy": 100,
-		"description": "The user sprays fire at the enemy."
-	},
-	{
-		"id": 4,
-		"name": "Thunder Wave",
-		"type": "Electric",
-		"target": "Enemy",
-		"power": -1,
-		"category": "Status",
-		"accuracy": 100,
-		"description": "The user shoots a paralyzing wave at the enemy."
-	}
+  {
+    "id": "tackle",
+    "name": "Tackle",
+    "type": "normal",
+    "category": "physical",
+    "target": "enemy",
+    "power": 40,
+    "accuracy": 100,
+    "pp": 35,
+    "priority": 0,
+    "effects": [],
+    "description": "A physical attack in which the user charges, full body, into the foe."
+  },
+  {
+    "id": "tail_whip",
+    "name": "Tail Whip",
+    "type": "normal",
+    "category": "status",
+    "target": "enemy",
+    "power": 0,
+    "accuracy": 100,
+    "pp": 30,
+    "priority": 0,
+    "effects": [
+      {
+        "kind": "stat_change",
+        "target": "enemy",
+        "stat": "defense",
+        "stages": -1,
+        "chance": 100
+      }
+    ],
+    "description": "The user wags its tail cutely, making the foe lower its Defense stat."
+  },
+  {
+    "id": "scratch",
+    "name": "Scratch",
+    "type": "normal",
+    "category": "physical",
+    "target": "enemy",
+    "power": 40,
+    "accuracy": 100,
+    "pp": 35,
+    "priority": 0,
+    "effects": [],
+    "description": "The user attacks with its claw."
+  },
+  {
+    "id": "ember",
+    "name": "Ember",
+    "type": "fire",
+    "category": "special",
+    "target": "enemy",
+    "power": 40,
+    "accuracy": 100,
+    "pp": 25,
+    "priority": 0,
+    "effects": [
+      {
+        "kind": "status_chance",
+        "target": "enemy",
+        "status": "burn",
+        "chance": 10
+      }
+    ],
+    "description": "The user sprays fire at the enemy."
+  },
+  {
+    "id": "thunder_wave",
+    "name": "Thunder Wave",
+    "type": "electric",
+    "category": "status",
+    "target": "enemy",
+    "power": 0,
+    "accuracy": 90,
+    "pp": 20,
+    "priority": 0,
+    "effects": [
+      {
+        "kind": "apply_status",
+        "target": "enemy",
+        "status": "paralysis",
+        "chance": 100
+      }
+    ],
+    "description": "The user shoots a paralyzing wave at the enemy."
+  }
 ]
