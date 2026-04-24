@@ -1,89 +1,9890 @@
-[
-  {
-    "id": "tackle",
-    "name": "Tackle",
-    "type": "normal",
-    "category": "physical",
-    "target": "enemy",
-    "power": 40,
-    "accuracy": 100,
-    "pp": 35,
-    "priority": 0,
-    "effects": [],
-    "description": "A physical attack in which the user charges, full body, into the foe."
-  },
-  {
-    "id": "tail_whip",
-    "name": "Tail Whip",
-    "type": "normal",
-    "category": "status",
-    "target": "enemy",
-    "power": 0,
-    "accuracy": 100,
-    "pp": 30,
-    "priority": 0,
-    "effects": [
-      {
-        "kind": "stat_change",
-        "target": "enemy",
-        "stat": "defense",
-        "stages": -1,
-        "chance": 100
-      }
-    ],
-    "description": "The user wags its tail cutely, making the foe lower its Defense stat."
-  },
-  {
-    "id": "scratch",
-    "name": "Scratch",
-    "type": "normal",
-    "category": "physical",
-    "target": "enemy",
-    "power": 40,
-    "accuracy": 100,
-    "pp": 35,
-    "priority": 0,
-    "effects": [],
-    "description": "The user attacks with its claw."
-  },
-  {
-    "id": "ember",
-    "name": "Ember",
-    "type": "fire",
-    "category": "special",
-    "target": "enemy",
-    "power": 40,
-    "accuracy": 100,
-    "pp": 25,
-    "priority": 0,
-    "effects": [
-      {
-        "kind": "status_chance",
-        "target": "enemy",
-        "status": "burn",
-        "chance": 10
-      }
-    ],
-    "description": "The user sprays fire at the enemy."
-  },
-  {
-    "id": "thunder_wave",
-    "name": "Thunder Wave",
-    "type": "electric",
-    "category": "status",
-    "target": "enemy",
-    "power": 0,
-    "accuracy": 90,
-    "pp": 20,
-    "priority": 0,
-    "effects": [
-      {
-        "kind": "apply_status",
-        "target": "enemy",
-        "status": "paralysis",
-        "chance": 100
-      }
-    ],
-    "description": "The user shoots a paralyzing wave at the enemy."
-  }
-]
+{
+	"pound": {
+		"id": "pound",
+		"source_move_id": 1,
+		"name": "Pound",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"karate_chop": {
+		"id": "karate_chop",
+		"source_move_id": 2,
+		"name": "Karate Chop",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"double_slap": {
+		"id": "double_slap",
+		"source_move_id": 3,
+		"name": "Double Slap",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 85,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"comet_punch": {
+		"id": "comet_punch",
+		"source_move_id": 4,
+		"name": "Comet Punch",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 18,
+		"accuracy": 85,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"mega_punch": {
+		"id": "mega_punch",
+		"source_move_id": 5,
+		"name": "Mega Punch",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 85,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"pay_day": {
+		"id": "pay_day",
+		"source_move_id": 6,
+		"name": "Pay Day",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "scatter_coins"
+			}
+		],
+		"description": ""
+	},
+	"fire_punch": {
+		"id": "fire_punch",
+		"source_move_id": 7,
+		"name": "Fire Punch",
+		"generation": 1,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 75,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"ice_punch": {
+		"id": "ice_punch",
+		"source_move_id": 8,
+		"name": "Ice Punch",
+		"generation": 1,
+		"type": "ice",
+		"category": "special",
+		"target": "enemy",
+		"power": 75,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "freeze",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"thunder_punch": {
+		"id": "thunder_punch",
+		"source_move_id": 9,
+		"name": "Thunder Punch",
+		"generation": 1,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 75,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"scratch": {
+		"id": "scratch",
+		"source_move_id": 10,
+		"name": "Scratch",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"vice_grip": {
+		"id": "vice_grip",
+		"source_move_id": 11,
+		"name": "Vice Grip",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 55,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"guillotine": {
+		"id": "guillotine",
+		"source_move_id": 12,
+		"name": "Guillotine",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 30,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "ohko"
+			}
+		],
+		"description": ""
+	},
+	"razor_wind": {
+		"id": "razor_wind",
+		"source_move_id": 13,
+		"name": "Razor Wind",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "all_enemies",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move"
+			}
+		],
+		"description": ""
+	},
+	"swords_dance": {
+		"id": "swords_dance",
+		"source_move_id": 14,
+		"name": "Swords Dance",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"cut": {
+		"id": "cut",
+		"source_move_id": 15,
+		"name": "Cut",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 95,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"gust": {
+		"id": "gust",
+		"source_move_id": 16,
+		"name": "Gust",
+		"generation": 1,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "bonus_vs_flying_targets"
+			}
+		],
+		"description": ""
+	},
+	"wing_attack": {
+		"id": "wing_attack",
+		"source_move_id": 17,
+		"name": "Wing Attack",
+		"generation": 1,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"whirlwind": {
+		"id": "whirlwind",
+		"source_move_id": 18,
+		"name": "Whirlwind",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": -6,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "force_switch_or_end_wild_battle"
+			}
+		],
+		"description": ""
+	},
+	"fly": {
+		"id": "fly",
+		"source_move_id": 19,
+		"name": "Fly",
+		"generation": 1,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 95,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move"
+			}
+		],
+		"description": ""
+	},
+	"bind": {
+		"id": "bind",
+		"source_move_id": 20,
+		"name": "Bind",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 85,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "trap",
+				"target": "enemy",
+				"min_turns": 2,
+				"max_turns": 5
+			}
+		],
+		"description": ""
+	},
+	"slam": {
+		"id": "slam",
+		"source_move_id": 21,
+		"name": "Slam",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 75,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"vine_whip": {
+		"id": "vine_whip",
+		"source_move_id": 22,
+		"name": "Vine Whip",
+		"generation": 1,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 35,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"stomp": {
+		"id": "stomp",
+		"source_move_id": 23,
+		"name": "Stomp",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "bonus_vs_minimized_targets"
+			}
+		],
+		"description": ""
+	},
+	"double_kick": {
+		"id": "double_kick",
+		"source_move_id": 24,
+		"name": "Double Kick",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 30,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 2,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 2
+			}
+		],
+		"description": ""
+	},
+	"mega_kick": {
+		"id": "mega_kick",
+		"source_move_id": 25,
+		"name": "Mega Kick",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 75,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"jump_kick": {
+		"id": "jump_kick",
+		"source_move_id": 26,
+		"name": "Jump Kick",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 95,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "crash_damage_on_miss"
+			}
+		],
+		"description": ""
+	},
+	"rolling_kick": {
+		"id": "rolling_kick",
+		"source_move_id": 27,
+		"name": "Rolling Kick",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 85,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"sand_attack": {
+		"id": "sand_attack",
+		"source_move_id": 28,
+		"name": "Sand Attack",
+		"generation": 1,
+		"type": "ground",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "accuracy",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"headbutt": {
+		"id": "headbutt",
+		"source_move_id": 29,
+		"name": "Headbutt",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"horn_attack": {
+		"id": "horn_attack",
+		"source_move_id": 30,
+		"name": "Horn Attack",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"fury_attack": {
+		"id": "fury_attack",
+		"source_move_id": 31,
+		"name": "Fury Attack",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 85,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"horn_drill": {
+		"id": "horn_drill",
+		"source_move_id": 32,
+		"name": "Horn Drill",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 30,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "ohko"
+			}
+		],
+		"description": ""
+	},
+	"tackle": {
+		"id": "tackle",
+		"source_move_id": 33,
+		"name": "Tackle",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 35,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"body_slam": {
+		"id": "body_slam",
+		"source_move_id": 34,
+		"name": "Body Slam",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 85,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"wrap": {
+		"id": "wrap",
+		"source_move_id": 35,
+		"name": "Wrap",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 90,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "trap",
+				"target": "enemy",
+				"min_turns": 2,
+				"max_turns": 5
+			}
+		],
+		"description": ""
+	},
+	"take_down": {
+		"id": "take_down",
+		"source_move_id": 36,
+		"name": "Take Down",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 90,
+		"accuracy": 85,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.25,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recoil",
+				"target": "self",
+				"fraction_of_damage": 0.25
+			}
+		],
+		"description": ""
+	},
+	"thrash": {
+		"id": "thrash",
+		"source_move_id": 37,
+		"name": "Thrash",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "random_enemy",
+		"power": 120,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "locked_move_then_confusion"
+			}
+		],
+		"description": ""
+	},
+	"double_edge": {
+		"id": "double_edge",
+		"source_move_id": 38,
+		"name": "Double Edge",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.3333333333333333,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recoil",
+				"target": "self",
+				"fraction_of_damage": 0.3333333333333333
+			}
+		],
+		"description": ""
+	},
+	"tail_whip": {
+		"id": "tail_whip",
+		"source_move_id": 39,
+		"name": "Tail Whip",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "all_enemies",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"poison_sting": {
+		"id": "poison_sting",
+		"source_move_id": 40,
+		"name": "Poison Sting",
+		"generation": 1,
+		"type": "poison",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"twineedle": {
+		"id": "twineedle",
+		"source_move_id": 41,
+		"name": "Twineedle",
+		"generation": 1,
+		"type": "bug",
+		"category": "physical",
+		"target": "enemy",
+		"power": 25,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 2,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 2
+			},
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"pin_missile": {
+		"id": "pin_missile",
+		"source_move_id": 42,
+		"name": "Pin Missile",
+		"generation": 1,
+		"type": "bug",
+		"category": "physical",
+		"target": "enemy",
+		"power": 25,
+		"accuracy": 95,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"leer": {
+		"id": "leer",
+		"source_move_id": 43,
+		"name": "Leer",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "all_enemies",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"bite": {
+		"id": "bite",
+		"source_move_id": 44,
+		"name": "Bite",
+		"generation": 1,
+		"type": "dark",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"growl": {
+		"id": "growl",
+		"source_move_id": 45,
+		"name": "Growl",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "all_enemies",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "attack",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"roar": {
+		"id": "roar",
+		"source_move_id": 46,
+		"name": "Roar",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": -6,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "force_switch_or_end_wild_battle"
+			}
+		],
+		"description": ""
+	},
+	"sing": {
+		"id": "sing",
+		"source_move_id": 47,
+		"name": "Sing",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 55,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "sleep",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"supersonic": {
+		"id": "supersonic",
+		"source_move_id": 48,
+		"name": "Supersonic",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 55,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"sonic_boom": {
+		"id": "sonic_boom",
+		"source_move_id": 49,
+		"name": "Sonic Boom",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 90,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "fixed_damage",
+				"amount": 20
+			}
+		],
+		"description": ""
+	},
+	"disable": {
+		"id": "disable",
+		"source_move_id": 50,
+		"name": "Disable",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "disable_last_used_move"
+			}
+		],
+		"description": ""
+	},
+	"acid": {
+		"id": "acid",
+		"source_move_id": 51,
+		"name": "Acid",
+		"generation": 1,
+		"type": "poison",
+		"category": "physical",
+		"target": "all_enemies",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_defense",
+				"stages": -1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"ember": {
+		"id": "ember",
+		"source_move_id": 52,
+		"name": "Ember",
+		"generation": 1,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"flamethrower": {
+		"id": "flamethrower",
+		"source_move_id": 53,
+		"name": "Flamethrower",
+		"generation": 1,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 95,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"mist": {
+		"id": "mist",
+		"source_move_id": 54,
+		"name": "Mist",
+		"generation": 1,
+		"type": "ice",
+		"category": "status",
+		"target": "allies_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "field_screen",
+				"screen": "mist",
+				"target": "user_side"
+			}
+		],
+		"description": ""
+	},
+	"water_gun": {
+		"id": "water_gun",
+		"source_move_id": 55,
+		"name": "Water Gun",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"hydro_pump": {
+		"id": "hydro_pump",
+		"source_move_id": 56,
+		"name": "Hydro Pump",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 80,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"surf": {
+		"id": "surf",
+		"source_move_id": 57,
+		"name": "Surf",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "all_others",
+		"power": 95,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"ice_beam": {
+		"id": "ice_beam",
+		"source_move_id": 58,
+		"name": "Ice Beam",
+		"generation": 1,
+		"type": "ice",
+		"category": "special",
+		"target": "enemy",
+		"power": 95,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "freeze",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"blizzard": {
+		"id": "blizzard",
+		"source_move_id": 59,
+		"name": "Blizzard",
+		"generation": 1,
+		"type": "ice",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 120,
+		"accuracy": 70,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"psybeam": {
+		"id": "psybeam",
+		"source_move_id": 60,
+		"name": "Psybeam",
+		"generation": 1,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"bubble_beam": {
+		"id": "bubble_beam",
+		"source_move_id": 61,
+		"name": "Bubble Beam",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "speed",
+				"stages": -1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"aurora_beam": {
+		"id": "aurora_beam",
+		"source_move_id": 62,
+		"name": "Aurora Beam",
+		"generation": 1,
+		"type": "ice",
+		"category": "special",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "attack",
+				"stages": -1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"hyper_beam": {
+		"id": "hyper_beam",
+		"source_move_id": 63,
+		"name": "Hyper Beam",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 150,
+		"accuracy": 90,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 1,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recharge",
+				"turns": 1
+			}
+		],
+		"description": ""
+	},
+	"peck": {
+		"id": "peck",
+		"source_move_id": 64,
+		"name": "Peck",
+		"generation": 1,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 35,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"drill_peck": {
+		"id": "drill_peck",
+		"source_move_id": 65,
+		"name": "Drill Peck",
+		"generation": 1,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"submission": {
+		"id": "submission",
+		"source_move_id": 66,
+		"name": "Submission",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 80,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.25,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recoil",
+				"target": "self",
+				"fraction_of_damage": 0.25
+			}
+		],
+		"description": ""
+	},
+	"low_kick": {
+		"id": "low_kick",
+		"source_move_id": 67,
+		"name": "Low Kick",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "power_depends_on_target_weight"
+			}
+		],
+		"description": ""
+	},
+	"counter": {
+		"id": "counter",
+		"source_move_id": 68,
+		"name": "Counter",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "specific_move",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": -5,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "counter",
+				"damage_category": "physical",
+				"multiplier": 2
+			}
+		],
+		"description": ""
+	},
+	"seismic_toss": {
+		"id": "seismic_toss",
+		"source_move_id": 69,
+		"name": "Seismic Toss",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "fixed_damage",
+				"rule": "user_level"
+			}
+		],
+		"description": ""
+	},
+	"strength": {
+		"id": "strength",
+		"source_move_id": 70,
+		"name": "Strength",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"absorb": {
+		"id": "absorb",
+		"source_move_id": 71,
+		"name": "Absorb",
+		"generation": 1,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 20,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.5,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "drain",
+				"target": "self",
+				"fraction_of_damage": 0.5
+			}
+		],
+		"description": ""
+	},
+	"mega_drain": {
+		"id": "mega_drain",
+		"source_move_id": 72,
+		"name": "Mega Drain",
+		"generation": 1,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.5,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "drain",
+				"target": "self",
+				"fraction_of_damage": 0.5
+			}
+		],
+		"description": ""
+	},
+	"leech_seed": {
+		"id": "leech_seed",
+		"source_move_id": 73,
+		"name": "Leech Seed",
+		"generation": 1,
+		"type": "grass",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "leech_seed"
+			}
+		],
+		"description": ""
+	},
+	"growth": {
+		"id": "growth",
+		"source_move_id": 74,
+		"name": "Growth",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"razor_leaf": {
+		"id": "razor_leaf",
+		"source_move_id": 75,
+		"name": "Razor Leaf",
+		"generation": 1,
+		"type": "grass",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 55,
+		"accuracy": 95,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"solar_beam": {
+		"id": "solar_beam",
+		"source_move_id": 76,
+		"name": "Solar Beam",
+		"generation": 1,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move"
+			}
+		],
+		"description": ""
+	},
+	"poison_powder": {
+		"id": "poison_powder",
+		"source_move_id": 77,
+		"name": "Poison Powder",
+		"generation": 1,
+		"type": "poison",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 75,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"stun_spore": {
+		"id": "stun_spore",
+		"source_move_id": 78,
+		"name": "Stun Spore",
+		"generation": 1,
+		"type": "grass",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 75,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"sleep_powder": {
+		"id": "sleep_powder",
+		"source_move_id": 79,
+		"name": "Sleep Powder",
+		"generation": 1,
+		"type": "grass",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 75,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "sleep",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"petal_dance": {
+		"id": "petal_dance",
+		"source_move_id": 80,
+		"name": "Petal Dance",
+		"generation": 1,
+		"type": "grass",
+		"category": "special",
+		"target": "random_enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "locked_move_then_confusion"
+			}
+		],
+		"description": ""
+	},
+	"string_shot": {
+		"id": "string_shot",
+		"source_move_id": 81,
+		"name": "String Shot",
+		"generation": 1,
+		"type": "bug",
+		"category": "status",
+		"target": "all_enemies",
+		"power": 0,
+		"accuracy": 95,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "all_enemies",
+				"stat": "speed",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"dragon_rage": {
+		"id": "dragon_rage",
+		"source_move_id": 82,
+		"name": "Dragon Rage",
+		"generation": 1,
+		"type": "dragon",
+		"category": "special",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "fixed_damage",
+				"amount": 40
+			}
+		],
+		"description": ""
+	},
+	"fire_spin": {
+		"id": "fire_spin",
+		"source_move_id": 83,
+		"name": "Fire Spin",
+		"generation": 1,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 85,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "trap",
+				"target": "enemy",
+				"min_turns": 2,
+				"max_turns": 5
+			}
+		],
+		"description": ""
+	},
+	"thunder_shock": {
+		"id": "thunder_shock",
+		"source_move_id": 84,
+		"name": "Thunder Shock",
+		"generation": 1,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"thunderbolt": {
+		"id": "thunderbolt",
+		"source_move_id": 85,
+		"name": "Thunderbolt",
+		"generation": 1,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 95,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"thunder_wave": {
+		"id": "thunder_wave",
+		"source_move_id": 86,
+		"name": "Thunder Wave",
+		"generation": 1,
+		"type": "electric",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 90,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"thunder": {
+		"id": "thunder",
+		"source_move_id": 87,
+		"name": "Thunder",
+		"generation": 1,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 70,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "weather_accuracy_rules"
+			}
+		],
+		"description": ""
+	},
+	"rock_throw": {
+		"id": "rock_throw",
+		"source_move_id": 88,
+		"name": "Rock Throw",
+		"generation": 1,
+		"type": "rock",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 90,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"earthquake": {
+		"id": "earthquake",
+		"source_move_id": 89,
+		"name": "Earthquake",
+		"generation": 1,
+		"type": "ground",
+		"category": "physical",
+		"target": "all_others",
+		"power": 100,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "double_damage_to_digging_targets"
+			}
+		],
+		"description": ""
+	},
+	"fissure": {
+		"id": "fissure",
+		"source_move_id": 90,
+		"name": "Fissure",
+		"generation": 1,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 30,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "ohko"
+			}
+		],
+		"description": ""
+	},
+	"dig": {
+		"id": "dig",
+		"source_move_id": 91,
+		"name": "Dig",
+		"generation": 1,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move"
+			}
+		],
+		"description": ""
+	},
+	"toxic": {
+		"id": "toxic",
+		"source_move_id": 92,
+		"name": "Toxic",
+		"generation": 1,
+		"type": "poison",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "bad_poison",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"confusion": {
+		"id": "confusion",
+		"source_move_id": 93,
+		"name": "Confusion",
+		"generation": 1,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"psychic": {
+		"id": "psychic",
+		"source_move_id": 94,
+		"name": "Psychic",
+		"generation": 1,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 90,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_defense",
+				"stages": -1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"hypnosis": {
+		"id": "hypnosis",
+		"source_move_id": 95,
+		"name": "Hypnosis",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 60,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "sleep",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"meditate": {
+		"id": "meditate",
+		"source_move_id": 96,
+		"name": "Meditate",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"agility": {
+		"id": "agility",
+		"source_move_id": 97,
+		"name": "Agility",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "speed",
+				"stages": 2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"quick_attack": {
+		"id": "quick_attack",
+		"source_move_id": 98,
+		"name": "Quick Attack",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 1,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "priority_attack"
+			}
+		],
+		"description": ""
+	},
+	"rage": {
+		"id": "rage",
+		"source_move_id": 99,
+		"name": "Rage",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 20,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "rage"
+			}
+		],
+		"description": ""
+	},
+	"teleport": {
+		"id": "teleport",
+		"source_move_id": 100,
+		"name": "Teleport",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": -6,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "flee_or_switch"
+			}
+		],
+		"description": ""
+	},
+	"night_shade": {
+		"id": "night_shade",
+		"source_move_id": 101,
+		"name": "Night Shade",
+		"generation": 1,
+		"type": "ghost",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "fixed_damage",
+				"rule": "user_level"
+			}
+		],
+		"description": ""
+	},
+	"mimic": {
+		"id": "mimic",
+		"source_move_id": 102,
+		"name": "Mimic",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "copy_target_last_move"
+			}
+		],
+		"description": ""
+	},
+	"screech": {
+		"id": "screech",
+		"source_move_id": 103,
+		"name": "Screech",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 85,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"double_team": {
+		"id": "double_team",
+		"source_move_id": 104,
+		"name": "Double Team",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "evasion",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"recover": {
+		"id": "recover",
+		"source_move_id": 105,
+		"name": "Recover",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "heal",
+				"target": "self",
+				"fraction_of_max_hp": 0.5
+			}
+		],
+		"description": ""
+	},
+	"harden": {
+		"id": "harden",
+		"source_move_id": 106,
+		"name": "Harden",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"minimize": {
+		"id": "minimize",
+		"source_move_id": 107,
+		"name": "Minimize",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "minimize"
+			}
+		],
+		"description": ""
+	},
+	"smokescreen": {
+		"id": "smokescreen",
+		"source_move_id": 108,
+		"name": "Smokescreen",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "accuracy",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"confuse_ray": {
+		"id": "confuse_ray",
+		"source_move_id": 109,
+		"name": "Confuse Ray",
+		"generation": 1,
+		"type": "ghost",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"withdraw": {
+		"id": "withdraw",
+		"source_move_id": 110,
+		"name": "Withdraw",
+		"generation": 1,
+		"type": "water",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"defense_curl": {
+		"id": "defense_curl",
+		"source_move_id": 111,
+		"name": "Defense Curl",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "defense_curl_rollout_boost"
+			}
+		],
+		"description": ""
+	},
+	"barrier": {
+		"id": "barrier",
+		"source_move_id": 112,
+		"name": "Barrier",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"light_screen": {
+		"id": "light_screen",
+		"source_move_id": 113,
+		"name": "Light Screen",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "allies_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "field_screen",
+				"screen": "light_screen",
+				"target": "user_side"
+			}
+		],
+		"description": ""
+	},
+	"haze": {
+		"id": "haze",
+		"source_move_id": 114,
+		"name": "Haze",
+		"generation": 1,
+		"type": "ice",
+		"category": "status",
+		"target": "entire_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "reset_stat_stages",
+				"target": "all_battlers"
+			}
+		],
+		"description": ""
+	},
+	"reflect": {
+		"id": "reflect",
+		"source_move_id": 115,
+		"name": "Reflect",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "allies_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "field_screen",
+				"screen": "reflect",
+				"target": "user_side"
+			}
+		],
+		"description": ""
+	},
+	"focus_energy": {
+		"id": "focus_energy",
+		"source_move_id": 116,
+		"name": "Focus Energy",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "increase_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"bide": {
+		"id": "bide",
+		"source_move_id": 117,
+		"name": "Bide",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 1,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"metronome": {
+		"id": "metronome",
+		"source_move_id": 118,
+		"name": "Metronome",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "random_move"
+			}
+		],
+		"description": ""
+	},
+	"mirror_move": {
+		"id": "mirror_move",
+		"source_move_id": 119,
+		"name": "Mirror Move",
+		"generation": 1,
+		"type": "flying",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"self_destruct": {
+		"id": "self_destruct",
+		"source_move_id": 120,
+		"name": "Self Destruct",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "all_others",
+		"power": 200,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "faint_self_after_damage"
+			}
+		],
+		"description": ""
+	},
+	"egg_bomb": {
+		"id": "egg_bomb",
+		"source_move_id": 121,
+		"name": "Egg Bomb",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 75,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"lick": {
+		"id": "lick",
+		"source_move_id": 122,
+		"name": "Lick",
+		"generation": 1,
+		"type": "ghost",
+		"category": "physical",
+		"target": "enemy",
+		"power": 30,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"smog": {
+		"id": "smog",
+		"source_move_id": 123,
+		"name": "Smog",
+		"generation": 1,
+		"type": "poison",
+		"category": "physical",
+		"target": "enemy",
+		"power": 30,
+		"accuracy": 70,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 40
+			}
+		],
+		"description": ""
+	},
+	"sludge": {
+		"id": "sludge",
+		"source_move_id": 124,
+		"name": "Sludge",
+		"generation": 1,
+		"type": "poison",
+		"category": "physical",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"bone_club": {
+		"id": "bone_club",
+		"source_move_id": 125,
+		"name": "Bone Club",
+		"generation": 1,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 85,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"fire_blast": {
+		"id": "fire_blast",
+		"source_move_id": 126,
+		"name": "Fire Blast",
+		"generation": 1,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 85,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"waterfall": {
+		"id": "waterfall",
+		"source_move_id": 127,
+		"name": "Waterfall",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"clamp": {
+		"id": "clamp",
+		"source_move_id": 128,
+		"name": "Clamp",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 35,
+		"accuracy": 85,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "trap",
+				"target": "enemy",
+				"min_turns": 2,
+				"max_turns": 5
+			}
+		],
+		"description": ""
+	},
+	"swift": {
+		"id": "swift",
+		"source_move_id": 129,
+		"name": "Swift",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "all_enemies",
+		"power": 60,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "never_misses"
+			}
+		],
+		"description": ""
+	},
+	"skull_bash": {
+		"id": "skull_bash",
+		"source_move_id": 130,
+		"name": "Skull Bash",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move"
+			}
+		],
+		"description": ""
+	},
+	"spike_cannon": {
+		"id": "spike_cannon",
+		"source_move_id": 131,
+		"name": "Spike Cannon",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 20,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"constrict": {
+		"id": "constrict",
+		"source_move_id": 132,
+		"name": "Constrict",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 10,
+		"accuracy": 100,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "speed",
+				"stages": -1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"amnesia": {
+		"id": "amnesia",
+		"source_move_id": 133,
+		"name": "Amnesia",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_defense",
+				"stages": 2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"kinesis": {
+		"id": "kinesis",
+		"source_move_id": 134,
+		"name": "Kinesis",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 80,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "accuracy",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"soft_boiled": {
+		"id": "soft_boiled",
+		"source_move_id": 135,
+		"name": "Soft Boiled",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "heal",
+				"target": "self",
+				"fraction_of_max_hp": 0.5
+			}
+		],
+		"description": ""
+	},
+	"high_jump_kick": {
+		"id": "high_jump_kick",
+		"source_move_id": 136,
+		"name": "High Jump Kick",
+		"generation": 1,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 85,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "crash_damage_on_miss"
+			}
+		],
+		"description": ""
+	},
+	"glare": {
+		"id": "glare",
+		"source_move_id": 137,
+		"name": "Glare",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"dream_eater": {
+		"id": "dream_eater",
+		"source_move_id": 138,
+		"name": "Dream Eater",
+		"generation": 1,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"poison_gas": {
+		"id": "poison_gas",
+		"source_move_id": 139,
+		"name": "Poison Gas",
+		"generation": 1,
+		"type": "poison",
+		"category": "status",
+		"target": "all_enemies",
+		"power": 0,
+		"accuracy": 90,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"barrage": {
+		"id": "barrage",
+		"source_move_id": 140,
+		"name": "Barrage",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 85,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"leech_life": {
+		"id": "leech_life",
+		"source_move_id": 141,
+		"name": "Leech Life",
+		"generation": 1,
+		"type": "bug",
+		"category": "physical",
+		"target": "enemy",
+		"power": 20,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.5,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "drain",
+				"target": "self",
+				"fraction_of_damage": 0.5
+			}
+		],
+		"description": ""
+	},
+	"lovely_kiss": {
+		"id": "lovely_kiss",
+		"source_move_id": 142,
+		"name": "Lovely Kiss",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 75,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "sleep",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"sky_attack": {
+		"id": "sky_attack",
+		"source_move_id": 143,
+		"name": "Sky Attack",
+		"generation": 1,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 140,
+		"accuracy": 90,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move"
+			}
+		],
+		"description": ""
+	},
+	"transform": {
+		"id": "transform",
+		"source_move_id": 144,
+		"name": "Transform",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "transform_into_target"
+			}
+		],
+		"description": ""
+	},
+	"bubble": {
+		"id": "bubble",
+		"source_move_id": 145,
+		"name": "Bubble",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "speed",
+				"stages": -1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"dizzy_punch": {
+		"id": "dizzy_punch",
+		"source_move_id": 146,
+		"name": "Dizzy Punch",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"spore": {
+		"id": "spore",
+		"source_move_id": 147,
+		"name": "Spore",
+		"generation": 1,
+		"type": "grass",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "sleep",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"flash": {
+		"id": "flash",
+		"source_move_id": 148,
+		"name": "Flash",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "accuracy",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"psywave": {
+		"id": "psywave",
+		"source_move_id": 149,
+		"name": "Psywave",
+		"generation": 1,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "fixed_damage",
+				"rule": "random_0_5_to_1_5_user_level"
+			}
+		],
+		"description": ""
+	},
+	"splash": {
+		"id": "splash",
+		"source_move_id": 150,
+		"name": "Splash",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"acid_armor": {
+		"id": "acid_armor",
+		"source_move_id": 151,
+		"name": "Acid Armor",
+		"generation": 1,
+		"type": "poison",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"crabhammer": {
+		"id": "crabhammer",
+		"source_move_id": 152,
+		"name": "Crabhammer",
+		"generation": 1,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 90,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"explosion": {
+		"id": "explosion",
+		"source_move_id": 153,
+		"name": "Explosion",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "all_others",
+		"power": 250,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "faint_self_after_damage"
+			}
+		],
+		"description": ""
+	},
+	"fury_swipes": {
+		"id": "fury_swipes",
+		"source_move_id": 154,
+		"name": "Fury Swipes",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 18,
+		"accuracy": 80,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"bonemerang": {
+		"id": "bonemerang",
+		"source_move_id": 155,
+		"name": "Bonemerang",
+		"generation": 1,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 2,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 2
+			}
+		],
+		"description": ""
+	},
+	"rest": {
+		"id": "rest",
+		"source_move_id": 156,
+		"name": "Rest",
+		"generation": 1,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "self",
+				"status": "sleep",
+				"chance": 100
+			},
+			{
+				"kind": "heal",
+				"target": "self",
+				"fraction_of_max_hp": 1.0
+			}
+		],
+		"description": ""
+	},
+	"rock_slide": {
+		"id": "rock_slide",
+		"source_move_id": 157,
+		"name": "Rock Slide",
+		"generation": 1,
+		"type": "rock",
+		"category": "physical",
+		"target": "all_enemies",
+		"power": 75,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"hyper_fang": {
+		"id": "hyper_fang",
+		"source_move_id": 158,
+		"name": "Hyper Fang",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 90,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"sharpen": {
+		"id": "sharpen",
+		"source_move_id": 159,
+		"name": "Sharpen",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"conversion": {
+		"id": "conversion",
+		"source_move_id": 160,
+		"name": "Conversion",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "change_type_to_user_first_move_type"
+			}
+		],
+		"description": ""
+	},
+	"tri_attack": {
+		"id": "tri_attack",
+		"source_move_id": 161,
+		"name": "Tri Attack",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "tri_attack",
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"super_fang": {
+		"id": "super_fang",
+		"source_move_id": 162,
+		"name": "Super Fang",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "target_current_hp_half"
+			}
+		],
+		"description": ""
+	},
+	"slash": {
+		"id": "slash",
+		"source_move_id": 163,
+		"name": "Slash",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"substitute": {
+		"id": "substitute",
+		"source_move_id": 164,
+		"name": "Substitute",
+		"generation": 1,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "create_substitute"
+			}
+		],
+		"description": ""
+	},
+	"struggle": {
+		"id": "struggle",
+		"source_move_id": 165,
+		"name": "Struggle",
+		"generation": 1,
+		"type": "normal",
+		"category": "physical",
+		"target": "random_enemy",
+		"power": 50,
+		"accuracy": null,
+		"pp": 1,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "struggle_recoil"
+			}
+		],
+		"description": ""
+	},
+	"sketch": {
+		"id": "sketch",
+		"source_move_id": 166,
+		"name": "Sketch",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 1,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "permanently_copy_target_last_move"
+			}
+		],
+		"description": ""
+	},
+	"triple_kick": {
+		"id": "triple_kick",
+		"source_move_id": 167,
+		"name": "Triple Kick",
+		"generation": 2,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 10,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 3,
+		"max_hits": 3,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 3,
+				"max_hits": 3,
+				"rule": "triple_kick_increasing_power"
+			}
+		],
+		"description": ""
+	},
+	"thief": {
+		"id": "thief",
+		"source_move_id": 168,
+		"name": "Thief",
+		"generation": 2,
+		"type": "dark",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "steal_item"
+			}
+		],
+		"description": ""
+	},
+	"spider_web": {
+		"id": "spider_web",
+		"source_move_id": 169,
+		"name": "Spider Web",
+		"generation": 2,
+		"type": "bug",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "prevent_escape"
+			}
+		],
+		"description": ""
+	},
+	"mind_reader": {
+		"id": "mind_reader",
+		"source_move_id": 170,
+		"name": "Mind Reader",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "next_move_never_misses"
+			}
+		],
+		"description": ""
+	},
+	"nightmare": {
+		"id": "nightmare",
+		"source_move_id": 171,
+		"name": "Nightmare",
+		"generation": 2,
+		"type": "ghost",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "damage_sleeping_target_each_turn"
+			}
+		],
+		"description": ""
+	},
+	"flame_wheel": {
+		"id": "flame_wheel",
+		"source_move_id": 172,
+		"name": "Flame Wheel",
+		"generation": 2,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"snore": {
+		"id": "snore",
+		"source_move_id": 173,
+		"name": "Snore",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "usable_only_while_sleeping_may_flinch"
+			}
+		],
+		"description": ""
+	},
+	"curse": {
+		"id": "curse",
+		"source_move_id": 174,
+		"name": "Curse",
+		"generation": 2,
+		"type": "ghost",
+		"category": "status",
+		"target": "specific_move",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "curse"
+			}
+		],
+		"description": ""
+	},
+	"flail": {
+		"id": "flail",
+		"source_move_id": 175,
+		"name": "Flail",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "power_increases_as_hp_decreases"
+			}
+		],
+		"description": ""
+	},
+	"conversion_2": {
+		"id": "conversion_2",
+		"source_move_id": 176,
+		"name": "Conversion 2",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "resist_last_move_type"
+			}
+		],
+		"description": ""
+	},
+	"aeroblast": {
+		"id": "aeroblast",
+		"source_move_id": 177,
+		"name": "Aeroblast",
+		"generation": 2,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 95,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"cotton_spore": {
+		"id": "cotton_spore",
+		"source_move_id": 178,
+		"name": "Cotton Spore",
+		"generation": 2,
+		"type": "grass",
+		"category": "status",
+		"target": "all_enemies",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "all_enemies",
+				"stat": "speed",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"reversal": {
+		"id": "reversal",
+		"source_move_id": 179,
+		"name": "Reversal",
+		"generation": 2,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "power_increases_as_hp_decreases"
+			}
+		],
+		"description": ""
+	},
+	"spite": {
+		"id": "spite",
+		"source_move_id": 180,
+		"name": "Spite",
+		"generation": 2,
+		"type": "ghost",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "reduce_target_last_move_pp"
+			}
+		],
+		"description": ""
+	},
+	"powder_snow": {
+		"id": "powder_snow",
+		"source_move_id": 181,
+		"name": "Powder Snow",
+		"generation": 2,
+		"type": "ice",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "freeze",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"protect": {
+		"id": "protect",
+		"source_move_id": 182,
+		"name": "Protect",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 4,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "protect"
+			}
+		],
+		"description": ""
+	},
+	"mach_punch": {
+		"id": "mach_punch",
+		"source_move_id": 183,
+		"name": "Mach Punch",
+		"generation": 2,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 1,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "priority_attack"
+			}
+		],
+		"description": ""
+	},
+	"scary_face": {
+		"id": "scary_face",
+		"source_move_id": 184,
+		"name": "Scary Face",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "all_enemies",
+				"stat": "speed",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"feint_attack": {
+		"id": "feint_attack",
+		"source_move_id": 185,
+		"name": "Feint Attack",
+		"generation": 2,
+		"type": "dark",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "never_misses"
+			}
+		],
+		"description": ""
+	},
+	"sweet_kiss": {
+		"id": "sweet_kiss",
+		"source_move_id": 186,
+		"name": "Sweet Kiss",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 75,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"belly_drum": {
+		"id": "belly_drum",
+		"source_move_id": 187,
+		"name": "Belly Drum",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "belly_drum"
+			}
+		],
+		"description": ""
+	},
+	"sludge_bomb": {
+		"id": "sludge_bomb",
+		"source_move_id": 188,
+		"name": "Sludge Bomb",
+		"generation": 2,
+		"type": "poison",
+		"category": "physical",
+		"target": "enemy",
+		"power": 90,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"mud_slap": {
+		"id": "mud_slap",
+		"source_move_id": 189,
+		"name": "Mud Slap",
+		"generation": 2,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 20,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "accuracy",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"octazooka": {
+		"id": "octazooka",
+		"source_move_id": 190,
+		"name": "Octazooka",
+		"generation": 2,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 85,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "accuracy",
+				"stages": -1,
+				"chance": 50
+			}
+		],
+		"description": ""
+	},
+	"spikes": {
+		"id": "spikes",
+		"source_move_id": 191,
+		"name": "Spikes",
+		"generation": 2,
+		"type": "ground",
+		"category": "status",
+		"target": "enemy_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "entry_hazard",
+				"hazard": "spikes"
+			}
+		],
+		"description": ""
+	},
+	"zap_cannon": {
+		"id": "zap_cannon",
+		"source_move_id": 192,
+		"name": "Zap Cannon",
+		"generation": 2,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 50,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"foresight": {
+		"id": "foresight",
+		"source_move_id": 193,
+		"name": "Foresight",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "foresight"
+			}
+		],
+		"description": ""
+	},
+	"destiny_bond": {
+		"id": "destiny_bond",
+		"source_move_id": 194,
+		"name": "Destiny Bond",
+		"generation": 2,
+		"type": "ghost",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "destiny_bond"
+			}
+		],
+		"description": ""
+	},
+	"perish_song": {
+		"id": "perish_song",
+		"source_move_id": 195,
+		"name": "Perish Song",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "all_battlers",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "perish_song"
+			}
+		],
+		"description": ""
+	},
+	"icy_wind": {
+		"id": "icy_wind",
+		"source_move_id": 196,
+		"name": "Icy Wind",
+		"generation": 2,
+		"type": "ice",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 55,
+		"accuracy": 95,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "speed",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"detect": {
+		"id": "detect",
+		"source_move_id": 197,
+		"name": "Detect",
+		"generation": 2,
+		"type": "fighting",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 4,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "protect"
+			}
+		],
+		"description": ""
+	},
+	"bone_rush": {
+		"id": "bone_rush",
+		"source_move_id": 198,
+		"name": "Bone Rush",
+		"generation": 2,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 25,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"lock_on": {
+		"id": "lock_on",
+		"source_move_id": 199,
+		"name": "Lock On",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "next_move_never_misses"
+			}
+		],
+		"description": ""
+	},
+	"outrage": {
+		"id": "outrage",
+		"source_move_id": 200,
+		"name": "Outrage",
+		"generation": 2,
+		"type": "dragon",
+		"category": "special",
+		"target": "random_enemy",
+		"power": 120,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "locked_move_then_confusion"
+			}
+		],
+		"description": ""
+	},
+	"sandstorm": {
+		"id": "sandstorm",
+		"source_move_id": 201,
+		"name": "Sandstorm",
+		"generation": 2,
+		"type": "rock",
+		"category": "status",
+		"target": "entire_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "weather",
+				"weather": "sandstorm",
+				"turns": 5
+			}
+		],
+		"description": ""
+	},
+	"giga_drain": {
+		"id": "giga_drain",
+		"source_move_id": 202,
+		"name": "Giga Drain",
+		"generation": 2,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.5,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "drain",
+				"target": "self",
+				"fraction_of_damage": 0.5
+			}
+		],
+		"description": ""
+	},
+	"endure": {
+		"id": "endure",
+		"source_move_id": 203,
+		"name": "Endure",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 4,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "endure"
+			}
+		],
+		"description": ""
+	},
+	"charm": {
+		"id": "charm",
+		"source_move_id": 204,
+		"name": "Charm",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "attack",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"rollout": {
+		"id": "rollout",
+		"source_move_id": 205,
+		"name": "Rollout",
+		"generation": 2,
+		"type": "rock",
+		"category": "physical",
+		"target": "enemy",
+		"power": 30,
+		"accuracy": 90,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "rollout"
+			}
+		],
+		"description": ""
+	},
+	"false_swipe": {
+		"id": "false_swipe",
+		"source_move_id": 206,
+		"name": "False Swipe",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "cannot_reduce_target_below_1_hp"
+			}
+		],
+		"description": ""
+	},
+	"swagger": {
+		"id": "swagger",
+		"source_move_id": 207,
+		"name": "Swagger",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 85,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "swagger"
+			}
+		],
+		"description": ""
+	},
+	"milk_drink": {
+		"id": "milk_drink",
+		"source_move_id": 208,
+		"name": "Milk Drink",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "heal",
+				"target": "self",
+				"fraction_of_max_hp": 0.5
+			}
+		],
+		"description": ""
+	},
+	"spark": {
+		"id": "spark",
+		"source_move_id": 209,
+		"name": "Spark",
+		"generation": 2,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 65,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"fury_cutter": {
+		"id": "fury_cutter",
+		"source_move_id": 210,
+		"name": "Fury Cutter",
+		"generation": 2,
+		"type": "bug",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 95,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "fury_cutter"
+			}
+		],
+		"description": ""
+	},
+	"steel_wing": {
+		"id": "steel_wing",
+		"source_move_id": 211,
+		"name": "Steel Wing",
+		"generation": 2,
+		"type": "steel",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 90,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"mean_look": {
+		"id": "mean_look",
+		"source_move_id": 212,
+		"name": "Mean Look",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "prevent_escape"
+			}
+		],
+		"description": ""
+	},
+	"attract": {
+		"id": "attract",
+		"source_move_id": 213,
+		"name": "Attract",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "attract"
+			}
+		],
+		"description": ""
+	},
+	"sleep_talk": {
+		"id": "sleep_talk",
+		"source_move_id": 214,
+		"name": "Sleep Talk",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "random_known_move_while_asleep"
+			}
+		],
+		"description": ""
+	},
+	"heal_bell": {
+		"id": "heal_bell",
+		"source_move_id": 215,
+		"name": "Heal Bell",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "user_and_allies",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "cure_party_status"
+			}
+		],
+		"description": ""
+	},
+	"return": {
+		"id": "return",
+		"source_move_id": 216,
+		"name": "Return",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "power_depends_on_friendship"
+			}
+		],
+		"description": ""
+	},
+	"present": {
+		"id": "present",
+		"source_move_id": 217,
+		"name": "Present",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 90,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "present_random_effect"
+			}
+		],
+		"description": ""
+	},
+	"frustration": {
+		"id": "frustration",
+		"source_move_id": 218,
+		"name": "Frustration",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "power_depends_on_low_friendship"
+			}
+		],
+		"description": ""
+	},
+	"safeguard": {
+		"id": "safeguard",
+		"source_move_id": 219,
+		"name": "Safeguard",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "allies_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "field_screen",
+				"screen": "safeguard",
+				"target": "user_side"
+			}
+		],
+		"description": ""
+	},
+	"pain_split": {
+		"id": "pain_split",
+		"source_move_id": 220,
+		"name": "Pain Split",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "average_current_hp"
+			}
+		],
+		"description": ""
+	},
+	"sacred_fire": {
+		"id": "sacred_fire",
+		"source_move_id": 221,
+		"name": "Sacred Fire",
+		"generation": 2,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 95,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 50
+			}
+		],
+		"description": ""
+	},
+	"magnitude": {
+		"id": "magnitude",
+		"source_move_id": 222,
+		"name": "Magnitude",
+		"generation": 2,
+		"type": "ground",
+		"category": "physical",
+		"target": "all_others",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "random_magnitude_power"
+			}
+		],
+		"description": ""
+	},
+	"dynamic_punch": {
+		"id": "dynamic_punch",
+		"source_move_id": 223,
+		"name": "Dynamic Punch",
+		"generation": 2,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 50,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"megahorn": {
+		"id": "megahorn",
+		"source_move_id": 224,
+		"name": "Megahorn",
+		"generation": 2,
+		"type": "bug",
+		"category": "physical",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 85,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"dragon_breath": {
+		"id": "dragon_breath",
+		"source_move_id": 225,
+		"name": "Dragon Breath",
+		"generation": 2,
+		"type": "dragon",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"baton_pass": {
+		"id": "baton_pass",
+		"source_move_id": 226,
+		"name": "Baton Pass",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "baton_pass"
+			}
+		],
+		"description": ""
+	},
+	"encore": {
+		"id": "encore",
+		"source_move_id": 227,
+		"name": "Encore",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "encore"
+			}
+		],
+		"description": ""
+	},
+	"pursuit": {
+		"id": "pursuit",
+		"source_move_id": 228,
+		"name": "Pursuit",
+		"generation": 2,
+		"type": "dark",
+		"category": "special",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "pursuit_switch_bonus"
+			}
+		],
+		"description": ""
+	},
+	"rapid_spin": {
+		"id": "rapid_spin",
+		"source_move_id": 229,
+		"name": "Rapid Spin",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "remove_bind_leech_seed_spikes_and_raise_speed"
+			}
+		],
+		"description": ""
+	},
+	"sweet_scent": {
+		"id": "sweet_scent",
+		"source_move_id": 230,
+		"name": "Sweet Scent",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "all_enemies",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "all_enemies",
+				"stat": "evasion",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"iron_tail": {
+		"id": "iron_tail",
+		"source_move_id": 231,
+		"name": "Iron Tail",
+		"generation": 2,
+		"type": "steel",
+		"category": "physical",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 75,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"metal_claw": {
+		"id": "metal_claw",
+		"source_move_id": 232,
+		"name": "Metal Claw",
+		"generation": 2,
+		"type": "steel",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 95,
+		"pp": 35,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"vital_throw": {
+		"id": "vital_throw",
+		"source_move_id": 233,
+		"name": "Vital Throw",
+		"generation": 2,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": null,
+		"pp": 10,
+		"priority": -1,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"morning_sun": {
+		"id": "morning_sun",
+		"source_move_id": 234,
+		"name": "Morning Sun",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "weather_based_heal"
+			}
+		],
+		"description": ""
+	},
+	"synthesis": {
+		"id": "synthesis",
+		"source_move_id": 235,
+		"name": "Synthesis",
+		"generation": 2,
+		"type": "grass",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "weather_based_heal"
+			}
+		],
+		"description": ""
+	},
+	"moonlight": {
+		"id": "moonlight",
+		"source_move_id": 236,
+		"name": "Moonlight",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "weather_based_heal"
+			}
+		],
+		"description": ""
+	},
+	"hidden_power": {
+		"id": "hidden_power",
+		"source_move_id": 237,
+		"name": "Hidden Power",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "hidden_power"
+			}
+		],
+		"description": ""
+	},
+	"cross_chop": {
+		"id": "cross_chop",
+		"source_move_id": 238,
+		"name": "Cross Chop",
+		"generation": 2,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 80,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"twister": {
+		"id": "twister",
+		"source_move_id": 239,
+		"name": "Twister",
+		"generation": 2,
+		"type": "dragon",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "bonus_vs_flying_targets"
+			}
+		],
+		"description": ""
+	},
+	"rain_dance": {
+		"id": "rain_dance",
+		"source_move_id": 240,
+		"name": "Rain Dance",
+		"generation": 2,
+		"type": "water",
+		"category": "status",
+		"target": "entire_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "weather",
+				"weather": "rain",
+				"turns": 5
+			}
+		],
+		"description": ""
+	},
+	"sunny_day": {
+		"id": "sunny_day",
+		"source_move_id": 241,
+		"name": "Sunny Day",
+		"generation": 2,
+		"type": "fire",
+		"category": "status",
+		"target": "entire_field",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "weather",
+				"weather": "sun",
+				"turns": 5
+			}
+		],
+		"description": ""
+	},
+	"crunch": {
+		"id": "crunch",
+		"source_move_id": 242,
+		"name": "Crunch",
+		"generation": 2,
+		"type": "dark",
+		"category": "special",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"mirror_coat": {
+		"id": "mirror_coat",
+		"source_move_id": 243,
+		"name": "Mirror Coat",
+		"generation": 2,
+		"type": "psychic",
+		"category": "special",
+		"target": "specific_move",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": -5,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "counter",
+				"damage_category": "special",
+				"multiplier": 2
+			}
+		],
+		"description": ""
+	},
+	"psych_up": {
+		"id": "psych_up",
+		"source_move_id": 244,
+		"name": "Psych Up",
+		"generation": 2,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "copy_target_stat_stages"
+			}
+		],
+		"description": ""
+	},
+	"extreme_speed": {
+		"id": "extreme_speed",
+		"source_move_id": 245,
+		"name": "Extreme Speed",
+		"generation": 2,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 2,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "priority_attack"
+			}
+		],
+		"description": ""
+	},
+	"ancient_power": {
+		"id": "ancient_power",
+		"source_move_id": 246,
+		"name": "Ancient Power",
+		"generation": 2,
+		"type": "rock",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change_all",
+				"target": "self",
+				"stats": [
+					"attack",
+					"defense",
+					"special_attack",
+					"special_defense",
+					"speed"
+				],
+				"stages": 1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"shadow_ball": {
+		"id": "shadow_ball",
+		"source_move_id": 247,
+		"name": "Shadow Ball",
+		"generation": 2,
+		"type": "ghost",
+		"category": "physical",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_defense",
+				"stages": -1,
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"future_sight": {
+		"id": "future_sight",
+		"source_move_id": 248,
+		"name": "Future Sight",
+		"generation": 2,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "delayed_damage"
+			}
+		],
+		"description": ""
+	},
+	"rock_smash": {
+		"id": "rock_smash",
+		"source_move_id": 249,
+		"name": "Rock Smash",
+		"generation": 2,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 50
+			}
+		],
+		"description": ""
+	},
+	"whirlpool": {
+		"id": "whirlpool",
+		"source_move_id": 250,
+		"name": "Whirlpool",
+		"generation": 2,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 35,
+		"accuracy": 85,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"beat_up": {
+		"id": "beat_up",
+		"source_move_id": 251,
+		"name": "Beat Up",
+		"generation": 2,
+		"type": "dark",
+		"category": "special",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "party_attack"
+			}
+		],
+		"description": ""
+	},
+	"fake_out": {
+		"id": "fake_out",
+		"source_move_id": 252,
+		"name": "Fake Out",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 3,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 100
+			},
+			{
+				"kind": "special_rule",
+				"rule": "only_works_on_first_user_turn"
+			}
+		],
+		"description": ""
+	},
+	"uproar": {
+		"id": "uproar",
+		"source_move_id": 253,
+		"name": "Uproar",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "random_enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "locks_user_into_move_and_prevents_sleep"
+			}
+		],
+		"description": ""
+	},
+	"stockpile": {
+		"id": "stockpile",
+		"source_move_id": 254,
+		"name": "Stockpile",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stockpile",
+				"stages": 1,
+				"max_stacks": 3
+			}
+		],
+		"description": ""
+	},
+	"spit_up": {
+		"id": "spit_up",
+		"source_move_id": 255,
+		"name": "Spit Up",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "power_depends_on_stockpile_stacks"
+			}
+		],
+		"description": ""
+	},
+	"swallow": {
+		"id": "swallow",
+		"source_move_id": 256,
+		"name": "Swallow",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "heal",
+				"target": "self",
+				"rule": "amount_depends_on_stockpile_stacks"
+			}
+		],
+		"description": ""
+	},
+	"heat_wave": {
+		"id": "heat_wave",
+		"source_move_id": 257,
+		"name": "Heat Wave",
+		"generation": 3,
+		"type": "fire",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 100,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "status_chance",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"hail": {
+		"id": "hail",
+		"source_move_id": 258,
+		"name": "Hail",
+		"generation": 3,
+		"type": "ice",
+		"category": "status",
+		"target": "battlefield",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "weather",
+				"weather": "hail",
+				"turns": 5
+			}
+		],
+		"description": ""
+	},
+	"torment": {
+		"id": "torment",
+		"source_move_id": 259,
+		"name": "Torment",
+		"generation": 3,
+		"type": "dark",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "torment"
+			}
+		],
+		"description": ""
+	},
+	"flatter": {
+		"id": "flatter",
+		"source_move_id": 260,
+		"name": "Flatter",
+		"generation": 3,
+		"type": "dark",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_attack",
+				"stages": 1,
+				"chance": 100
+			},
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion"
+			}
+		],
+		"description": ""
+	},
+	"will_o_wisp": {
+		"id": "will_o_wisp",
+		"source_move_id": 261,
+		"name": "Will-O-Wisp",
+		"generation": 3,
+		"type": "fire",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 75,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"memento": {
+		"id": "memento",
+		"source_move_id": 262,
+		"name": "Memento",
+		"generation": 3,
+		"type": "dark",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "attack",
+				"stages": -2,
+				"chance": 100
+			},
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_attack",
+				"stages": -2,
+				"chance": 100
+			},
+			{
+				"kind": "self_faint"
+			}
+		],
+		"description": ""
+	},
+	"facade": {
+		"id": "facade",
+		"source_move_id": 263,
+		"name": "Facade",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "double_power_if_user_poisoned_burned_or_paralyzed"
+			}
+		],
+		"description": ""
+	},
+	"focus_punch": {
+		"id": "focus_punch",
+		"source_move_id": 264,
+		"name": "Focus Punch",
+		"generation": 3,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 150,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": -3,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "fails_if_user_takes_damage_before_attack"
+			}
+		],
+		"description": ""
+	},
+	"smelling_salts": {
+		"id": "smelling_salts",
+		"source_move_id": 265,
+		"name": "Smelling Salts",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "double_power_if_target_paralyzed"
+			},
+			{
+				"kind": "cure_status",
+				"target": "enemy",
+				"status": "paralysis",
+				"condition": "after_damage_if_target_was_paralyzed"
+			}
+		],
+		"description": ""
+	},
+	"follow_me": {
+		"id": "follow_me",
+		"source_move_id": 266,
+		"name": "Follow Me",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 2,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "self",
+				"status": "redirect_targeting_to_user"
+			}
+		],
+		"description": ""
+	},
+	"nature_power": {
+		"id": "nature_power",
+		"source_move_id": 267,
+		"name": "Nature Power",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "battlefield",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "turns_into_move_based_on_battlefield"
+			}
+		],
+		"description": ""
+	},
+	"charge": {
+		"id": "charge",
+		"source_move_id": 268,
+		"name": "Charge",
+		"generation": 3,
+		"type": "electric",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "self",
+				"status": "charge"
+			}
+		],
+		"description": ""
+	},
+	"taunt": {
+		"id": "taunt",
+		"source_move_id": 269,
+		"name": "Taunt",
+		"generation": 3,
+		"type": "dark",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "taunt"
+			}
+		],
+		"description": ""
+	},
+	"helping_hand": {
+		"id": "helping_hand",
+		"source_move_id": 270,
+		"name": "Helping Hand",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "ally",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 5,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "ally",
+				"status": "helping_hand"
+			}
+		],
+		"description": ""
+	},
+	"trick": {
+		"id": "trick",
+		"source_move_id": 271,
+		"name": "Trick",
+		"generation": 3,
+		"type": "psychic",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "swap_held_items"
+			}
+		],
+		"description": ""
+	},
+	"role_play": {
+		"id": "role_play",
+		"source_move_id": 272,
+		"name": "Role Play",
+		"generation": 3,
+		"type": "psychic",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "copy_target_ability"
+			}
+		],
+		"description": ""
+	},
+	"wish": {
+		"id": "wish",
+		"source_move_id": 273,
+		"name": "Wish",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "delayed_heal",
+				"target": "user_side",
+				"turns": 1,
+				"amount": "half_user_max_hp"
+			}
+		],
+		"description": ""
+	},
+	"assist": {
+		"id": "assist",
+		"source_move_id": 274,
+		"name": "Assist",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "random_eligible_move_from_party"
+			}
+		],
+		"description": ""
+	},
+	"ingrain": {
+		"id": "ingrain",
+		"source_move_id": 275,
+		"name": "Ingrain",
+		"generation": 3,
+		"type": "grass",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "self",
+				"status": "ingrain"
+			}
+		],
+		"description": ""
+	},
+	"superpower": {
+		"id": "superpower",
+		"source_move_id": 276,
+		"name": "Superpower",
+		"generation": 3,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": -1,
+				"chance": 100
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"magic_coat": {
+		"id": "magic_coat",
+		"source_move_id": 277,
+		"name": "Magic Coat",
+		"generation": 3,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 15,
+		"priority": 4,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "self",
+				"status": "magic_coat"
+			}
+		],
+		"description": ""
+	},
+	"recycle": {
+		"id": "recycle",
+		"source_move_id": 278,
+		"name": "Recycle",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "restore_consumed_held_item"
+			}
+		],
+		"description": ""
+	},
+	"revenge": {
+		"id": "revenge",
+		"source_move_id": 279,
+		"name": "Revenge",
+		"generation": 3,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": -4,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "double_power_if_user_was_damaged_this_turn"
+			}
+		],
+		"description": ""
+	},
+	"brick_break": {
+		"id": "brick_break",
+		"source_move_id": 280,
+		"name": "Brick Break",
+		"generation": 3,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 75,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "remove_barriers",
+				"target": "enemy_side",
+				"barriers": [
+					"reflect",
+					"light_screen"
+				]
+			}
+		],
+		"description": ""
+	},
+	"yawn": {
+		"id": "yawn",
+		"source_move_id": 281,
+		"name": "Yawn",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "drowsy"
+			}
+		],
+		"description": ""
+	},
+	"knock_off": {
+		"id": "knock_off",
+		"source_move_id": 282,
+		"name": "Knock Off",
+		"generation": 3,
+		"type": "dark",
+		"category": "special",
+		"target": "enemy",
+		"power": 20,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "remove_item",
+				"target": "enemy"
+			}
+		],
+		"description": ""
+	},
+	"endeavor": {
+		"id": "endeavor",
+		"source_move_id": 283,
+		"name": "Endeavor",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "reduce_target_hp_to_user_current_hp"
+			}
+		],
+		"description": ""
+	},
+	"eruption": {
+		"id": "eruption",
+		"source_move_id": 284,
+		"name": "Eruption",
+		"generation": 3,
+		"type": "fire",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 150,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "power_scales_with_user_current_hp"
+			}
+		],
+		"description": ""
+	},
+	"skill_swap": {
+		"id": "skill_swap",
+		"source_move_id": 285,
+		"name": "Skill Swap",
+		"generation": 3,
+		"type": "psychic",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "swap_abilities"
+			}
+		],
+		"description": ""
+	},
+	"imprison": {
+		"id": "imprison",
+		"source_move_id": 286,
+		"name": "Imprison",
+		"generation": 3,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "self",
+				"status": "imprison"
+			}
+		],
+		"description": ""
+	},
+	"refresh": {
+		"id": "refresh",
+		"source_move_id": 287,
+		"name": "Refresh",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "cure_status",
+				"target": "self",
+				"statuses": [
+					"burn",
+					"paralysis",
+					"poison"
+				]
+			}
+		],
+		"description": ""
+	},
+	"grudge": {
+		"id": "grudge",
+		"source_move_id": 288,
+		"name": "Grudge",
+		"generation": 3,
+		"type": "ghost",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "self",
+				"status": "grudge"
+			}
+		],
+		"description": ""
+	},
+	"snatch": {
+		"id": "snatch",
+		"source_move_id": 289,
+		"name": "Snatch",
+		"generation": 3,
+		"type": "dark",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 4,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "self",
+				"status": "snatch"
+			}
+		],
+		"description": ""
+	},
+	"secret_power": {
+		"id": "secret_power",
+		"source_move_id": 290,
+		"name": "Secret Power",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "secondary_effect",
+				"rule": "effect_depends_on_battlefield",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"dive": {
+		"id": "dive",
+		"source_move_id": 291,
+		"name": "Dive",
+		"generation": 3,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move",
+				"semi_invulnerable_state": "underwater"
+			}
+		],
+		"description": ""
+	},
+	"arm_thrust": {
+		"id": "arm_thrust",
+		"source_move_id": 292,
+		"name": "Arm Thrust",
+		"generation": 3,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"camouflage": {
+		"id": "camouflage",
+		"source_move_id": 293,
+		"name": "Camouflage",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "type_change",
+				"target": "self",
+				"rule": "type_depends_on_battlefield"
+			}
+		],
+		"description": ""
+	},
+	"tail_glow": {
+		"id": "tail_glow",
+		"source_move_id": 294,
+		"name": "Tail Glow",
+		"generation": 3,
+		"type": "bug",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_attack",
+				"stages": 2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"luster_purge": {
+		"id": "luster_purge",
+		"source_move_id": 295,
+		"name": "Luster Purge",
+		"generation": 3,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_defense",
+				"stages": -1,
+				"chance": 50
+			}
+		],
+		"description": ""
+	},
+	"mist_ball": {
+		"id": "mist_ball",
+		"source_move_id": 296,
+		"name": "Mist Ball",
+		"generation": 3,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_attack",
+				"stages": -1,
+				"chance": 50
+			}
+		],
+		"description": ""
+	},
+	"feather_dance": {
+		"id": "feather_dance",
+		"source_move_id": 297,
+		"name": "Feather Dance",
+		"generation": 3,
+		"type": "flying",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "attack",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"teeter_dance": {
+		"id": "teeter_dance",
+		"source_move_id": 298,
+		"name": "Teeter Dance",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "all_others",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "all_others",
+				"status": "confusion"
+			}
+		],
+		"description": ""
+	},
+	"blaze_kick": {
+		"id": "blaze_kick",
+		"source_move_id": 299,
+		"name": "Blaze Kick",
+		"generation": 3,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 85,
+		"accuracy": 90,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "status_chance",
+				"target": "enemy",
+				"status": "burn",
+				"chance": 10
+			},
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"mud_sport": {
+		"id": "mud_sport",
+		"source_move_id": 300,
+		"name": "Mud Sport",
+		"generation": 3,
+		"type": "ground",
+		"category": "status",
+		"target": "battlefield",
+		"power": 0,
+		"accuracy": null,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "field_effect",
+				"effect": "mud_sport"
+			}
+		],
+		"description": ""
+	},
+	"ice_ball": {
+		"id": "ice_ball",
+		"source_move_id": 301,
+		"name": "Ice Ball",
+		"generation": 3,
+		"type": "ice",
+		"category": "special",
+		"target": "enemy",
+		"power": 30,
+		"accuracy": 90,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "power_doubles_each_consecutive_hit"
+			}
+		],
+		"description": ""
+	},
+	"needle_arm": {
+		"id": "needle_arm",
+		"source_move_id": 302,
+		"name": "Needle Arm",
+		"generation": 3,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"slack_off": {
+		"id": "slack_off",
+		"source_move_id": 303,
+		"name": "Slack Off",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "heal",
+				"target": "self",
+				"amount": "half_max_hp"
+			}
+		],
+		"description": ""
+	},
+	"hyper_voice": {
+		"id": "hyper_voice",
+		"source_move_id": 304,
+		"name": "Hyper Voice",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "all_enemies",
+		"power": 90,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "sound_based"
+			}
+		],
+		"description": ""
+	},
+	"poison_fang": {
+		"id": "poison_fang",
+		"source_move_id": 305,
+		"name": "Poison Fang",
+		"generation": 3,
+		"type": "poison",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "toxic_poison",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"crush_claw": {
+		"id": "crush_claw",
+		"source_move_id": 306,
+		"name": "Crush Claw",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 75,
+		"accuracy": 95,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 50
+			}
+		],
+		"description": ""
+	},
+	"blast_burn": {
+		"id": "blast_burn",
+		"source_move_id": 307,
+		"name": "Blast Burn",
+		"generation": 3,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 150,
+		"accuracy": 90,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 1,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recharge",
+				"turns": 1
+			}
+		],
+		"description": ""
+	},
+	"hydro_cannon": {
+		"id": "hydro_cannon",
+		"source_move_id": 308,
+		"name": "Hydro Cannon",
+		"generation": 3,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 150,
+		"accuracy": 90,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 1,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recharge",
+				"turns": 1
+			}
+		],
+		"description": ""
+	},
+	"meteor_mash": {
+		"id": "meteor_mash",
+		"source_move_id": 309,
+		"name": "Meteor Mash",
+		"generation": 3,
+		"type": "steel",
+		"category": "physical",
+		"target": "enemy",
+		"power": 100,
+		"accuracy": 85,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"astonish": {
+		"id": "astonish",
+		"source_move_id": 310,
+		"name": "Astonish",
+		"generation": 3,
+		"type": "ghost",
+		"category": "physical",
+		"target": "enemy",
+		"power": 30,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"weather_ball": {
+		"id": "weather_ball",
+		"source_move_id": 311,
+		"name": "Weather Ball",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "type_and_power_change_with_weather"
+			}
+		],
+		"description": ""
+	},
+	"aromatherapy": {
+		"id": "aromatherapy",
+		"source_move_id": 312,
+		"name": "Aromatherapy",
+		"generation": 3,
+		"type": "grass",
+		"category": "status",
+		"target": "party",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "cure_status",
+				"target": "party",
+				"statuses": [
+					"burn",
+					"paralysis",
+					"poison",
+					"sleep",
+					"freeze"
+				]
+			}
+		],
+		"description": ""
+	},
+	"fake_tears": {
+		"id": "fake_tears",
+		"source_move_id": 313,
+		"name": "Fake Tears",
+		"generation": 3,
+		"type": "dark",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_defense",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"air_cutter": {
+		"id": "air_cutter",
+		"source_move_id": 314,
+		"name": "Air Cutter",
+		"generation": 3,
+		"type": "flying",
+		"category": "physical",
+		"target": "all_enemies",
+		"power": 55,
+		"accuracy": 95,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"overheat": {
+		"id": "overheat",
+		"source_move_id": 315,
+		"name": "Overheat",
+		"generation": 3,
+		"type": "fire",
+		"category": "special",
+		"target": "enemy",
+		"power": 140,
+		"accuracy": 90,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_attack",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"odor_sleuth": {
+		"id": "odor_sleuth",
+		"source_move_id": 316,
+		"name": "Odor Sleuth",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "identified"
+			}
+		],
+		"description": ""
+	},
+	"rock_tomb": {
+		"id": "rock_tomb",
+		"source_move_id": 317,
+		"name": "Rock Tomb",
+		"generation": 3,
+		"type": "rock",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 80,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "speed",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"silver_wind": {
+		"id": "silver_wind",
+		"source_move_id": 318,
+		"name": "Silver Wind",
+		"generation": 3,
+		"type": "bug",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 10
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 1,
+				"chance": 10
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_attack",
+				"stages": 1,
+				"chance": 10
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_defense",
+				"stages": 1,
+				"chance": 10
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "speed",
+				"stages": 1,
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"metal_sound": {
+		"id": "metal_sound",
+		"source_move_id": 319,
+		"name": "Metal Sound",
+		"generation": 3,
+		"type": "steel",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 85,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "special_defense",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"grass_whistle": {
+		"id": "grass_whistle",
+		"source_move_id": 320,
+		"name": "Grass Whistle",
+		"generation": 3,
+		"type": "grass",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 55,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "apply_status",
+				"target": "enemy",
+				"status": "sleep",
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"tickle": {
+		"id": "tickle",
+		"source_move_id": 321,
+		"name": "Tickle",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "attack",
+				"stages": -1,
+				"chance": 100
+			},
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "defense",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"cosmic_power": {
+		"id": "cosmic_power",
+		"source_move_id": 322,
+		"name": "Cosmic Power",
+		"generation": 3,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 1,
+				"chance": 100
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_defense",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"water_spout": {
+		"id": "water_spout",
+		"source_move_id": 323,
+		"name": "Water Spout",
+		"generation": 3,
+		"type": "water",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 150,
+		"accuracy": 100,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_damage",
+				"rule": "power_scales_with_user_current_hp"
+			}
+		],
+		"description": ""
+	},
+	"signal_beam": {
+		"id": "signal_beam",
+		"source_move_id": 324,
+		"name": "Signal Beam",
+		"generation": 3,
+		"type": "bug",
+		"category": "physical",
+		"target": "enemy",
+		"power": 75,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"shadow_punch": {
+		"id": "shadow_punch",
+		"source_move_id": 325,
+		"name": "Shadow Punch",
+		"generation": 3,
+		"type": "ghost",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "never_misses"
+			}
+		],
+		"description": ""
+	},
+	"extrasensory": {
+		"id": "extrasensory",
+		"source_move_id": 326,
+		"name": "Extrasensory",
+		"generation": 3,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "flinch",
+				"target": "enemy",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"sky_uppercut": {
+		"id": "sky_uppercut",
+		"source_move_id": 327,
+		"name": "Sky Uppercut",
+		"generation": 3,
+		"type": "fighting",
+		"category": "physical",
+		"target": "enemy",
+		"power": 85,
+		"accuracy": 90,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "special_rule",
+				"rule": "can_hit_targets_using_fly_or_bounce"
+			}
+		],
+		"description": ""
+	},
+	"sand_tomb": {
+		"id": "sand_tomb",
+		"source_move_id": 328,
+		"name": "Sand Tomb",
+		"generation": 3,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 15,
+		"accuracy": 70,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "trap",
+				"target": "enemy",
+				"min_turns": 2,
+				"max_turns": 5
+			}
+		],
+		"description": ""
+	},
+	"sheer_cold": {
+		"id": "sheer_cold",
+		"source_move_id": 329,
+		"name": "Sheer Cold",
+		"generation": 3,
+		"type": "ice",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": 30,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "one_hit_ko"
+			}
+		],
+		"description": ""
+	},
+	"muddy_water": {
+		"id": "muddy_water",
+		"source_move_id": 330,
+		"name": "Muddy Water",
+		"generation": 3,
+		"type": "water",
+		"category": "special",
+		"target": "all_enemies",
+		"power": 95,
+		"accuracy": 85,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "accuracy",
+				"stages": -1,
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"bullet_seed": {
+		"id": "bullet_seed",
+		"source_move_id": 331,
+		"name": "Bullet Seed",
+		"generation": 3,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 10,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"aerial_ace": {
+		"id": "aerial_ace",
+		"source_move_id": 332,
+		"name": "Aerial Ace",
+		"generation": 3,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "never_misses"
+			}
+		],
+		"description": ""
+	},
+	"icicle_spear": {
+		"id": "icicle_spear",
+		"source_move_id": 333,
+		"name": "Icicle Spear",
+		"generation": 3,
+		"type": "ice",
+		"category": "special",
+		"target": "enemy",
+		"power": 10,
+		"accuracy": 100,
+		"pp": 30,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"iron_defense": {
+		"id": "iron_defense",
+		"source_move_id": 334,
+		"name": "Iron Defense",
+		"generation": 3,
+		"type": "steel",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"block": {
+		"id": "block",
+		"source_move_id": 335,
+		"name": "Block",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "enemy",
+		"power": 0,
+		"accuracy": null,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "trapped"
+			}
+		],
+		"description": ""
+	},
+	"howl": {
+		"id": "howl",
+		"source_move_id": 336,
+		"name": "Howl",
+		"generation": 3,
+		"type": "normal",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"dragon_claw": {
+		"id": "dragon_claw",
+		"source_move_id": 337,
+		"name": "Dragon Claw",
+		"generation": 3,
+		"type": "dragon",
+		"category": "special",
+		"target": "enemy",
+		"power": 80,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [],
+		"description": ""
+	},
+	"frenzy_plant": {
+		"id": "frenzy_plant",
+		"source_move_id": 338,
+		"name": "Frenzy Plant",
+		"generation": 3,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 150,
+		"accuracy": 90,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 1,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recharge",
+				"turns": 1
+			}
+		],
+		"description": ""
+	},
+	"bulk_up": {
+		"id": "bulk_up",
+		"source_move_id": 339,
+		"name": "Bulk Up",
+		"generation": 3,
+		"type": "fighting",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 100
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "defense",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"bounce": {
+		"id": "bounce",
+		"source_move_id": 340,
+		"name": "Bounce",
+		"generation": 3,
+		"type": "flying",
+		"category": "physical",
+		"target": "enemy",
+		"power": 85,
+		"accuracy": 85,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 1,
+		"effects": [
+			{
+				"kind": "two_turn_move",
+				"semi_invulnerable_state": "airborne"
+			},
+			{
+				"kind": "status_chance",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 30
+			}
+		],
+		"description": ""
+	},
+	"mud_shot": {
+		"id": "mud_shot",
+		"source_move_id": 341,
+		"name": "Mud Shot",
+		"generation": 3,
+		"type": "ground",
+		"category": "physical",
+		"target": "enemy",
+		"power": 55,
+		"accuracy": 95,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "enemy",
+				"stat": "speed",
+				"stages": -1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"poison_tail": {
+		"id": "poison_tail",
+		"source_move_id": 342,
+		"name": "Poison Tail",
+		"generation": 3,
+		"type": "poison",
+		"category": "physical",
+		"target": "enemy",
+		"power": 50,
+		"accuracy": 100,
+		"pp": 25,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "status_chance",
+				"target": "enemy",
+				"status": "poison",
+				"chance": 10
+			},
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"covet": {
+		"id": "covet",
+		"source_move_id": 343,
+		"name": "Covet",
+		"generation": 3,
+		"type": "normal",
+		"category": "physical",
+		"target": "enemy",
+		"power": 40,
+		"accuracy": 100,
+		"pp": 40,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "steal_item",
+				"target": "enemy"
+			}
+		],
+		"description": ""
+	},
+	"volt_tackle": {
+		"id": "volt_tackle",
+		"source_move_id": 344,
+		"name": "Volt Tackle",
+		"generation": 3,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.33,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "recoil",
+				"fraction_of_damage": 0.33
+			},
+			{
+				"kind": "status_chance",
+				"target": "enemy",
+				"status": "paralysis",
+				"chance": 10
+			}
+		],
+		"description": ""
+	},
+	"magical_leaf": {
+		"id": "magical_leaf",
+		"source_move_id": 345,
+		"name": "Magical Leaf",
+		"generation": 3,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "never_misses"
+			}
+		],
+		"description": ""
+	},
+	"water_sport": {
+		"id": "water_sport",
+		"source_move_id": 346,
+		"name": "Water Sport",
+		"generation": 3,
+		"type": "water",
+		"category": "status",
+		"target": "battlefield",
+		"power": 0,
+		"accuracy": null,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "field_effect",
+				"effect": "water_sport"
+			}
+		],
+		"description": ""
+	},
+	"calm_mind": {
+		"id": "calm_mind",
+		"source_move_id": 347,
+		"name": "Calm Mind",
+		"generation": 3,
+		"type": "psychic",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_attack",
+				"stages": 1,
+				"chance": 100
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_defense",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"leaf_blade": {
+		"id": "leaf_blade",
+		"source_move_id": 348,
+		"name": "Leaf Blade",
+		"generation": 3,
+		"type": "grass",
+		"category": "special",
+		"target": "enemy",
+		"power": 70,
+		"accuracy": 100,
+		"pp": 15,
+		"priority": 0,
+		"crit_stage": 1,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "high_critical_hit_ratio"
+			}
+		],
+		"description": ""
+	},
+	"dragon_dance": {
+		"id": "dragon_dance",
+		"source_move_id": 349,
+		"name": "Dragon Dance",
+		"generation": 3,
+		"type": "dragon",
+		"category": "status",
+		"target": "self",
+		"power": 0,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "attack",
+				"stages": 1,
+				"chance": 100
+			},
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "speed",
+				"stages": 1,
+				"chance": 100
+			}
+		],
+		"description": ""
+	},
+	"rock_blast": {
+		"id": "rock_blast",
+		"source_move_id": 350,
+		"name": "Rock Blast",
+		"generation": 3,
+		"type": "rock",
+		"category": "physical",
+		"target": "enemy",
+		"power": 25,
+		"accuracy": 80,
+		"pp": 10,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 2,
+		"max_hits": 5,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "multi_hit",
+				"min_hits": 2,
+				"max_hits": 5
+			}
+		],
+		"description": ""
+	},
+	"shock_wave": {
+		"id": "shock_wave",
+		"source_move_id": 351,
+		"name": "Shock Wave",
+		"generation": 3,
+		"type": "electric",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": null,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "never_misses"
+			}
+		],
+		"description": ""
+	},
+	"water_pulse": {
+		"id": "water_pulse",
+		"source_move_id": 352,
+		"name": "Water Pulse",
+		"generation": 3,
+		"type": "water",
+		"category": "special",
+		"target": "enemy",
+		"power": 60,
+		"accuracy": 100,
+		"pp": 20,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "volatile_status",
+				"target": "enemy",
+				"status": "confusion",
+				"chance": 20
+			}
+		],
+		"description": ""
+	},
+	"doom_desire": {
+		"id": "doom_desire",
+		"source_move_id": 353,
+		"name": "Doom Desire",
+		"generation": 3,
+		"type": "steel",
+		"category": "physical",
+		"target": "enemy",
+		"power": 120,
+		"accuracy": 85,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "delayed_damage",
+				"turns": 2
+			}
+		],
+		"description": ""
+	},
+	"psycho_boost": {
+		"id": "psycho_boost",
+		"source_move_id": 354,
+		"name": "Psycho Boost",
+		"generation": 3,
+		"type": "psychic",
+		"category": "special",
+		"target": "enemy",
+		"power": 140,
+		"accuracy": 90,
+		"pp": 5,
+		"priority": 0,
+		"crit_stage": 0,
+		"min_hits": 1,
+		"max_hits": 1,
+		"recoil_fraction": 0.0,
+		"drain_fraction": 0.0,
+		"recharge_turns": 0,
+		"charge_turns": 0,
+		"effects": [
+			{
+				"kind": "stat_change",
+				"target": "self",
+				"stat": "special_attack",
+				"stages": -2,
+				"chance": 100
+			}
+		],
+		"description": ""
+	}
+}
