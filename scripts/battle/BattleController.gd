@@ -220,23 +220,40 @@ func _play_events(events: Array[BattleEvent]) -> void:
 					# battle_ui.show_party(session.player_party, true)
 					return
 
-			BattleDefinitions.BattleEvent.SWITCH_PERFORMED:
+			BattleDefinitions.BattleEvent.BATTLER_WITHDRAWN:
+				var target_is_player := e.side == BattleDefinitions.BattleSide.PLAYER
+				var pokemon_name: String
+				if target_is_player:
+					pokemon_name = session.get_active_player().base_data.name
+					battle_ui.unload_player_pokemon()
+				else:
+					pokemon_name = session.get_active_enemy().base_data.name
+					battle_ui.unload_enemy_pokemon()
+				await DialogueManager.say(
+					PackedStringArray([
+						"%s was withdrawn." % pokemon_name
+					]),
+					{"lock_input": false, "require_input": false, "auto_advance_time": 0.8}
+				)
+
+			BattleDefinitions.BattleEvent.BATTLER_SENT_IN:
 				var target_is_player := e.side == BattleDefinitions.BattleSide.PLAYER
 				var new_index: int = e.payload["new_index"]
+				var pokemon_name: String
 
 				if target_is_player:
 					session.active_player_index = new_index
-					battle_ui.unload_player_pokemon()
+					pokemon_name = session.get_active_player().base_data.name
 					battle_ui.load_player_pokemon(session.get_active_player())
 					battle_ui.set_moves(session.get_active_player().move_names)
 				else:
 					session.active_enemy_index = new_index
-					battle_ui.unload_enemy_pokemon()
+					pokemon_name = session.get_active_enemy().base_data.name
 					battle_ui.load_enemy_pokemon(session.get_active_enemy())
 
 				await DialogueManager.say(
 					PackedStringArray([
-						"%s entered the battle!" % e.payload["new_pokemon_name"]
+						"%s was sent in." % pokemon_name
 					]),
 					{"lock_input": false, "require_input": false, "auto_advance_time": 0.8}
 				)

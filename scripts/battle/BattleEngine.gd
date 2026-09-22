@@ -150,7 +150,8 @@ func _resolve_switch_action(session: BattleSession, action: BattleAction) -> Arr
 		old_pokemon_name = session.get_active_enemy().base_data.name
 		session.switch_enemy_to(action.switch_index)
 		new_pokemon_name = session.get_active_enemy().base_data.name
-	events.append(BattleEvent.switch_performed(action.actor, old_pokemon_name, new_pokemon_name, action.switch_index))
+	events.append(BattleEvent.battler_withdrawn(action.actor))
+	events.append(BattleEvent.battler_sent_in(action.actor, action.switch_index))
 	return events
 
 # Speed/priority handling
@@ -221,13 +222,7 @@ func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -
 	session.switch_enemy_to(next_index)
 	var next_enemy := session.get_active_enemy()
 
-	events.append(BattleEvent.switch_performed(
-		BattleDefinitions.BattleSide.ENEMY,
-		old_name,
-		next_enemy.base_data.name,
-		next_index
-	))
-	events.append(BattleEvent.message("%s sent out %s" % [session.trainer_data.display_name, next_enemy.base_data.name]))
+	events.append(BattleEvent.battler_sent_in(BattleDefinitions.BattleSide.ENEMY, next_index))
 	return true
 
 func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) -> bool:

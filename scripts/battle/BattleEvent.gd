@@ -66,15 +66,20 @@ static func fainted(side_: BattleDefinitions.BattleSide, pokemon_name: String) -
 	}
 	return e
 
-static func switch_performed(side_: BattleDefinitions.BattleSide, old_pokemon_name: String, new_pokemon_name: String, new_index: int) -> BattleEvent:
+static func battler_sent_in(side_: BattleDefinitions.BattleSide, new_index: int) -> BattleEvent:
 	var e := BattleEvent.new()
-	e.event_type = BattleDefinitions.BattleEvent.SWITCH_PERFORMED
+	e.event_type = BattleDefinitions.BattleEvent.BATTLER_SENT_IN
 	e.side = side_
 	e.payload = {
-		"old_pokemon_name": old_pokemon_name,
-		"new_pokemon_name": new_pokemon_name,
 		"new_index": new_index
 	}
+	return e
+
+static func battler_withdrawn(side_: BattleDefinitions.BattleSide) -> BattleEvent:
+	var e := BattleEvent.new()
+	e.event_type = BattleDefinitions.BattleEvent.BATTLER_WITHDRAWN
+	e.side = side_
+	e.payload = {}
 	return e
 
 static func run_succeeded() -> BattleEvent:
