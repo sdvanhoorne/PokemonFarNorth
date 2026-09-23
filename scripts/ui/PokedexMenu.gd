@@ -10,7 +10,6 @@ extends CanvasLayer
 
 
 var pokedex_entry_scene := preload("res://scenes/ui/PokedexEntry.tscn")
-var pokemon_data: Array = []
 
 func load_pokemon_list() -> void:
 	var file := FileAccess.open(pokedex_path, FileAccess.READ)

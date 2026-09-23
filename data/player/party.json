@@ -38,6 +38,82 @@
 				"speed": 22
 			},
 			"status": "0"
+		},
+		{
+			"current_hp": 23,
+			"current_xp": 512,
+			"id": 1,
+			"level": 8,
+			"move_names": [
+				"Scratch",
+				"Tail Whip"
+			],
+			"stats": {
+				"attack": 14,
+				"defense": 21,
+				"hp": 23,
+				"special_attack": 14,
+				"special_defense": 14,
+				"speed": 22
+			},
+			"status": "0"
+		},
+		{
+			"current_hp": 23,
+			"current_xp": 512,
+			"id": 1,
+			"level": 8,
+			"move_names": [
+				"Scratch",
+				"Tail Whip"
+			],
+			"stats": {
+				"attack": 14,
+				"defense": 21,
+				"hp": 23,
+				"special_attack": 14,
+				"special_defense": 14,
+				"speed": 22
+			},
+			"status": "0"
+		},
+		{
+			"current_hp": 23,
+			"current_xp": 512,
+			"id": 1,
+			"level": 8,
+			"move_names": [
+				"Scratch",
+				"Tail Whip"
+			],
+			"stats": {
+				"attack": 14,
+				"defense": 21,
+				"hp": 23,
+				"special_attack": 14,
+				"special_defense": 14,
+				"speed": 22
+			},
+			"status": "0"
+		},
+		{
+			"current_hp": 23,
+			"current_xp": 512,
+			"id": 1,
+			"level": 8,
+			"move_names": [
+				"Scratch",
+				"Tail Whip"
+			],
+			"stats": {
+				"attack": 14,
+				"defense": 21,
+				"hp": 23,
+				"special_attack": 14,
+				"special_defense": 14,
+				"speed": 22
+			},
+			"status": "0"
 		}
 	]
 }

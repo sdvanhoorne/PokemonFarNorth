@@ -31,7 +31,7 @@ func start_wild_battle(
 	enemy_party: Array[Pokemon],
 	player_position: Vector2,
 	player_direction: String,
-	intro_lines: PackedStringArray = PackedStringArray()
+	_intro_lines: PackedStringArray = PackedStringArray()
 ) -> void:
 	var request := BattleStartRequest.for_wild_battle(
 		enemy_party,

@@ -42,7 +42,6 @@ func _resolve_action(session: BattleSession, action: BattleAction) -> Array[Batt
 		#	return _resolve_item_action(session, action)
 	return []
 
-# Resolve moves
 func _resolve_move_action(session: BattleSession, action: BattleAction) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
 
@@ -66,15 +65,15 @@ func _resolve_move_action(session: BattleSession, action: BattleAction) -> Array
 	))
 
 	match move.category:
-		"Physical", "Special":
+		"physical", "special":
 			var target := _get_move_target(move, user, opponent)
 			events.append_array(_resolve_damage_move(action.actor, move, user, target))
 
-		"Status":
+		"status":
 			var target := _get_move_target(move, user, opponent)
 			events.append_array(_resolve_status_move(action.actor, move, user, target))
 
-		"StatChange":
+		"stat_change":
 			var target := _get_move_target(move, user, opponent)
 			events.append_array(_resolve_stat_change_move(action.actor, move, user, target))
 
@@ -120,7 +119,8 @@ func _resolve_status_move(attacker_side: BattleDefinitions.BattleSide, move: Mov
 func _resolve_stat_change_move(attacker_side: BattleDefinitions.BattleSide, move: Move, user: Pokemon, target: Pokemon) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
 
-	var stat_name: String = move.target_stat
+	# assume every move has max one effect for now
+	var stat_name: String = move.effects[0].stat
 	var current_value = target.battle_stats.get(stat_name)
 	target.battle_stats.set(stat_name, current_value * move.stat_multiplier)
 
@@ -137,7 +137,6 @@ func _resolve_stat_change_move(attacker_side: BattleDefinitions.BattleSide, move
 
 	return events
 
-# Resolve switch
 func _resolve_switch_action(session: BattleSession, action: BattleAction) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
 	var old_pokemon_name: String
@@ -154,7 +153,6 @@ func _resolve_switch_action(session: BattleSession, action: BattleAction) -> Arr
 	events.append(BattleEvent.battler_sent_in(action.actor, action.switch_index))
 	return events
 
-# Speed/priority handling
 func _get_ordered_actions(session: BattleSession, player_action: BattleAction, enemy_action: BattleAction) -> Array[BattleAction]:
 	var actions: Array[BattleAction] = [player_action, enemy_action]
 
@@ -186,7 +184,6 @@ func _get_action_priority(session: BattleSession, action: BattleAction) -> int:
 	# implement move priority later
 	return 1
 
-# Helpers and other
 func _handle_post_action_state(session: BattleSession, events: Array[BattleEvent]) -> bool:
 	var enemy_pokemon := session.get_active_enemy()
 	if enemy_pokemon.current_hp <= 0:

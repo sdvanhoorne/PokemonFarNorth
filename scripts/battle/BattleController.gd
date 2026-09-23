@@ -11,10 +11,12 @@ var engine: BattleEngine
 var input_locked := false
 var pending_player_action: BattleAction = null
 var pending_enemy_action: BattleAction = null
+var events: Array[BattleEvent]
 
 func _ready() -> void:
 	engine = BattleEngine.new()
 	engine.setup()
+	events = []
 	rng.randomize()
 	_wire_signals()
 
@@ -120,12 +122,13 @@ func _process_turn():
 		# no enemy switches yet, just moves
 		# random move selection, no AI yet
 		pending_enemy_action = BattleAction.make_move(BattleDefinitions.BattleSide.ENEMY, _determine_enemy_move_index())
-		var events: Array[BattleEvent] = engine.resolve_turn(session, pending_player_action, pending_enemy_action)
-		await _play_events(events)
-		if _events_contain_battle_end(events):
+		events.append_array(engine.resolve_turn(session, pending_player_action, pending_enemy_action))
+		await _play_events()
+		if _events_contain_battle_end():
 			return
 
 		battle_ui.set_state(BattleUI.UIState.OPTIONS)
+		events.clear()
 
 func _determine_enemy_move_index() -> int:
 	return rng.randi_range(0, session.get_active_enemy().moves.size() - 1)
@@ -134,7 +137,7 @@ func _determine_enemy_move_name() -> String:
 	var index = _determine_enemy_move_index()
 	return session.get_active_enemy().moves[index].name
 
-func _play_events(events: Array[BattleEvent]) -> void:
+func _play_events() -> void:
 	for e in events:
 		match e.event_type:
 			BattleDefinitions.BattleEvent.MESSAGE:
@@ -312,7 +315,7 @@ func _play_events(events: Array[BattleEvent]) -> void:
 							PackedStringArray(session.trainer_data.outro_lines_win),
 							{"lock_input": false, "require_input": true}
 						)
-						await BattleManager.return_to_world(session.result)
+						BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.TRAINER_LOSE:
 						await DialogueManager.say(
@@ -323,24 +326,24 @@ func _play_events(events: Array[BattleEvent]) -> void:
 							PackedStringArray(session.trainer_data.outro_lines_lose),
 							{"lock_input": false, "require_input": true}
 						)
-						await BattleManager.return_to_world(session.result)
+						BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.WILD_WIN:
-						await BattleManager.return_to_world(session.result)
+						BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.WILD_LOSE:
 						await DialogueManager.say(
 							PackedStringArray(["You ran out of usable Pokemon."]),
 							{"lock_input": false, "require_input": true}
 						)
-						await BattleManager.return_to_world(session.result)
+						BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.CAPTURE:
 						await DialogueManager.say(
 							PackedStringArray(["You captured %s" % session.result.captured_pokemon.base_data.name]),
 							{"lock_input": false, "require_input": true}
 						)
-						await BattleManager.return_to_world(session.result)
+						BattleManager.return_to_world(session.result)
 				return
 
 			_:
@@ -361,7 +364,7 @@ func _status_applied_text(pokemon_name: String, status_type: String) -> String:
 		_:
 			return "%s was afflicted with %s." % [pokemon_name, str(status_type)]
 
-func _events_contain_battle_end(events: Array[BattleEvent]) -> bool:
+func _events_contain_battle_end() -> bool:
 	for e in events:
 		if e.event_type == BattleDefinitions.BattleEvent.BATTLE_ENDED:
 			return true

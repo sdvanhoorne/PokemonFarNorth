@@ -18,7 +18,7 @@ func interact(player: Node) -> void:
 
 	_busy = true
 	get_viewport().set_input_as_handled()
-	await _do_interact(player)
+	_do_interact(player)
 	_busy = false
 
 	if cooldown_sec > 0.0:

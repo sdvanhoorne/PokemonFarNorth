@@ -64,7 +64,7 @@ static func run() -> BattleResult:
 static func capture(
 	battle_type_: BattleDefinitions.BattleType,
 	captured_pokemon_: Pokemon,
-	updated_party_: Array[Pokemon] = []
+	_updated_party_: Array[Pokemon] = []
 ) -> BattleResult:
 	return make(
 		battle_type_,

@@ -33,4 +33,4 @@ func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokem
 func get_type_effectiveness(move_type: String, type: String) -> float:
 	var file = FileAccess.open(TypeEffectivenessChartPath, FileAccess.READ)
 	var typeChart = JSON.parse_string(file.get_as_text())
-	return typeChart[move_type][type]
+	return typeChart[move_type.to_lower()][type.to_lower()]
