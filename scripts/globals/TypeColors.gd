@@ -44,13 +44,13 @@ const TYPE_FONT_COLOR: Dictionary = {
 
 const DEFAULT_COLOR := Color.WHITE
 
-static func color_for(type_name: StringName) -> Color:
+func color_for(type_name: StringName) -> Color:
 	var key := type_name
 	if not TYPE_COLOR.has(key):
 		key = StringName(String(type_name).to_lower())
 	return TYPE_COLOR.get(key, DEFAULT_COLOR)
 	
-static func font_color_for(type_name: StringName) -> Color:
+func font_color_for(type_name: StringName) -> Color:
 	var key := type_name
 	if not TYPE_FONT_COLOR.has(key):
 		key = StringName(String(type_name).to_lower())

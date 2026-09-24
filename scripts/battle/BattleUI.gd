@@ -145,10 +145,10 @@ func set_moves(move_names: Array) -> void:
 		var move_container := row.get_node("MoveContainer%d" % i) as PanelContainer
 		var move_button := move_container.get_node("MoveButton%d" % i) as Button
 		if i < move_names.size():
-			var name = move_names[i]
-			move_button.text = name
+			var move_name = move_names[i]
+			move_button.text = move_name
 			move_button.disabled = false
-			var move_type = MoveDatabase.get_move_by_name(name).type
+			var move_type = MoveDatabase.get_move_by_name(move_name).type
 			var type_color = TypeColors.color_for(move_type)
 			var sb := move_container.get_theme_stylebox("panel").duplicate(true) as StyleBoxFlat
 			sb.bg_color = type_color
@@ -160,7 +160,7 @@ func set_moves(move_names: Array) -> void:
 			sb.bg_color = Color(0.2, 0.2, 0.2, 1)
 			move_container.add_theme_stylebox_override("panel", sb)
 	
-func update_health_bar(side: BattleDefinitions.BattleSide, current_hp: int, max_hp: int):
+func update_health_bar(side: BattleDefinitions.BattleSide, current_hp: int):
 	var damagedPokemonContainer
 	if(side == BattleDefinitions.BattleSide.ENEMY):
 		damagedPokemonContainer = enemy_pokemon_ui

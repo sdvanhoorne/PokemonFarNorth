@@ -12,10 +12,10 @@ func _ready():
 	var height = CollisionShape.shape.get_rect().size.y
 	if(width < height):
 		horizontal = false
-		length = height / 20
+		length = int(height / 20)
 	else:
 		horizontal = true
-		length = width / 20
+		length = int(width / 20)
 
 func _on_body_entered(body: Node2D) -> void:
 	# don't care about non players

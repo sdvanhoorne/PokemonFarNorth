@@ -18,7 +18,7 @@ const POKEMON_FRONT_SPRITES := POKEMON_ROOT
 # --- trainer subfolders ---
 const TRAINER_BATTLE_SPRITES := CHARACTER_ROOT + "/trainer/battle_sprites"
 
-static func join(a: String, b: String) -> String:
+func join(a: String, b: String) -> String:
 	if a.ends_with("/"):
 		a = a.trim_suffix("/")
 	if b.begins_with("/"):
@@ -26,7 +26,7 @@ static func join(a: String, b: String) -> String:
 	return a + "/" + b
 
 # --- Helpers: load resources safely ---
-static func load_sprite(path: String) -> Texture2D:
+func load_sprite(path: String) -> Texture2D:
 	path = path + ".png"
 	var res := load(path)
 	if res == null:

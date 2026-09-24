@@ -47,12 +47,12 @@ func _start_wild_intro() -> void:
 	battle_ui.load_enemy_pokemon(session.get_active_enemy().pokemon)
 	
 	await DialogueManager.say(
-		PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().base_data.name]),
+		PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().pokemon.base_data.name]),
 		{"lock_input": false, "require_input": true}
 	)
 	battle_ui.load_player_pokemon(session.get_active_player().pokemon)
 	
-	battle_ui.set_moves(session.get_active_player().move_names)
+	battle_ui.set_moves(session.get_active_player().pokemon.move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 	return
 
@@ -131,7 +131,7 @@ func _process_turn():
 		events.clear()
 
 func _determine_enemy_move_index() -> int:
-	return rng.randi_range(0, session.get_active_enemy().moves.size() - 1)
+	return rng.randi_range(0, session.get_active_enemy().pokemon.moves.size() - 1)
 	
 func _determine_enemy_move_name() -> String:
 	var index = _determine_enemy_move_index()
@@ -176,19 +176,16 @@ func _play_events() -> void:
 			BattleDefinitions.BattleEvent.HP_CHANGED:
 				var target_is_player := e.side == BattleDefinitions.BattleSide.PLAYER
 				var current_hp: int = e.payload["current_hp"]
-				var max_hp: int = e.payload["max_hp"]
 
 				if target_is_player:
 					battle_ui.update_health_bar(
 						BattleDefinitions.BattleSide.PLAYER,
-						current_hp,
-						max_hp
+						current_hp
 					)
 				else:
 					battle_ui.update_health_bar(
 						BattleDefinitions.BattleSide.ENEMY,
-						current_hp,
-						max_hp
+						current_hp
 					)
 
 			BattleDefinitions.BattleEvent.STATUS_APPLIED:

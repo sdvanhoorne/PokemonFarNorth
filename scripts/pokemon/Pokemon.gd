@@ -123,4 +123,4 @@ func recalculate_stats_on_level_up() -> void:
 	battle_stats = stats
 
 static func get_xp_given(lvl: int) -> int:
-	return int(lvl * lvl * lvl / 4)
+	return int(lvl * lvl * lvl / 4.0)

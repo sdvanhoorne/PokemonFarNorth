@@ -51,11 +51,11 @@ func _emit_spotted(player: Node2D) -> void:
 		_armed = false
 
 func _update_sight_ray() -> void:
-	var owner := get_parent().get_node_or_null("MovementController")
-	if owner == null:
+	var ray_owner := get_parent().get_node_or_null("MovementController")
+	if ray_owner == null:
 		return
 
-	var facing: Vector2 = owner.facing
+	var facing: Vector2 = ray_owner.facing
 	if facing == Vector2.ZERO:
 		return
 

@@ -185,11 +185,11 @@ func _get_action_priority(session: BattleSession, action: BattleAction) -> int:
 	return 1
 
 func _handle_post_action_state(session: BattleSession, events: Array[BattleEvent]) -> bool:
-	var enemy_pokemon := session.get_active_enemy()
+	var enemy_pokemon := session.get_active_enemy().pokemon
 	if enemy_pokemon.current_hp <= 0:
 		return _handle_enemy_fainted(session, events)
 
-	var player_pokemon := session.get_active_player()
+	var player_pokemon := session.get_active_player().pokemon
 	if player_pokemon.current_hp <= 0:
 		return _handle_player_fainted(session, events)
 
@@ -239,7 +239,7 @@ func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) 
 	return true
 
 func _award_xp_for_enemy_faint(session: BattleSession, fainted_enemy: Pokemon, events: Array[BattleEvent]) -> void:
-	var active_player := session.get_active_player()
+	var active_player := session.get_active_player().pokemon
 	var xp_gain_amount: int = fainted_enemy.calculate_xp_given()
 
 	active_player.add_xp(xp_gain_amount)

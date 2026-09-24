@@ -44,14 +44,14 @@ static func for_trainer_battle(
 	enemy_party_: Array[Pokemon],
 	player_position_: Vector2,
 	player_direction_: String,
-	trainer_data: BattleTrainerData
+	trainer_data_: BattleTrainerData
 ) -> BattleStartRequest:
 	return make(
 		BattleDefinitions.BattleType.TRAINER,
 		enemy_party_,
 		player_position_,
 		player_direction_,
-		trainer_data,
+		trainer_data_,
 		false
 	)
 

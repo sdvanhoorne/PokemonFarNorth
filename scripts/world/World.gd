@@ -95,13 +95,13 @@ func _place_player_at_spawn(player: Node2D, map: Node2D, request: MapLoadRequest
 
 	_apply_player_transform(player, final_pos, request.facing_direction)
 
-func _place_player_at_position(player: Node2D, position: Vector2, facing_direction: String) -> void:
-	var snapped_pos := position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size))
+func _place_player_at_position(player: Node2D, player_position: Vector2, facing_direction: String) -> void:
+	var snapped_pos := player_position.snapped(Vector2(GlobalConstants.tile_size, GlobalConstants.tile_size))
 	_apply_player_transform(player, snapped_pos, facing_direction)
 
-func _apply_player_transform(player: Node2D, position: Vector2, facing_direction: String) -> void:
-	player.global_position = position
-	player.movement_controller.target_position = position
+func _apply_player_transform(player: Node2D, player_position: Vector2, facing_direction: String) -> void:
+	player.global_position = player_position
+	player.movement_controller.target_position = player_position
 	player.movement_controller.facing_direction = facing_direction
 	player.movement_controller.clear_input()
 

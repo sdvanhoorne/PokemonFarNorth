@@ -13,9 +13,9 @@ func _ready() -> void:
 	button.mouse_entered.connect(_on_mouse_entered)
 	button.focus_entered.connect(_on_focus_entered)
 
-func setup(id: int, name: String) -> void:
+func setup(id: int, name_: String) -> void:
 	pokemon_id = id
-	pokemon_name = name
+	pokemon_name = name_
 	
 func _on_mouse_entered() -> void:
 	hovered_pokemon.emit(pokemon_id)
