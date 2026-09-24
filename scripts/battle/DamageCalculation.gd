@@ -3,29 +3,36 @@ class_name DamageCalculation
 
 const TypeEffectivenessChartPath = "res://data/types/type_effectiveness.json"
 
-func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokemon) -> int:	
-	var has_stab = move.type == attacking_pokemon.base_data.type1 or attacking_pokemon.base_data.type2
+func get_damage(move: Move, attacker: BattlePokemon, defender: BattlePokemon) -> int:	
+	var has_stab = move.type == attacker.pokemon.base_data.type1 or attacker.pokemon.base_data.type2
 	var stab_multiplier = 1.5 if has_stab else 1.0
 	
-	var physical_move = move.category == "Physical"
-	var attacker_stat
-	var defender_stat
+	var physical_move := move.category.to_lower() == "physical"
+	var attacker_stat: int
+	var defender_stat: int
+
 	if physical_move:
-		attacker_stat = attacking_pokemon.battle_stats.values[PokemonStat.Stat.ATTACK]
-		defender_stat = defending_pokemon.battle_stats.values[PokemonStat.Stat.DEFENSE]
+		attacker_stat = attacker.get_effective_stat(
+			PokemonStat.Stat.ATTACK
+		)
+		defender_stat = defender.get_effective_stat(
+			PokemonStat.Stat.DEFENSE
+		)
 	else:
-		attacker_stat = attacking_pokemon.battle_stats.values[PokemonStat.Stat.SPECIAL_ATTACK]
-		defender_stat = defending_pokemon.battle_stats.values[PokemonStat.Stat.SPECIAL_DEFENSE]
+		attacker_stat = attacker.get_effective_stat(
+			PokemonStat.Stat.SPECIAL_ATTACK
+		)
+		defender_stat = defender.get_effective_stat(
+			PokemonStat.Stat.SPECIAL_DEFENSE
+		)
 	
-	var type_effectiveness_1 = get_type_effectiveness(move.type, defending_pokemon.base_data.type1)
+	var type_effectiveness_1 = get_type_effectiveness(move.type, defender.pokemon.base_data.type1)
 	var type_effectiveness_2
-	if(defending_pokemon.base_data.type2 == ""):
+	if(defender.pokemon.base_data.type2 == ""):
 		type_effectiveness_2 = 1.0
 	else:
-		type_effectiveness_2 = get_type_effectiveness(move.type, defending_pokemon.base_data.type2)
+		type_effectiveness_2 = get_type_effectiveness(move.type, defender.pokemon.base_data.type2)
 	
-	# might need to manage int vs float here
-	# should damage round to nearest int?
 	var damage = move.power * (float(attacker_stat) / float(defender_stat)) 
 	damage =  damage * stab_multiplier * type_effectiveness_1 * type_effectiveness_2 / 6
 	return int(ceil(damage))

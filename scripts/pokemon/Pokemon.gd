@@ -12,7 +12,6 @@ var xp_to_next_level = 0
 var move_names = []
 var moves = []
 var stats: PokemonStats = null
-var battle_stats: PokemonStats = null
 var status: status_types
 
 func _init(id: int):
@@ -48,8 +47,6 @@ func clone(id: int) -> Pokemon:
 
 	if stats != null:
 		p.stats = stats.clone()
-	if battle_stats != null:
-		p.battle_stats = battle_stats.clone()
 		
 	return p
 	
@@ -60,8 +57,6 @@ static func new_existing(data: Dictionary) -> Pokemon:
 	pokemon.current_xp = int(data.get("current_xp"))
 	pokemon.move_names = data["move_names"]
 	pokemon.stats = PokemonStats.new(data.get("stats"))
-	# might want to set battle_stats right before battle
-	pokemon.battle_stats = pokemon.stats
 	pokemon.current_hp = int(data.get("current_hp"))
 	pokemon.xp_to_next_level = calculate_xp_to_next(pokemon.level)
 	return pokemon
@@ -72,15 +67,13 @@ static func new_wild(id: int, lvl: int) -> Pokemon:
 	pokemon.status = status_types.NONE
 	pokemon.move_names = get_learned_moves(lvl, pokemon.base_data.learnable_moves)
 	pokemon.stats = PokemonStats.scaled_stats(lvl, pokemon.base_data.base_stats)
-	pokemon.battle_stats = pokemon.stats
-	pokemon.current_hp = pokemon.battle_stats.values[PokemonStat.Stat.HP]		
+	pokemon.current_hp = pokemon.stats.values[PokemonStat.Stat.HP]
 	return pokemon
 
 static func new_trainer_pokemon(data: Dictionary) -> Pokemon:
 	var pokemon = Pokemon.new(data.get("id"))
 	pokemon.current_hp = pokemon.base_data.base_stats.values[PokemonStat.Stat.HP]
 	pokemon.level = int(data.get("level"))
-	pokemon.battle_stats = PokemonStats.scaled_stats(pokemon.level, pokemon.base_data.base_stats)
 	pokemon.move_names = data["move_names"]
 	return pokemon
 
@@ -119,8 +112,7 @@ static func calculate_xp_to_next(_level: int) -> int:
 	
 func recalculate_stats_on_level_up() -> void:
 	stats = PokemonStats.scaled_stats(level, base_data.base_stats)
-	current_hp = battle_stats.hp
-	battle_stats = stats
+	current_hp = stats.hp
 
 static func get_xp_given(lvl: int) -> int:
 	return int(lvl * lvl * lvl / 4.0)

@@ -36,3 +36,16 @@ func change_stat_stage(stat: Stat, amount: int) -> int:
 	stat_stages[stat] = new_stage
 
 	return new_stage - old_stage
+	
+func get_effective_stat(stat: int) -> int:
+	var base_stat: int = pokemon.stats.get_stat(stat)
+	var stage: int = stat_stages[stat]
+
+	var multiplier: float
+
+	if stage >= 0:
+		multiplier = float(2 + stage) / 2.0
+	else:
+		multiplier = 2.0 / float(2 - stage)
+
+	return int(base_stat * multiplier)

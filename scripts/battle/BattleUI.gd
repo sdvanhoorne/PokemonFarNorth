@@ -115,7 +115,7 @@ func _load_pokemon(node: Control, pokemon: Pokemon):
 	var levelLabel = info.get_node("Level")
 	levelLabel.text = str(pokemon.level)
 	var healthBar = info.get_node("Control/HealthBar")
-	healthBar.max_value = pokemon.battle_stats.values[PokemonStat.Stat.HP]
+	healthBar.max_value = pokemon.stats.values[PokemonStat.Stat.HP]
 	healthBar.value = pokemon.current_hp
 	
 	# load moves just for battle, maybe change later

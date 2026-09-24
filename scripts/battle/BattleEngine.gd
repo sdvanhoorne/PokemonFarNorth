@@ -20,7 +20,7 @@ func resolve_turn(session: BattleSession, player_action: BattleAction, enemy_act
 			break
 
 		var user := _get_action_user(session, action)
-		if user == null or user.current_hp <= 0:
+		if user == null or user.pokemon.current_hp <= 0:
 			continue
 
 		events.append_array(_resolve_action(session, action))
@@ -51,16 +51,16 @@ func _resolve_move_action(session: BattleSession, action: BattleAction) -> Array
 	if user == null or opponent == null:
 		return events
 
-	if action.move_index < 0 or action.move_index >= user.moves.size():
+	if action.move_index < 0 or action.move_index >= user.pokemon.moves.size():
 		return events
 
-	var move: Move = user.moves[action.move_index]
+	var move: Move = user.pokemon.moves[action.move_index]
 	if move == null:
 		return events
 
 	events.append(BattleEvent.move_used(
 		action.actor,
-		user.base_data.name,
+		user.pokemon.base_data.name,
 		move.name
 	))
 
@@ -82,18 +82,19 @@ func _resolve_move_action(session: BattleSession, action: BattleAction) -> Array
 
 	return events
 	
-func _resolve_damage_move(attacker_side: BattleDefinitions.BattleSide, move: Move, attacker: Pokemon, defender: Pokemon) -> Array[BattleEvent]:
+func _resolve_damage_move(attacker_side: BattleDefinitions.BattleSide, move: Move, 
+attacker: BattlePokemon, defender: BattlePokemon) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
 
 	if attacker == null or defender == null:
 		return events
 
-	if attacker.current_hp <= 0:
+	if attacker.pokemon.current_hp <= 0:
 		return events
 
-	var old_hp = defender.current_hp
+	var old_hp = defender.pokemon.current_hp
 	var damage: int = damage_calculation.get_damage(move, attacker, defender)
-	defender.current_hp = max(defender.current_hp - damage, 0)
+	defender.pokemon.current_hp = max(defender.pokemon.current_hp - damage, 0)
 
 	var defender_side := BattleDefinitions.BattleSide.ENEMY
 	if attacker_side == BattleDefinitions.BattleSide.ENEMY:
@@ -101,39 +102,98 @@ func _resolve_damage_move(attacker_side: BattleDefinitions.BattleSide, move: Mov
 
 	events.append(BattleEvent.hp_changed(
 		defender_side,
-		defender.base_data.name,
+		defender.pokemon.base_data.name,
 		old_hp,
-		defender.current_hp,
-		defender.battle_stats.values[PokemonStat.Stat.HP]
+		defender.pokemon.current_hp,
+		defender.pokemon.stats.values[PokemonStat.Stat.HP]
 	))
 
 	return events
 
-func _resolve_status_move(attacker_side: BattleDefinitions.BattleSide, move: Move, user: Pokemon, target: Pokemon) -> Array[BattleEvent]:
+func _resolve_status_move(attacker_side: BattleDefinitions.BattleSide, move: Move, user: BattlePokemon, 
+target: BattlePokemon) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
 	var status = move.status
-	target.status = status
+	target.pokemon.status = status
 	events.append(BattleEvent.status_applied(status))
 	return events
 
-func _resolve_stat_change_move(attacker_side: BattleDefinitions.BattleSide, move: Move, user: Pokemon, target: Pokemon) -> Array[BattleEvent]:
+func _resolve_stat_change_move(
+	attacker_side: BattleDefinitions.BattleSide,
+	move: Move,
+	user: BattlePokemon,
+	target: BattlePokemon
+) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
 
-	# assume every move has max one effect for now
-	var stat_name: String = move.effects[0].stat
-	var current_value = target.battle_stats.get(stat_name)
-	target.battle_stats.set(stat_name, current_value * move.stat_multiplier)
+	# Assume every move has max one effect for now
+	var effect = move.effects[0]
+	var stat_name: String = effect.stat
+	var stat: int = PokemonStat.from_string(stat_name)
+
+	var actual_change: int = target.change_stat_stage(
+		stat,
+		effect.stages
+	)
 
 	var target_side := attacker_side
 	if target != user:
 		target_side = _opposing_side(attacker_side)
 
-	if move.stat_multiplier > 1.0:
-		events.append(BattleEvent.message("%s's %s rose." % [target.base_data.name, stat_name]))
-	elif move.stat_multiplier < 1.0:
-		events.append(BattleEvent.message("%s's %s fell." % [target.base_data.name, stat_name]))
+	var pokemon_name: String = target.pokemon.base_data.name
+	var display_stat_name: String = stat_name.replace("_", " ").capitalize()
+
+	var message: String
+
+	if actual_change == 0:
+		if effect.stages > 0:
+			message = "%s's %s won't go any higher!" % [
+				pokemon_name,
+				display_stat_name
+			]
+		else:
+			message = "%s's %s won't go any lower!" % [
+				pokemon_name,
+				display_stat_name
+			]
+
+	elif actual_change == 1:
+		message = "%s's %s rose!" % [
+			pokemon_name,
+			display_stat_name
+		]
+
+	elif actual_change == 2:
+		message = "%s's %s rose sharply!" % [
+			pokemon_name,
+			display_stat_name
+		]
+
+	elif actual_change >= 3:
+		message = "%s's %s rose drastically!" % [
+			pokemon_name,
+			display_stat_name
+		]
+
+	elif actual_change == -1:
+		message = "%s's %s fell!" % [
+			pokemon_name,
+			display_stat_name
+		]
+
+	elif actual_change == -2:
+		message = "%s's %s harshly fell!" % [
+			pokemon_name,
+			display_stat_name
+		]
+
 	else:
-		events.append(BattleEvent.message("Nothing happened."))
+		message = "%s's %s severely fell!" % [
+			pokemon_name,
+			display_stat_name
+		]
+
+	events.append(BattleEvent.message(message))
 
 	return events
 
@@ -153,7 +213,8 @@ func _resolve_switch_action(session: BattleSession, action: BattleAction) -> Arr
 	events.append(BattleEvent.battler_sent_in(action.actor, action.switch_index))
 	return events
 
-func _get_ordered_actions(session: BattleSession, player_action: BattleAction, enemy_action: BattleAction) -> Array[BattleAction]:
+func _get_ordered_actions(session: BattleSession, player_action: BattleAction, 
+enemy_action: BattleAction) -> Array[BattleAction]:
 	var actions: Array[BattleAction] = [player_action, enemy_action]
 
 	actions.sort_custom(func(a: BattleAction, b: BattleAction) -> bool:
@@ -178,7 +239,7 @@ func _get_action_speed(session: BattleSession, action: BattleAction) -> int:
 	var user := _get_action_user(session, action)
 	if user == null:
 		return 0
-	return user.battle_stats.values[PokemonStat.Stat.SPEED]
+	return user.pokemon.stats.values[PokemonStat.Stat.SPEED]
 
 func _get_action_priority(session: BattleSession, action: BattleAction) -> int:
 	# implement move priority later
@@ -197,7 +258,8 @@ func _handle_post_action_state(session: BattleSession, events: Array[BattleEvent
 	
 func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -> bool:
 	var fainted_enemy := session.get_active_enemy().pokemon
-	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.ENEMY, fainted_enemy.base_data.name))
+	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.ENEMY, 
+	fainted_enemy.base_data.name))
 
 	_award_xp_for_enemy_faint(session, fainted_enemy, events)
 
@@ -238,7 +300,8 @@ func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) 
 	events.append(BattleEvent.player_switch_required())
 	return true
 
-func _award_xp_for_enemy_faint(session: BattleSession, fainted_enemy: Pokemon, events: Array[BattleEvent]) -> void:
+func _award_xp_for_enemy_faint(session: BattleSession, fainted_enemy: Pokemon, 
+events: Array[BattleEvent]) -> void:
 	var active_player := session.get_active_player().pokemon
 	var xp_gain_amount: int = fainted_enemy.calculate_xp_given()
 
@@ -268,23 +331,23 @@ func _opposing_side(side: BattleDefinitions.BattleSide) -> BattleDefinitions.Bat
 	else:
 		return BattleDefinitions.BattleSide.PLAYER
 
-func _get_action_user(session: BattleSession, action: BattleAction) -> Pokemon:
+func _get_action_user(session: BattleSession, action: BattleAction) -> BattlePokemon:
 	match action.actor:
 		BattleDefinitions.BattleSide.PLAYER:
-			return session.get_active_player().pokemon
+			return session.get_active_player()
 		BattleDefinitions.BattleSide.ENEMY:
-			return session.get_active_enemy().pokemon
+			return session.get_active_enemy()
 	return null
 	
-func _get_action_target(session: BattleSession, action: BattleAction) -> Pokemon:
+func _get_action_target(session: BattleSession, action: BattleAction) -> BattlePokemon:
 	match action.actor:
 		BattleDefinitions.BattleSide.PLAYER:
-			return session.get_active_enemy().pokemon
+			return session.get_active_enemy()
 		BattleDefinitions.BattleSide.ENEMY:
-			return session.get_active_player().pokemon
+			return session.get_active_player()
 	return null
 
-func _get_move_target(move: Move, user: Pokemon, opponent: Pokemon) -> Pokemon:
+func _get_move_target(move: Move, user: BattlePokemon, opponent: BattlePokemon) -> BattlePokemon:
 	match move.target:
 		"Self":
 			return user
