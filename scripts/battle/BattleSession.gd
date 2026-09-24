@@ -2,8 +2,8 @@ extends RefCounted
 class_name BattleSession
 
 var battle_type: BattleDefinitions.BattleType
-var player_party: Array[Pokemon]
-var enemy_party: Array[Pokemon]
+var player_party: Array[BattlePokemon]
+var enemy_party: Array[BattlePokemon]
 var active_player_index: int
 var active_enemy_index: int
 var can_run: bool
@@ -15,18 +15,23 @@ var result: BattleResult
 static func from_request(request: BattleStartRequest, player_party_source: Array[Pokemon]) -> BattleSession:
 	var session := BattleSession.new()
 	session.battle_type = request.battle_type
-	session.player_party = player_party_source.duplicate(true)
-	session.enemy_party = request.enemy_party.duplicate(true)
+	
+	for pokemon in player_party_source:
+		session.player_party.append(BattlePokemon.new(pokemon))
+	for pokemon in request.enemy_party:
+		session.enemy_party.append(BattlePokemon.new(pokemon))
+		
 	session.active_player_index = 0
 	session.active_enemy_index = 0
 	session.can_run = request.can_run
 	session.trainer_data = request.trainer_data
+	
 	return session
 
-func get_active_player() -> Pokemon:
+func get_active_player() -> BattlePokemon:
 	return player_party[active_player_index]
 
-func get_active_enemy() -> Pokemon:
+func get_active_enemy() -> BattlePokemon:
 	return enemy_party[active_enemy_index]
 	
 func has_usable_player() -> bool:
@@ -35,9 +40,9 @@ func has_usable_player() -> bool:
 func has_usable_enemy() -> bool:
 	return has_usable(enemy_party)
 
-func has_usable(party: Array[Pokemon]) -> bool:
-	for pokemon in party:
-		if pokemon.current_hp > 0:
+func has_usable(party: Array[BattlePokemon]) -> bool:
+	for battle_pokemon in party:
+		if battle_pokemon.pokemon.current_hp > 0:
 			return true
 	return false
 

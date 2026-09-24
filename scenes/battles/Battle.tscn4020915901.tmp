@@ -1,0 +1,288 @@
+[gd_scene load_steps=14 format=3 uid="uid://bihya4k8vuet"]
+
+[ext_resource type="Script" uid="uid://dsb5p8di0tfn1" path="res://scripts/battle/BattleController.gd" id="1_7gd76"]
+[ext_resource type="Script" uid="uid://dcj2t7xoxgiul" path="res://scripts/battle/BattleUI.gd" id="2_0pul7"]
+[ext_resource type="Script" uid="uid://bslny5x4vea4c" path="res://scripts/battle/PokemonTooltip.gd" id="3_34g4o"]
+[ext_resource type="Texture2D" uid="uid://buxdcl0i5n5hx" path="res://assets/pokemon/Chasmurk.png" id="4_ufufc"]
+[ext_resource type="PackedScene" uid="uid://l2svjgm0dh12" path="res://scenes/battles/BattleInfo.tscn" id="5_tbq5m"]
+[ext_resource type="PackedScene" uid="uid://dspxwq63y8f0w" path="res://scenes/ui/PartyMenu.tscn" id="7_mtsvn"]
+[ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="9_2iovi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1kxda"]
+size = Vector2(64, 64)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mxf8o"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ngw5r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fe3c8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s0meg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m7hvh"]
+content_margin_left = 64.0
+content_margin_top = 64.0
+content_margin_right = 64.0
+content_margin_bottom = 64.0
+bg_color = Color(0.74978, 0.74978, 0.74978, 1)
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="Battle" type="Node2D"]
+script = ExtResource("1_7gd76")
+
+[node name="BattleUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 240.0
+offset_bottom = 160.0
+mouse_filter = 2
+script = ExtResource("2_0pul7")
+
+[node name="PlayerUI" type="Control" parent="BattleUI"]
+layout_mode = 1
+anchors_preset = 0
+offset_right = 120.0
+offset_bottom = 100.0
+mouse_filter = 2
+
+[node name="PokemonUI" type="Control" parent="BattleUI/PlayerUI"]
+anchors_preset = 0
+script = ExtResource("3_34g4o")
+
+[node name="SpriteArea" type="Area2D" parent="BattleUI/PlayerUI/PokemonUI"]
+visible = false
+position = Vector2(40, 64)
+
+[node name="Sprite" type="Sprite2D" parent="BattleUI/PlayerUI/PokemonUI/SpriteArea"]
+texture_filter = 1
+texture = ExtResource("4_ufufc")
+flip_h = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/PlayerUI/PokemonUI/SpriteArea"]
+shape = SubResource("RectangleShape2D_1kxda")
+
+[node name="Info" parent="BattleUI/PlayerUI/PokemonUI" instance=ExtResource("5_tbq5m")]
+visible = false
+offset_left = 6.0
+offset_top = 13.0
+offset_right = 45.9997
+offset_bottom = 53.0
+
+[node name="EnemyUI" type="Control" parent="BattleUI"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_bottom = 100.0
+grow_horizontal = 0
+
+[node name="PokemonUI" type="Control" parent="BattleUI/EnemyUI"]
+anchors_preset = 0
+script = ExtResource("3_34g4o")
+
+[node name="SpriteArea" type="Area2D" parent="BattleUI/EnemyUI/PokemonUI"]
+visible = false
+position = Vector2(80, 64)
+
+[node name="Sprite" type="Sprite2D" parent="BattleUI/EnemyUI/PokemonUI/SpriteArea"]
+texture_filter = 1
+texture = ExtResource("4_ufufc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BattleUI/EnemyUI/PokemonUI/SpriteArea"]
+z_index = 1
+shape = SubResource("RectangleShape2D_1kxda")
+
+[node name="Info" parent="BattleUI/EnemyUI/PokemonUI" instance=ExtResource("5_tbq5m")]
+visible = false
+offset_left = 22.0
+offset_top = 13.0
+offset_right = 62.0
+offset_bottom = 53.0
+
+[node name="EnemyTrainerSprite" type="TextureRect" parent="BattleUI/EnemyUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="BattleUI"]
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Background" type="Sprite2D" parent="BattleUI"]
+visible = false
+
+[node name="PartyUI" parent="BattleUI" instance=ExtResource("7_mtsvn")]
+visible = false
+
+[node name="BottomUI" type="Control" parent="BattleUI"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MovesContainer" type="PanelContainer" parent="BattleUI/BottomUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Moves" type="VBoxContainer" parent="BattleUI/BottomUI/MovesContainer"]
+layout_mode = 2
+
+[node name="MovesFirstRow" type="HBoxContainer" parent="BattleUI/BottomUI/MovesContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoveContainer0" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton0" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer0" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_mxf8o")
+
+[node name="MoveContainer1" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton1" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer1" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ngw5r")
+
+[node name="MovesSecondRow" type="HBoxContainer" parent="BattleUI/BottomUI/MovesContainer/Moves"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="MoveContainer2" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton2" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer2" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fe3c8")
+
+[node name="MoveContainer3" type="PanelContainer" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MoveButton3" type="Button" parent="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer3" groups=["MoveButtons"]]
+layout_mode = 2
+size_flags_horizontal = 7
+size_flags_vertical = 7
+theme_override_font_sizes/font_size = 12
+theme_override_styles/normal = SubResource("StyleBoxEmpty_s0meg")
+
+[node name="MessageContainer" type="Panel" parent="BattleUI/BottomUI"]
+visible = false
+layout_direction = 1
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxFlat_m7hvh")
+
+[node name="Message" type="RichTextLabel" parent="BattleUI/BottomUI/MessageContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("9_2iovi")
+theme_override_colors/table_border = Color(0, 0, 0, 1)
+text = "What would you like to do?"
+
+[node name="BattleOptionsUI" type="GridContainer" parent="BattleUI/BottomUI"]
+custom_minimum_size = Vector2(240, 60)
+layout_mode = 1
+offset_right = 240.0
+offset_bottom = 60.0
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="Fight" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Fight"
+
+[node name="CenterContainer2" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="Switch" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer2"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Switch"
+
+[node name="CenterContainer3" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="Bag" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer3"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Bag"
+
+[node name="CenterContainer4" type="CenterContainer" parent="BattleUI/BottomUI/BattleOptionsUI"]
+custom_minimum_size = Vector2(120, 30)
+layout_mode = 2
+
+[node name="Run" type="Button" parent="BattleUI/BottomUI/BattleOptionsUI/CenterContainer4"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Run"
+
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer0/MoveButton0" to="." method="_on_move_0_pressed"]
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesFirstRow/MoveContainer1/MoveButton1" to="." method="_on_move_1_pressed"]
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer2/MoveButton2" to="." method="_on_move_2_pressed"]
+[connection signal="pressed" from="BattleUI/BottomUI/MovesContainer/Moves/MovesSecondRow/MoveContainer3/MoveButton3" to="." method="_on_move_3_pressed"]

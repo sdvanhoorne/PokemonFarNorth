@@ -73,12 +73,12 @@ static func new_wild(id: int, lvl: int) -> Pokemon:
 	pokemon.move_names = get_learned_moves(lvl, pokemon.base_data.learnable_moves)
 	pokemon.stats = PokemonStats.scaled_stats(lvl, pokemon.base_data.base_stats)
 	pokemon.battle_stats = pokemon.stats
-	pokemon.current_hp = pokemon.battle_stats.hp		
+	pokemon.current_hp = pokemon.battle_stats.values[PokemonStat.Stat.HP]		
 	return pokemon
 
 static func new_trainer_pokemon(data: Dictionary) -> Pokemon:
 	var pokemon = Pokemon.new(data.get("id"))
-	pokemon.current_hp = pokemon.base_data.base_stats.hp
+	pokemon.current_hp = pokemon.base_data.base_stats.values[PokemonStat.Stat.HP]
 	pokemon.level = int(data.get("level"))
 	pokemon.battle_stats = PokemonStats.scaled_stats(pokemon.level, pokemon.base_data.base_stats)
 	pokemon.move_names = data["move_names"]

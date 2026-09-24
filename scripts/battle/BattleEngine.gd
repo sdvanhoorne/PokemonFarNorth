@@ -104,7 +104,7 @@ func _resolve_damage_move(attacker_side: BattleDefinitions.BattleSide, move: Mov
 		defender.base_data.name,
 		old_hp,
 		defender.current_hp,
-		defender.battle_stats.hp
+		defender.battle_stats.values[PokemonStat.Stat.HP]
 	))
 
 	return events
@@ -178,7 +178,7 @@ func _get_action_speed(session: BattleSession, action: BattleAction) -> int:
 	var user := _get_action_user(session, action)
 	if user == null:
 		return 0
-	return user.battle_stats.speed
+	return user.battle_stats.values[PokemonStat.Stat.SPEED]
 
 func _get_action_priority(session: BattleSession, action: BattleAction) -> int:
 	# implement move priority later
@@ -196,7 +196,7 @@ func _handle_post_action_state(session: BattleSession, events: Array[BattleEvent
 	return false
 	
 func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -> bool:
-	var fainted_enemy := session.get_active_enemy()
+	var fainted_enemy := session.get_active_enemy().pokemon
 	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.ENEMY, fainted_enemy.base_data.name))
 
 	_award_xp_for_enemy_faint(session, fainted_enemy, events)
@@ -271,17 +271,17 @@ func _opposing_side(side: BattleDefinitions.BattleSide) -> BattleDefinitions.Bat
 func _get_action_user(session: BattleSession, action: BattleAction) -> Pokemon:
 	match action.actor:
 		BattleDefinitions.BattleSide.PLAYER:
-			return session.get_active_player()
+			return session.get_active_player().pokemon
 		BattleDefinitions.BattleSide.ENEMY:
-			return session.get_active_enemy()
+			return session.get_active_enemy().pokemon
 	return null
 	
 func _get_action_target(session: BattleSession, action: BattleAction) -> Pokemon:
 	match action.actor:
 		BattleDefinitions.BattleSide.PLAYER:
-			return session.get_active_enemy()
+			return session.get_active_enemy().pokemon
 		BattleDefinitions.BattleSide.ENEMY:
-			return session.get_active_player()
+			return session.get_active_player().pokemon
 	return null
 
 func _get_move_target(move: Move, user: Pokemon, opponent: Pokemon) -> Pokemon:
@@ -296,7 +296,7 @@ func _find_next_usable_enemy_index(session: BattleSession) -> int:
 	for i in range(session.enemy_party.size()):
 		if i == session.active_enemy_index:
 			continue
-		var pokemon: Pokemon = session.enemy_party[i]
+		var pokemon: Pokemon = session.enemy_party[i].pokemon
 		if pokemon.current_hp > 0:
 			return i
 	return -1

@@ -44,13 +44,13 @@ func _start_battle_intro() -> void:
 
 func _start_wild_intro() -> void:
 	battle_ui.show_player_back_portrait()
-	battle_ui.load_enemy_pokemon(session.get_active_enemy())
+	battle_ui.load_enemy_pokemon(session.get_active_enemy().pokemon)
 	
 	await DialogueManager.say(
 		PackedStringArray(["A wild %s appeared!" % session.get_active_enemy().base_data.name]),
 		{"lock_input": false, "require_input": true}
 	)
-	battle_ui.load_player_pokemon(session.get_active_player())
+	battle_ui.load_player_pokemon(session.get_active_player().pokemon)
 	
 	battle_ui.set_moves(session.get_active_player().move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
@@ -68,8 +68,8 @@ func _start_trainer_intro() -> void:
 	battle_ui.hide_player_back_portrait()
 	battle_ui.hide_trainer_portrait()
 	
-	battle_ui.load_player_pokemon(session.get_active_player())
-	battle_ui.load_enemy_pokemon(session.get_active_enemy())
+	battle_ui.load_player_pokemon(session.get_active_player().pokemon)
+	battle_ui.load_enemy_pokemon(session.get_active_enemy().pokemon)
 	
 	battle_ui.set_moves(session.get_active_player().move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
@@ -247,12 +247,12 @@ func _play_events() -> void:
 				if target_is_player:
 					session.active_player_index = new_index
 					pokemon_name = session.get_active_player().base_data.name
-					battle_ui.load_player_pokemon(session.get_active_player())
+					battle_ui.load_player_pokemon(session.get_active_player().pokemon)
 					battle_ui.set_moves(session.get_active_player().move_names)
 				else:
 					session.active_enemy_index = new_index
 					pokemon_name = session.get_active_enemy().base_data.name
-					battle_ui.load_enemy_pokemon(session.get_active_enemy())
+					battle_ui.load_enemy_pokemon(session.get_active_enemy().pokemon)
 
 				await DialogueManager.say(
 					PackedStringArray([
@@ -285,7 +285,7 @@ func _play_events() -> void:
 
 				# Optional: refresh the currently displayed player Pokémon info if needed
 				if e.side == BattleDefinitions.BattleSide.PLAYER:
-					battle_ui.load_player_pokemon(session.get_active_player())
+					battle_ui.load_player_pokemon(session.get_active_player().pokemon)
 					battle_ui.set_moves(session.get_active_player().move_names)
 
 			BattleDefinitions.BattleEvent.RUN_SUCCEEDED:
@@ -301,9 +301,6 @@ func _play_events() -> void:
 				)
 
 			BattleDefinitions.BattleEvent.BATTLE_ENDED:
-				
-				PlayerInventory.PartyPokemon = session.player_party
-				
 				match session.result.outcome:
 					BattleDefinitions.BattleOutcome.TRAINER_WIN:
 						await DialogueManager.say(

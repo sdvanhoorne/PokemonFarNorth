@@ -1,44 +1,43 @@
-extends Resource
+extends RefCounted
 class_name PokemonStats
 
 const stat_scaler = 25.0
 const starting_hp = 15
 
-var hp = 0
-var attack = 0
-var defense = 0
-var special_attack = 0
-var special_defense = 0
-var speed = 0
+var values: Dictionary = {
+	PokemonStat.Stat.HP: 0,
+	PokemonStat.Stat.ATTACK: 0,
+	PokemonStat.Stat.DEFENSE: 0,
+	PokemonStat.Stat.SPECIAL_ATTACK: 0,
+	PokemonStat.Stat.SPECIAL_DEFENSE: 0,
+	PokemonStat.Stat.SPEED: 0
+}
 
-func _init(data: Dictionary = {}):
-	hp = int(data.get("hp", 0))
-	attack = int(data.get("attack", 0))
-	defense = int(data.get("defense", 0))
-	special_attack = int(data.get("special_attack", 0))
-	special_defense = int(data.get("special_defense", 0))
-	speed = int(data.get("speed", 0))
+
+func _init(data: Dictionary = {}) -> void:
+	values[PokemonStat.Stat.HP] = int(data.get("hp", 0))
+	values[PokemonStat.Stat.ATTACK] = int(data.get("attack", 0))
+	values[PokemonStat.Stat.DEFENSE] = int(data.get("defense", 0))
+	values[PokemonStat.Stat.SPECIAL_ATTACK] = int(data.get("special_attack", 0))
+	values[PokemonStat.Stat.SPECIAL_DEFENSE] = int(data.get("special_defense", 0))
+	values[PokemonStat.Stat.SPEED] = int(data.get("speed", 0))
+
+
+func get_stat(stat: int) -> int:
+	return values[stat]
+
 	
-func clone() -> PokemonStats:
-	var s := PokemonStats.new()
-	s.hp = hp
-	s.attack = attack
-	s.defense = defense
-	s.special_attack = special_attack
-	s.special_defense = special_defense
-	s.speed = speed
-	return s
+# for calculating new stats after level up
 	
-static func scaled_stats( level: int, data = {}) -> PokemonStats:
+static func scaled_stats(level: int, data: PokemonStats) -> PokemonStats:
 	return PokemonStats.new({
-		"hp": scale_stat(data["hp"], level) + starting_hp,
-		"attack": scale_stat(data["attack"], level),
-		"defense": scale_stat(data["defense"], level),
-		"special_attack": scale_stat(data["special_attack"], level),
-		"special_defense": scale_stat(data["special_defense"], level),
-		"speed": scale_stat(data["speed"], level),
+		"hp": scale_stat(data.get_stat(PokemonStat.Stat.HP), level) + starting_hp,
+		"attack": scale_stat(data.get_stat(PokemonStat.Stat.ATTACK), level),
+		"defense": scale_stat(data.get_stat(PokemonStat.Stat.DEFENSE), level),
+		"special_attack": scale_stat(data.get_stat(PokemonStat.Stat.SPECIAL_ATTACK), level),
+		"special_defense": scale_stat(data.get_stat(PokemonStat.Stat.SPECIAL_DEFENSE), level),
+		"speed": scale_stat(data.get_stat(PokemonStat.Stat.SPEED), level),
 	})
 
 static func scale_stat(stat: int, level: int) -> int:
-	var scaled_stat = stat * (level / stat_scaler)
-	return scaled_stat
+	return int(stat * (level / stat_scaler))

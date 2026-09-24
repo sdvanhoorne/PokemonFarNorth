@@ -11,11 +11,11 @@ func get_damage(move: Move, attacking_pokemon: Pokemon, defending_pokemon: Pokem
 	var attacker_stat
 	var defender_stat
 	if physical_move:
-		attacker_stat = attacking_pokemon.battle_stats.attack
-		defender_stat = defending_pokemon.battle_stats.defense 
+		attacker_stat = attacking_pokemon.battle_stats.values[PokemonStat.Stat.ATTACK]
+		defender_stat = defending_pokemon.battle_stats.values[PokemonStat.Stat.DEFENSE]
 	else:
-		attacker_stat = attacking_pokemon.battle_stats.special_attack
-		defender_stat = defending_pokemon.battle_stats.special_defense
+		attacker_stat = attacking_pokemon.battle_stats.values[PokemonStat.Stat.SPECIAL_ATTACK]
+		defender_stat = defending_pokemon.battle_stats.values[PokemonStat.Stat.SPECIAL_DEFENSE]
 	
 	var type_effectiveness_1 = get_type_effectiveness(move.type, defending_pokemon.base_data.type1)
 	var type_effectiveness_2
