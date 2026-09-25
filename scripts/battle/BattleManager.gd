@@ -2,6 +2,7 @@ extends Node
 
 var current_request: BattleStartRequest = null
 
+
 func start_battle(request: BattleStartRequest) -> void:
 	current_request = request
 
@@ -25,14 +26,11 @@ func start_battle(request: BattleStartRequest) -> void:
 	if message_box != null:
 		DialogueManager.message_box = message_box
 
-
-# Temporary migration helper for wild battles.
 func start_wild_battle(
 	enemy_party: Array[Pokemon],
 	player_position: Vector2,
 	player_direction: String,
-	_intro_lines: PackedStringArray = PackedStringArray()
-) -> void:
+	_intro_lines: PackedStringArray = PackedStringArray()) -> void:
 	var request := BattleStartRequest.for_wild_battle(
 		enemy_party,
 		player_position,
@@ -40,14 +38,11 @@ func start_wild_battle(
 		)
 	await start_battle(request)
 
-
-# Temporary migration helper for trainer battles.
 func start_trainer_battle(
 	enemy_party: Array[Pokemon],
 	player_position: Vector2,
 	player_direction: String,
-	trainer_data: BattleTrainerData
-) -> void:
+	trainer_data: BattleTrainerData) -> void:
 	var request := BattleStartRequest.for_trainer_battle(
 		enemy_party,
 		player_position,
@@ -55,7 +50,6 @@ func start_trainer_battle(
 		trainer_data
 	)
 	await start_battle(request)
-
 
 func return_to_world(result: BattleResult = null) -> void:
 	call_deferred("_load_previous_map", result)

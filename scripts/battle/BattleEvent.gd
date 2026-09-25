@@ -113,7 +113,7 @@ static func level_up(pokemon_name: String, level: int) -> BattleEvent:
 	}
 	return e
 
-static func battle_ended(result: BattleResult) -> BattleEvent:
+static func battle_ended() -> BattleEvent:
 	var e := BattleEvent.new()
 	e.event_type = BattleDefinitions.BattleEvent.BATTLE_ENDED
 	return e

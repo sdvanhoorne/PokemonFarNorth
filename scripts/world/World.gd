@@ -140,7 +140,7 @@ func capture_runtime_state() -> void:
 func _on_home_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
 	var request := MapLoadRequest.for_spawn("starting_town", "StartingHouseSpawn", "down")
-	load_map(request)
+	load_map.call_deferred(request)
 
 func _on_battle_pressed() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false
@@ -156,7 +156,7 @@ func _on_load_pressed() -> void:
 		GameState.player_position,
 		GameState.player_facing_direction
 	)
-	load_map(request)
+	load_map.call_deferred(request)
 
 func disable_debug_buttons() -> void:
 	get_node_or_null("/root/World/DebugControls").visible = false

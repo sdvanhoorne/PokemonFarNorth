@@ -71,11 +71,11 @@ func _resolve_move_action(session: BattleSession, action: BattleAction) -> Array
 
 		"status":
 			var target := _get_move_target(move, user, opponent)
-			events.append_array(_resolve_status_move(action.actor, move, user, target))
+			events.append_array(_resolve_status_move(move, target))
 
 		"stat_change":
 			var target := _get_move_target(move, user, opponent)
-			events.append_array(_resolve_stat_change_move(action.actor, move, user, target))
+			events.append_array(_resolve_stat_change_move(move, target))
 
 		_:
 			events.append(BattleEvent.message("But it failed."))
@@ -110,8 +110,7 @@ attacker: BattlePokemon, defender: BattlePokemon) -> Array[BattleEvent]:
 
 	return events
 
-func _resolve_status_move(attacker_side: BattleDefinitions.BattleSide, move: Move, user: BattlePokemon, 
-target: BattlePokemon) -> Array[BattleEvent]:
+func _resolve_status_move(move: Move, target: BattlePokemon) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
 	var status = move.status
 	target.pokemon.status = status
@@ -119,9 +118,7 @@ target: BattlePokemon) -> Array[BattleEvent]:
 	return events
 
 func _resolve_stat_change_move(
-	attacker_side: BattleDefinitions.BattleSide,
 	move: Move,
-	user: BattlePokemon,
 	target: BattlePokemon
 ) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
@@ -135,10 +132,6 @@ func _resolve_stat_change_move(
 		stat,
 		effect.stages
 	)
-
-	var target_side := attacker_side
-	if target != user:
-		target_side = _opposing_side(attacker_side)
 
 	var pokemon_name: String = target.pokemon.base_data.name
 	var display_stat_name: String = stat_name.replace("_", " ").capitalize()
@@ -199,16 +192,10 @@ func _resolve_stat_change_move(
 
 func _resolve_switch_action(session: BattleSession, action: BattleAction) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
-	var old_pokemon_name: String
-	var new_pokemon_name: String
 	if(action.actor == BattleDefinitions.BattleSide.PLAYER):
-		old_pokemon_name = session.get_active_player().base_data.name
 		session.switch_player_to(action.switch_index)
-		new_pokemon_name = session.get_active_player().base_data.name
 	else:
-		old_pokemon_name = session.get_active_enemy().base_data.name
 		session.switch_enemy_to(action.switch_index)
-		new_pokemon_name = session.get_active_enemy().base_data.name
 	events.append(BattleEvent.battler_withdrawn(action.actor))
 	events.append(BattleEvent.battler_sent_in(action.actor, action.switch_index))
 	return events
@@ -268,18 +255,16 @@ func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -
 			_set_battle_result(session, BattleDefinitions.BattleOutcome.WILD_WIN)
 		elif session.battle_type == BattleDefinitions.BattleType.TRAINER:
 			_set_battle_result(session, BattleDefinitions.BattleOutcome.TRAINER_WIN)
-		events.append(BattleEvent.battle_ended(session.result))
+		events.append(BattleEvent.battle_ended())
 		return true
 
 	var next_index := _find_next_usable_enemy_index(session)
 	if next_index == -1:
 		_set_battle_result(session, BattleDefinitions.BattleOutcome.WILD_WIN)
-		events.append(BattleEvent.battle_ended(session.result))
+		events.append(BattleEvent.battle_ended())
 		return true
 
-	var old_name := fainted_enemy.base_data.name
 	session.switch_enemy_to(next_index)
-	var next_enemy := session.get_active_enemy()
 
 	events.append(BattleEvent.battler_sent_in(BattleDefinitions.BattleSide.ENEMY, next_index))
 	return true
@@ -293,7 +278,7 @@ func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) 
 			_set_battle_result(session, BattleDefinitions.BattleOutcome.WILD_LOSE)
 		elif session.battle_type == BattleDefinitions.BattleType.TRAINER:
 			_set_battle_result(session, BattleDefinitions.BattleOutcome.TRAINER_LOSE)
-		events.append(BattleEvent.battle_ended(session.result))
+		events.append(BattleEvent.battle_ended())
 		return true
 
 	events.append(BattleEvent.message("Choose your next Pokémon."))

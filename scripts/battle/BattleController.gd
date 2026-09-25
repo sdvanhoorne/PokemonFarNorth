@@ -22,7 +22,7 @@ func _ready() -> void:
 
 func setup(request: BattleStartRequest, player_party: Array[Pokemon]) -> void:
 	session = BattleSession.from_request(request, player_party)
-	await _start_battle_intro()
+	_start_battle_intro()
 
 func _wire_signals() -> void:
 	$BattleUI/BottomUI/BattleOptionsUI/CenterContainer/Fight.pressed.connect(_on_fight_pressed)
@@ -92,7 +92,7 @@ func _run() -> void:
 		PackedStringArray(["You ran away..."]),
 		{"lock_input": false, "require_input": true}
 	)
-	await BattleManager.return_to_world(session.result)
+	BattleManager.return_to_world(session.result)
 
 func _on_switch_pressed() -> void:
 	if input_locked: return	
