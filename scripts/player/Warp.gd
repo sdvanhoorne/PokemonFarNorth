@@ -31,7 +31,7 @@ func _on_body_entered(body: Node2D) -> void:
 		horizontal,
 		offset
 	)
-	world.load_map.call_deferred(request, body)
+	world.load_map(request, body)
 	
 func get_warp_offset(player_position: Vector2) -> int:
 	var local_offset: Vector2 = (player_position - global_position) / GlobalConstants.tile_size

@@ -27,7 +27,9 @@ func load_map(request: MapLoadRequest, player: Node2D = null) -> Node2D:
 
 	var old_map := current_map
 	player = _get_or_create_player(player)
-
+	
+	await get_tree().process_frame
+	
 	_attach_map_and_player(new_map, player)
 	_place_player(player, new_map, request)
 	_reset_player_after_transfer(player)
