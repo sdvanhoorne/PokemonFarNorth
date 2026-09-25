@@ -110,12 +110,12 @@ func _serialize_party() -> Array:
 			"current_hp": int(pokemon.current_hp),
 			"current_xp": int(pokemon.current_xp),
 			"stats": {
-				"hp": int(pokemon.stats.hp),
-				"attack": int(pokemon.stats.attack),
-				"defense": int(pokemon.stats.defense),
-				"special_attack": int(pokemon.stats.special_attack),
-				"special_defense": int(pokemon.stats.special_defense),
-				"speed": int(pokemon.stats.speed)
+				"hp": int(pokemon.stats.get_stat(PokemonStat.Stat.HP)),
+				"attack": int(pokemon.stats.get_stat(PokemonStat.Stat.ATTACK)),
+				"defense": int(pokemon.stats.get_stat(PokemonStat.Stat.DEFENSE)),
+				"special_attack": int(pokemon.stats.get_stat(PokemonStat.Stat.SPECIAL_ATTACK)),
+				"special_defense": int(pokemon.stats.get_stat(PokemonStat.Stat.SPECIAL_DEFENSE)),
+				"speed": int(pokemon.stats.get_stat(PokemonStat.Stat.SPEED))
 			},
 			"move_names": pokemon.move_names
 		})

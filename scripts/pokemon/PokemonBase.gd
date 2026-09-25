@@ -17,7 +17,7 @@ func _init(_id: int):
 		push_error("Pokémon ID %d not found in Pokedex." % id)
 		return 
 	
-	var path = "res://data/pokemon/%s.json" % name
+	var path = "res://data/pokemon/%s.json" % name.to_lower()
 	var file = FileAccess.open(path, FileAccess.READ)
 	if file == null:
 		print("Could not find file for %d" % name)

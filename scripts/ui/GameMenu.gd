@@ -55,3 +55,13 @@ func _close_party_menu() -> void:
 	party_menu.visible = false
 	main_menu.visible = true
 	current_menu = menu_state.MAIN
+
+func _on_save_pressed() -> void:
+	var world := get_tree().current_scene
+	if world.has_method("capture_runtime_state"):
+		world.capture_runtime_state()
+	SaveData.save_game()
+
+func _on_save_and_quit_pressed() -> void:
+	_on_save_pressed()
+	get_tree().quit()

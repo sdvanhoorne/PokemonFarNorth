@@ -83,15 +83,6 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 8
 text = "Bag"
 
-[node name="SaveContainer" type="HBoxContainer" parent="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer/SaveContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_font_sizes/font_size = 8
-text = "Save"
-
 [node name="OptionsContainer" type="HBoxContainer" parent="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -101,5 +92,25 @@ size_flags_horizontal = 3
 theme_override_font_sizes/font_size = 8
 text = "Option"
 
+[node name="SaveContainer" type="HBoxContainer" parent="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer/SaveContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "Save"
+
+[node name="SaveQuitContainer" type="HBoxContainer" parent="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Button" type="Button" parent="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer/SaveQuitContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/font_size = 8
+text = "Save & Quit"
+
 [connection signal="pressed" from="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer/PokedexContainer/Button" to="." method="_on_pokedex_pressed"]
 [connection signal="pressed" from="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer/PartyContainer/Button" to="." method="_on_party_pressed"]
+[connection signal="pressed" from="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer/SaveContainer/Button" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="MainMenu/Control/MarginContainer/PanelContainer/VBoxContainer/SaveQuitContainer/Button" to="." method="_on_save_and_quit_pressed"]
