@@ -13,7 +13,6 @@ var values: Dictionary = {
 	PokemonStat.Stat.SPEED: 0
 }
 
-
 func _init(data: Dictionary = {}) -> void:
 	values[PokemonStat.Stat.HP] = int(data.get("hp", 0))
 	values[PokemonStat.Stat.ATTACK] = int(data.get("attack", 0))
@@ -22,11 +21,9 @@ func _init(data: Dictionary = {}) -> void:
 	values[PokemonStat.Stat.SPECIAL_DEFENSE] = int(data.get("special_defense", 0))
 	values[PokemonStat.Stat.SPEED] = int(data.get("speed", 0))
 
-
 func get_stat(stat: int) -> int:
 	return values[stat]
 
-	
 # for calculating new stats after level up
 	
 static func scaled_stats(level: int, data: PokemonStats) -> PokemonStats:
@@ -41,3 +38,7 @@ static func scaled_stats(level: int, data: PokemonStats) -> PokemonStats:
 
 static func scale_stat(stat: int, level: int) -> int:
 	return int(stat * (level / stat_scaler))
+
+## Returns stat total
+func get_total() -> int:
+	return values.values().reduce(func(sum, value): return sum + value, 0)

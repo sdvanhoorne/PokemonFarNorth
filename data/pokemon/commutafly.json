@@ -4,12 +4,12 @@
 	"type1": "Bug",
 	"type2": "Psychic",
 	"base_stats": {
-		"hp": 70,
-		"attack": 105,
-		"defense": 65,
-		"special_attack": 85,
-		"special_defense": 85,
-		"speed": 120
+		"hp": 95,
+		"attack": 30,
+		"defense": 45,
+		"special_attack": 120,
+		"special_defense": 100,
+		"speed": 110
 	},
 	"learnable_moves": [
 		{ "level": 0, "id": 0 },

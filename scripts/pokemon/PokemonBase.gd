@@ -36,3 +36,6 @@ func _init(_id: int):
 	evolutions = data.get("evolutions", [])
 	
 	sprite = Paths.load_sprite(Paths.join(Paths.POKEMON_FRONT_SPRITES, name))
+	
+func get_base_stat_total() -> int:
+	return base_stats.get_total()
