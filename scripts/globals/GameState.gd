@@ -4,8 +4,10 @@ signal gameplay_input_changed(enabled: bool)
 signal state_changed(new_state: State)
 
 ### STATE ###
-
+enum WorldEntry { NEW_GAME, LOAD_GAME, RETURN_FROM_BATTLE }
 enum State { MAIN_MENU, OVERWORLD, BATTLE}
+
+var world_entry: WorldEntry = WorldEntry.LOAD_GAME
 
 var current_state: State = State.MAIN_MENU:
 	set(value):

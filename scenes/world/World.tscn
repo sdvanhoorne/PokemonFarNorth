@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cuvh67l5gtpaq"]
+[gd_scene load_steps=6 format=3 uid="uid://cuvh67l5gtpaq"]
 
 [ext_resource type="Script" uid="uid://cl1etwgpxg1gh" path="res://scripts/world/World.gd" id="1_6eebf"]
 [ext_resource type="Theme" uid="uid://b4d8mhipe34it" path="res://assets/themes/InfoBox.tres" id="2_gbddb"]
 [ext_resource type="PackedScene" uid="uid://c2fp7sitha1lr" path="res://scenes/ui/GameMenu.tscn" id="3_qxiha"]
-[ext_resource type="Script" path="res://scenes/world/MapName.gd" id="4_gbddb"]
+[ext_resource type="Script" uid="uid://ccxbxafah5kge" path="res://scenes/world/MapName.gd" id="4_gbddb"]
+[ext_resource type="Script" uid="uid://0olsfhhncrlm" path="res://scripts/world/MapLoader.gd" id="5_qxiha"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_6eebf")
@@ -32,9 +33,12 @@ text = "Sample Message"
 [node name="GameMenuCanvas" parent="." instance=ExtResource("3_qxiha")]
 visible = false
 
-[node name="MapNameCanvas" type="CanvasLayer" parent="."]
+[node name="MapLoader" type="Node" parent="."]
+script = ExtResource("5_qxiha")
 
-[node name="MapName" type="Control" parent="MapNameCanvas"]
+[node name="MapNameCanvas" type="CanvasLayer" parent="MapLoader"]
+
+[node name="MapName" type="Control" parent="MapLoader/MapNameCanvas"]
 visible = false
 layout_mode = 3
 anchors_preset = 0
@@ -42,7 +46,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("4_gbddb")
 
-[node name="MapNameLabel" type="RichTextLabel" parent="MapNameCanvas/MapName"]
+[node name="MapNameLabel" type="RichTextLabel" parent="MapLoader/MapNameCanvas/MapName"]
 z_index = 10
 layout_mode = 0
 offset_right = 165.0

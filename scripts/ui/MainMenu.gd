@@ -1,10 +1,9 @@
 extends Control
 
-# NEED TO MAKE A NEW MAP LOADER TO HANDLE LOADING MAP FROM CONTINUE/NEW GAME 
-# AND ALSO FOR WORLD TO TRANSITION BETWEEN MAPS
-
 func _on_home_pressed() -> void:
-	var request := MapLoadRequest.for_spawn("starting_town", "StartingHouseSpawn", "down")
+	GameState.reset_run_state()
+	GameState.world_entry = GameState.WorldEntry.NEW_GAME
+	GameState.current_state = GameState.State.OVERWORLD
 	get_tree().change_scene_to_file("res://scenes/world/World.tscn")
 
 func _on_battle_pressed() -> void:
@@ -14,13 +13,8 @@ func _on_battle_pressed() -> void:
 func _on_load_pressed() -> void:
 	if not SaveData.load_game():
 		return
-
-	var request := MapLoadRequest.for_position(
-		GameState.current_map_id,
-		GameState.player_position,
-		GameState.player_facing_direction
-	)
-	
+	GameState.world_entry = GameState.WorldEntry.LOAD_GAME
+	GameState.current_state = GameState.State.OVERWORLD
 	get_tree().change_scene_to_file("res://scenes/world/World.tscn")
 
 func _on_quit_pressed() -> void:

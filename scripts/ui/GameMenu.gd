@@ -57,7 +57,7 @@ func _close_party_menu() -> void:
 	current_menu = menu_state.MAIN
 
 func _on_save_pressed() -> void:
-	var world := get_tree().current_scene
+	var world: World = get_parent()
 	if world.has_method("capture_runtime_state"):
 		world.capture_runtime_state()
 	SaveData.save_game()

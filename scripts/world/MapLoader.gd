@@ -5,11 +5,10 @@ const PlayerScene = preload("res://scenes/player/Player.tscn")
 var current_map: Node2D = null
 var is_loading_map := false
 var world: Node2D
-var map_name_control: Control
+@onready var map_name_control: Control = $MapNameCanvas/MapName
 
-func initialize(world_node: Node2D,map_name: Control) -> void:
+func initialize(world_node: Node2D) -> void:
 	world = world_node
-	map_name_control = map_name
 
 func load_map(request: MapLoadRequest,player: Node2D = null) -> Node2D:
 	if is_loading_map:

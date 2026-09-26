@@ -10,6 +10,7 @@ func start_battle(request: BattleStartRequest) -> void:
 		push_warning("BattleManager.start_battle: World not found")
 		return
 
+	world.capture_runtime_state()
 	world.queue_free()
 	await get_tree().process_frame
 
@@ -76,8 +77,8 @@ func _load_previous_map(result: BattleResult = null) -> void:
 
 	var request := MapLoadRequest.for_position(
 		GameState.current_map_id,
-		current_request.player_position,
-		current_request.player_direction
+		GameState.player_position,
+		GameState.player_facing_direction
 	)
 
 	await world_scene.load_map(request)

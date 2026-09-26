@@ -6,22 +6,15 @@ var enemy_party: Array[Pokemon] = []
 var trainer_data: BattleTrainerData
 var can_run: bool = true
 
-var player_position: Vector2
-var player_direction: String
-
 static func make(
 	battle_type_: BattleDefinitions.BattleType,
 	enemy_party_: Array[Pokemon],
-	player_position_: Vector2,
-	player_direction_: String,
 	trainer_data_: BattleTrainerData,
 	can_run_: bool = true
 ) -> BattleStartRequest:
 	var request := BattleStartRequest.new()
 	request.battle_type = battle_type_
 	request.enemy_party = enemy_party_.duplicate(true)
-	request.player_position = player_position_
-	request.player_direction = player_direction_
 	request.trainer_data = trainer_data_
 	request.can_run = can_run_
 	return request
@@ -34,8 +27,6 @@ static func for_wild_battle(
 	return make(
 		BattleDefinitions.BattleType.WILD,
 		enemy_party_,
-		player_position_,
-		player_direction_,
 		null,
 		true
 	)
@@ -49,8 +40,6 @@ static func for_trainer_battle(
 	return make(
 		BattleDefinitions.BattleType.TRAINER,
 		enemy_party_,
-		player_position_,
-		player_direction_,
 		trainer_data_,
 		false
 	)
