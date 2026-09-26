@@ -2,7 +2,6 @@ extends Node
 
 var current_request: BattleStartRequest = null
 
-
 func start_battle(request: BattleStartRequest) -> void:
 	current_request = request
 
@@ -14,6 +13,8 @@ func start_battle(request: BattleStartRequest) -> void:
 	world.queue_free()
 	await get_tree().process_frame
 
+	GameState.current_state = GameState.State.BATTLE
+	
 	var battle_scene = load("res://scenes/battles/Battle.tscn").instantiate()
 	get_parent().add_child(battle_scene)
 
@@ -67,6 +68,8 @@ func _load_previous_map(result: BattleResult = null) -> void:
 		return
 
 	_apply_battle_result(result)
+
+	GameState.current_state = GameState.State.OVERWORLD
 
 	var world_scene = load("res://scenes/world/world.tscn").instantiate()
 	get_parent().add_child(world_scene)

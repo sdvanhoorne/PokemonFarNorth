@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="PokemonRemake"
-run/main_scene="uid://cuvh67l5gtpaq"
+run/main_scene="uid://cmcqt0wimnnay"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="uid://ctx5hacjwngpy"
 

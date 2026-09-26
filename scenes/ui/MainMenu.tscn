@@ -1,0 +1,47 @@
+[gd_scene load_steps=2 format=3 uid="uid://cmcqt0wimnnay"]
+
+[ext_resource type="Script" uid="uid://bw8xrxyhmaq5x" path="res://scripts/ui/MainMenu.gd" id="1_vjtqc"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_vjtqc")
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DebugControls" type="VBoxContainer" parent="CenterContainer"]
+layout_mode = 2
+
+[node name="Home" type="Button" parent="CenterContainer/DebugControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Home"
+
+[node name="Battle" type="Button" parent="CenterContainer/DebugControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Battle"
+
+[node name="Load" type="Button" parent="CenterContainer/DebugControls"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 16
+text = "Load"
+
+[node name="Quit" type="Button" parent="CenterContainer/DebugControls"]
+layout_mode = 2
+text = "Quit"
+
+[connection signal="pressed" from="CenterContainer/DebugControls/Home" to="." method="_on_home_pressed"]
+[connection signal="pressed" from="CenterContainer/DebugControls/Battle" to="." method="_on_battle_pressed"]
+[connection signal="pressed" from="CenterContainer/DebugControls/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="CenterContainer/DebugControls/Quit" to="." method="_on_quit_pressed"]

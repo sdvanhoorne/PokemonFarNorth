@@ -1,6 +1,20 @@
 extends Node
 
 signal gameplay_input_changed(enabled: bool)
+signal state_changed(new_state: State)
+
+### STATE ###
+
+enum State { MAIN_MENU, OVERWORLD, BATTLE}
+
+var current_state: State = State.MAIN_MENU:
+	set(value):
+		if current_state == value:
+			return
+		current_state = value
+		state_changed.emit(value)
+
+### PLAYER ###
 
 var current_map_id: String = ""
 var player_position: Vector2 = Vector2.ZERO
