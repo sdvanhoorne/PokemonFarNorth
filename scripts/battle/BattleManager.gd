@@ -2,77 +2,61 @@ extends Node
 
 var current_request: BattleStartRequest = null
 
+
 func start_battle(request: BattleStartRequest) -> void:
 	current_request = request
 
-	var world := get_parent().get_node_or_null("World")
-	if world:
-		world.capture_runtime_state()
-		world.queue_free()
-	
-	var main_menu := get_parent().get_node_or_null("MainMenu")
-	if main_menu:
-		main_menu.queue_free()
+	var game := get_tree().current_scene as Game
 
-	await get_tree().process_frame
+	if game == null:
+		push_error("BattleManager: Current scene is not Game")
+		return
 
-	GameState.current_state = GameState.State.BATTLE
-	
-	var battle_scene = load("res://scenes/battles/Battle.tscn").instantiate()
-	get_parent().add_child(battle_scene)
+	await game.start_battle(request)
 
-	# BattleController / battle scene should take the request and build the session.
-	if battle_scene.has_method("setup"):
-		battle_scene.setup(request, PlayerInventory.PartyPokemon)
-
-	# Point DialogueManager at the battle message box if present.
-	var message_box = battle_scene.get_node_or_null("BattleUI/BottomUI/MessageContainer")
-	if message_box != null:
-		DialogueManager.message_box = message_box
 
 func start_wild_battle(
 	enemy_party: Array[Pokemon],
-	_intro_lines: PackedStringArray = PackedStringArray()) -> void:
+	_intro_lines: PackedStringArray = PackedStringArray()
+) -> void:
 	var request := BattleStartRequest.for_wild_battle(
-		enemy_party,
-		)
+		enemy_party
+	)
+
 	await start_battle(request)
+
 
 func start_trainer_battle(
 	enemy_party: Array[Pokemon],
-	trainer_data: BattleTrainerData) -> void:
+	trainer_data: BattleTrainerData
+) -> void:
 	var request := BattleStartRequest.for_trainer_battle(
 		enemy_party,
 		trainer_data
 	)
+
 	await start_battle(request)
 
-func return_to_overworld(result: BattleResult = null) -> void:
-	var battle := get_parent().get_node_or_null("Battle")
-	if battle == null:
-		push_warning("BattleManager._load_previous_map: Battle scene not found")
-	else:
-		battle.queue_free()
-		await get_tree().process_frame
 
+func return_to_overworld(result: BattleResult = null) -> void:
 	if current_request == null:
-		push_warning("BattleManager._load_previous_map: current_request was null")
+		push_warning(
+			"BattleManager.return_to_overworld: current_request was null"
+		)
 		return
 
 	_apply_battle_result(result)
 
-	GameState.current_state = GameState.State.OVERWORLD
+	current_request = null
 
-	var world_scene = load("res://scenes/world/world.tscn").instantiate()
-	get_parent().add_child(world_scene)
+	var game := get_tree().current_scene as Game
 
-	var request := MapLoadRequest.for_position(
-		GameState.current_map_id,
-		GameState.player_position,
-		GameState.player_facing_direction
-	)
+	if game == null:
+		push_error("BattleManager: Current scene is not Game")
+		return
 
-	await world_scene.load_map(request)
+	await game.end_battle()
+
 
 func _apply_battle_result(result: BattleResult) -> void:
 	if result == null:
@@ -84,17 +68,17 @@ func _apply_battle_result(result: BattleResult) -> void:
 	match result.outcome:
 		BattleDefinitions.BattleOutcome.TRAINER_WIN:
 			if result.defeated_trainer_id != "":
-				GameState.mark_trainer_defeated(result.defeated_trainer_id)
+				GameState.mark_trainer_defeated(
+					result.defeated_trainer_id
+				)
 
 		BattleDefinitions.BattleOutcome.CAPTURE:
-			# If capture already modified PlayerInventory during battle, the updated_party
-			# assignment above is enough. If not, do it here.
 			pass
 
 		BattleDefinitions.BattleOutcome.TRAINER_LOSE:
-			# Later: teleport to last heal point instead of returning to battle origin.
+			# Later: return to last heal point.
 			pass
 
 		BattleDefinitions.BattleOutcome.WILD_LOSE:
-			# Same as above eventually.
+			# Later: return to last heal point.
 			pass
