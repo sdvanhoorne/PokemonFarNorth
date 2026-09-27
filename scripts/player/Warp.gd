@@ -18,7 +18,6 @@ func _ready():
 		length = int(width / 20)
 
 func _on_body_entered(body: Node2D) -> void:
-	# don't care about non players
 	if body.name != "Player":
 		return
 	
