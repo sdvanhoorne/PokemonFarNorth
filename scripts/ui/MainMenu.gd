@@ -15,6 +15,7 @@ func _on_load_pressed() -> void:
 		return
 	GameState.world_entry = GameState.WorldEntry.LOAD_GAME
 	GameState.current_state = GameState.State.OVERWORLD
+	GameState.unlock_gameplay_input()
 	get_tree().change_scene_to_file("res://scenes/world/World.tscn")
 
 func _on_quit_pressed() -> void:
