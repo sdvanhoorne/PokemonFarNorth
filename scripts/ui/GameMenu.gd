@@ -64,5 +64,7 @@ func _on_save_pressed() -> void:
 
 func _on_save_and_quit_pressed() -> void:
 	_on_save_pressed()
-	GameState.current_state = GameState.State.MAIN_MENU
-	get_tree().change_scene_to_file("res://scenes/ui/MainMenu.tscn")
+	print(get_tree().current_scene)
+	print(get_tree().current_scene.get_script())
+	var game := get_tree().current_scene as Game
+	game.load_main_menu()

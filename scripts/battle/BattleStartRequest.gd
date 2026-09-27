@@ -21,8 +21,6 @@ static func make(
 
 static func for_wild_battle(
 	enemy_party_: Array[Pokemon],
-	player_position_: Vector2,
-	player_direction_: String
 ) -> BattleStartRequest:
 	return make(
 		BattleDefinitions.BattleType.WILD,
@@ -33,8 +31,6 @@ static func for_wild_battle(
 
 static func for_trainer_battle(
 	enemy_party_: Array[Pokemon],
-	player_position_: Vector2,
-	player_direction_: String,
 	trainer_data_: BattleTrainerData
 ) -> BattleStartRequest:
 	return make(

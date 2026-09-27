@@ -92,7 +92,7 @@ func _run() -> void:
 		PackedStringArray(["You ran away..."]),
 		{"lock_input": false, "require_input": true}
 	)
-	BattleManager.return_to_world(session.result)
+	BattleManager.return_to_overworld(session.result)
 
 func _on_switch_pressed() -> void:
 	if input_locked: return	
@@ -323,7 +323,7 @@ func _play_events() -> void:
 						BattleManager.return_to_world(session.result)
 						
 					BattleDefinitions.BattleOutcome.WILD_WIN:
-						BattleManager.return_to_world(session.result)
+						BattleManager.return_to_overworld(session.result)
 						
 					BattleDefinitions.BattleOutcome.WILD_LOSE:
 						await DialogueManager.say(

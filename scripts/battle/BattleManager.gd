@@ -6,12 +6,14 @@ func start_battle(request: BattleStartRequest) -> void:
 	current_request = request
 
 	var world := get_parent().get_node_or_null("World")
-	if world == null:
-		push_warning("BattleManager.start_battle: World not found")
-		return
+	if world:
+		world.capture_runtime_state()
+		world.queue_free()
+	
+	var main_menu := get_parent().get_node_or_null("MainMenu")
+	if main_menu:
+		main_menu.queue_free()
 
-	world.capture_runtime_state()
-	world.queue_free()
 	await get_tree().process_frame
 
 	GameState.current_state = GameState.State.BATTLE
@@ -30,33 +32,22 @@ func start_battle(request: BattleStartRequest) -> void:
 
 func start_wild_battle(
 	enemy_party: Array[Pokemon],
-	player_position: Vector2,
-	player_direction: String,
 	_intro_lines: PackedStringArray = PackedStringArray()) -> void:
 	var request := BattleStartRequest.for_wild_battle(
 		enemy_party,
-		player_position,
-		player_direction
 		)
 	await start_battle(request)
 
 func start_trainer_battle(
 	enemy_party: Array[Pokemon],
-	player_position: Vector2,
-	player_direction: String,
 	trainer_data: BattleTrainerData) -> void:
 	var request := BattleStartRequest.for_trainer_battle(
 		enemy_party,
-		player_position,
-		player_direction,
 		trainer_data
 	)
 	await start_battle(request)
 
-func return_to_world(result: BattleResult = null) -> void:
-	call_deferred("_load_previous_map", result)
-
-func _load_previous_map(result: BattleResult = null) -> void:
+func return_to_overworld(result: BattleResult = null) -> void:
 	var battle := get_parent().get_node_or_null("Battle")
 	if battle == null:
 		push_warning("BattleManager._load_previous_map: Battle scene not found")
