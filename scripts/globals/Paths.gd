@@ -30,9 +30,9 @@ func load_sprite(path: String) -> Texture2D:
 	path = path + ".png"
 	var res := load(path)
 	if res == null:
-		push_error("Missing Texture2D at: %s" % path)
+		push_warning("Missing Texture2D at: %s" % path)
 		return null
 	if res is Texture2D:
 		return res
-	push_error("Resource at %s is not a Texture2D (got %s)" % [path, typeof(res)])
+	push_warning("Resource at %s is not a Texture2D (got %s)" % [path, typeof(res)])
 	return null

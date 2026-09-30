@@ -20,7 +20,7 @@ func set_pokemon(pokemon: Pokemon) -> void:
 	level_label.text = "Lv. %d" % int(pokemon.level)
 
 	var hp := int(pokemon.current_hp)
-	var max_hp = int(pokemon.stats.hp)
+	var max_hp = int(pokemon.stats.get_stat(PokemonStat.Stat.HP))
 
 	hp_label.text = "%d/%d" % [hp, max_hp]
 

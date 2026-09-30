@@ -64,7 +64,5 @@ func _on_save_pressed() -> void:
 
 func _on_save_and_quit_pressed() -> void:
 	_on_save_pressed()
-	print(get_tree().current_scene)
-	print(get_tree().current_scene.get_script())
 	var game := get_tree().current_scene as Game
 	game.load_main_menu()

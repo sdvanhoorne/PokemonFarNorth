@@ -27,7 +27,7 @@ visible = false
 z_index = 1
 z_as_relative = false
 y_sort_enabled = true
-position = Vector2(8, 10)
+position = Vector2(8, 9)
 scale = Vector2(0.5, 0.5)
 shape = SubResource("RectangleShape2D_x7p2l")
 
@@ -43,7 +43,9 @@ script = ExtResource("17_jtlb7")
 body_path = NodePath("..")
 
 [node name="CharacterAnimationController" parent="." instance=ExtResource("4_tpg5x")]
-position = Vector2(8, 4)
+position = Vector2(8, 3)
 sprite_frames = ExtResource("2_tpg5x")
-animation = &"sprint_up"
+animation = &"move_down"
+frame = 3
+frame_progress = 0.286361
 offset = Vector2(0, -4)

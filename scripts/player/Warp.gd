@@ -22,7 +22,7 @@ func _on_body_entered(body: Node2D) -> void:
 		return
 	
 	var offset = get_warp_offset(body.global_position)
-	var world := get_tree().root.get_node("World")
+	var world := get_tree().get_first_node_in_group("world") as World
 	var request := MapLoadRequest.for_spawn(
 		target_map_id,
 		spawn_point,
