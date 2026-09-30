@@ -36,7 +36,6 @@ func save_game() -> bool:
 	return true
 
 func load_game() -> bool:
-	print(ProjectSettings.globalize_path("user://saves/primary_save.json"))
 	if not FileAccess.file_exists(SAVE_PATH):
 		return false
 

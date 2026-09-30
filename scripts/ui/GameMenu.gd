@@ -12,17 +12,18 @@ func _ready() -> void:
 	main_menu.visible = false
 	
 func _unhandled_key_input(event: InputEvent) -> void:
-	if event.is_action_pressed("menu"):
-		if current_menu == menu_state.NONE:
-			_open_main_menu()
-		elif current_menu == menu_state.MAIN:
-			_close_main_menu()
-		elif current_menu == menu_state.POKEDEX:
-			_close_pokedex_menu()
-		elif current_menu == menu_state.PARTY:
-			_close_party_menu()
-		
-		get_viewport().set_input_as_handled()
+	#if GameState.gameplay_input_enabled:
+		if event.is_action_pressed("menu"):
+			if current_menu == menu_state.NONE:
+				_open_main_menu()
+			elif current_menu == menu_state.MAIN:
+				_close_main_menu()
+			elif current_menu == menu_state.POKEDEX:
+				_close_pokedex_menu()
+			elif current_menu == menu_state.PARTY:
+				_close_party_menu()
+			
+			get_viewport().set_input_as_handled()
 
 func _open_main_menu() -> void:
 	GameState.lock_gameplay_input()
