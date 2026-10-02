@@ -9,6 +9,7 @@
 	"accuracy": 100,
 	"pp": 35,
 	"priority": 0,
+	"tags": ["CONTACT"],
 	"effects": [],
 	"description": "A physical attack in which the user charges, full body, into the foe."
   },
