@@ -71,7 +71,7 @@ func _start_trainer_intro() -> void:
 	battle_ui.load_player_pokemon(session.get_active_player().pokemon)
 	battle_ui.load_enemy_pokemon(session.get_active_enemy().pokemon)
 	
-	battle_ui.set_moves(session.get_active_player().move_names)
+	battle_ui.set_moves(session.get_active_player().pokemon.move_names)
 	battle_ui.set_state(BattleUI.UIState.OPTIONS)
 	return
 
@@ -135,7 +135,7 @@ func _determine_enemy_move_index() -> int:
 	
 func _determine_enemy_move_name() -> String:
 	var index = _determine_enemy_move_index()
-	return session.get_active_enemy().moves[index].name
+	return session.get_active_enemy().pokemon.moves[index].name
 
 func _play_events() -> void:
 	for e in events:
@@ -222,12 +222,11 @@ func _play_events() -> void:
 
 			BattleDefinitions.BattleEvent.BATTLER_WITHDRAWN:
 				var target_is_player := e.side == BattleDefinitions.BattleSide.PLAYER
-				var pokemon_name: String
+				# The engine has already switched the active index, so use the name it recorded.
+				var pokemon_name: String = e.payload["pokemon_name"]
 				if target_is_player:
-					pokemon_name = session.get_active_player().base_data.name
 					battle_ui.unload_player_pokemon()
 				else:
-					pokemon_name = session.get_active_enemy().base_data.name
 					battle_ui.unload_enemy_pokemon()
 				await DialogueManager.say(
 					PackedStringArray([
@@ -243,12 +242,12 @@ func _play_events() -> void:
 
 				if target_is_player:
 					session.active_player_index = new_index
-					pokemon_name = session.get_active_player().base_data.name
+					pokemon_name = session.get_active_player().pokemon.base_data.name
 					battle_ui.load_player_pokemon(session.get_active_player().pokemon)
-					battle_ui.set_moves(session.get_active_player().move_names)
+					battle_ui.set_moves(session.get_active_player().pokemon.move_names)
 				else:
 					session.active_enemy_index = new_index
-					pokemon_name = session.get_active_enemy().base_data.name
+					pokemon_name = session.get_active_enemy().pokemon.base_data.name
 					battle_ui.load_enemy_pokemon(session.get_active_enemy().pokemon)
 
 				await DialogueManager.say(
@@ -283,7 +282,7 @@ func _play_events() -> void:
 				# Optional: refresh the currently displayed player Pokémon info if needed
 				if e.side == BattleDefinitions.BattleSide.PLAYER:
 					battle_ui.load_player_pokemon(session.get_active_player().pokemon)
-					battle_ui.set_moves(session.get_active_player().move_names)
+					battle_ui.set_moves(session.get_active_player().pokemon.move_names)
 
 			BattleDefinitions.BattleEvent.RUN_SUCCEEDED:
 				await DialogueManager.say(
@@ -309,7 +308,7 @@ func _play_events() -> void:
 							PackedStringArray(session.trainer_data.outro_lines_win),
 							{"lock_input": false, "require_input": true}
 						)
-						BattleManager.return_to_world(session.result)
+						BattleManager.return_to_overworld(session.result)
 						
 					BattleDefinitions.BattleOutcome.TRAINER_LOSE:
 						await DialogueManager.say(
@@ -320,7 +319,7 @@ func _play_events() -> void:
 							PackedStringArray(session.trainer_data.outro_lines_lose),
 							{"lock_input": false, "require_input": true}
 						)
-						BattleManager.return_to_world(session.result)
+						BattleManager.return_to_overworld(session.result)
 						
 					BattleDefinitions.BattleOutcome.WILD_WIN:
 						BattleManager.return_to_overworld(session.result)
@@ -330,33 +329,33 @@ func _play_events() -> void:
 							PackedStringArray(["You ran out of usable Pokemon."]),
 							{"lock_input": false, "require_input": true}
 						)
-						BattleManager.return_to_world(session.result)
+						BattleManager.return_to_overworld(session.result)
 						
 					BattleDefinitions.BattleOutcome.CAPTURE:
 						await DialogueManager.say(
 							PackedStringArray(["You captured %s" % session.result.captured_pokemon.base_data.name]),
 							{"lock_input": false, "require_input": true}
 						)
-						BattleManager.return_to_world(session.result)
+						BattleManager.return_to_overworld(session.result)
 				return
 
 			_:
 				pass
 
-func _status_applied_text(pokemon_name: String, status_type: String) -> String:
+func _status_applied_text(pokemon_name: String, status_type: Pokemon.status_types) -> String:
 	match status_type:
-		"Poison":
+		Pokemon.status_types.POISONED:
 			return "%s was poisoned!" % pokemon_name
-		"Burn":
+		Pokemon.status_types.BURNED:
 			return "%s was burned!" % pokemon_name
-		"Sleep":
+		Pokemon.status_types.ASLEEP:
 			return "%s fell asleep!" % pokemon_name
-		"Paralysis":
+		Pokemon.status_types.PARALYZED:
 			return "%s was paralyzed!" % pokemon_name
-		"Freeze":
+		Pokemon.status_types.FROZEN:
 			return "%s was frozen solid!" % pokemon_name
 		_:
-			return "%s was afflicted with %s." % [pokemon_name, str(status_type)]
+			return "%s was afflicted with a status condition." % pokemon_name
 
 func _events_contain_battle_end() -> bool:
 	for e in events:

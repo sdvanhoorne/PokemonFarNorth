@@ -2,7 +2,7 @@
 # updates Pokemon objects
 # and queues events for the BattleController
 
-extends Node
+extends RefCounted
 class_name BattleEngine
 
 var damage_calculation: DamageCalculation
@@ -71,7 +71,8 @@ func _resolve_move_action(session: BattleSession, action: BattleAction) -> Array
 
 		"status":
 			var target := _get_move_target(move, user, opponent)
-			events.append_array(_resolve_status_move(move, target))
+			var target_side := action.actor if target == user else _opposing_side(action.actor)
+			events.append_array(_resolve_status_move(move, target, target_side))
 
 		"stat_change":
 			var target := _get_move_target(move, user, opponent)
@@ -110,11 +111,26 @@ attacker: BattlePokemon, defender: BattlePokemon) -> Array[BattleEvent]:
 
 	return events
 
-func _resolve_status_move(move: Move, target: BattlePokemon) -> Array[BattleEvent]:
+func _resolve_status_move(move: Move, target: BattlePokemon,
+target_side: BattleDefinitions.BattleSide) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
-	var status = move.status
-	target.pokemon.status = status
-	events.append(BattleEvent.status_applied(status))
+
+	for effect in move.effects:
+		if effect.kind != "apply_status":
+			continue
+
+		var status := Pokemon.status_from_string(effect.status)
+		if status == Pokemon.status_types.NONE:
+			continue
+
+		# A Pokémon can only have one major status at a time.
+		if target.pokemon.status != Pokemon.status_types.NONE:
+			events.append(BattleEvent.message("But it failed."))
+			continue
+
+		target.pokemon.status = status
+		events.append(BattleEvent.status_applied(target_side, target.pokemon.base_data.name, status))
+
 	return events
 
 func _resolve_stat_change_move(
@@ -192,11 +208,13 @@ func _resolve_stat_change_move(
 
 func _resolve_switch_action(session: BattleSession, action: BattleAction) -> Array[BattleEvent]:
 	var events: Array[BattleEvent] = []
+	# Capture the outgoing Pokémon's name before the switch changes the active index.
+	var withdrawn_name: String = _get_action_user(session, action).pokemon.base_data.name
 	if(action.actor == BattleDefinitions.BattleSide.PLAYER):
 		session.switch_player_to(action.switch_index)
 	else:
 		session.switch_enemy_to(action.switch_index)
-	events.append(BattleEvent.battler_withdrawn(action.actor))
+	events.append(BattleEvent.battler_withdrawn(action.actor, withdrawn_name))
 	events.append(BattleEvent.battler_sent_in(action.actor, action.switch_index))
 	return events
 
@@ -271,9 +289,9 @@ func _handle_enemy_fainted(session: BattleSession, events: Array[BattleEvent]) -
 
 func _handle_player_fainted(session: BattleSession, events: Array[BattleEvent]) -> bool:
 	var fainted_player := session.get_active_player()
-	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.PLAYER, fainted_player.base_data.name))
+	events.append(BattleEvent.fainted(BattleDefinitions.BattleSide.PLAYER, fainted_player.pokemon.base_data.name))
 
-	if not session.has_usable_player_pokemon():
+	if not session.has_usable_player():
 		if session.battle_type == BattleDefinitions.BattleType.WILD:
 			_set_battle_result(session, BattleDefinitions.BattleOutcome.WILD_LOSE)
 		elif session.battle_type == BattleDefinitions.BattleType.TRAINER:
@@ -333,10 +351,11 @@ func _get_action_target(session: BattleSession, action: BattleAction) -> BattleP
 	return null
 
 func _get_move_target(move: Move, user: BattlePokemon, opponent: BattlePokemon) -> BattlePokemon:
-	match move.target:
-		"Self":
+	# Move data uses lowercase targets ("self", "enemy").
+	match move.target.to_lower():
+		"self":
 			return user
-		"Enemy":
+		"enemy":
 			return opponent
 	return opponent
 
