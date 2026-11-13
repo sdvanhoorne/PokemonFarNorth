@@ -23,7 +23,7 @@ func _ready() -> void:
 	outro_lines_win = Array(dialogue.get("outro_lines_win", []), TYPE_STRING, "", null)
 	outro_lines_lose = Array(dialogue.get("outro_lines_lose", []), TYPE_STRING, "", null)
 	trainer_class = TrainerDatabase.get_trainer_class(npc_id)
-	portrait = Paths.load_sprite(Paths.join(Paths.TRAINER_BATTLE_SPRITES, trainer_class))
+	portrait = Paths.load_sprite(Paths.join(Paths.TRAINER_BATTLE_SPRITES, trainer_class.to_lower().replace(" ", "_")))
 
 func _on_player_spotted(p: Node2D) -> void:
 	if GameState.is_trainer_defeated(npc_id) or is_engaging:
