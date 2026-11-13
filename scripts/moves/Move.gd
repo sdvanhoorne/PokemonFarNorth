@@ -23,11 +23,12 @@ func _init(move_data: Dictionary):
 	category = move_data.get("category", "")
 	accuracy = float(move_data.get("accuracy", 1.0))
 	description = move_data.get("description", "")
-	for effect in move_data.get("effects"):
+	for effect in move_data.get("effects", []):
 		effects.append(MoveEffect.new(
 			effect.get("kind", ""),
 			effect.get("target", ""),
 			effect.get("stat", ""),
 			int(effect.get("stages", 0)),
-			int(effect.get("chance", 100))
+			int(effect.get("chance", 100)),
+			effect.get("status", "")
 		))
