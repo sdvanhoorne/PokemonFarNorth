@@ -21,15 +21,8 @@ func load_main_menu() -> void:
 func load_world() -> void:
 	GameState.current_state = GameState.State.OVERWORLD
 
-	var world := await _change_scene(WORLD_SCENE) as World
-
-	var request := MapLoadRequest.for_position(
-		GameState.current_map_id,
-		GameState.player_position,
-		GameState.player_facing_direction
-	)
-
-	await world.load_map(request)
+	# World._ready() picks the initial map based on GameState.world_entry.
+	await _change_scene(WORLD_SCENE)
 
 
 func start_battle(request: BattleStartRequest) -> void:
@@ -58,6 +51,7 @@ func start_battle(request: BattleStartRequest) -> void:
 
 
 func end_battle() -> void:
+	GameState.world_entry = GameState.WorldEntry.RETURN_FROM_BATTLE
 	await load_world()
 
 

@@ -21,7 +21,7 @@ func _get_initial_map_request() -> MapLoadRequest:
 				"down"
 			)
 
-		GameState.WorldEntry.LOAD_GAME:
+		GameState.WorldEntry.LOAD_GAME, GameState.WorldEntry.RETURN_FROM_BATTLE:
 			return MapLoadRequest.for_position(
 				GameState.current_map_id,
 				GameState.player_position,
