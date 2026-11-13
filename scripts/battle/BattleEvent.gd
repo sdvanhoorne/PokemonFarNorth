@@ -75,11 +75,13 @@ static func battler_sent_in(side_: BattleDefinitions.BattleSide, new_index: int)
 	}
 	return e
 
-static func battler_withdrawn(side_: BattleDefinitions.BattleSide) -> BattleEvent:
+static func battler_withdrawn(side_: BattleDefinitions.BattleSide, pokemon_name: String) -> BattleEvent:
 	var e := BattleEvent.new()
 	e.event_type = BattleDefinitions.BattleEvent.BATTLER_WITHDRAWN
 	e.side = side_
-	e.payload = {}
+	e.payload = {
+		"pokemon_name": pokemon_name
+	}
 	return e
 
 static func run_succeeded() -> BattleEvent:
@@ -106,7 +108,8 @@ static func xp_gained(pokemon_name: String, xp_gain_amount: int) -> BattleEvent:
 	
 static func level_up(pokemon_name: String, level: int) -> BattleEvent:
 	var e := BattleEvent.new()
-	e.event_type = BattleDefinitions.BattleEvent.XP_GAINED
+	e.event_type = BattleDefinitions.BattleEvent.LEVEL_UP
+	e.side = BattleDefinitions.BattleSide.PLAYER
 	e.payload = {
 		"pokemon_name": pokemon_name,
 		"level": level
@@ -123,10 +126,13 @@ static func player_switch_required() -> BattleEvent:
 	e.event_type = BattleDefinitions.BattleEvent.SWITCH_REQUIRED
 	return e
 
-static func status_applied(status: String) -> BattleEvent:
-	var event := BattleEvent.new()
-	event.event_type = BattleDefinitions.BattleEvent.STATUS_APPLIED
-	event.payload = {
-		"status": status
+static func status_applied(side_: BattleDefinitions.BattleSide, pokemon_name: String,
+status: Pokemon.status_types) -> BattleEvent:
+	var e := BattleEvent.new()
+	e.event_type = BattleDefinitions.BattleEvent.STATUS_APPLIED
+	e.side = side_
+	e.payload = {
+		"pokemon_name": pokemon_name,
+		"status_type": status
 	}
-	return event
+	return e

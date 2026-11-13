@@ -3,7 +3,25 @@ class_name Pokemon
 
 var base_data: PokemonBase
 
-enum status_types { NONE, POISONED, ASLEEP, PARALYZED, BURNED, LOCKED }
+# Saved as an int, so only ever append new values; never reorder or remove.
+enum status_types { NONE, POISONED, ASLEEP, PARALYZED, BURNED, LOCKED, FROZEN }
+
+## Converts move-data status names ("burn", "paralysis", ...) to status_types.
+## Returns NONE (with a warning) for unknown names.
+static func status_from_string(status_name: String) -> status_types:
+	match status_name.to_lower():
+		"poison":
+			return status_types.POISONED
+		"sleep":
+			return status_types.ASLEEP
+		"paralysis":
+			return status_types.PARALYZED
+		"burn":
+			return status_types.BURNED
+		"freeze":
+			return status_types.FROZEN
+	push_warning("Pokemon: unknown status '%s'" % status_name)
+	return status_types.NONE
 
 var level = 0
 var current_hp = 0
@@ -72,9 +90,13 @@ static func new_wild(id: int, lvl: int) -> Pokemon:
 
 static func new_trainer_pokemon(data: Dictionary) -> Pokemon:
 	var pokemon = Pokemon.new(data.get("id"))
-	pokemon.current_hp = pokemon.base_data.base_stats.values[PokemonStat.Stat.HP]
 	pokemon.level = int(data.get("level"))
+	pokemon.status = status_types.NONE
 	pokemon.move_names = data["move_names"]
+	# Issue #5: stats were never set, so the battle UI crashed reading them.
+	pokemon.stats = PokemonStats.scaled_stats(pokemon.level, pokemon.base_data.base_stats)
+	pokemon.current_hp = pokemon.stats.get_stat(PokemonStat.Stat.HP)
+	pokemon.xp_to_next_level = calculate_xp_to_next(pokemon.level)
 	return pokemon
 
 static func get_learned_moves(lvl: int, learnable_moves: Array) -> Array:
@@ -112,7 +134,8 @@ static func calculate_xp_to_next(_level: int) -> int:
 	
 func recalculate_stats_on_level_up() -> void:
 	stats = PokemonStats.scaled_stats(level, base_data.base_stats)
-	current_hp = stats.hp
+	# Issue #5: PokemonStats has no `hp` member; read it from the values dict.
+	current_hp = stats.get_stat(PokemonStat.Stat.HP)
 
 static func get_xp_given(lvl: int) -> int:
 	return int(lvl * lvl * lvl / 4.0)
